@@ -1,0 +1,532 @@
+<pre class='metadata'>
+Title: AV1 Still Image File Format (AVIF)
+Shortname: av1-avif
+Level: 1
+Date: 2017-12-13
+Status: LS
+Group: AOM
+URL: https://AOMediaCodec.github.io/av1-avif
+Repository: AOMediaCodec/av1-avif
+Inline Github Issues: full
+Editor: Paul Kerr, Netflix, pkerr@netflix.com
+Abstract: This document specifies how to store [[!AV1]] still images in a file using [[!ISOBMFF]] structures.
+Boilerplate: copyright no
+Warning: Custom
+Custom Warning Title: Warning
+Custom Warning Text: This specification is still at draft stage and should not be referenced other than as a working draft.
+</pre>
+
+<pre class="anchors">
+</pre>
+
+<h2 id="overview">Overview</h2>
+
+<p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0.
+</p>
+
+<p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. For a multiple image file, an image sequence with suggested playback timing may be defined.
+</p>
+
+<h3 id="target-features">Target Features</h3>
+  <ul>
+    <li>AV1 intra-frame codec toolkit</li>
+    <li>Multiple image storage: untimed unordered collection</li>
+    <li class="c31 c20"><span class="c22">Animation: timed sequence of images</li>
+    <li>Thumbnail image</li>
+    <li>Alpha channel</li>
+    <li>Extensible image metadata</li>
+  </ul>
+
+<h2 id="terms-and-definitions">Terms and Definitions</h2>
+
+  <h3 id="def-alpha-image"><dfn>Alpha Image</dfn></h3>
+  <p>A specific type of [=Auxiliary Image=] that may be used to convey information representing the opacity of the associated Master Images.
+  </p>
+
+  <h3 id="def-auxiliary-image"><dfn>Auxiliary Image</dfn></h3>
+  <p>An image that is not be intended to be displayed but provides supplemental information complementing an associated [=Master Image=]. AVIF allows only one type of Auxiliary Image: an Alpha Image.
+  </p>
+
+  <h3 id="def-cover-image"><dfn>Cover Image</dfn></h3>
+  <p>A [=Master Image=] that may be used to represent the file contents. An example of this is a single image used to represent an animation before the animation sequence is activated.
+  </p>
+
+  <h3 id="def-image-collection"><dfn>Image Collection</dfn></h3>
+  <p>One or more [=Master Images=] stored as items in a single file with no defined order or timing information. Within a collection, groups of image samples may share properties and metadata.
+  </p>
+
+  <h3 id="def-image-properties"><dfn>Image Properties</dfn></h3>
+  <p>This is a class of non-media data. The property items may be descriptive image attributes or decoder configuration data. The properties are primarily for consumption by the decoding agent. This information may include:</p>
+  <ul>
+    <li>decoder specific configuration and initialization values</li>
+    <li>image width and height</li>
+    <li>pixel attributes</li>
+    <li>color space</li>
+  </ul>
+
+  <h3 id="def-image-sequence"><dfn>Image Sequence</dfn></h3>
+  <p>A sequence of [=Master Images=] stored as a track for which information is provided that defines a sequential ordering and temporal information indicating suggested playback timing. An agent decoding and presenting an AVIF file may chose to render an Image Sequence as an animation.
+  </p>
+
+  <h3 id="def-master-image"><dfn>Master Image</dfn></h3>
+  <p>An image that is not a thumbnail or auxiliary image. For the purpose of this specification, such an image is encoded using AV1 intra-frame tools. This type of image is the primary displayable payload of an AVIF file. A Master Image may be used as a member of both an Image Collection and an Image Sequence.
+  </p>
+
+  <h3 id="def-metadata"><dfn>Metadata</dfn></h3>
+  <p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7. An AVIF reader will not be required to extract metadata from a Informational Metadata boxes. Essential information shall be carried in the image media directly or be conveyed as Image Properties.
+  </p>
+
+  <h3 id="def-thumbnail-image"><dfn>Thumbnail Image</dfn></h3>
+  <p>This is a non-Master image that may be used to represent one or more [=Master Images=] found in an AVIF file. It is typically of a smaller scale than the Master Images. The compression format may be different than the one used by the Master Images.
+  </p>
+
+  <h2 id="object-model-and-structure">Object Model and Structure</h2>
+    <p>An AVIF file should be a simplified and conformant version of an HEIF file. This is to allow for the deployment of general libraries that may be used to create and parse HEIF-based image files wrapping different coding methods for the actual image content. This should be similar to ISO-BMFF usage in the video domain.
+    </p>
+    <p>The AVIF file format will be built on the box-structured media interchange format introduced by the ISO Base Media File Format ([[!ISOBMFF]]). The format specified by AVIF defines the use of a subset of box structures introduced in ISOBMFF. Where the necessary structures do not exist in ISOBMFF, structures defined as part of the High Efficiency Image File Format (HEIF: ISO/IEC 23008-12) that are codec neutral and can be applied in a generic manner are used. An AVIF version 1.0 file shall be compliant to the requirements of Clause 4 of the [[!ISOBMFF]] specification, and where applicable, the recommendations in Annex I: Guidelines On Defining New Image Formats and Brands in the MPEG HEIF specification shall be followed for AVIF 1.0.
+    </p>
+
+    <h3 id="image-storage">Image Storage</h3>
+    <p>All of the constituent elements, including image samples, shall be contained in a single file. All media data locations, regardless of construction method, shall resolve to an offset within an AVIF file.
+    </p>
+
+    <h3 id="image-collection-elements">Image Collection Elements</h3>
+    <p>An Image Collection is the most basic format of an AVIF file. This form should be used for the case of a single image, or when a group of images does not require logical or temporal sequencing.
+    </p>
+    <p>Image Collections are structured as items defined in a single file-level MetaBox. Each master, thumbnail or auxiliary image that are a component of an Image Collection shall have an item definition in this MetaBox. Items have no timing information. Any association between a Master Image and an Auxiliary or Thumbnail image must be defined explicitly.
+    </p>
+    <p>An AVIF file containing an Image Collection shall list the "mif1" brand as one of the entries in the compatible_brands array and conform to section 10.1 of HEIF. The boxes used to structure a collection are all located at the file level within a MetaBox: there are no track level boxes. The image data for a collection may be stored within an ItemDataBox or a MediaDataBox.
+    </p>
+    <p>The images stored in the file are listed in the ItemLocationBox. A unique ItemLocationBox entry shall be used to reference media data for each image in the collection: Master, Thumbnail and Alpha images. Each image shall have an entry in the ItemLocationBox.
+    </p>
+    <p>The type of the item element is identified in an entry in the ItemInfoBox. Every ItemLocationBox entry shall have a matching entry in the ItemInfoBox cross referenced by item_ID.
+    </p>
+    <p>The images making up an Image Collection do not need to have the same Image Properties. A specific property may be assigned to one or more of the images within the Image Collection using an ItemPropertyBox entry.
+    </p>
+
+    <h3 id="image-sequence-elements">Image Sequence Elements</h3>
+    <p>Image Sequences are structured as tracks. An individual track contains one type of image: master, auxiliary or thumbnail. Associations between a thumbnail or auxiliary image, and a master image, is determined by finding components of each track that are time-parallel as defined by procedures detailed in [[!ISOBMFF]].
+    </p>
+    <p>An AVIF file containing an Image Sequence shall list the "msf1" brand as one of the entries in the compatible_brands array.
+    </p>
+    <p>The timing information provided for a Master Image track is advisory. However, the timing relationship between the master track and any associated non-master track shall be treated strictly when used to determine which images are time-parallel.
+    </p>
+    <p>All Master Images that are part of a sequence shall share the same Image Properties. Any Image Properties assigned to the sequence shall be linked to the track and shall not be linked to an individual image sample. Image Properties are linked to tracks by setting the item_ID field of an ItemPropertyAssociation to a track_id.
+    </p>
+    <p>The determination as to which master track images a non-master image is bound to is made after the decoding sample time is reconstructed for all tracks of the Image Sequence using the TimeToSampleBox (stts) information associated with each track. A non-master image is linked to each master image that has a decode time equal the decode time for that image or falls within the period before the decode time of the next non-master image in the track sequence.
+    </p>
+
+    <figure>
+    	<img alt="Determining time-parallel images between track using decode time." src="images/track_matching.svg">
+    	<figcaption>Determining time-parallel images between track using decode time</figcaption>
+    </figure>
+
+    <h3 id="thumbnails">Thumbnails</h3>
+    <p>For Image Collections, a Thumbnail Image and one or more Master Images shall be linked using an ItemReferenceBox entry with a referenceType of "thmb" in the file-level MetaBox. A single thumbnail may be linked to multiple non-sequential Master Images in the collection.
+    </p>
+    <p>For Image Sequences, a Thumbnail Image track may be associated with the Master Image track. The thumbnail track may contain one or more images. The number of Thumbnail Images shall not exceed the number of Master Images. Presentation timing for the thumbnail track is derived from the track-level TimeToSampleBox and may be treated as advisory for playback. A thumbnail track shall be associated with the primary track using a TrackReferenceBox with a referenceType of "thmb".
+    </p>
+
+    <h3 id="cover-image">Cover Image</h3>
+    <p>A Cover Image differs from a Thumbnail Image in that it is also a Master Image. For Image Collections, a PrimaryItemBox found in the file-level MetaBox is used to indicate the image item that is considered the Cover Image. For an Image Sequence, a MetaBox with a hander_type set to "pict" shall be used at the MovieBox level of the Master Image track. A single image item shall be defined in the MetaBox with an ItemLocationBox entry that points to the Master Image that is to be used as the Cover Image. This MetaBox shall also contain a PrimaryItemBox that points to that image item.
+    </p>
+
+    <h3 id="alpha-channel">Alpha Channel</h3>
+    <p>An Alpha Image is a specific type of auxiliary image that is used to carry per pixel opacity information for one or more Master Images. This is the only type of Auxiliary Image supported by AVIF.
+    </p>
+    <p>A URN will be defined to identify AVIF alpha auxiliary images or tracks. For the purposes of this draft the placeholder urn:aom:avif:alpha will be used.
+    </p>
+    <p>A brand that represents the encoding format of the alpha image shall be placed in the compatible_brands array of the FileTypeBox.
+    </p>
+    <p>The alpha image shall have the same dimensional attributes as the largest channel plane in the Master Image: width, height, and pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the largest component plane of any linked Master Image exactly. For example, for YUV 4:2:x, this would be the Y component plane. The decoded value of an alpha pixel is shall be a normalized unsigned integer of at least 8 bits representing a value between 0.0 and 1.0 or a floating point value between 0.0 and 1.0.
+    </p>
+    <p>For an Image Collection, Alpha Images and Master Images shall be linked using an ItemReferenceBox entry with a reference type of "auxl". A single Alpha Image may be linked to one or more Master Images. The total number of Alpha Images shall not exceed the number of Master Images. When an Alpha Image applies to a subset of the Master Image items this shall constrain all Master Images in that subset to have the same dimensional attributes.
+    </p>
+    <p>When the AVIF file is structured as an Image Sequence, Alpha images may be associated with an Image Sequence using an associated auxiliary track. This track shall have a TrackReferenceBox with a referenceType of "auxl" with an auxiliary type of urn:aom:avif:alpha. For AVIF, only one alpha track may be included in the file. Linking of samples in the Alpha Image track and Master Image track is defined by derived parallel time alignment using each stream's TimeToSampleBox. The timing relationship between alpha track and primary track is strict and shall not be treated as advisory. At a minimum, the alpha track shall contain a single image.
+    </p>
+
+    <h3 id="metadata">Metadata</h3>
+    <p>Metadata is associated through a "cdsc" (content describes) item referenceType element in an ItemReferenceBox for an Image Collection, or a TrackReferenceBox for an Image Sequence. A conforming AVIF reader may ignore all metadata.
+    </p>
+
+<h2 id="file-format">File Format</h2>
+
+<h3 id="common-elements">Common Elements</h3>
+    <h4 id="file-type-box">FileTypeBox</h4>
+    <p>Each AVIF file will begin with a FileTypeBox. This shall be the first box in the file and may only be preceded by non-ISOBMFF data when necessary. The box should identify this file as conforming to HEIF with specific branding registered for AVIF.
+    </p>
+    <p>If the major_brand field is set to "avif" then the minor_version shall be set to 0.
+    </p>
+    <p>If the major_brand field is not set to "avif", then the brand "avif" shall appear in the compatible_brands array.
+    </p>
+    <p>The compatible_brands array shall contain "mif1" if the file contains an Image Collection.
+    </p>
+    <p>The compatible_brands array shall contain "msf1" if the file contains an Image Sequence.
+    </p>
+    <p>The compatible_brands array shall contain an appropriate brand for the encoding used for thumbnails images if it is not AV1.
+    </p>
+    <p>The compatible_brands array shall contain an appropriate brand for the encoding used for alpha images if it is not AV1.
+    </p>
+
+<h3 id="collection-elements">Collection Elements</h3>
+    <p>An AVIF file reader must be able recognize the following boxes. Any box field or feature not explicitly limited by this specification should be handled as defined in ISO 14496&#8209;12 and ISO 23008-12.
+    </p>
+    <table class="complex data" style="border: 2px solid;">
+    <colgroup>
+      <col span="3">
+      <col style="border-right: 2px solid; border-left: 2px solid">
+    </colgroup>
+    <thead>
+      <tr>
+        <td colspan="3" rowspan="1">box hierarchy</td>
+        <td>version</td>
+        <td>box description</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ftyp</td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>file type</td>
+      </tr>
+      <tr>
+        <td>meta</td>
+        <td></td>
+        <td></td>
+        <td>0</td>
+        <td>metadata container box</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>hdlr</td>
+        <td></td>
+        <td>0</td>
+        <td>handler type definition</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>iloc</td>
+        <td></td>
+        <td>0,1,2</td>
+        <td>item location table</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>iinf</td>
+        <td></td>
+        <td>0,1</td>
+        <td>item information table</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>infe</td>
+        <td>2,3</td>
+        <td>item information table entry</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>pitm</td>
+        <td></td>
+        <td>0,1</td>
+        <td>primary item reference</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>iprp</td>
+        <td></td>
+        <td>-</td>
+        <td>item properties container box</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>ipco</td>
+        <td>0</td>
+        <td>item property definitions</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>ipma</td>
+        <td>0,1</td>
+        <td>item property associations</td>
+      </tr>
+    </tbody>
+  </table>
+
+<h4 id="meta-box">MetaBox</h4>
+  <p>A file-level MetaBox shall follow immediately after the FileTypeBox if the file contains an Image Collection.
+  </p>
+
+<h4 id="handler-box">HandlerBox</h4>
+  <p>The handler type for the MetaBox shall be "pict".
+  </p>
+
+<h4 id="primary-item-box">PrimaryItemBox</h4>
+  <p>One PrimaryItemBox may be used in this MetaBox to provide a reference to a Cover Image. The image referenced by the PrimaryItemBox shall be a Master Image.
+  </p>
+
+<h4 id="item-location-box">ItemLocationBox</h4>
+  <p>The data_reference_index for any AVIF conformant element in the ItemLocationBox table entry shall be set to zero.
+  </p>
+  <p>The construction_method value of 2 shall not be used.
+  </p>
+
+<h4 id="item-properties-box">ItemPropertiesBox</h4>
+  <p>Item Properties are associated with an item using an ItemPropertiesBox. The type of each property is uniquely identified with a fourCC. Two categories of image properties may be found in an AVIF file.
+  </p>
+  <p>The first are decoder specific configuration and initialization properties. The AVIF codec configuration property will be identified with an property type of "av1C". Non-master image types recommendations may also define codec configuration property formats and usage rules.
+  </p>
+  <p>The second are image descriptive properties conveying the attributes of the encoded image and, by implication, the reconstructed image post decode. The descriptive image properties that may be used in AVIF compliant files are:
+  </p>
+  <ul>
+    <li>Image Spatial Extents (ispe)</li>
+    <li>Pixel Aspect Ratio (pasp)</li>
+    <li>Colour Information (colr)</li>
+    <li>Pixel Information (pixi)</li>
+    <li>Image properties for auxiliary images (auxC)</li>
+  </ul>
+
+<h4 id="item-info-box">ItemInfoBox</h4>
+  <p>All images samples that are members of the Image Collection shall have an entry in the ItemInfoBox item_infos table. This includes primary, thumbnail, and alpha images
+  </p>
+  <p>Image samples of the collection shall use version 2 or 3 of the ItemInfoEntry box.
+  </p>
+  <p>Each ItemInfoEntry referencing a master image shall have an item_type of "av1i".
+  </p>
+  <p>Each ItemInfoEntry referencing an alpha plane image shall have an item_type field of"uri" and an item_uri_type set to "urn:aom:avif:alpha".
+  </p>
+  <p>Each ItemInfoEntry referencing a thumbnail image shall have an item_type field set to either"av1i" or"jpeg".
+  </p>
+  <p>The item_name is optional. A single byte null string shall be used to indicate an empty item_name.
+  </p>
+
+<h4 id="item-reference-box">ItemReferenceBox</h4>
+  <p>An AVIF file reader shall support item references of the following types:
+  </p>
+  <ul>
+    <li>"auxl" auxiliary image; limited to an aux_type of urn:aom:avif:alpha</li>
+    <li>"thmb" thumbnail image; limited to"av1i" or"jpeg"</li>
+  </ul>
+  <p>An AVIF file reader may optionally support item references of the follow type:
+  </p>
+  <ul>
+    <li>"cdsc" content description</li>
+  </ul>
+<h4 id="item-data-box">ItemDataBox</h4>
+  <p>An ItemDataBox shall be used if any ItemLocationBox entry has an"idat" construction method.
+  </p>
+
+  <h3 id="sequence-elements">Sequence Elements</h3>
+  <p>An AVIF file reader must be able recognize the following boxes. Any box field or feature not explicitly limited by this specification should be handled as defined in ISO 14496&#8209;12 and ISO 23008-12.
+  </p>
+
+  <table class="complex data" style="border: 2px solid;">
+  <colgroup>
+    <col span="4">
+    <col style="border-right: 2px solid; border-left: 2px solid">
+  </colgroup>
+    <thead>
+      <tr>
+        <td colspan="4" rowspan="1">box hierarchy</td>
+        <td>version</td>
+        <td>box description</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ftyp</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>file type</td>
+      </tr>
+      <tr>
+        <td>moov</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>movie container box</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>trak</td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>track container box</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>tkhd</td>
+        <td></td>
+        <td></td>
+        <td>0,1</td>
+        <td>track header</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>tref</td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>track references</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>mdia</td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>media information container</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>mdhd</td>
+        <td></td>
+        <td></td>
+        <td>0,1</td>
+        <td>media information header</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>hdlr</td>
+        <td></td>
+        <td></td>
+        <td>0</td>
+        <td>media handler type</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>minf</td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td>media information box</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>vmhd</td>
+        <td></td>
+        <td></td>
+        <td>video media header</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>dinf</td>
+        <td></td>
+        <td>-</td>
+        <td>data information container</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>dref</td>
+        <td>0</td>
+        <td>data references for track sources</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>stbl</td>
+        <td></td>
+        <td>-</td>
+        <td>sample table mapping container</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>stts</td>
+        <td>0</td>
+        <td>sample to decode time table</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>stsd</td>
+        <td></td>
+        <td>sample description(visual sample entry box subclass)</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>stsz</td>
+        <td>0</td>
+        <td>sample size table</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>stsc</td>
+        <td>0</td>
+        <td>sample to chunk table</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>stco</td>
+        <td>0</td>
+        <td>chunk offset table</td>
+      </tr>
+      <tr>
+        <td>mdat</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>-</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 id="movie-box">MovieBox</h4>
+  <pThe Image Sequence tracks shall be contained in a MovieBox. The MovieBox should follow directly after either a file-level MetaBox, if one exists, or the FileTypeBox.
+  </p>
+  <h4 id="track-header-box">TrackHeaderBox</h4>
+  <p>For a track of sample type "av1i" the flag field shall be set to track_enabled and track_in_movie.
+  </p>
+  <p>For "thmb" the track_in_preview flag shall be set and track_in_movie cleared.
+  </p>
+  <p>For "auxv" (auxiliary used to convey alpha images) tracks the flag field shall be set to zero.
+  </p>
+
+  <h4 id="track-reference-box">TrackReferenceBox</h4>
+  <p>The reference_type values supported by an AVIF file shall be:
+  </p>
+  <ul>
+    <li>"thmb"thumbnail track</li>
+    <li>"auxl"; only when the auxiliary track type is alpha</li>
+  </ul>
+
+  <h4 id="media-box">MediaBox</h4>
+  <p>Each MediaBox associated with AVIF elements "av1i" and "thmb" shall contain a HandlerBox with the handler_type shall be set to "pict".
+  </p>
+  <p>For alpha auxiliary tracks, the handler_type of the HandlerBox shall be "auxv".
+  </p>
+
+  <h4 id="sample-table-box">SampleTableBox</h4>
+  <p>The "av1i" codec configuration (see ItemPropertyBox above) block shall be used as the AV1 specific version of the SampleDescriptionBox for all AV1 encoded image tracks: primary and AV1 encoded thumbnail images.
+  </p>
+  <p>A JPEG encoded thumbnail shall conform to section H of the HEIF specification and use the "jpgC" JpegConfigurationBox as its sample descriptor.
+  </p>
+  <p>For an alpha track, the AuxiliaryTypeInfoBox shall be used as SampleDescriptionBox entry in the SampleTableBox for an alpha track. The aux_track_type shall be assigned the string urn:aom:avif:alpha. This is the only type of auxiliary track defined by this specification.
+  </p>
+
+  <h4 id="data-reference-box">DataReferenceBox</h4>
+  <p>Only one type of DataReferenceBox table entry shall be used to define to the location of an AVIF media data element: the DataEntryUrlBox. Furthermore, the entry_flag must be set to 0x001 to signal that the data element resides in the same file as the containing DataReferenceBox.
+  </p>
+
+</body>
