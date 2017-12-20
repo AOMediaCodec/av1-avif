@@ -1530,7 +1530,18 @@ pre .property::before, pre .property::after {
    <p>For Image Collections, a Thumbnail Image and one or more Master Images shall be linked using an ItemReferenceBox entry with a referenceType of "thmb" in the file-level MetaBox. A single thumbnail may be linked to multiple non-sequential Master Images in the collection. </p>
    <p>For Image Sequences, a Thumbnail Image track may be associated with the Master Image track. The thumbnail track may contain one or more images. The number of Thumbnail Images shall not exceed the number of Master Images. Presentation timing for the thumbnail track is derived from the track-level TimeToSampleBox and may be treated as advisory for playback. A thumbnail track shall be associated with the primary track using a TrackReferenceBox with a referenceType of "thmb". </p>
    <h3 class="heading settled" data-level="3.5" id="cover-image①"><span class="secno">3.5. </span><span class="content">Cover Image</span><a class="self-link" href="#cover-image①"></a></h3>
-   <p>A Cover Image differs from a Thumbnail Image in that it is also a Master Image. For Image Collections, a PrimaryItemBox found in the file-level MetaBox is used to indicate the image item that is considered the Cover Image. For an Image Sequence, a MetaBox with a hander_type set to "pict" shall be used at the MovieBox level of the Master Image track. A single image item shall be defined in the MetaBox with an ItemLocationBox entry that points to the Master Image that is to be used as the Cover Image. This MetaBox shall also contain a PrimaryItemBox that points to that image item. </p>
+   <p>A Cover Image differs from a Thumbnail Image in that it is also a Master Image.
+    For Image Collections, a PrimaryItemBox found in the file-level MetaBox may be used to
+    indicate the image item that is to be considered the Cover Image. This image item
+    shall be a master image. If not explicitly indicated in the above manner, the
+    Cover Image shall be assumed to be the first master image entry in the ItemLocationBox. </p>
+   <p>For an Image Sequence, a PrimaryItemBox in a MetaBox found in the TrackBox
+    of the master image track may be used to indicate the Cover Image. The MetaBox
+    containing this PrimaryItemBox shall have a HandlerBox with a hander_type set to "pict"
+    and an ItemLocationBox that has an entry with the same item_ID that is contained
+    in the PrimaryItemBox. The item identified by the item_ID shall a Master Image.
+    If not explicitly indicated in the above manner, the Cover Image shall be assumed
+    to be first entry in the master track. </p>
    <h3 class="heading settled" data-level="3.6" id="alpha-channel"><span class="secno">3.6. </span><span class="content">Alpha Channel</span><a class="self-link" href="#alpha-channel"></a></h3>
    <p>An Alpha Image is a specific type of auxiliary image that is used to carry per pixel opacity information for one or more Master Images. This is the only type of Auxiliary Image supported by AVIF. </p>
    <p>A URN will be defined to identify AVIF alpha auxiliary images or tracks. For the purposes of this draft the placeholder urn:aom:avif:alpha will be used. </p>
@@ -1582,6 +1593,12 @@ pre .property::before, pre .property::after {
       <td>handler type definition
      <tr>
       <td>
+      <td>pitm
+      <td>
+      <td>0,1
+      <td>primary item reference
+     <tr>
+      <td>
       <td>iloc
       <td>
       <td>0,1,2
@@ -1598,12 +1615,6 @@ pre .property::before, pre .property::after {
       <td>infe
       <td>2,3
       <td>item information table entry
-     <tr>
-      <td>
-      <td>pitm
-      <td>
-      <td>0,1
-      <td>primary item reference
      <tr>
       <td>
       <td>iprp
@@ -1628,7 +1639,9 @@ pre .property::before, pre .property::after {
    <h4 class="heading settled" data-level="4.2.2" id="handler-box"><span class="secno">4.2.2. </span><span class="content">HandlerBox</span><a class="self-link" href="#handler-box"></a></h4>
    <p>The handler type for the MetaBox shall be "pict". </p>
    <h4 class="heading settled" data-level="4.2.3" id="primary-item-box"><span class="secno">4.2.3. </span><span class="content">PrimaryItemBox</span><a class="self-link" href="#primary-item-box"></a></h4>
-   <p>One PrimaryItemBox may be used in this MetaBox to provide a reference to a Cover Image. The image referenced by the PrimaryItemBox shall be a Master Image. </p>
+   <p>One PrimaryItemBox may be used in this MetaBox to provide a reference to a Cover Image.
+  The image referenced by the PrimaryItemBox shall be a Master Image.
+  The PrimaryItemBox shall come before the ItemLocationBox. </p>
    <h4 class="heading settled" data-level="4.2.4" id="item-location-box"><span class="secno">4.2.4. </span><span class="content">ItemLocationBox</span><a class="self-link" href="#item-location-box"></a></h4>
    <p>The data_reference_index for any AVIF conformant element in the ItemLocationBox table entry shall be set to zero. </p>
    <p>The construction_method value of 2 shall not be used. </p>

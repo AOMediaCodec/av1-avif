@@ -128,7 +128,18 @@ Custom Warning Text: This specification is still at draft stage and should not b
     </p>
 
     <h3 id="cover-image">Cover Image</h3>
-    <p>A Cover Image differs from a Thumbnail Image in that it is also a Master Image. For Image Collections, a PrimaryItemBox found in the file-level MetaBox is used to indicate the image item that is considered the Cover Image. For an Image Sequence, a MetaBox with a hander_type set to "pict" shall be used at the MovieBox level of the Master Image track. A single image item shall be defined in the MetaBox with an ItemLocationBox entry that points to the Master Image that is to be used as the Cover Image. This MetaBox shall also contain a PrimaryItemBox that points to that image item.
+    <p>A Cover Image differs from a Thumbnail Image in that it is also a Master Image.
+    For Image Collections, a PrimaryItemBox found in the file-level MetaBox may be used to
+    indicate the image item that is to be considered the Cover Image. This image item
+    shall be a master image. If not explicitly indicated in the above manner, the
+    Cover Image shall be assumed to be the first master image entry in the ItemLocationBox.
+    <p>For an Image Sequence, a PrimaryItemBox in a MetaBox found in the TrackBox
+    of the master image track may be used to indicate the Cover Image. The MetaBox
+    containing this PrimaryItemBox shall have a HandlerBox with a hander_type set to "pict"
+    and an ItemLocationBox that has an entry with the same item_ID that is contained
+    in the PrimaryItemBox. The item identified by the item_ID shall a Master Image.
+    If not explicitly indicated in the above manner, the Cover Image shall be assumed
+    to be first entry in the master track.
     </p>
 
     <h3 id="alpha-channel">Alpha Channel</h3>
@@ -207,6 +218,13 @@ Custom Warning Text: This specification is still at draft stage and should not b
       </tr>
       <tr>
         <td></td>
+        <td>pitm</td>
+        <td></td>
+        <td>0,1</td>
+        <td>primary item reference</td>
+      </tr>
+      <tr>
+        <td></td>
         <td>iloc</td>
         <td></td>
         <td>0,1,2</td>
@@ -225,13 +243,6 @@ Custom Warning Text: This specification is still at draft stage and should not b
         <td>infe</td>
         <td>2,3</td>
         <td>item information table entry</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>pitm</td>
-        <td></td>
-        <td>0,1</td>
-        <td>primary item reference</td>
       </tr>
       <tr>
         <td></td>
@@ -266,7 +277,9 @@ Custom Warning Text: This specification is still at draft stage and should not b
   </p>
 
 <h4 id="primary-item-box">PrimaryItemBox</h4>
-  <p>One PrimaryItemBox may be used in this MetaBox to provide a reference to a Cover Image. The image referenced by the PrimaryItemBox shall be a Master Image.
+  <p>One PrimaryItemBox may be used in this MetaBox to provide a reference to a Cover Image.
+  The image referenced by the PrimaryItemBox shall be a Master Image.
+  The PrimaryItemBox shall come before the ItemLocationBox.
   </p>
 
 <h4 id="item-location-box">ItemLocationBox</h4>
