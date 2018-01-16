@@ -1,6 +1,6 @@
 # av1-avif
 
-This is a proposed specification of the AOM group.
+This is a Netflix DRAFT proposal for a still image format specification.
 This document describes how to use ISO-BMFF structures to generate a HEIF/MIAF
 compatible file that contains one or more still images encoded using AV1
 intra-frame tools.
