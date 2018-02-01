@@ -1,6 +1,8 @@
 #Emacs backup files
 *~
 *.*~
+\#*\#
+.\#*
 
 # OS generated files
 .DS_Store
