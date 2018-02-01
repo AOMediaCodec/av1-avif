@@ -21,17 +21,17 @@ Custom Warning Text: This specification is still at draft stage and should not b
 
 <h2 id="overview">Overview</h2>
 
-<p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0.
+<p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in AVIF version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0.
 </p>
 
-<p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. For a multiple image file, an image sequence with suggested playback timing may be defined.
+<p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. An image sequence with suggested playback timing may be defined.
 </p>
 
 <h3 id="target-features">Target Features</h3>
   <ul>
     <li>AV1 intra-frame codec toolkit</li>
     <li>Multiple image storage: untimed unordered collection</li>
-    <li class="c31 c20"><span class="c22">Animation: timed sequence of images</li>
+    <li>Animation: timed sequence of images</li>
     <li>Thumbnail image</li>
     <li>Alpha channel</li>
     <li>Extensible image metadata</li>
@@ -40,11 +40,11 @@ Custom Warning Text: This specification is still at draft stage and should not b
 <h2 id="terms-and-definitions">Terms and Definitions</h2>
 
   <h3 id="def-alpha-image"><dfn>Alpha Image</dfn></h3>
-  <p>A specific type of [=Auxiliary Image=] that may be used to convey information representing the opacity of the associated Master Images.
+  <p>A specific type of [=Auxiliary Image=] that may be used to convey information representing the opacity of associated [=Master Images=].
   </p>
 
   <h3 id="def-auxiliary-image"><dfn>Auxiliary Image</dfn></h3>
-  <p>An image that is not be intended to be displayed but provides supplemental information complementing an associated [=Master Image=]. AVIF allows only one type of Auxiliary Image: an Alpha Image.
+  <p>An image that is not be intended to be displayed but provides supplemental information for associated [=Master Images=]. AVIF allows only one type of Auxiliary Image: an [=Alpha Image=].
   </p>
 
   <h3 id="def-cover-image"><dfn>Cover Image</dfn></h3>
@@ -77,13 +77,13 @@ Custom Warning Text: This specification is still at draft stage and should not b
   </p>
 
   <h3 id="def-thumbnail-image"><dfn>Thumbnail Image</dfn></h3>
-  <p>This is a non-Master image that may be used to represent one or more [=Master Images=] found in an AVIF file. It is typically of a smaller scale than the Master Images. The compression format may be different than the one used by the Master Images.
+  <p>This is a non-master image that may be used to represent one or more [=Master Images=] found in an AVIF file. It is typically of a smaller scale than the Master Images. Its compression format may be different than the one used by the Master Images.
   </p>
 
   <h2 id="object-model-and-structure">Object Model and Structure</h2>
-    <p>An AVIF file should be a simplified and conformant version of an HEIF file. This is to allow for the deployment of general libraries that may be used to create and parse HEIF-based image files wrapping different coding methods for the actual image content. This should be similar to ISO-BMFF usage in the video domain.
+    <p>An AVIF file should be a simplified and conformant version of an [[!HEIF]] file. This is to allow for the deployment of general libraries that may be used to create and parse HEIF-based image files wrapping different coding methods for the actual image content. This should be similar to ISO-BMFF usage in the video domain.
     </p>
-    <p>The AVIF file format will be built on the box-structured media interchange format introduced by the ISO Base Media File Format ([[!ISOBMFF]]). The format specified by AVIF defines the use of a subset of box structures introduced in ISOBMFF. Where the necessary structures do not exist in ISOBMFF, structures defined as part of the High Efficiency Image File Format (HEIF: ISO/IEC 23008-12) that are codec neutral and can be applied in a generic manner are used. An AVIF version 1.0 file shall be compliant to the requirements of Clause 4 of the [[!ISOBMFF]] specification, and where applicable, the recommendations in Annex I: Guidelines On Defining New Image Formats and Brands in the MPEG HEIF specification shall be followed for AVIF 1.0.
+    <p>The AVIF file format will be built on the box-structured media interchange format introduced by the ISO Base Media File Format ([[!ISOBMFF]]). The format specified by AVIF defines the use of a subset of box structures introduced in ISOBMFF. Where the necessary structures do not exist in ISOBMFF, structures defined as part of the High Efficiency Image File Format ([[!HEIF]]: ISO/IEC 23008-12) that are codec neutral and can be applied in a generic manner are used. An AVIF version 1.0 file shall be compliant to the requirements of Clause 4 of the [[!ISOBMFF]] specification, and where applicable, the recommendations in Annex I: Guidelines On Defining New Image Formats and Brands in the MPEG HEIF specification shall be followed for AVIF 1.0.
     </p>
 
     <h3 id="image-storage">Image Storage</h3>
@@ -91,21 +91,21 @@ Custom Warning Text: This specification is still at draft stage and should not b
     </p>
 
     <h3 id="image-collection-elements">Image Collection Elements</h3>
-    <p>An Image Collection is the most basic format of an AVIF file. This form should be used for the case of a single image, or when a group of images does not require logical or temporal sequencing.
+    <p>An Image Collection is the most basic format of an AVIF file. This form should be used for the case of a single image, or when a group of images that have no logical or temporal sequencing.
     </p>
-    <p>Image Collections are structured as items defined in a single file-level MetaBox. Each master, thumbnail or auxiliary image that are a component of an Image Collection shall have an item definition in this MetaBox. Items have no timing information. Any association between a Master Image and an Auxiliary or Thumbnail image must be defined explicitly.
+    <p>Image Collections are structured as items defined in a single file-level MetaBox. Each master, thumbnail or auxiliary image that are a component of the Image Collection shall have an item definition in this MetaBox. Items have no timing information. Any association between a Master Image and an Auxiliary or Thumbnail image must be defined explicitly.
     </p>
-    <p>An AVIF file containing an Image Collection shall list the "mif1" brand as one of the entries in the compatible_brands array and conform to section 10.1 of HEIF. The boxes used to structure a collection are all located at the file level within a MetaBox: there are no track level boxes. The image data for a collection may be stored within an ItemDataBox or a MediaDataBox.
+    <p>An AVIF file containing an Image Collection shall list the "mif1" brand as one of the entries in the compatible_brands array and conform to section 10.1 of [[!HEIF]]. All boxes used to structure a collection are located at the file level within a MetaBox: there are no track level boxes. The image data for a collection may be stored within an ItemDataBox or a MediaDataBox.
     </p>
-    <p>The images stored in the file are listed in the ItemLocationBox. A unique ItemLocationBox entry shall be used to reference media data for each image in the collection: Master, Thumbnail and Alpha images. Each image shall have an entry in the ItemLocationBox.
+    <p>The images stored in the file are listed in an ItemLocationBox. A unique ItemLocationBox entry shall be used to reference the media data for each image in the collection: Master, Thumbnail and Alpha images. Each image shall have an entry in the ItemLocationBox.
     </p>
-    <p>The type of the item element is identified in an entry in the ItemInfoBox. Every ItemLocationBox entry shall have a matching entry in the ItemInfoBox cross referenced by item_ID.
+    <p>The type of the item element is identified in an entry in the ItemInfoBox. Every ItemLocationBox entry shall have a matching entry in the ItemInfoBox cross referenced by the item_ID.
     </p>
     <p>The images making up an Image Collection do not need to have the same Image Properties. A specific property may be assigned to one or more of the images within the Image Collection using an ItemPropertyBox entry.
     </p>
 
     <h3 id="image-sequence-elements">Image Sequence Elements</h3>
-    <p>Image Sequences are structured as tracks. An individual track contains one type of image: master, auxiliary or thumbnail. Associations between a thumbnail or auxiliary image, and a master image, is determined by finding components of each track that are time-parallel as defined by procedures detailed in [[!ISOBMFF]].
+    <p>Image Sequences are structured as tracks. An individual track shall contain one type of image: master, auxiliary or thumbnail. Associations between a thumbnail or auxiliary image, and a master image, is determined by finding components of each track that are time-parallel as defined by procedures detailed in [[!ISOBMFF]].
     </p>
     <p>An AVIF file containing an Image Sequence shall list the "msf1" brand as one of the entries in the compatible_brands array.
     </p>

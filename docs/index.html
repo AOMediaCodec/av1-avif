@@ -1176,8 +1176,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 549748cf00f6303618e14a7868fb2ecd5725161f" name="generator">
+  <meta content="Bikeshed version 1760a0346ebf3096d8d47b818b15ffcad41e99a0" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
+  <meta content="0f78319190395b66d3a427ef718bdb69cf96a73d" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1468,26 +1469,26 @@ pre .property::before, pre .property::after {
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="overview"><span class="secno">1. </span><span class="content">Overview</span><a class="self-link" href="#overview"></a></h2>
-   <p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0. </p>
-   <p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. For a multiple image file, an image sequence with suggested playback timing may be defined. </p>
+   <p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in AVIF version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0. </p>
+   <p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. An image sequence with suggested playback timing may be defined. </p>
    <h3 class="heading settled" data-level="1.1" id="target-features"><span class="secno">1.1. </span><span class="content">Target Features</span><a class="self-link" href="#target-features"></a></h3>
    <ul>
     <li>AV1 intra-frame codec toolkit
     <li>Multiple image storage: untimed unordered collection
-    <li class="c31 c20"><span class="c22">Animation: timed sequence of images</span>
+    <li>Animation: timed sequence of images
     <li>Thumbnail image
     <li>Alpha channel
     <li>Extensible image metadata
    </ul>
    <h2 class="heading settled" data-level="2" id="terms-and-definitions"><span class="secno">2. </span><span class="content">Terms and Definitions</span><a class="self-link" href="#terms-and-definitions"></a></h2>
-   <h3 class="heading settled" data-level="2.1" id="def-alpha-image"><span class="secno">2.1. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="alpha-image">Alpha Image<a class="self-link" href="#alpha-image"></a></dfn></span><a class="self-link" href="#def-alpha-image"></a></h3>
-   <p>A specific type of <a data-link-type="dfn" href="#auxiliary-image" id="ref-for-auxiliary-image">Auxiliary Image</a> that may be used to convey information representing the opacity of the associated Master Images. </p>
+   <h3 class="heading settled" data-level="2.1" id="def-alpha-image"><span class="secno">2.1. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="alpha-image">Alpha Image</dfn></span><a class="self-link" href="#def-alpha-image"></a></h3>
+   <p>A specific type of <a data-link-type="dfn" href="#auxiliary-image" id="ref-for-auxiliary-image">Auxiliary Image</a> that may be used to convey information representing the opacity of associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image">Master Images</a>. </p>
    <h3 class="heading settled" data-level="2.2" id="def-auxiliary-image"><span class="secno">2.2. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="auxiliary-image">Auxiliary Image</dfn></span><a class="self-link" href="#def-auxiliary-image"></a></h3>
-   <p>An image that is not be intended to be displayed but provides supplemental information complementing an associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image">Master Image</a>. AVIF allows only one type of Auxiliary Image: an Alpha Image. </p>
+   <p>An image that is not be intended to be displayed but provides supplemental information for associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image①">Master Images</a>. AVIF allows only one type of Auxiliary Image: an <a data-link-type="dfn" href="#alpha-image" id="ref-for-alpha-image">Alpha Image</a>. </p>
    <h3 class="heading settled" data-level="2.3" id="def-cover-image"><span class="secno">2.3. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="cover-image">Cover Image<a class="self-link" href="#cover-image"></a></dfn></span><a class="self-link" href="#def-cover-image"></a></h3>
-   <p>A <a data-link-type="dfn" href="#master-image" id="ref-for-master-image①">Master Image</a> that may be used to represent the file contents. An example of this is a single image used to represent an animation before the animation sequence is activated. </p>
+   <p>A <a data-link-type="dfn" href="#master-image" id="ref-for-master-image②">Master Image</a> that may be used to represent the file contents. An example of this is a single image used to represent an animation before the animation sequence is activated. </p>
    <h3 class="heading settled" data-level="2.4" id="def-image-collection"><span class="secno">2.4. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="image-collection">Image Collection<a class="self-link" href="#image-collection"></a></dfn></span><a class="self-link" href="#def-image-collection"></a></h3>
-   <p>One or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image②">Master Images</a> stored as items in a single file with no defined order or timing information. Within a collection, groups of image samples may share properties and metadata. </p>
+   <p>One or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image③">Master Images</a> stored as items in a single file with no defined order or timing information. Within a collection, groups of image samples may share properties and metadata. </p>
    <h3 class="heading settled" data-level="2.5" id="def-image-properties"><span class="secno">2.5. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="image-properties">Image Properties<a class="self-link" href="#image-properties"></a></dfn></span><a class="self-link" href="#def-image-properties"></a></h3>
    <p>This is a class of non-media data. The property items may be descriptive image attributes or decoder configuration data. The properties are primarily for consumption by the decoding agent. This information may include:</p>
    <ul>
@@ -1497,27 +1498,27 @@ pre .property::before, pre .property::after {
     <li>color space
    </ul>
    <h3 class="heading settled" data-level="2.6" id="def-image-sequence"><span class="secno">2.6. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="image-sequence">Image Sequence<a class="self-link" href="#image-sequence"></a></dfn></span><a class="self-link" href="#def-image-sequence"></a></h3>
-   <p>A sequence of <a data-link-type="dfn" href="#master-image" id="ref-for-master-image③">Master Images</a> stored as a track for which information is provided that defines a sequential ordering and temporal information indicating suggested playback timing. An agent decoding and presenting an AVIF file may chose to render an Image Sequence as an animation. </p>
+   <p>A sequence of <a data-link-type="dfn" href="#master-image" id="ref-for-master-image④">Master Images</a> stored as a track for which information is provided that defines a sequential ordering and temporal information indicating suggested playback timing. An agent decoding and presenting an AVIF file may chose to render an Image Sequence as an animation. </p>
    <h3 class="heading settled" data-level="2.7" id="def-master-image"><span class="secno">2.7. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="master-image">Master Image</dfn></span><a class="self-link" href="#def-master-image"></a></h3>
    <p>An image that is not a thumbnail or auxiliary image. For the purpose of this specification, such an image is encoded using AV1 intra-frame tools. This type of image is the primary displayable payload of an AVIF file. A Master Image may be used as a member of both an Image Collection and an Image Sequence. </p>
    <h3 class="heading settled" data-level="2.8" id="def-metadata"><span class="secno">2.8. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="metadata">Metadata<a class="self-link" href="#metadata"></a></dfn></span><a class="self-link" href="#def-metadata"></a></h3>
    <p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7. An AVIF reader will not be required to extract metadata from a Informational Metadata boxes. Essential information shall be carried in the image media directly or be conveyed as Image Properties. </p>
    <h3 class="heading settled" data-level="2.9" id="def-thumbnail-image"><span class="secno">2.9. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="thumbnail-image">Thumbnail Image<a class="self-link" href="#thumbnail-image"></a></dfn></span><a class="self-link" href="#def-thumbnail-image"></a></h3>
-   <p>This is a non-Master image that may be used to represent one or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image④">Master Images</a> found in an AVIF file. It is typically of a smaller scale than the Master Images. The compression format may be different than the one used by the Master Images. </p>
+   <p>This is a non-master image that may be used to represent one or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image⑤">Master Images</a> found in an AVIF file. It is typically of a smaller scale than the Master Images. Its compression format may be different than the one used by the Master Images. </p>
    <h2 class="heading settled" data-level="3" id="object-model-and-structure"><span class="secno">3. </span><span class="content">Object Model and Structure</span><a class="self-link" href="#object-model-and-structure"></a></h2>
-   <p>An AVIF file should be a simplified and conformant version of an HEIF file. This is to allow for the deployment of general libraries that may be used to create and parse HEIF-based image files wrapping different coding methods for the actual image content. This should be similar to ISO-BMFF usage in the video domain. </p>
-   <p>The AVIF file format will be built on the box-structured media interchange format introduced by the ISO Base Media File Format (<a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>). The format specified by AVIF defines the use of a subset of box structures introduced in ISOBMFF. Where the necessary structures do not exist in ISOBMFF, structures defined as part of the High Efficiency Image File Format (HEIF: ISO/IEC 23008-12) that are codec neutral and can be applied in a generic manner are used. An AVIF version 1.0 file shall be compliant to the requirements of Clause 4 of the <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> specification, and where applicable, the recommendations in Annex I: Guidelines On Defining New Image Formats and Brands in the MPEG HEIF specification shall be followed for AVIF 1.0. </p>
+   <p>An AVIF file should be a simplified and conformant version of an <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> file. This is to allow for the deployment of general libraries that may be used to create and parse HEIF-based image files wrapping different coding methods for the actual image content. This should be similar to ISO-BMFF usage in the video domain. </p>
+   <p>The AVIF file format will be built on the box-structured media interchange format introduced by the ISO Base Media File Format (<a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>). The format specified by AVIF defines the use of a subset of box structures introduced in ISOBMFF. Where the necessary structures do not exist in ISOBMFF, structures defined as part of the High Efficiency Image File Format (<a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>: ISO/IEC 23008-12) that are codec neutral and can be applied in a generic manner are used. An AVIF version 1.0 file shall be compliant to the requirements of Clause 4 of the <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> specification, and where applicable, the recommendations in Annex I: Guidelines On Defining New Image Formats and Brands in the MPEG HEIF specification shall be followed for AVIF 1.0. </p>
    <h3 class="heading settled" data-level="3.1" id="image-storage"><span class="secno">3.1. </span><span class="content">Image Storage</span><a class="self-link" href="#image-storage"></a></h3>
    <p>All of the constituent elements, including image samples, shall be contained in a single file. All media data locations, regardless of construction method, shall resolve to an offset within an AVIF file. </p>
    <h3 class="heading settled" data-level="3.2" id="image-collection-elements"><span class="secno">3.2. </span><span class="content">Image Collection Elements</span><a class="self-link" href="#image-collection-elements"></a></h3>
-   <p>An Image Collection is the most basic format of an AVIF file. This form should be used for the case of a single image, or when a group of images does not require logical or temporal sequencing. </p>
-   <p>Image Collections are structured as items defined in a single file-level MetaBox. Each master, thumbnail or auxiliary image that are a component of an Image Collection shall have an item definition in this MetaBox. Items have no timing information. Any association between a Master Image and an Auxiliary or Thumbnail image must be defined explicitly. </p>
-   <p>An AVIF file containing an Image Collection shall list the "mif1" brand as one of the entries in the compatible_brands array and conform to section 10.1 of HEIF. The boxes used to structure a collection are all located at the file level within a MetaBox: there are no track level boxes. The image data for a collection may be stored within an ItemDataBox or a MediaDataBox. </p>
-   <p>The images stored in the file are listed in the ItemLocationBox. A unique ItemLocationBox entry shall be used to reference media data for each image in the collection: Master, Thumbnail and Alpha images. Each image shall have an entry in the ItemLocationBox. </p>
-   <p>The type of the item element is identified in an entry in the ItemInfoBox. Every ItemLocationBox entry shall have a matching entry in the ItemInfoBox cross referenced by item_ID. </p>
+   <p>An Image Collection is the most basic format of an AVIF file. This form should be used for the case of a single image, or when a group of images that have no logical or temporal sequencing. </p>
+   <p>Image Collections are structured as items defined in a single file-level MetaBox. Each master, thumbnail or auxiliary image that are a component of the Image Collection shall have an item definition in this MetaBox. Items have no timing information. Any association between a Master Image and an Auxiliary or Thumbnail image must be defined explicitly. </p>
+   <p>An AVIF file containing an Image Collection shall list the "mif1" brand as one of the entries in the compatible_brands array and conform to section 10.1 of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>. All boxes used to structure a collection are located at the file level within a MetaBox: there are no track level boxes. The image data for a collection may be stored within an ItemDataBox or a MediaDataBox. </p>
+   <p>The images stored in the file are listed in an ItemLocationBox. A unique ItemLocationBox entry shall be used to reference the media data for each image in the collection: Master, Thumbnail and Alpha images. Each image shall have an entry in the ItemLocationBox. </p>
+   <p>The type of the item element is identified in an entry in the ItemInfoBox. Every ItemLocationBox entry shall have a matching entry in the ItemInfoBox cross referenced by the item_ID. </p>
    <p>The images making up an Image Collection do not need to have the same Image Properties. A specific property may be assigned to one or more of the images within the Image Collection using an ItemPropertyBox entry. </p>
    <h3 class="heading settled" data-level="3.3" id="image-sequence-elements"><span class="secno">3.3. </span><span class="content">Image Sequence Elements</span><a class="self-link" href="#image-sequence-elements"></a></h3>
-   <p>Image Sequences are structured as tracks. An individual track contains one type of image: master, auxiliary or thumbnail. Associations between a thumbnail or auxiliary image, and a master image, is determined by finding components of each track that are time-parallel as defined by procedures detailed in <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>. </p>
+   <p>Image Sequences are structured as tracks. An individual track shall contain one type of image: master, auxiliary or thumbnail. Associations between a thumbnail or auxiliary image, and a master image, is determined by finding components of each track that are time-parallel as defined by procedures detailed in <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>. </p>
    <p>An AVIF file containing an Image Sequence shall list the "msf1" brand as one of the entries in the compatible_brands array. </p>
    <p>The timing information provided for a Master Image track is advisory. However, the timing relationship between the master track and any associated non-master track shall be treated strictly when used to determine which images are time-parallel. </p>
    <p>All Master Images that are part of a sequence shall share the same Image Properties. Any Image Properties assigned to the sequence shall be linked to the track and shall not be linked to an individual image sample. Image Properties are linked to tracks by setting the item_ID field of an ItemPropertyAssociation to a track_id. </p>
@@ -2008,11 +2009,19 @@ pre .property::before, pre .property::after {
   <dl>
    <dt id="biblio-av1">[AV1]
    <dd><a href="http://av1-spec.argondesign.com/av1-spec/av1-spec.html">AV1 Bitstream &amp; Decoding Process Specification</a>. LS. URL: <a href="http://av1-spec.argondesign.com/av1-spec/av1-spec.html">http://av1-spec.argondesign.com/av1-spec/av1-spec.html</a>
+   <dt id="biblio-heif">[HEIF]
+   <dd><a href="https://www.iso.org/standard/66067.html">Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format</a>. December 2017. International Standard. URL: <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a>
    <dt id="biblio-isobmff">[ISOBMFF]
    <dd><a href="http://standards.iso.org/ittf/PubliclyAvailableStandards/c068960_ISO_IEC_14496-12_2015.zip">Information technology — Coding of audio-visual objects — Part 12: ISO Base Media File Format</a>. December 2015. International Standard. URL: <a href="http://standards.iso.org/ittf/PubliclyAvailableStandards/c068960_ISO_IEC_14496-12_2015.zip">http://standards.iso.org/ittf/PubliclyAvailableStandards/c068960_ISO_IEC_14496-12_2015.zip</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
   </dl>
+  <aside class="dfn-panel" data-for="alpha-image">
+   <b><a href="#alpha-image">#alpha-image</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-alpha-image">2.2. Auxiliary Image</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="auxiliary-image">
    <b><a href="#auxiliary-image">#auxiliary-image</a></b><b>Referenced in:</b>
    <ul>
@@ -2022,11 +2031,12 @@ pre .property::before, pre .property::after {
   <aside class="dfn-panel" data-for="master-image">
    <b><a href="#master-image">#master-image</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-master-image">2.2. Auxiliary Image</a>
-    <li><a href="#ref-for-master-image①">2.3. Cover Image</a>
-    <li><a href="#ref-for-master-image②">2.4. Image Collection</a>
-    <li><a href="#ref-for-master-image③">2.6. Image Sequence</a>
-    <li><a href="#ref-for-master-image④">2.9. Thumbnail Image</a>
+    <li><a href="#ref-for-master-image">2.1. Alpha Image</a>
+    <li><a href="#ref-for-master-image①">2.2. Auxiliary Image</a>
+    <li><a href="#ref-for-master-image②">2.3. Cover Image</a>
+    <li><a href="#ref-for-master-image③">2.4. Image Collection</a>
+    <li><a href="#ref-for-master-image④">2.6. Image Sequence</a>
+    <li><a href="#ref-for-master-image⑤">2.9. Thumbnail Image</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

@@ -4,5 +4,14 @@
 		"title": "AV1 Bitstream & Decoding Process Specification",
 		"status": "LS",
 		"publisher": "AOM"
-	}
+	},
+
+    "HEIF": {
+	"date": "December 2017",
+	"id": "HEIF",
+	"href": "https://www.iso.org/standard/66067.html",
+	"title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
+	"status": "International Standard",
+	"publisher": "ISO/IEC"
+    }
 }
