@@ -1176,9 +1176,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 1760a0346ebf3096d8d47b818b15ffcad41e99a0" name="generator">
+  <meta content="Bikeshed version b740b15097946bf1d13405dc6d7ca5a72fa2530d" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="0f78319190395b66d3a427ef718bdb69cf96a73d" name="document-revision">
+  <meta content="3dd5c44b37537c4063afb0cced961618a4941c31" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1367,7 +1367,7 @@ pre .property::before, pre .property::after {
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">AV1 Still Image File Format (AVIF)</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2017-12-13">13 December 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2018-05-09">9 May 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1384,11 +1384,24 @@ pre .property::before, pre .property::after {
      <p>This specification is still at draft stage and should not be referenced other than as a working draft.</p>
     </details>
    </div>
+   <p class="copyright" data-fill-with="copyright">
+    <p>Copyright 2018, The Alliance for Open Media</p>
+    <p>Licensing information is available at http://aomedia.org/license/</p>
+    <p> The MATERIALS ARE PROVIDED “AS IS.” The Alliance for Open Media, its members, and its contributors
+  expressly disclaim any warranties (express, implied, or otherwise), including implied warranties of
+  merchantability, non-infringement, fitness for a particular purpose, or title, related to the materials.
+  The entire risk as to implementing or otherwise using the materials is assumed by the implementer and user.
+  IN NO EVENT WILL THE ALLIANCE FOR OPEN MEDIA, ITS MEMBERS, OR CONTRIBUTORS BE LIABLE TO ANY OTHER PARTY
+  FOR LOST PROFITS OR ANY FORM OF INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER
+  FROM ANY CAUSES OF ACTION OF ANY KIND WITH RESPECT TO THIS DELIVERABLE OR ITS GOVERNING AGREEMENT,
+  WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, AND WHETHER OR NOT
+  THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGEd. </p>
+   </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-   <p>This document specifies how to store <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> still images in a file using <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> structures.</p>
+   <p>This document contains a set of requirements that can be used to contain a one or more <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> still images in a file using structures defined by the a <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> and <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> specifications meant to allow for a mimumum set of features to allow the interchange of files between AVIF writers and readers. The file format described here conforms to the interoperability rules as defined in MIAF as applied to the structures used within this specification. AVIF respresents a functional subset of the features and attributes defined in the codec agnostic sections of HEIF.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -1469,8 +1482,16 @@ pre .property::before, pre .property::after {
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="overview"><span class="secno">1. </span><span class="content">Overview</span><a class="self-link" href="#overview"></a></h2>
-   <p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in AVIF version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0. </p>
-   <p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. An image sequence with suggested playback timing may be defined. </p>
+   <p> AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit.
+  AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard
+  dynamic range (SDR). Only the intra-frame encoding toolkit is used in AVIF version 1.0. Using
+  the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP:
+  VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0. </p>
+   <p> The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution
+  of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more
+  images plus all supporting data needed to correctly reconstruct and display the images to be conveyed
+  in a file. The ability to embed a thumbnail image will also be provided. An image sequence with suggested
+  playback timing may be defined. </p>
    <h3 class="heading settled" data-level="1.1" id="target-features"><span class="secno">1.1. </span><span class="content">Target Features</span><a class="self-link" href="#target-features"></a></h3>
    <ul>
     <li>AV1 intra-frame codec toolkit
@@ -1482,15 +1503,21 @@ pre .property::before, pre .property::after {
    </ul>
    <h2 class="heading settled" data-level="2" id="terms-and-definitions"><span class="secno">2. </span><span class="content">Terms and Definitions</span><a class="self-link" href="#terms-and-definitions"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="def-alpha-image"><span class="secno">2.1. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="alpha-image">Alpha Image</dfn></span><a class="self-link" href="#def-alpha-image"></a></h3>
-   <p>A specific type of <a data-link-type="dfn" href="#auxiliary-image" id="ref-for-auxiliary-image">Auxiliary Image</a> that may be used to convey information representing the opacity of associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image">Master Images</a>. </p>
+   <p> A specific type of <a data-link-type="dfn" href="#auxiliary-image" id="ref-for-auxiliary-image">Auxiliary Image</a> that may be used to convey information representing
+  the opacity of associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image">Master Images</a>. </p>
    <h3 class="heading settled" data-level="2.2" id="def-auxiliary-image"><span class="secno">2.2. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="auxiliary-image">Auxiliary Image</dfn></span><a class="self-link" href="#def-auxiliary-image"></a></h3>
-   <p>An image that is not be intended to be displayed but provides supplemental information for associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image①">Master Images</a>. AVIF allows only one type of Auxiliary Image: an <a data-link-type="dfn" href="#alpha-image" id="ref-for-alpha-image">Alpha Image</a>. </p>
+   <p> An image that is not be intended to be displayed but provides supplemental information for
+  associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image①">Master Images</a>. AVIF allows only one type of Auxiliary Image: an <a data-link-type="dfn" href="#alpha-image" id="ref-for-alpha-image">Alpha Image</a>. </p>
    <h3 class="heading settled" data-level="2.3" id="def-cover-image"><span class="secno">2.3. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="cover-image">Cover Image<a class="self-link" href="#cover-image"></a></dfn></span><a class="self-link" href="#def-cover-image"></a></h3>
-   <p>A <a data-link-type="dfn" href="#master-image" id="ref-for-master-image②">Master Image</a> that may be used to represent the file contents. An example of this is a single image used to represent an animation before the animation sequence is activated. </p>
+   <p> A <a data-link-type="dfn" href="#master-image" id="ref-for-master-image②">Master Image</a> that may be used to represent the file contents. An example of this is
+  a single image used to represent an animation before the animation sequence is activated. </p>
    <h3 class="heading settled" data-level="2.4" id="def-image-collection"><span class="secno">2.4. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="image-collection">Image Collection<a class="self-link" href="#image-collection"></a></dfn></span><a class="self-link" href="#def-image-collection"></a></h3>
-   <p>One or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image③">Master Images</a> stored as items in a single file with no defined order or timing information. Within a collection, groups of image samples may share properties and metadata. </p>
+   <p> One or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image③">Master Images</a> stored as items in a single file with no defined order or
+  timing information. Within a collection, groups of image samples may share properties and metadata. </p>
    <h3 class="heading settled" data-level="2.5" id="def-image-properties"><span class="secno">2.5. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="image-properties">Image Properties<a class="self-link" href="#image-properties"></a></dfn></span><a class="self-link" href="#def-image-properties"></a></h3>
-   <p>This is a class of non-media data. The property items may be descriptive image attributes or decoder configuration data. The properties are primarily for consumption by the decoding agent. This information may include:</p>
+   <p> This is a class of non-media data. The property items may be descriptive image attribute
+  or decoder configuration data. The properties are primarily for consumption by the decoding
+  agent. This information may include: </p>
    <ul>
     <li>decoder specific configuration and initialization values
     <li>image width and height
@@ -1547,7 +1574,7 @@ pre .property::before, pre .property::after {
    <p>An Alpha Image is a specific type of auxiliary image that is used to carry per pixel opacity information for one or more Master Images. This is the only type of Auxiliary Image supported by AVIF. </p>
    <p>A URN will be defined to identify AVIF alpha auxiliary images or tracks. For the purposes of this draft the placeholder urn:aom:avif:alpha will be used. </p>
    <p>A brand that represents the encoding format of the alpha image shall be placed in the compatible_brands array of the FileTypeBox. </p>
-   <p>The alpha image shall have the same dimensional attributes as the largest channel plane in the Master Image: width, height, and pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the largest component plane of any linked Master Image exactly. For example, for YUV 4:2:x, this would be the Y component plane. The decoded value of an alpha pixel is shall be a normalized unsigned integer of at least 8 bits representing a value between 0.0 and 1.0 or a floating point value between 0.0 and 1.0. </p>
+   <p>The alpha image shall have the same dimensional attributes as the largest channel plane in the Master Image: width, height, and pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the largest component plane of any linked Master Image exactly. For example, for YUV 4:2:x, this would be the Y component plane. The decoded value of an alpha pixel shall be a normalized unsigned integer of at least 8 bits representing a value between 0.0 and 1.0 or a floating point value between 0.0 and 1.0. </p>
    <p>For an Image Collection, Alpha Images and Master Images shall be linked using an ItemReferenceBox entry with a reference type of "auxl". A single Alpha Image may be linked to one or more Master Images. The total number of Alpha Images shall not exceed the number of Master Images. When an Alpha Image applies to a subset of the Master Image items this shall constrain all Master Images in that subset to have the same dimensional attributes. </p>
    <p>When the AVIF file is structured as an Image Sequence, Alpha images may be associated with an Image Sequence using an associated auxiliary track. This track shall have a TrackReferenceBox with a referenceType of "auxl" with an auxiliary type of urn:aom:avif:alpha. For AVIF, only one alpha track may be included in the file. Linking of samples in the Alpha Image track and Master Image track is defined by derived parallel time alignment using each stream’s TimeToSampleBox. The timing relationship between alpha track and primary track is strict and shall not be treated as advisory. At a minimum, the alpha track shall contain a single image. </p>
    <h3 class="heading settled" data-level="3.7" id="metadata①"><span class="secno">3.7. </span><span class="content">Metadata</span><a class="self-link" href="#metadata①"></a></h3>
@@ -1563,7 +1590,7 @@ pre .property::before, pre .property::after {
    <p>The compatible_brands array shall contain an appropriate brand for the encoding used for thumbnails images if it is not AV1. </p>
    <p>The compatible_brands array shall contain an appropriate brand for the encoding used for alpha images if it is not AV1. </p>
    <h3 class="heading settled" data-level="4.2" id="collection-elements"><span class="secno">4.2. </span><span class="content">Collection Elements</span><a class="self-link" href="#collection-elements"></a></h3>
-   <p>An AVIF file reader must be able recognize the following boxes. Any box field or feature not explicitly limited by this specification should be handled as defined in ISO 14496‑12 and ISO 23008-12. </p>
+   <p>An AVIF file reader must be able to recognize the following boxes. Any box field or feature not explicitly limited by this specification should be handled as defined in ISO 14496‑12 and ISO 23008-12. </p>
    <table class="complex data" style="border: 2px solid;">
     <colgroup>
      <col span="3">
@@ -1648,13 +1675,17 @@ pre .property::before, pre .property::after {
    <p>The construction_method value of 2 shall not be used. </p>
    <h4 class="heading settled" data-level="4.2.5" id="item-properties-box"><span class="secno">4.2.5. </span><span class="content">ItemPropertiesBox</span><a class="self-link" href="#item-properties-box"></a></h4>
    <p>Item Properties are associated with an item using an ItemPropertiesBox. The type of each property is uniquely identified with a fourCC. Two categories of image properties may be found in an AVIF file. </p>
-   <p>The first are decoder specific configuration and initialization properties. The AVIF codec configuration property will be identified with an property type of "av1C". Non-master image types recommendations may also define codec configuration property formats and usage rules. </p>
+   <p>The first catagory are decoder specific configuration and initialization properties. The AVIF codec configuration property will be identified with a property type of "av1C". For non-master image types recommendations may also define codec configuration property formats and usage rules. </p>
    <p>The second are image descriptive properties conveying the attributes of the encoded image and, by implication, the reconstructed image post decode. The descriptive image properties that may be used in AVIF compliant files are: </p>
    <ul>
     <li>Image Spatial Extents (ispe)
     <li>Pixel Aspect Ratio (pasp)
     <li>Colour Information (colr)
     <li>Pixel Information (pixi)
+    <li>Image Rotation (irot)
+    <li>Clean Aperture (clap)
+    <li>Relative Location (rloc)
+    <li>Image Mirroring (imir)
     <li>Image properties for auxiliary images (auxC)
    </ul>
    <h4 class="heading settled" data-level="4.2.6" id="item-info-box"><span class="secno">4.2.6. </span><span class="content">ItemInfoBox</span><a class="self-link" href="#item-info-box"></a></h4>
@@ -2073,7 +2104,6 @@ pre .property::before, pre .property::after {
                 // open the panel
                 var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
                 if(dfnPanel) {
-                    console.log(dfnPanel);
                     dfnPanel.classList.add("on");
                     var rect = el.getBoundingClientRect();
                     dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";

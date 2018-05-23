@@ -2,29 +2,56 @@
 Title: AV1 Still Image File Format (AVIF)
 Shortname: av1-avif
 Level: 1
-Date: 2017-12-13
+Date: 2018-05-09
 Status: LS
 Group: AOM
 URL: https://AOMediaCodec.github.io/av1-avif
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
 Editor: Paul Kerr, Netflix, pkerr@netflix.com
-Abstract: This document specifies how to store [[!AV1]] still images in a file using [[!ISOBMFF]] structures.
-Boilerplate: copyright no
+Abstract: This document contains a set of requirements that can be used to contain a one or more [[!AV1]] still images in a file using structures defined by the a [[!ISOBMFF]] and [[!HEIF]] specifications meant to allow for a mimumum set of features to allow the interchange of files between AVIF writers and readers. The file format described here conforms to the interoperability rules as defined in MIAF as applied to the structures used within this specification. AVIF respresents a functional subset of the features and attributes defined in the codec agnostic sections of HEIF. 
+Boilerplate: copyright yes
 Warning: Custom
 Custom Warning Title: Warning
 Custom Warning Text: This specification is still at draft stage and should not be referenced other than as a working draft.
 </pre>
+
+<div boilerplate='copyright'>
+<p>Copyright 2018, The Alliance for Open Media</p>
+<p>Licensing information is available at http://aomedia.org/license/</p>
+<p>
+  The MATERIALS ARE PROVIDED “AS IS.” The Alliance for Open Media, its members, and its contributors
+  expressly disclaim any warranties (express, implied, or otherwise), including implied warranties of
+  merchantability, non-infringement, fitness for a particular purpose, or title, related to the materials.
+  The entire risk as to implementing or otherwise using the materials is assumed by the implementer and user.
+  IN NO EVENT WILL THE ALLIANCE FOR OPEN MEDIA, ITS MEMBERS, OR CONTRIBUTORS BE LIABLE TO ANY OTHER PARTY
+  FOR LOST PROFITS OR ANY FORM OF INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER
+  FROM ANY CAUSES OF ACTION OF ANY KIND WITH RESPECT TO THIS DELIVERABLE OR ITS GOVERNING AGREEMENT,
+  WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, AND WHETHER OR NOT
+  THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGEd.
+</p>
+</div>
 
 <pre class="anchors">
 </pre>
 
 <h2 id="overview">Overview</h2>
 
-<p>AVIF is a file format wrapping compressed images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit. AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard dynamic range (SDR). Only the intra-frame encoding toolkit is used in AVIF version 1.0. Using the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP: VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0.
+<p>
+  AVIF is a file format wrapping compressed images based on the
+  <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit.
+  AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard
+  dynamic range (SDR). Only the intra-frame encoding toolkit is used in AVIF version 1.0. Using
+  the intra-frame encoding mechanism from an existing video codec standard has a precedent in WebP:
+  VP8, and HEIF: HEVC. This document describes at a high level a proposal on the structure of AVIF version 1.0.
 </p>
 
-<p>The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more images plus all supporting data needed to correctly reconstruct and display the images to be conveyed in a file. The ability to embed a thumbnail image will also be provided. An image sequence with suggested playback timing may be defined.
+<p>
+  The initial version of AVIF seeks to be simple, with just enough structure to allow the distribution
+  of images based on the AV1 intra-frame coding toolset. At its core, AVIF 1.0 will allow for one or more
+  images plus all supporting data needed to correctly reconstruct and display the images to be conveyed
+  in a file. The ability to embed a thumbnail image will also be provided. An image sequence with suggested
+  playback timing may be defined.
 </p>
 
 <h3 id="target-features">Target Features</h3>
@@ -39,33 +66,45 @@ Custom Warning Text: This specification is still at draft stage and should not b
 
 <h2 id="terms-and-definitions">Terms and Definitions</h2>
 
-  <h3 id="def-alpha-image"><dfn>Alpha Image</dfn></h3>
-  <p>A specific type of [=Auxiliary Image=] that may be used to convey information representing the opacity of associated [=Master Images=].
-  </p>
+<h3 id="def-alpha-image"><dfn>Alpha Image</dfn></h3>
+<p>
+  A specific type of [=Auxiliary Image=] that may be used to convey information representing
+  the opacity of associated [=Master Images=].
+</p>
 
-  <h3 id="def-auxiliary-image"><dfn>Auxiliary Image</dfn></h3>
-  <p>An image that is not be intended to be displayed but provides supplemental information for associated [=Master Images=]. AVIF allows only one type of Auxiliary Image: an [=Alpha Image=].
-  </p>
+<h3 id="def-auxiliary-image"><dfn>Auxiliary Image</dfn></h3>
+<p>
+  An image that is not be intended to be displayed but provides supplemental information for
+  associated [=Master Images=]. AVIF allows only one type of Auxiliary Image: an [=Alpha Image=].
+</p>
 
-  <h3 id="def-cover-image"><dfn>Cover Image</dfn></h3>
-  <p>A [=Master Image=] that may be used to represent the file contents. An example of this is a single image used to represent an animation before the animation sequence is activated.
-  </p>
+<h3 id="def-cover-image"><dfn>Cover Image</dfn></h3>
+<p>
+  A [=Master Image=] that may be used to represent the file contents. An example of this is
+  a single image used to represent an animation before the animation sequence is activated.
+</p>
 
-  <h3 id="def-image-collection"><dfn>Image Collection</dfn></h3>
-  <p>One or more [=Master Images=] stored as items in a single file with no defined order or timing information. Within a collection, groups of image samples may share properties and metadata.
-  </p>
+<h3 id="def-image-collection"><dfn>Image Collection</dfn></h3>
+<p>
+  One or more [=Master Images=] stored as items in a single file with no defined order or
+  timing information. Within a collection, groups of image samples may share properties and metadata.
+</p>
 
-  <h3 id="def-image-properties"><dfn>Image Properties</dfn></h3>
-  <p>This is a class of non-media data. The property items may be descriptive image attributes or decoder configuration data. The properties are primarily for consumption by the decoding agent. This information may include:</p>
-  <ul>
-    <li>decoder specific configuration and initialization values</li>
-    <li>image width and height</li>
-    <li>pixel attributes</li>
-    <li>color space</li>
-  </ul>
+<h3 id="def-image-properties"><dfn>Image Properties</dfn></h3>
+<p>
+  This is a class of non-media data. The property items may be descriptive image attribute
+  or decoder configuration data. The properties are primarily for consumption by the decoding
+  agent. This information may include:
+</p>
+<ul>
+  <li>decoder specific configuration and initialization values</li>
+  <li>image width and height</li>
+  <li>pixel attributes</li>
+  <li>color space</li>
+</ul>
 
-  <h3 id="def-image-sequence"><dfn>Image Sequence</dfn></h3>
-  <p>A sequence of [=Master Images=] stored as a track for which information is provided that defines a sequential ordering and temporal information indicating suggested playback timing. An agent decoding and presenting an AVIF file may chose to render an Image Sequence as an animation.
+<h3 id="def-image-sequence"><dfn>Image Sequence</dfn></h3>
+<p>A sequence of [=Master Images=] stored as a track for which information is provided that defines a sequential ordering and temporal information indicating suggested playback timing. An agent decoding and presenting an AVIF file may chose to render an Image Sequence as an animation.
   </p>
 
   <h3 id="def-master-image"><dfn>Master Image</dfn></h3>
@@ -149,7 +188,7 @@ Custom Warning Text: This specification is still at draft stage and should not b
     </p>
     <p>A brand that represents the encoding format of the alpha image shall be placed in the compatible_brands array of the FileTypeBox.
     </p>
-    <p>The alpha image shall have the same dimensional attributes as the largest channel plane in the Master Image: width, height, and pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the largest component plane of any linked Master Image exactly. For example, for YUV 4:2:x, this would be the Y component plane. The decoded value of an alpha pixel is shall be a normalized unsigned integer of at least 8 bits representing a value between 0.0 and 1.0 or a floating point value between 0.0 and 1.0.
+    <p>The alpha image shall have the same dimensional attributes as the largest channel plane in the Master Image: width, height, and pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the largest component plane of any linked Master Image exactly. For example, for YUV 4:2:x, this would be the Y component plane. The decoded value of an alpha pixel shall be a normalized unsigned integer of at least 8 bits representing a value between 0.0 and 1.0 or a floating point value between 0.0 and 1.0.
     </p>
     <p>For an Image Collection, Alpha Images and Master Images shall be linked using an ItemReferenceBox entry with a reference type of "auxl". A single Alpha Image may be linked to one or more Master Images. The total number of Alpha Images shall not exceed the number of Master Images. When an Alpha Image applies to a subset of the Master Image items this shall constrain all Master Images in that subset to have the same dimensional attributes.
     </p>
@@ -180,7 +219,7 @@ Custom Warning Text: This specification is still at draft stage and should not b
     </p>
 
 <h3 id="collection-elements">Collection Elements</h3>
-    <p>An AVIF file reader must be able recognize the following boxes. Any box field or feature not explicitly limited by this specification should be handled as defined in ISO 14496&#8209;12 and ISO 23008-12.
+    <p>An AVIF file reader must be able to recognize the following boxes. Any box field or feature not explicitly limited by this specification should be handled as defined in ISO 14496&#8209;12 and ISO 23008-12.
     </p>
     <table class="complex data" style="border: 2px solid;">
     <colgroup>
@@ -291,7 +330,7 @@ Custom Warning Text: This specification is still at draft stage and should not b
 <h4 id="item-properties-box">ItemPropertiesBox</h4>
   <p>Item Properties are associated with an item using an ItemPropertiesBox. The type of each property is uniquely identified with a fourCC. Two categories of image properties may be found in an AVIF file.
   </p>
-  <p>The first are decoder specific configuration and initialization properties. The AVIF codec configuration property will be identified with an property type of "av1C". Non-master image types recommendations may also define codec configuration property formats and usage rules.
+  <p>The first catagory are decoder specific configuration and initialization properties. The AVIF codec configuration property will be identified with a property type of "av1C". For non-master image types recommendations may also define codec configuration property formats and usage rules.
   </p>
   <p>The second are image descriptive properties conveying the attributes of the encoded image and, by implication, the reconstructed image post decode. The descriptive image properties that may be used in AVIF compliant files are:
   </p>
@@ -300,6 +339,10 @@ Custom Warning Text: This specification is still at draft stage and should not b
     <li>Pixel Aspect Ratio (pasp)</li>
     <li>Colour Information (colr)</li>
     <li>Pixel Information (pixi)</li>
+    <li>Image Rotation (irot)</li>
+    <li>Clean Aperture (clap)</li>
+    <li>Relative Location (rloc)</li>
+    <li>Image Mirroring (imir)</li>
     <li>Image properties for auxiliary images (auxC)</li>
   </ul>
 
