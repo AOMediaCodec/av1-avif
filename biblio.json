@@ -1,17 +1,27 @@
 {
-	"AV1": {
-		"href": "http://av1-spec.argondesign.com/av1-spec/av1-spec.html",
-		"title": "AV1 Bitstream & Decoding Process Specification",
-		"status": "LS",
-		"publisher": "AOM"
-	},
+    "AV1": {
+	"href": "http://av1-spec.argondesign.com/av1-spec/av1-spec.html",
+	"id": "AV1",
+	"title": "AV1 Bitstream & Decoding Process Specification",
+	"status": "LS",
+	"publisher": "AOM"
+    },
 
     "HEIF": {
-	"date": "December 2017",
 	"id": "HEIF",
 	"href": "https://www.iso.org/standard/66067.html",
 	"title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
 	"status": "International Standard",
-	"publisher": "ISO/IEC"
+	"publisher": "ISO/IEC",
+	"isoNumber":"ISO/IEC 23008-12:2017"
+    },
+
+    "MIAF": {
+	"href": "https://www.iso.org/standard/74417.html",
+	"id": "MIAF",
+	"title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)",
+	"status": "Enquiry",
+	"publisher": "ISO/IEC",
+	"isoNumber": "ISO/IEC DIS 23000-22"
     }
 }
