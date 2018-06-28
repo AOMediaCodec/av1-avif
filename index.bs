@@ -3,18 +3,19 @@
 Title: AV1 Image File Format (AVIF)
 Shortname: av1-avif
 Level: 1
-Date: 2018-06-03
-Status: LS
+Date: 2018-06-26
+Status: LS-COMMIT
 Group: AOM
 URL: https://AOMediaCodec.github.io/av1-avif
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
 Editor: Paul Kerr, Netflix, pkerr@netflix.com
-Abstract: This document contains a set of requirements that can be used to incorporate one or more [[!AV1]] still images in a file using structures and procedures defined by the [[!HEIF]] specification. This specification defines a set of minimum requirements to allow the interchange of files between AVIF writers and readers. 
+Abstract: This document contains a set of requirements that can be used to incorporate one or more [[!AV1]] still images in a file using structures and procedures defined by the [[!HEIF]] specification. This specification also defines a set of baseline requirements to allow the interchange of files between AVIF writers and readers. 
 Boilerplate: copyright yes
 Warning: Custom
 Custom Warning Title: Warning
 Custom Warning Text: This specification is still at draft stage and should not be referenced other than as a working draft.
+Status Text: Version A.1
 </pre>
 
 <div boilerplate='copyright'>
@@ -42,36 +43,134 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <p>AVIF is a file format wrapping compressed still images based on the
 <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit.
 AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard
-dynamic range (SDR). An AVIF file should be a conformant to [[!HEIF]] for both Image Collections and
-Image Sequences.  An AVIF file shall be compliant to the requirements of Clause 4 of the [[!ISOBMFF]] specification
-and, where applicable, the recommendations in Annex I: Guidelines On Defining New Image Formats
-and Brands in [[!HEIF]].
+dynamic range (SDR). An AVIF file shall be a conformant to [[!HEIF]] for both Image Collections and
+Image Sequences.  Specifically, an AVIF file shall be compliant to the requirements of Clause 4 of the
+[[!ISOBMFF]] specification and, where applicable, the recommendations in Annex I: Guidelines On Defining
+New Image Formats and Brands in [[!HEIF]].
 </p>
-<p>For the purposes of this document, the terms, definitions, and abbreviated terms specified in [[!ISOBMFF]] and [[!HEIF]] apply.
+<h2 id="terms-and-definitions">Terms and Definitions</h2>
+
+<p>For the purposes of this document, the terms, definitions, and abbreviated terms specified in
+[[!ISOBMFF]] and [[!HEIF]] apply.
+</p>
+
+Some important definitions used by this document are paraphrased informationally here.
+
+<h3 id="def-alpha-image"><dfn>Alpha Image</dfn></h3>
+<p>A specific type of [=Auxiliary Image=] that may be used to convey information representing
+the opacity of associated [=Master Images=].
+</p>
+
+<h3 id="def-auxiliary-image"><dfn>Auxiliary Image</dfn></h3>
+<p>An image that is not intended to be displayed but provides supplemental information for
+associated [=Master Images=].
+</p>
+
+<h3 id="def-cover-image"><dfn>Cover Image</dfn></h3>
+<p>A [=Master Image=] that may be used to represent the file contents. An example of this is
+a single image used to represent an animation before the animation sequence is activated.
+</p>
+
+<h3 id="def-image-collection"><dfn>Image Collection</dfn></h3>
+<p>One or more [=Master Images=] stored as items in a single file with no defined order or
+timing information. Within a collection image samples may share properties and metadata.
+</p>
+
+<h3 id="def-image-properties"><dfn>Image Properties</dfn></h3>
+<p>This is a class of non-media data. The property items may be a descriptive image attribute
+or decoder configuration data. The properties are primarily for consumption by the decoding
+agent. This information may include:
+</p>
+
+<ul>
+  <li>decoder specific configuration and initialization values</li>
+  <li>image width and height</li>
+  <li>pixel attributes</li>
+  <li>color space</li>
+  <li>content light level</li>
+  <li>mastering display color volume</li>
+</ul>
+
+<h3 id="def-image-sequence"><dfn>Image Sequence</dfn></h3>
+
+<p>A sequence of [=Master Images=] stored as a track for which information is provided that defines a
+sequential ordering and temporal information indicating suggested playback timing. An agent decoding
+and presenting an AVIF file may chose to render an Image Sequence as an animation.
+</p>
+
+<h3 id="def-master-image"><dfn>Master Image</dfn></h3>
+
+<p>An image that is not a thumbnail or auxiliary image. For the purpose of this specification,
+such an image is encoded using AV1 intra-frame tools. This type of image is the primary displayable
+payload of an AVIF file. A Master Image may be included in both an [=Image Collection=] and an
+[=Image Sequence=] within the same file, along with being referenced as the [=Cover Image=].
+</p>
+
+<h3 id="def-metadata"><dfn>Metadata</dfn></h3>
+
+<p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is
+considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7.
+</p>
+
+<h3 id="def-thumbnail-image"><dfn>Thumbnail Image</dfn></h3>
+
+<p>This is a non-master image that may be used to represent one or more [=Master Images=] found in an
+AVIF file. It is typically of a smaller scale than the Master Images. Its compression format may be
+different than the one used by the Master Images.
+</p>
+
+<h2 id="object-model-and-structure">Object Model and Structure</h2>
+
+<p>An AVIF file shall be a conformant version of an [[!HEIF]] file.
+This is to allow for the deployment of general libraries that may be used to create and parse
+HEIF-based image files wrapping different coding methods for the actual image content.
+This should be similar to ISO-BMFF usage in the video domain.
+</p>
+<p>
+The AVIF file format will be built on the box-structured media interchange format introduced
+by the ISO Base Media File Format ([[!ISOBMFF]]). The format specified by AVIF defines the use
+of a subset of box structures introduced in ISOBMFF. Where the necessary structures do not
+exist in ISOBMFF, structures defined as part of the High Efficiency Image File Format
+([[!HEIF]]: ISO/IEC 23008-12) that are codec neutral and can be applied in a generic manner
+are used. An AVIF version 1.0 file shall be compliant to the requirements of Clause 4 of the
+[[!ISOBMFF]] specification, and where applicable, the recommendations in Annex I: Guidelines
+On Defining New Image Formats and Brands in the MPEG HEIF specification shall be followed
+for AVIF 1.0.
+</p>
+
+<h2 id="avif-image-data">Image Data</h2>
+
+<p> Image data of type "av1i" shall be limited to AV1 intra frames. This applies to both Image Collections and Image Sequences.
+Each image shall conform to the requirements of an Intra Frame as defined by AV1 Bitstream & Decoding Process Specification
+[[!AV1-ISOBMFF]]. No inter-frame encoding shall be permitted between images.
 </p>
 
 <h2 id="avif=image-collection">AVIF Image Collection</h2>
 
-<h3 id="av1-image-samples">AV1 Image Data</h2>
+<p>The image data of type "av1i" shall be used for an image collection item coded with AV1.
 
-<p>The image item of type "av1i" shall be used for an image collection item coded with AV1.
+The image item data shall be structured as defined in the AV1 Sample Format section of the AV1 Codec ISO Media File Format Binding
+[[!AV1]] specification.
 
-<p> Image items of type "av1i" (AV1 image) are based on AV1 key frames. Specifically the
-  AV1 intra-frame encoding tools as defined by AV1 Bitstream & Decoding Process Specification
-  ([[!AV1-ISOBMFF]]): no intrer-frame encoding shall be permitted between images. The image data
-  is structured as defined by the AV1 Codec ISO Media File Format Binding
-  ([[!AV1]]) specification.</p>
-
-<p>An AVIF file containing an Image Collection shall list the "mif1" brand as one of the entries in
-  the compatible_brands array and conform to sections 6 and 10.2 of [[!HEIF]].
+<p>An AVIF file containing an Image Collection shall list the "mif1" structural brand as one of
+the entries in the compatible_brands array and conform to clauses 6 and 10.2 of [[!HEIF]].
 </p>
 
-<h3 id="av1-configuration-item-property">AV1 Configuration Item Property</h3>
+AVIF does not support coding dependencies outside of shared image properties: no inter-frame decoding dependencies
+within the image samples sequence.
+
+<h3 id="image-item-properties">Image Item Properties</h3>
+
+In addtion to the Image Properties defined in [[!HEIF]], AVIF image collections may also use the Content Light Level and
+Mastering Display Colour Volume image properties introduced in [[!MIAF]].
+
+<h4 id ="av1-configuration-item-property">AV1 Configuration Item Property</H4>
 
 <p> Each image item of type '"av1i" shall have an associated image property of type "av1C" that is identical
-  to the AV1CodecConfigurationBox as defined in [[!AV1-ISOBMFF]]. Such a property will be marked as essential.
+  to the AV1CodecConfigurationBox as defined in [[!AV1-ISOBMFF]]. Such a property shall be marked as essential.
 </p>
 
+Each AV1i image item shall be associated with an AV1 Configuration Item Property.
 
 <h2 id="avif-image-sequence">AVIF Image Sequence</h2>
 
@@ -79,22 +178,34 @@ and Brands in [[!HEIF]].
 
 <p>The sample entry of type "av1i" shall be used for an image sequence track coded with AV1.
 
-<p> Image samples of type "av1i" (AV1 image) are based on AV1 key frames. Specifically the
+<p> Image samples of type "av1i" (AV1 image) are based on AV1 intra frames. Specifically the
   AV1 intra-frame encoding tools as defined by AV1 Bitstream & Decoding Process Specification
-  ([[!AV1-ISOBMFF]]): no intrer-frame encoding shall be permitted between images. The image track
+  [[!AV1-ISOBMFF]]: no inter-frame encoding shall be permitted between images. The image track
   is structured as defined by the AV1 Codec ISO Media File Format Binding
-  ([[!AV1]]) specification.</p>
+  [[!AV1]] specification constrainded to the specific use case where all frames are key frames.</p>
 
 <p>An AVIF file containing an Image Sequence shall list the "msf1" brand as one of the entries in the
   compatible_brands array and conform to sections 7 and 10.3 of [[!HEIF]].
 </p>
 
-<h3 id="av1-visual-sample-entryy">AV1 Visual Sample Entry</h3>
+<h3 id="av1-sample-entryy">AV1 Sample Entry</h3>
 
-<p> The AV1CodecConfigurationBox as defined in [[!AV1-ISOBMFF]] shall be used as the "av1i" specifi
-  version VisualSampleEntry for the SampleDescriptionBox for all
- AV1 encoded master image tracks and thumbnail tracks.
- </p>
+All SampleDescriptionBoxes associated with AV1 image tracks shall use the format and procedures as defined in [[!AV1-ISOBMFF]].
+The AV1SampleEntry extends the VisualSample entry and includes a manditory AV1CodecConfigurationBox. In this case,
+the box is identified by the "av1i" type.
+
+<pre>
+	Sample Entry Type: av1i
+	Container:         Sample Description Box ('stsd')
+	Mandatory:         Yes
+	Quantity:          One or more.
+</pre>
+
+```
+class AV1SampleEntry extends VisualSampleEntry('av1i') {
+  AV1CodecConfigurationBox config;
+}
+```
 
 <h2 id="alpha-images">Alpha Images</h2>
 
@@ -117,15 +228,15 @@ the compatible_brands array.
 <p>The compatible_brands array shall contain "msf1" if the file contains an Image Sequence.
 </p>
 
-<h2 id="AVIF-version-1.0-profile">AVIF Version 1.0 Profile</h2>
+<h2 id="AVIF-baseline-profile">AVIF Baseline Profile</h2>
 
-<p>An AVIF verion 1.0 file should be a conformant, simplified version of an [[!HEIF]] file.
+<p>An AVIF Baseline file should be a conformant, simplified version of an [[!HEIF]] file.
 This is to allow for the deployment of general libraries that may be used to create and parse
 HEIF-based image files wrapping different coding methods for the actual image content.
-  This should be similar to ISO-BMFF usage in the video domain. The following define limitations
-  to the general format of an HEIF file that define the minimum requirements for an AVIF file reader.
-  An implementation of an AVIF file reader may optionally choose to recognise any structure as defined in
-  HEIF.
+This should be similar to ISO-BMFF usage in the video domain. The following define limitations
+to the general format of an HEIF file that defines the minimum requirements for an AVIF file reader.
+An implementation of an AVIF file reader may optionally choose to recognise any structure as defined in
+HEIF.
 </p>
 
 <h3 id="ver1-image-storage">Image Storage</h3>
@@ -137,13 +248,13 @@ within an AVIF file.
 
 <h3 id="ver1-thumbnails">Thumbnails</h3>
 
-<p> Only an image type of "av1i" is permited for thumbnails.</p>
+<p>Only an image type of "av1i" or "jpeg" is permited for thumbnails.</p>
 
 <h3 id="ver1-cover-image">Cover Image</h3>
 
 <p>A PrimaryItemBox is optional. If a Cover Image is not explicitly indicated by a PrimaryItemBox the
-  Cover Image shall be assumed to be the first master image entry in the ItemLocationBox or the
-  first entry in the master track.
+Cover Image shall be assumed to be the first master image entry in the ItemLocationBox or the
+first entry in the master track.
 </p>
 
 <h3 id="ver1-auxiliary-images">Auxiliary Images</h3>
@@ -151,43 +262,44 @@ within an AVIF file.
 <p> AVIF allows only one type of Auxiliary Image: an Alpha Image.
 </p>
 
-<h3 id="ver1-alpha-channel">Alpha Channel</h3>
+<h3 id="ver1-alpha-image">Alpha Image</h3>
 
 <p>After applying any transformational Image Properties, the alpha image shall have the same
-  dimensional attributes as the largest channel
-plane in the Master Image: width, height, and pixel aspect ratio. Furthermore, the pixels
-of the Alpha Image shall overlay the pixels of the largest component plane of any linked
-Master Image exactly. For example, for YUV 4:2:x, this would be the Y component plane.
-The decoded value of an alpha pixel shall be a normalized unsigned integer of at least
-8 bits representing a value between 0.0 and 1.0.
+dimensional attributes as the largest composite plane in the Master Image: width, height, and
+pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the
+largest component plane of any linked Master Image exactly. For example, for YUV 4:2:x, this
+would be the Y component plane. The decoded value of an alpha pixel shall be a normalized
+unsigned integer of at least 8 bits representing a range between 0.0 and 1.0. An alpha value
+of zero will map to 0.0 and the maximum value representable by the alpha channel shall map
+to 1.0.
 </p>
 
 <h3 id="ver1-sample-groups">Sample Groups</h3>
 
-<p>Sample groups are not supported for version 1.0 readers.
+<p>Sample groups may be ignored by readers.
 </p>
 
 <h3 id="ver1-hidden-images">Hidden Images</h3>
 
-<p>Hidden images are not supported for version 1.0 readers.
+<p>Hidden images may be ignored by readers.
 </p>
 
 <h3 id="ver1-pre-derived-images">Pre-Derived Coded Images</h3>
 
-<p>Pre-derived coded images are not supported for version 1.0 readers.
+<p>Pre-derived coded images may be ignored by readers.
 </p>
 
 <h3 id="ver1-multi-layer-images">Multi-Layer Images</h3>
 
-<p>Multi-layer images are not supported for version 1.0 readers. This does not limit the
-  underlying image format from encoding multiple layers but this will be internal to the
-  encoded image and managed directly by the decoder and not visible to the AVIF
-  reader.
+<p>Multi-layer images may be ignored by readers. This does not limit the underlying image format from
+encoding multiple layers but this will be internal to the encoded image and managed directly by
+the decoder and not visible to the AVIF reader.
 </p>
 
 <h3 id="ver1-derived-images">Derived Images</h3>
 
-<p>Derived images are not supported for version 1.0 readers.
+<p>The derivation of tiled images may be supported by Baseline readers which also support rendering images
+larger than permited by AV1 profiles. No other derived image format need be supported.
 </p>
 
 <h3 id="ver1-metadata">Metadata</h3>
@@ -195,7 +307,7 @@ The decoded value of an alpha pixel shall be a normalized unsigned integer of at
 <p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is
 considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7.
 An AVIF reader will not be required to extract metadata from Informational Metadata boxes. This
-  includes the case of image editing instructions conveyed in an XMP record. Essential
+includes the case of image editing instructions conveyed in an XMP record. Essential
 information shall be carried in the image media directly or be conveyed as Image Properties.
 </p>
 
