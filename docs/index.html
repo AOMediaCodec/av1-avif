@@ -1178,7 +1178,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version b740b15097946bf1d13405dc6d7ca5a72fa2530d" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="4387b59379747eff221d10f7685bc8c37acd8335" name="document-revision">
+  <meta content="25bff2a2936d5a526d52823418da6a59b1e81e17" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1447,7 +1447,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
       <li><a href="#ver1-thumbnails"><span class="secno">9.2</span> <span class="content">Thumbnails</span></a>
       <li><a href="#ver1-cover-image"><span class="secno">9.3</span> <span class="content">Cover Image</span></a>
       <li><a href="#ver1-auxiliary-images"><span class="secno">9.4</span> <span class="content">Auxiliary Images</span></a>
-      <li><a href="#ver1-alpha-channel"><span class="secno">9.5</span> <span class="content">Alpha Channel</span></a>
+      <li><a href="#ver1-alpha-image"><span class="secno">9.5</span> <span class="content">Alpha Image</span></a>
       <li><a href="#ver1-sample-groups"><span class="secno">9.6</span> <span class="content">Sample Groups</span></a>
       <li><a href="#ver1-hidden-images"><span class="secno">9.7</span> <span class="content">Hidden Images</span></a>
       <li><a href="#ver1-pre-derived-images"><span class="secno">9.8</span> <span class="content">Pre-Derived Coded Images</span></a>
@@ -1475,7 +1475,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
    <p>AVIF is a file format wrapping compressed still images based on the <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit.
 AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard
 dynamic range (SDR). An AVIF file shall be a conformant to <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> for both Image Collections and
-Image Sequences.  Specifically, nn AVIF file shall be compliant to the requirements of Clause 4 of the <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> specification and, where applicable, the recommendations in Annex I: Guidelines On Defining
+Image Sequences.  Specifically, an AVIF file shall be compliant to the requirements of Clause 4 of the <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> specification and, where applicable, the recommendations in Annex I: Guidelines On Defining
 New Image Formats and Brands in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>. </p>
    <h2 class="heading settled" data-level="2" id="terms-and-definitions"><span class="secno">2. </span><span class="content">Terms and Definitions</span><a class="self-link" href="#terms-and-definitions"></a></h2>
    <p>For the purposes of this document, the terms, definitions, and abbreviated terms specified in <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> and <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> apply. </p>
@@ -1484,7 +1484,7 @@ New Image Formats and Brands in <a data-link-type="biblio" href="#biblio-heif">[
    <p>A specific type of <a data-link-type="dfn" href="#auxiliary-image" id="ref-for-auxiliary-image">Auxiliary Image</a> that may be used to convey information representing
 the opacity of associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image">Master Images</a>. </p>
    <h3 class="heading settled" data-level="2.2" id="def-auxiliary-image"><span class="secno">2.2. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="auxiliary-image">Auxiliary Image</dfn></span><a class="self-link" href="#def-auxiliary-image"></a></h3>
-   <p>An image that is not be intended to be displayed but provides supplemental information for
+   <p>An image that is not intended to be displayed but provides supplemental information for
 associated <a data-link-type="dfn" href="#master-image" id="ref-for-master-image①">Master Images</a>. </p>
    <h3 class="heading settled" data-level="2.3" id="def-cover-image"><span class="secno">2.3. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="cover-image">Cover Image</dfn></span><a class="self-link" href="#def-cover-image"></a></h3>
    <p>A <a data-link-type="dfn" href="#master-image" id="ref-for-master-image②">Master Image</a> that may be used to represent the file contents. An example of this is
@@ -1493,7 +1493,7 @@ a single image used to represent an animation before the animation sequence is a
    <p>One or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image③">Master Images</a> stored as items in a single file with no defined order or
 timing information. Within a collection image samples may share properties and metadata. </p>
    <h3 class="heading settled" data-level="2.5" id="def-image-properties"><span class="secno">2.5. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="image-properties">Image Properties<a class="self-link" href="#image-properties"></a></dfn></span><a class="self-link" href="#def-image-properties"></a></h3>
-   <p>This is a class of non-media data. The property items may be descriptive image attribute
+   <p>This is a class of non-media data. The property items may be a descriptive image attribute
 or decoder configuration data. The properties are primarily for consumption by the decoding
 agent. This information may include: </p>
    <ul>
@@ -1514,9 +1514,7 @@ such an image is encoded using AV1 intra-frame tools. This type of image is the 
 payload of an AVIF file. A Master Image may be included in both an <a data-link-type="dfn" href="#image-collection" id="ref-for-image-collection">Image Collection</a> and an <a data-link-type="dfn" href="#image-sequence" id="ref-for-image-sequence">Image Sequence</a> within the same file, along with being referenced as the <a data-link-type="dfn" href="#cover-image" id="ref-for-cover-image">Cover Image</a>. </p>
    <h3 class="heading settled" data-level="2.8" id="def-metadata"><span class="secno">2.8. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="metadata">Metadata<a class="self-link" href="#metadata"></a></dfn></span><a class="self-link" href="#def-metadata"></a></h3>
    <p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is
-considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7.
-An AVIF reader will not be required to extract metadata from a Informational Metadata boxes. Essential
-information shall be carried in the image media directly or be conveyed as Image Properties. </p>
+considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7. </p>
    <h3 class="heading settled" data-level="2.9" id="def-thumbnail-image"><span class="secno">2.9. </span><span class="content"><dfn data-dfn-type="dfn" data-noexport="" id="thumbnail-image">Thumbnail Image<a class="self-link" href="#thumbnail-image"></a></dfn></span><a class="self-link" href="#def-thumbnail-image"></a></h3>
    <p>This is a non-master image that may be used to represent one or more <a data-link-type="dfn" href="#master-image" id="ref-for-master-image⑤">Master Images</a> found in an
 AVIF file. It is typically of a smaller scale than the Master Images. Its compression format may be
@@ -1541,7 +1539,7 @@ Each image shall conform to the requirements of an Intra Frame as defined by AV1
    <p>The image data of type "av1i" shall be used for an image collection item coded with AV1. </p>
    <p>The image item data shall be structured as defined in the AV1 Sample Format section of the AV1 Codec ISO Media File Format Binding <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> specification.</p>
    <p>An AVIF file containing an Image Collection shall list the "mif1" structural brand as one of
-the entries in the compatible_brands array and conform to sections 6 and 10.2 of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>. </p>
+the entries in the compatible_brands array and conform to clauses 6 and 10.2 of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>. </p>
    <p>AVIF does not support coding dependencies outside of shared image properties: no inter-frame decoding dependencies
 within the image samples sequence.</p>
    <h3 class="heading settled" data-level="5.1" id="image-item-properties"><span class="secno">5.1. </span><span class="content">Image Item Properties</span><a class="self-link" href="#image-item-properties"></a></h3>
@@ -1549,7 +1547,7 @@ within the image samples sequence.</p>
 Mastering Display Colour Volume image properties introduced in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
    <h4 class="heading settled" data-level="5.1.1" id="av1-configuration-item-property"><span class="secno">5.1.1. </span><span class="content">AV1 Configuration Item Property</span><a class="self-link" href="#av1-configuration-item-property"></a></h4>
    <p> Each image item of type '"av1i" shall have an associated image property of type "av1C" that is identical
-  to the AV1CodecConfigurationBox as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>. Such a property will be marked as essential. </p>
+  to the AV1CodecConfigurationBox as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>. Such a property shall be marked as essential. </p>
    <p>Each AV1i image item shall be associated with an AV1 Configuration Item Property.</p>
    <h2 class="heading settled" data-level="6" id="avif-image-sequence"><span class="secno">6. </span><span class="content">AVIF Image Sequence</span><a class="self-link" href="#avif-image-sequence"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="avif-image-tracks"><span class="secno">6.1. </span><span class="content">AVIF Image Tracks</span><a class="self-link" href="#avif-image-tracks"></a></h3>
@@ -1588,7 +1586,7 @@ the compatible_brands array. </p>
 This is to allow for the deployment of general libraries that may be used to create and parse
 HEIF-based image files wrapping different coding methods for the actual image content.
 This should be similar to ISO-BMFF usage in the video domain. The following define limitations
-to the general format of an HEIF file that define the minimum requirements for an AVIF file reader.
+to the general format of an HEIF file that defines the minimum requirements for an AVIF file reader.
 An implementation of an AVIF file reader may optionally choose to recognise any structure as defined in
 HEIF. </p>
    <h3 class="heading settled" data-level="9.1" id="ver1-image-storage"><span class="secno">9.1. </span><span class="content">Image Storage</span><a class="self-link" href="#ver1-image-storage"></a></h3>
@@ -1603,7 +1601,7 @@ Cover Image shall be assumed to be the first master image entry in the ItemLocat
 first entry in the master track. </p>
    <h3 class="heading settled" data-level="9.4" id="ver1-auxiliary-images"><span class="secno">9.4. </span><span class="content">Auxiliary Images</span><a class="self-link" href="#ver1-auxiliary-images"></a></h3>
    <p> AVIF allows only one type of Auxiliary Image: an Alpha Image. </p>
-   <h3 class="heading settled" data-level="9.5" id="ver1-alpha-channel"><span class="secno">9.5. </span><span class="content">Alpha Channel</span><a class="self-link" href="#ver1-alpha-channel"></a></h3>
+   <h3 class="heading settled" data-level="9.5" id="ver1-alpha-image"><span class="secno">9.5. </span><span class="content">Alpha Image</span><a class="self-link" href="#ver1-alpha-image"></a></h3>
    <p>After applying any transformational Image Properties, the alpha image shall have the same
 dimensional attributes as the largest composite plane in the Master Image: width, height, and
 pixel aspect ratio. Furthermore, the pixels of the Alpha Image shall overlay the pixels of the
@@ -1613,17 +1611,17 @@ unsigned integer of at least 8 bits representing a range between 0.0 and 1.0. An
 of zero will map to 0.0 and the maximum value representable by the alpha channel shall map
 to 1.0. </p>
    <h3 class="heading settled" data-level="9.6" id="ver1-sample-groups"><span class="secno">9.6. </span><span class="content">Sample Groups</span><a class="self-link" href="#ver1-sample-groups"></a></h3>
-   <p>Sample groups are not required for readers. </p>
+   <p>Sample groups may be ignored by readers. </p>
    <h3 class="heading settled" data-level="9.7" id="ver1-hidden-images"><span class="secno">9.7. </span><span class="content">Hidden Images</span><a class="self-link" href="#ver1-hidden-images"></a></h3>
-   <p>Hidden images are not required for readers. </p>
+   <p>Hidden images may be ignored by readers. </p>
    <h3 class="heading settled" data-level="9.8" id="ver1-pre-derived-images"><span class="secno">9.8. </span><span class="content">Pre-Derived Coded Images</span><a class="self-link" href="#ver1-pre-derived-images"></a></h3>
-   <p>Pre-derived coded images are not required for readers. </p>
+   <p>Pre-derived coded images may be ignored by readers. </p>
    <h3 class="heading settled" data-level="9.9" id="ver1-multi-layer-images"><span class="secno">9.9. </span><span class="content">Multi-Layer Images</span><a class="self-link" href="#ver1-multi-layer-images"></a></h3>
-   <p>Multi-layer images are not for readers. This does not limit the underlying image format from
+   <p>Multi-layer images may be ignored by readers. This does not limit the underlying image format from
 encoding multiple layers but this will be internal to the encoded image and managed directly by
 the decoder and not visible to the AVIF reader. </p>
    <h3 class="heading settled" data-level="9.10" id="ver1-derived-images"><span class="secno">9.10. </span><span class="content">Derived Images</span><a class="self-link" href="#ver1-derived-images"></a></h3>
-   <p>The derivation of tiled images may be supported by Baseline readers to support rendering images
+   <p>The derivation of tiled images may be supported by Baseline readers which also support rendering images
 larger than permited by AV1 profiles. No other derived image format need be supported. </p>
    <h3 class="heading settled" data-level="9.11" id="ver1-metadata"><span class="secno">9.11. </span><span class="content">Metadata</span><a class="self-link" href="#ver1-metadata"></a></h3>
    <p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is

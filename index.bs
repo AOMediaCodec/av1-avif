@@ -44,7 +44,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <a href="http://aomedia.org">Alliance for Open Media</a> AV1 intra-frame encoding toolkit.
 AVIF supports High Dynamic Range (HDR) and wide color gamut (WCG) images as well as standard
 dynamic range (SDR). An AVIF file shall be a conformant to [[!HEIF]] for both Image Collections and
-Image Sequences.  Specifically, nn AVIF file shall be compliant to the requirements of Clause 4 of the
+Image Sequences.  Specifically, an AVIF file shall be compliant to the requirements of Clause 4 of the
 [[!ISOBMFF]] specification and, where applicable, the recommendations in Annex I: Guidelines On Defining
 New Image Formats and Brands in [[!HEIF]].
 </p>
@@ -62,7 +62,7 @@ the opacity of associated [=Master Images=].
 </p>
 
 <h3 id="def-auxiliary-image"><dfn>Auxiliary Image</dfn></h3>
-<p>An image that is not be intended to be displayed but provides supplemental information for
+<p>An image that is not intended to be displayed but provides supplemental information for
 associated [=Master Images=].
 </p>
 
@@ -77,7 +77,7 @@ timing information. Within a collection image samples may share properties and m
 </p>
 
 <h3 id="def-image-properties"><dfn>Image Properties</dfn></h3>
-<p>This is a class of non-media data. The property items may be descriptive image attribute
+<p>This is a class of non-media data. The property items may be a descriptive image attribute
 or decoder configuration data. The properties are primarily for consumption by the decoding
 agent. This information may include:
 </p>
@@ -110,8 +110,6 @@ payload of an AVIF file. A Master Image may be included in both an [=Image Colle
 
 <p>Metadata conveys image attributes that are not used to decode or reconstruct an image. This data is
 considered to be non-essential and non-normative. Examples of this include EXIF, XMP, and MPEG-7.
-An AVIF reader will not be required to extract metadata from a Informational Metadata boxes. Essential
-information shall be carried in the image media directly or be conveyed as Image Properties.
 </p>
 
 <h3 id="def-thumbnail-image"><dfn>Thumbnail Image</dfn></h3>
@@ -155,7 +153,7 @@ The image item data shall be structured as defined in the AV1 Sample Format sect
 [[!AV1]] specification.
 
 <p>An AVIF file containing an Image Collection shall list the "mif1" structural brand as one of
-the entries in the compatible_brands array and conform to sections 6 and 10.2 of [[!HEIF]].
+the entries in the compatible_brands array and conform to clauses 6 and 10.2 of [[!HEIF]].
 </p>
 
 AVIF does not support coding dependencies outside of shared image properties: no inter-frame decoding dependencies
@@ -169,7 +167,7 @@ Mastering Display Colour Volume image properties introduced in [[!MIAF]].
 <h4 id ="av1-configuration-item-property">AV1 Configuration Item Property</H4>
 
 <p> Each image item of type '"av1i" shall have an associated image property of type "av1C" that is identical
-  to the AV1CodecConfigurationBox as defined in [[!AV1-ISOBMFF]]. Such a property will be marked as essential.
+  to the AV1CodecConfigurationBox as defined in [[!AV1-ISOBMFF]]. Such a property shall be marked as essential.
 </p>
 
 Each AV1i image item shall be associated with an AV1 Configuration Item Property.
@@ -236,7 +234,7 @@ the compatible_brands array.
 This is to allow for the deployment of general libraries that may be used to create and parse
 HEIF-based image files wrapping different coding methods for the actual image content.
 This should be similar to ISO-BMFF usage in the video domain. The following define limitations
-to the general format of an HEIF file that define the minimum requirements for an AVIF file reader.
+to the general format of an HEIF file that defines the minimum requirements for an AVIF file reader.
 An implementation of an AVIF file reader may optionally choose to recognise any structure as defined in
 HEIF.
 </p>
@@ -264,7 +262,7 @@ first entry in the master track.
 <p> AVIF allows only one type of Auxiliary Image: an Alpha Image.
 </p>
 
-<h3 id="ver1-alpha-channel">Alpha Channel</h3>
+<h3 id="ver1-alpha-image">Alpha Image</h3>
 
 <p>After applying any transformational Image Properties, the alpha image shall have the same
 dimensional attributes as the largest composite plane in the Master Image: width, height, and
@@ -278,29 +276,29 @@ to 1.0.
 
 <h3 id="ver1-sample-groups">Sample Groups</h3>
 
-<p>Sample groups are not required for readers.
+<p>Sample groups may be ignored by readers.
 </p>
 
 <h3 id="ver1-hidden-images">Hidden Images</h3>
 
-<p>Hidden images are not required for readers.
+<p>Hidden images may be ignored by readers.
 </p>
 
 <h3 id="ver1-pre-derived-images">Pre-Derived Coded Images</h3>
 
-<p>Pre-derived coded images are not required for readers.
+<p>Pre-derived coded images may be ignored by readers.
 </p>
 
 <h3 id="ver1-multi-layer-images">Multi-Layer Images</h3>
 
-<p>Multi-layer images are not for readers. This does not limit the underlying image format from
+<p>Multi-layer images may be ignored by readers. This does not limit the underlying image format from
 encoding multiple layers but this will be internal to the encoded image and managed directly by
 the decoder and not visible to the AVIF reader.
 </p>
 
 <h3 id="ver1-derived-images">Derived Images</h3>
 
-<p>The derivation of tiled images may be supported by Baseline readers to support rendering images
+<p>The derivation of tiled images may be supported by Baseline readers which also support rendering images
 larger than permited by AV1 profiles. No other derived image format need be supported.
 </p>
 
