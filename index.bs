@@ -145,6 +145,14 @@ Each image shall conform to the requirements of an Intra Frame as defined by AV1
 [[!AV1-ISOBMFF]]. No inter-frame encoding shall be permitted between images.
 </p>
 
+<p>
+The image data shall have the "still_picture" field set to 1 in the sequence header OBU as specified in section 5.5.1 of the Bitstream & Decoding Process Specification [[!AV1]].
+</p>
+
+<p>
+The image data should have the "reduced_still_picture_header" field set to 1 in the sequence header OBU as specified in section 5.5.1 of the Bitstream & Decoding Process Specification [[!AV1]]. The field may be set to 0 to allow for easy extraction of frames from an AV1 file.
+</p>
+
 <h2 id="avif=image-collection">AVIF Image Collection</h2>
 
 <p>The image data of type "av1i" shall be used for an image collection item coded with AV1.
