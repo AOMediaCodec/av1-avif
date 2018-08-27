@@ -1213,7 +1213,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version dc6a0999286e5dda761ab3caeb4f978c270ddaf8" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="3df4f497e095407c987de11ab78f8fefeede9057" name="document-revision">
+  <meta content="10d74f53ed52c5851adad4bd0c559c93dca51b70" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1502,24 +1502,24 @@ Quantity:                 One for an image item of type 'av01'
    <p>The syntax and semantics of the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="av1-item-configuration-property">AV1 Item Configuration Property</dfn> are identical to those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-⑧">AV1CodecConfigurationBox</a> defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>, with the following constraints:</p>
    <ul>
     <li><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-⑨">Sequence Header OBUs</a> SHOULD not be present in the <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property①">AV1 Item Configuration Property</a>.
-    <li>The values of the fields in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-①⓪">AV1CodecConfigurationBox</a> SHALL match those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①①">Sequence Header OBU</a> in the item data.
-    <li><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①②">Metadata OBUs</a>, if present, SHALL match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
+    <li>The values of the fields in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-①⓪">AV1CodecConfigurationBox</a> SHALL match those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①①">Sequence Header OBU</a> in the item data and in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-①②">AV1CodecConfigurationBox</a>, if any.
+    <li><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①③">Metadata OBUs</a>, if present, SHALL match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
    </ul>
     This property SHALL be marked as essential. 
    <p></p>
    <h4 class="heading settled" data-level="2.2.2" id="other-item-property"><span class="secno">2.2.2. </span><span class="content">Other Item Properties</span><a class="self-link" href="#other-item-property"></a></h4>
-   <p>In addition to the Image Properties defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, such as <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①③">colr</a>, <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①④">pixi</a> or <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑤">pasp</a>, <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item">AV1 image items</a> MAY also be associated with <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑥">clli</a> and <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑦">mdcv</a> introduced in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
-   <p>In general, it is recommended to use properties instead of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①⑧">Metadata OBUs</a> in the <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property②">AV1 Item Configuration Property</a>.</p>
+   <p>In addition to the Image Properties defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, such as <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①④">colr</a>, <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑤">pixi</a> or <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑥">pasp</a>, <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item">AV1 image items</a> MAY also be associated with <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑦">clli</a> and <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-①⑧">mdcv</a> introduced in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
+   <p>In general, it is recommended to use properties instead of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①⑨">Metadata OBUs</a> in the <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property②">AV1 Item Configuration Property</a>.</p>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-①⑨">Temporal Units</a> stored in an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-②⓪">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⓪">Temporal Units</a> stored in an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-②①">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
    <ul>
-    <li>The <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②①">Sequence Header OBUs</a> SHALL have their <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②②">still_picture</a></code> flag set to 1 and SHOULD have their <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②③">reduced_still_picture_header</a></code> flags set to 1. 
+    <li>The <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②②">Sequence Header OBUs</a> SHALL have their <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②③">still_picture</a></code> flag set to 1 and SHOULD have their <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②④">reduced_still_picture_header</a></code> flags set to 1. 
     <li>The track handlers <code>vide</code> or <code>pict</code> MAY be used. 
    </ul>
    <h2 class="heading settled" data-level="4" id="alpha-images"><span class="secno">4. </span><span class="content">Alpha Image Items and Sequences</span><a class="self-link" href="#alpha-images"></a></h2>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="av1-alpha-image-item">AV1 Alpha Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="av1-alpha-image-sequence">AV1 Alpha Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence">AV1 Image Sequence</a>) with the following additional constraints: </p>
    <ul>
-    <li>The <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②④">mono_chrome</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑤">Sequence Header OBU</a> SHALL be set to 1.
+    <li>The <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑤">mono_chrome</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑥">Sequence Header OBU</a> SHALL be set to 1.
    </ul>
    <p>In <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> or <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> files, if an <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively. an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) SHALL be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
    <h2 class="heading settled" data-level="5" id="AVIF-baseline-profile"><span class="secno">5. </span><span class="content">MIAF AV1 Baseline Profile</span><a class="self-link" href="#AVIF-baseline-profile"></a></h2>
@@ -1529,7 +1529,7 @@ Quantity:                 One for an image item of type 'av01'
     <li data-md="">
      <p>The following "shared constraints" of <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> apply: self-containment, single-layer, grid-limit, single-track, and matched-duration.</p>
     <li data-md="">
-     <p>For AV1 images stored as items or in <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-②⑥">pict</a> tracks, the profile SHALL be the Main Profile and the level SHALL be 6.0 level at Main tier or lower.</p>
+     <p>For AV1 images stored as items or in <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-②⑦">pict</a> tracks, the profile SHALL be the Main Profile and the level SHALL be 6.0 level at Main tier or lower.</p>
     <li data-md="">
      <p>For AV1 images stored in video tracks, the profile level SHALL be Main Profile and the level SHALL be 5.1 level at Main tier or lower.</p>
      <p></p>
@@ -1769,7 +1769,7 @@ Quantity:                 One for an image item of type 'av01'
    <a href="https://aomediacodec.github.io/av1-isobmff/#">https://aomediacodec.github.io/av1-isobmff/#</a><b>Referenced in:</b>
    <ul>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
-    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
    </ul>
   </aside>
@@ -1777,7 +1777,7 @@ Quantity:                 One for an image item of type 'av01'
    <a href="https://aomediacodec.github.io/av1-isobmff/#">https://aomediacodec.github.io/av1-isobmff/#</a><b>Referenced in:</b>
    <ul>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
-    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
    </ul>
   </aside>
@@ -1785,7 +1785,7 @@ Quantity:                 One for an image item of type 'av01'
    <a href="https://aomediacodec.github.io/av1-isobmff/#">https://aomediacodec.github.io/av1-isobmff/#</a><b>Referenced in:</b>
    <ul>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
-    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
    </ul>
   </aside>

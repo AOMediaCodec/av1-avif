@@ -117,7 +117,7 @@ ISSUE: Should this specification also define a structural brand stricter than 'm
 The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
 <ul>
 <li>[=Sequence Header OBUs=] SHOULD not be present in the [=AV1 Item Configuration Property=].</li>
-<li>The values of the fields in the [=AV1CodecConfigurationBox=] SHALL match those of the [=Sequence Header OBU=] in the item data.</li>
+<li>The values of the fields in the [=AV1CodecConfigurationBox=] SHALL match those of the [=Sequence Header OBU=] in the item data and in the [=AV1CodecConfigurationBox=], if any.</li>
 <li>[=Metadata OBUs=], if present, SHALL match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.</li>
 </ul>
 This property SHALL be marked as essential.
