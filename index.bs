@@ -153,5 +153,5 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
 <p>If the brand <code>MiA1</code> is in the list of compatible_brands of a TrackTypeBox or FileTypeBox, the following constraints SHALL be respected:
 - The following "shared constraints" of [[!MIAF]] apply: self-containment, single-layer, grid-limit, single-track, and matched-duration.
-- For AV1 images stored as items or in 'pict' tracks, the profile SHALL be the Main Profile and the level SHALL be 6.0 level at Main tier or lower.
+- For AV1 images stored as items or in 'pict' tracks, the profile SHALL be the High Profile or lower and the level SHALL be 6.0 level or lower.
 - For AV1 images stored in video tracks, the profile level SHALL be Main Profile and the level SHALL be 5.1 level at Main tier or lower.</p>
