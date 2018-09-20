@@ -155,15 +155,15 @@ Files conformant with the brand-independent restrictions in this document shall 
 
   <h3 id="image-and-image-collection-files">AV1 image and image collection files</h3>
   The file extension ".avif" and the MIME Content Type "image/avif" should be used for AVIF files that satisfy the following requirements:
-  - The file does not contain image sequences of any kind.
-  - The [=primary image=] is of type 'av01'.
+  - The file does not contain tracks, including image sequences, of any kind.
+  - The [=primary image=] is either an [=AV1 Image Item=] or a derived image that references one or more coded images that all are [=AV1 Image Items=].
   - The AVIF file conforms to at least one AVIF profile, and the profile is listed in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The AVIF file specifies 'avif' in the [=major_brand=] field of the [=FileTypeBox=].
 
   <h3 id="image-sequence-files">AV1 image sequence files</h3>
   The file extension ".avifs" and the MIME Content Type "image/avif-sequence" should be used for AVIF files that satisfy the following requirements:
   - The file contains at least one [=AV1 Image Sequence=].
-  - The [=primary image=] is of type 'av01'.
+  - The [=primary image=] is either an [=AV1 Image Item=] or a derived image that references one or more coded images that all are [=AV1 Image Items=].
   - The AVIF file conforms to at least one AVIF profile, and the profile is listed in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The AVIF file specifies 'avif' in the [=major_brand=] field of the [=FileTypeBox=].
 
@@ -179,7 +179,7 @@ AVIF files that do not conform to at least one AVIF profile shall not use the ".
 
   The following constraints are common to all profiles defined in this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The [=primary image=] shall be an [=AV1 Image Item=].
+  - The [=primary image=] shall be either an [=AV1 Image Item=] or a derived image that references one or more coded images that all are [=AV1 Image Items=].
 
   <h3 id="AVIF-baseline-profile">AVIF Baseline Profile</h3>
 
