@@ -5,7 +5,7 @@ URL: https://AOMediaCodec.github.io/av1-avif
 Shortname: av1-avif
 Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
-Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are defined in the form of profiles for the Multi-Image Application Format [[!MIAF]].
+Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are defined in the form of profiles that extend the Multi-Image Application Format [[!MIAF]].
 Date: 2018-09-19
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
@@ -15,7 +15,7 @@ Group: AOM
 Warning: Custom
 Custom Warning Title: Warning
 Custom Warning Text: This specification is still at draft stage and should not be referenced other than as a working draft.
-Status Text: Version A.2
+Status Text: Version A.1
 </pre>
 
 <div boilerplate='copyright'>
@@ -101,8 +101,13 @@ ISSUE: Should this specification also define a structural brand stricter than 'm
 
 <h3 id="image-item">AV1 Image Item</h3>
 
-<p>When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall be associated with an [=AV1 Item Configuration Property=].
-</p>
+When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
+    
+  - The [=AV1 Image Item=] is the content of a single valid [=AV1 Sync Sample=] as defined in [[!AV1-ISOBMFF]].
+  - The [=AV1 Image Item=] shall have exactly one [=Sequence Header OBU=].
+  - The [=AV1 Image Item=] should have its <code>[=still_picture=]</code> flag set to 1.
+  - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
+  - The item shall be associated with an [=AV1 Item Configuration Property=].
 
 <h3 id="image-item-properties">Image Item Properties</h3>
 
@@ -117,13 +122,13 @@ ISSUE: Should this specification also define a structural brand stricter than 'm
 </pre>
 
 The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
-<ul>
-<li>[=Sequence Header OBUs=] SHOULD not be present in the [=AV1 Item Configuration Property=].</li>
-<li>The values of the fields in the [=AV1CodecConfigurationBox=] SHALL match those of the [=Sequence Header OBU=], if any.</li>
-<li>[=Metadata OBUs=], if present, SHALL match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.</li>
-</ul>
-This property SHALL be marked as essential.
-</p>
+
+  - [=Sequence Header OBUs=] should not be present in the [=AV1 Item Configuration Property=].
+  - The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item=].
+  - [=Metadata OBUs=], if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
+  - If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the  [=Sequence Header OBU=] in the [=AV1 Image Item=].
+
+This property shall be marked as essential.
 
 <h4 id ="other-item-property">Other Item Properties</H4>
 
@@ -133,11 +138,14 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
 <h2 id="image-sequences">Image Sequences</h2>
 
-<p>An <dfn>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]].
-  The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
+<p>
+    An <dfn>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
-<h2 id="alpha-images">Alpha Image Items and Sequences</h2>
+    - The [=AV1 Image Item=] should have its <code>[=still_picture=]</code> flag set to 1.
+    - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
+    - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
 
+    <h2 id="alpha-images">Alpha Image Items and Sequences</h2>
 <p>An <dfn>AV1 Alpha Image Item</dfn> (respectively an <dfn>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
 <ul>
 <li>The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] SHALL be set to 1.</li>
@@ -155,19 +163,16 @@ Files conformant with the brand-independent restrictions in this document shall 
 
   <h3 id="image-and-image-collection-files">AV1 image and image collection files</h3>
   The file extension ".avif" and the MIME Content Type "image/avif" should be used for AVIF files that satisfy the following requirements:
-  - The file does not contain tracks, including image sequences, of any kind.
-  - The [=primary image=] is either an [=AV1 Image Item=] or a derived image that references one or more coded images that all are [=AV1 Image Items=].
   - The AVIF file conforms to at least one AVIF profile, and the profile is listed in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The AVIF file specifies 'avif' in the [=major_brand=] field of the [=FileTypeBox=].
 
   <h3 id="image-sequence-files">AV1 image sequence files</h3>
   The file extension ".avifs" and the MIME Content Type "image/avif-sequence" should be used for AVIF files that satisfy the following requirements:
   - The file contains at least one [=AV1 Image Sequence=].
-  - The [=primary image=] is either an [=AV1 Image Item=] or a derived image that references one or more coded images that all are [=AV1 Image Items=].
   - The AVIF file conforms to at least one AVIF profile, and the profile is listed in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The AVIF file specifies 'avif' in the [=major_brand=] field of the [=FileTypeBox=].
 
-  <h3 id="non-conforming-files">AVIF files not confirming to a profile</h3>
+  <h3 id="non-conforming-files">AVIF files not conforming to a profile</h3>
 AVIF files that do not conform to at least one AVIF profile shall not use the ".avif" or ".avifs" file extensions. Such files may use the ".heif" or ".heifs" file extensions, as defined in Annex D and E of [[!HEIF]].
 
   <h2 id="profiles-and-brands">Profiles and brands</h2>
@@ -179,46 +184,34 @@ AVIF files that do not conform to at least one AVIF profile shall not use the ".
 
   The following constraints are common to all profiles defined in this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The [=primary image=] shall be either an [=AV1 Image Item=] or a derived image that references one or more coded images that all are [=AV1 Image Items=].
+  - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more coded images that all are [=AV1 Image Items=].
 
   <h3 id="AVIF-baseline-profile">AVIF Baseline Profile</h3>
 
-<p>This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.</p>
+This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.
 
-<p>If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a TrackTypeBox or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
+If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a TrackTypeBox or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
 
   The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
-  - The [=AV1 Image Item=] is the content of a single valid [=AV1 Sync Sample=] as defined in [[!AV1-ISOBMFF]].
-  - The [=AV1 Image Item=] shall have only one [=Sequence Header OBU=].
-  - The [=AV1 Image Item=] shall have its <code>[=still_picture=]</code> flag set to 1.
-  - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
-  - The AV1 profile shall be the Main Profile and the level shall be 5.1 level at Main tier or lower.
+  - The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.
 
-  ISSUE: Is the restriction to have still_picture = 1 necessary?
+  The following additional constraints apply only to [=AV1 Image Sequences=]:
+  - The AV1 profile level shall be Main Profile and the level shall be 5.1 or lower.
 
-  The following additional constraints apply only to AV1 images stored in a 'vide' track:
-  - The AV1 profile level shall be Main Profile and the level shall be 5.1 level at Main tier or lower.</p>
+NOTE:  AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.
 
-  ISSUE: Review profile and level restrictions for all profiles. Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.
+NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.
 
   <h3 id="AVIF-advanced-profile">AVIF Advanced Profile</h3>
 
-  <p>
-    This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
-  </p>
+This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
 
-  <p>
-    If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a TrackTypeBox or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
+If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a TrackTypeBox or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
 
-    The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
-    - The [=AV1 Image Item=] is the content of a single valid [=AV1 Sync Sample=] as defined in [[!AV1-ISOBMFF]].
-    - The [=AV1 Image Item=] shall have only one [=Sequence Header OBU=].
-    - The [=AV1 Image Item=] shall have its <code>[=still_picture=]</code> flag set to 1.
-    - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
-    - The AV1 profile shall be the High Profile and the level shall be 6.0 level at High tier or lower.
+The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
+- The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.
 
-    The following additional constraints apply only to AV1 images stored in a 'vide' track:
-    - The AV1 profile level shall be either Main Profile or High Profile.
-    - The AV1 level for Main Profile shall be 5.1 or lower.
-    - The AV1 level for High Profile shall be 5.1 or lower.
-  </p>
+The following additional constraints apply only to [=AV1 Image Sequences=]:
+- The AV1 profile level shall be either Main Profile or High Profile.
+- The AV1 level for Main Profile shall be 5.1 or lower.
+- The AV1 level for High Profile shall be 5.1 or lower.
