@@ -37,6 +37,8 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <pre class="anchors">
 url: http://iso.org/#; spec: HEIF; type: property;
+    text: coded image
+    text: coded image item
     text: colr
     text: image item
     text: pasp
@@ -56,7 +58,7 @@ url: http://iso.org/#; spec: MIAF; type: property;
 
 url: https://aomediacodec.github.io/av1-isobmff/#; spec: AV1-ISOBMFF; type: dfn;
     text: av1codecconfigurationbox
-    text: AV1 Sync Sample
+    text: AV1 Sample
     text: AV1 Track
 
 url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
@@ -75,7 +77,7 @@ url: http://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
 
 [[!AV1]] defines the syntax and semantics of an [=AV1 bitstream=]. The <dfn>AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an [=AV1 bitstream=] in a [[!HEIF]] file.
 The [=AV1 Image File Format=] defines multiple profiles, which restrict the allowed syntax and semantics of the [=AV1 bitstream=].
-The profiles defined in this specification follows the convention of the [[!MIAF]] specification.
+The profiles defined in this specification follow the conventions of the [[!MIAF]] specification.
 
 [=AV1 Image File Format=] supports High Dynamic Range (HDR) and Wide Color Gamut (WCG) images as well as Standard Dynamic Range (SDR). It supports monochrome images as well as multi-channel images with all the bit depths and color spaces specified in [[!AV1]].
 
@@ -103,11 +105,15 @@ ISSUE: Should this specification also define a structural brand stricter than 'm
 
 When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
     
-  - The [=AV1 Image Item=] is the content of a single valid [=AV1 Sync Sample=] as defined in [[!AV1-ISOBMFF]].
-  - The [=AV1 Image Item=] shall have exactly one [=Sequence Header OBU=].
-  - The [=AV1 Image Item=] should have its <code>[=still_picture=]</code> flag set to 1.
-  - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
-  - The item shall be associated with an [=AV1 Item Configuration Property=].
+  - The [=AV1 Image Item=] is a coded image item in which the coded image is a single valid [=AV1 Sample=] as defined in [[!AV1-ISOBMFF]].
+  - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
+
+The [=AV1 Sample=] that is the coded image of the [=AV1 Image Item=], is called <dfn>AV1 Image Item Data</dfn>. 
+The following constraints apply to [=AV1 Image Item Data=]:
+  - The [=AV1 Image Item Data=] shall be signaled as a sync sample, as defined in [[!AV1-ISOBMFF]].
+  - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
+  - The [=AV1 Image Item Data=] should have its <code>[=still_picture=]</code> flag set to 1.
+  - The [=AV1 Image Item Data=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
 
 <h3 id="image-item-properties">Image Item Properties</h3>
 
@@ -124,9 +130,9 @@ When an image item is of type <dfn value export for="AV1 Image Item Type">av01</
 The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
 
   - [=Sequence Header OBUs=] should not be present in the [=AV1 Item Configuration Property=].
-  - The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item=].
+  - The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
   - [=Metadata OBUs=], if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
-  - If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the  [=Sequence Header OBU=] in the [=AV1 Image Item=].
+  - If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the  [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
 
 This property shall be marked as essential.
 
@@ -147,35 +153,27 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
     <h2 id="alpha-images">Alpha Image Items and Sequences</h2>
 <p>An <dfn>AV1 Alpha Image Item</dfn> (respectively an <dfn>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
-<ul>
-<li>The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] SHALL be set to 1.</li>
-</ul>
+    - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] SHALL be set to 1.
 
 <p>In [[!ISOBMFF]] or [[!HEIF]] files, if an [=AV1 Alpha Image Item=] (respectively. an [=AV1 Alpha Image Sequence=]) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) SHALL be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in [[!MIAF]].</p>
 
-  <h2 id="brands-and-file-extensions">Brands and file extensions</h2>
+  <h2>Brands and file extensions</h2>
 
-  <h3 id="AVIF-general-brand">AVIF General Brand</h3>
+<h3>AVIF image and image collection brand</h3>
+Files conformant with the brand-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#alpha-images]]) shall include the brand
+<dfn value="" export="" for="AVIF Image brand">avif</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
+<p>Files should also carry a compatible brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.</p>
+<p>If 'avif' is specified in the major_brand field of the FileTypeBox, the file extension should be ".avif".
+The MIME Content Type for files with the ".avif" file extension shall be "image/avif".</p>
 
-Files conformant with the brand-independent restrictions in this document shall include the brand
-<dfn value="" export="" for="AVIF General brand">avif</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
-  Files shall also carry a compatible brand to identify the AVIF profile, if any, with which the file complies.
+<h3>AVIF image sequence brand</h3>
+Files conformant with the brand-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#alpha-images]]) shall include the brand
+<dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
+<p>Files should also carry a compatible brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.</p>
+<p>If 'avis' is specified in the major_brand field of the FileTypeBox, the file extension should be ".avifs".
+The MIME Content Type for files with the ".avifs" file extension shall be "image/avif-sequence".</p>
 
-  <h3 id="image-and-image-collection-files">AV1 image and image collection files</h3>
-  The file extension ".avif" and the MIME Content Type "image/avif" should be used for AVIF files that satisfy the following requirements:
-  - The AVIF file conforms to at least one AVIF profile, and the profile is listed in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The AVIF file specifies 'avif' in the [=major_brand=] field of the [=FileTypeBox=].
-
-  <h3 id="image-sequence-files">AV1 image sequence files</h3>
-  The file extension ".avifs" and the MIME Content Type "image/avif-sequence" should be used for AVIF files that satisfy the following requirements:
-  - The file contains at least one [=AV1 Image Sequence=].
-  - The AVIF file conforms to at least one AVIF profile, and the profile is listed in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The AVIF file specifies 'avif' in the [=major_brand=] field of the [=FileTypeBox=].
-
-  <h3 id="non-conforming-files">AVIF files not conforming to a profile</h3>
-AVIF files that do not conform to at least one AVIF profile shall not use the ".avif" or ".avifs" file extensions. Such files may use the ".heif" or ".heifs" file extensions, as defined in Annex D and E of [[!HEIF]].
-
-  <h2 id="profiles-and-brands">Profiles and brands</h2>
+  <h2>Profiles</h2>
 
   The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers.
   A profile imposes a set of specific restrictions.
@@ -184,7 +182,7 @@ AVIF files that do not conform to at least one AVIF profile shall not use the ".
 
   The following constraints are common to all profiles defined in this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more coded images that all are [=AV1 Image Items=].
+  - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more items that all are [=AV1 Image Items=].
 
   <h3 id="AVIF-baseline-profile">AVIF Baseline Profile</h3>
 
