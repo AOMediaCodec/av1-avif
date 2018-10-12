@@ -24,6 +24,15 @@
 	"isoNumber":"ISO/IEC 23008-12:2017"
     },
 
+    "ISOBMFF": {
+	"id": "ISOBMFF",
+	"href": "https://www.iso.org/standard/68960.html",
+	"title": "Information technology — Coding of audio-visual objects — Part 12: ISO base media file format",
+	"status": "International Standard",
+	"publisher": "ISO/IEC",
+	"isoNumber":"ISO/IEC 14496-12:2015"
+    },
+
     "MIAF": {
 	"href": "https://www.iso.org/standard/74417.html",
 	"id": "MIAF",
