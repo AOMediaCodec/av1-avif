@@ -109,9 +109,9 @@ When an image item is of type <dfn value export for="AV1 Image Item Type">av01</
   - The [=AV1 Image Item=] is a coded image item in which the coded image is a single valid [=AV1 Sample=] as defined in [[!AV1-ISOBMFF]].
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
 
-The [=AV1 Sample=] that is the coded image of the [=AV1 Image Item=], is called <dfn>AV1 Image Item Data</dfn>. 
+The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn>. 
 The following constraints apply to [=AV1 Image Item Data=]:
-  - The [=AV1 Image Item Data=] shall be an AV1 sync sample, as defined in [[!AV1-ISOBMFF]].
+  - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].
   - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
   - The [=AV1 Image Item Data=] should have its <code>[=still_picture=]</code> flag set to 1.
   - The [=AV1 Image Item Data=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.

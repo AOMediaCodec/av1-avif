@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version a04b880cde96bf0ae2d14a0edcf2bcdcb631548b" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="89d137a56382d48c8c86e9a10432d007e725c99a" name="document-revision">
+  <meta content="be6829569a90001facb6ffa5833f77b46921dde8" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1505,11 +1505,11 @@ New Image Formats and Brands" of <a data-link-type="biblio" href="#biblio-heif">
     <li data-md>
      <p>The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①">AV1 Image Item</a> shall be associated with an <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property">AV1 Item Configuration Property</a>.</p>
    </ul>
-   <p>The <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-⑤">AV1 Sample</a> that is the coded image of the <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②">AV1 Image Item</a>, is called <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-item-data">AV1 Image Item Data</dfn>.
+   <p>The content of an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②">AV1 Image Item</a> is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-item-data">AV1 Image Item Data</dfn>.
 The following constraints apply to <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data">AV1 Image Item Data</a>:</p>
    <ul>
     <li data-md>
-     <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall be an AV1 sync sample, as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>.</p>
+     <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall be identical to the content of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-⑤">AV1 Sample</a> marked as <a class="property" data-link-type="propdesc">sync</a>, as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>.</p>
     <li data-md>
      <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data②">AV1 Image Item Data</a> shall have exactly one <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-⑥">Sequence Header OBU</a>.</p>
     <li data-md>
