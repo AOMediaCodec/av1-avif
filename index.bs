@@ -173,10 +173,14 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
 
   <h2 id="profiles">Profiles</h2>
 
+  <h3 id="profiles-overview">Overview</h3>
+
   The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers.
   A profile imposes a set of specific restrictions.
   The presence of a brand indicating a profile can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the profile, to process the corresponding file.
   An [=AV1 Image File Format=] file may conform to multiple profiles. Similarly, an [=AV1 Image File Format=] reader/parser or [=AV1 Image File Format=] renderer may be capable of processing one or more profiles.
+
+  <h3 id="profiles-constraints">Common constraints</h3>
 
   The following constraints are common to all profiles defined in this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
