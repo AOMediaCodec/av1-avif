@@ -37,11 +37,15 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </div>
 
 <pre class="anchors">
-url: http://iso.org/#; spec: HEIF; type: property;
+url: http://iso.org/#; spec: HEIF; type: dfn;
     text: coded image
     text: coded image item
-    text: colr
     text: image item
+
+url: http://iso.org/#; spec: HEIF; type: property;
+    text: colr
+    text: mif1
+    text: msf1
     text: pasp
     text: pict
     text: pixi
@@ -50,6 +54,7 @@ url: http://iso.org/#; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
+    text: TrackTypeBox
 
 url: http://iso.org/#; spec: ISOBMFF; type: property;
     text: sync
@@ -93,17 +98,6 @@ New Image Formats and Brands" of [[!HEIF]].
 This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
 ISSUE: Should this specification also define a structural brand stricter than 'miaf' to profile out some features?
-
-
-<!--h2 id="file-brand">Brands</h2>
-
-<p>This specification defines [[ISOBMFF]] brands to enable signaling that a file contains AVIF elements.</p>
-
-<p>A file declaring the brand <code><dfn>av1i</dfn></code> in the FileTypeBox SHALL contain at least one [=AV1 Image Item=] or [=AV1 Image Sequence=].</p>
-
-<p>An AVIF file containing an [=AV1 Image Item=] SHALL list the <code>mif1</code> brand as one of the entries in the <code>compatible_brands</code> array and conform to clauses 6 and 10.2 of [[!HEIF]].
-
-<p>An AVIF file containing an [=AV1 Image Sequence=] SHALL list the <code>msf1</code> brand as one of the entries in the <code>compatible_brands</code> array and conform to sections 7 and 10.3 of [[!HEIF]].</p-->
 
 <h2 id="image-item-and-properties">Image Items and properties</h2>
 
@@ -162,17 +156,21 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
   <h2 id="brands-and-file-extensions">Brands and file extensions</h2>
 
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
-Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#alpha-images]]) should include the brand
-<dfn value="" export="" for="AVIF Image brand">avif</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
-<p>Files should also carry a compatible brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.</p>
-<p>If <code>avif</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avif".
+Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#alpha-images]]) should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
+- the brand <dfn value="" export="" for="AVIF Image brand">avif</dfn> ,
+- the brand 'mif1' as recommended in [[!HEIF]],
+- a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
+
+<p>If the brand <code>avif</code> is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension should be ".avif".
 The MIME Content Type for files with the ".avif" file extension shall be "image/avif".</p>
 
 <h3 id="image-sequence-brand">AVIF image sequence brand</h3>
-Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#alpha-images]]), should include the brand
-<dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
-<p>Files should also carry a compatible brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.</p>
-<p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avifs".
+Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#alpha-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
+- the brand <dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn>,
+- the brand 'msf1' as recommended in [[!HEIF]],
+- a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
+
+<p>If <code>avis</code> is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension should be ".avifs".
 The MIME Content Type for files with the ".avifs" file extension shall be "image/avif-sequence".</p>
 
   <h2 id="profiles">Profiles</h2>
@@ -190,7 +188,7 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
 
 This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.
 
-If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a TrackTypeBox or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
+If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
 
   The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
   - The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.
@@ -202,11 +200,22 @@ NOTE:  AV1 tiers are not constrained because timing is optional in image sequenc
 
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.
 
+<div class="example">
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+
+  <code>avif, mif1, miaf, MA1B</code>
+
+A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+
+  <code>avis, msf1, miaf, MA1B</code>
+
+</div>
+
   <h3 id="advanced-profile">AVIF Advanced Profile</h3>
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
 
-If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a TrackTypeBox or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
+If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a =[TrackTypeBox=] or [=FileTypeBox=], the common constraints in the Profiles and brands section shall apply.
 
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
 - The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.
@@ -215,3 +224,13 @@ The following additional constraints apply only to [=AV1 Image Sequences=]:
 - The AV1 profile level shall be either Main Profile or High Profile.
 - The AV1 level for Main Profile shall be 5.1 or lower.
 - The AV1 level for High Profile shall be 5.1 or lower.
+
+<div class="example">
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+
+  <code>avif, mif1, miaf, MA1A</code>
+
+A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+
+  <code>avis, msf1, miaf, MA1A</code>
+</div>
