@@ -46,15 +46,20 @@ url: http://iso.org/#; spec: HEIF; type: property;
     text: pict
     text: pixi
 
-url: http://iso.org/#; spec: ISOBMFF; type: property;
+url: http://iso.org/#; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
+
+url: http://iso.org/#; spec: ISOBMFF; type: property;
+    text: sync
 
 url: http://iso.org/#; spec: MIAF; type: property;
     text: clli
     text: mdcv
     text: miaf
+
+url: http://iso.org/#; spec: MIAF; type: dfn;
     text: primary image
 
 url: https://aomediacodec.github.io/av1-isobmff/#; spec: AV1-ISOBMFF; type: dfn;
@@ -90,7 +95,7 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 ISSUE: Should this specification also define a structural brand stricter than 'miaf' to profile out some features?
 
 
-<!--h2 id="avif-file-brand">Brands</h2>
+<!--h2 id="file-brand">Brands</h2>
 
 <p>This specification defines [[ISOBMFF]] brands to enable signaling that a file contains AVIF elements.</p>
 
@@ -105,11 +110,10 @@ ISSUE: Should this specification also define a structural brand stricter than 'm
 <h3 id="image-item">AV1 Image Item</h3>
 
 When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
-    
   - The [=AV1 Image Item=] is a coded image item in which the coded image is a single valid [=AV1 Sample=] as defined in [[!AV1-ISOBMFF]].
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
 
-The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn>. 
+The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn>.
 The following constraints apply to [=AV1 Image Item Data=]:
   - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].
   - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
@@ -158,23 +162,23 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
 <p>In [[!ISOBMFF]] or [[!HEIF]] files, if an [=AV1 Alpha Image Item=] (respectively. an [=AV1 Alpha Image Sequence=]) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in [[!MIAF]].</p>
 
-  <h2>Brands and file extensions</h2>
+  <h2 id="brands-and-file-extensions">Brands and file extensions</h2>
 
-<h3>AVIF image and image collection brand</h3>
+<h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
 Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#alpha-images]]) should include the brand
 <dfn value="" export="" for="AVIF Image brand">avif</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
 <p>Files should also carry a compatible brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.</p>
-<p>If 'avif' is specified in the major_brand field of the FileTypeBox, the file extension should be ".avif".
+<p>If <code>avif</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avif".
 The MIME Content Type for files with the ".avif" file extension shall be "image/avif".</p>
 
-<h3>AVIF image sequence brand</h3>
+<h3 id="image-sequence-brand">AVIF image sequence brand</h3>
 Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#alpha-images]]), should include the brand
 <dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn> in the [=compatible_brands=] field of the [=FileTypeBox=].
 <p>Files should also carry a compatible brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.</p>
-<p>If 'avis' is specified in the major_brand field of the FileTypeBox, the file extension should be ".avifs".
+<p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avifs".
 The MIME Content Type for files with the ".avifs" file extension shall be "image/avif-sequence".</p>
 
-  <h2>Profiles</h2>
+  <h2 id="profiles">Profiles</h2>
 
   The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers.
   A profile imposes a set of specific restrictions.
@@ -185,7 +189,7 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more items that all are [=AV1 Image Items=].
 
-  <h3 id="AVIF-baseline-profile">AVIF Baseline Profile</h3>
+  <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 
 This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.
 
@@ -201,7 +205,7 @@ NOTE:  AV1 tiers are not constrained because timing is optional in image sequenc
 
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.
 
-  <h3 id="AVIF-advanced-profile">AVIF Advanced Profile</h3>
+  <h3 id="advanced-profile">AVIF Advanced Profile</h3>
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
 
