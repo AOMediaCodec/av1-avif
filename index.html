@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="abbb6dde5b07117e1763b8ac04dd8eacb52a06aa" name="document-revision">
+  <meta content="192fd09ab98e51e9d924699026268e3ae6140eab" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1461,7 +1461,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
     <li><a href="#image-sequences"><span class="secno">3</span> <span class="content">Image Sequences</span></a>
     <li><a href="#alpha-images"><span class="secno">4</span> <span class="content">Alpha Image Items and Sequences</span></a>
     <li>
-     <a href="#brands-and-file-extensions"><span class="secno">5</span> <span class="content">Brands and file extensions</span></a>
+     <a href="#brands"><span class="secno">5</span> <span class="content">Brands, Internet media types and file extensions</span></a>
      <ol class="toc">
       <li><a href="#image-and-image-collection-brand"><span class="secno">5.1</span> <span class="content">AVIF image and image collection brand</span></a>
       <li><a href="#image-sequence-brand"><span class="secno">5.2</span> <span class="content">AVIF image sequence brand</span></a>
@@ -1471,6 +1471,12 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
      <ol class="toc">
       <li><a href="#baseline-profile"><span class="secno">6.1</span> <span class="content">AVIF Baseline Profile</span></a>
       <li><a href="#advanced-profile"><span class="secno">6.2</span> <span class="content">AVIF Advanced Profile</span></a>
+     </ol>
+    <li>
+     <a href="#mime-registration"><span class="secno">7</span> <span class="content">AVIF Media Type Registrations</span></a>
+     <ol class="toc">
+      <li><a href="#avif-mime-definition"><span class="secno">7.1</span> <span class="content">AVIF Image Item Media Type Registration</span></a>
+      <li><a href="#avis-mime-definition"><span class="secno">7.2</span> <span class="content">AVIF Image Sequence Media Type Registration</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -1555,17 +1561,15 @@ Quantity:                 One for an image item of type 'av01'
      <p>The <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑧">mono_chrome</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑨">Sequence Header OBU</a> shall be set to 1.</p>
    </ul>
    <p>In <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> or <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> files, if an <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively. an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
-   <h2 class="heading settled" data-level="5" id="brands-and-file-extensions"><span class="secno">5. </span><span class="content">Brands and file extensions</span><a class="self-link" href="#brands-and-file-extensions"></a></h2>
+   <h2 class="heading settled" data-level="5" id="brands"><span class="secno">5. </span><span class="content">Brands, Internet media types and file extensions</span><a class="self-link" href="#brands"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="image-and-image-collection-brand"><span class="secno">5.1. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
     Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>) should include the brand <dfn class="css" data-dfn-for="AVIF Image brand" data-dfn-type="value" data-export id="valdef-avif-image-brand-avif">avif<a class="self-link" href="#valdef-avif-image-brand-avif"></a></dfn> in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>. 
    <p>Files should also carry a compatible brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
-   <p>If <code>avif</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avif".
-The MIME Content Type for files with the ".avif" file extension shall be "image/avif".</p>
+   <p>If <code>avif</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be as defined in <a href="#avif-mime-definition">§7.1 AVIF Image Item Media Type Registration</a>.</p>
    <h3 class="heading settled" data-level="5.2" id="image-sequence-brand"><span class="secno">5.2. </span><span class="content">AVIF image sequence brand</span><a class="self-link" href="#image-sequence-brand"></a></h3>
     Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a>, <a href="#image-sequences">§3 Image Sequences</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>), should include the brand <dfn class="css" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="value" data-export id="valdef-avif-image-sequence-brand-avis">avis<a class="self-link" href="#valdef-avif-image-sequence-brand-avis"></a></dfn> in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③②">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③③">FileTypeBox</a>. 
    <p>Files should also carry a compatible brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
-   <p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avifs".
-The MIME Content Type for files with the ".avifs" file extension shall be "image/avif-sequence".</p>
+   <p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be as defined in <a href="#avis-mime-definition">§7.2 AVIF Image Sequence Media Type Registration</a>.</p>
    <h2 class="heading settled" data-level="6" id="profiles"><span class="secno">6. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format②">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format③">AV1 Image File Format</a> readers/parsers.
   A profile imposes a set of specific restrictions.
@@ -1610,6 +1614,71 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li data-md>
      <p>The AV1 level for High Profile shall be 5.1 or lower.</p>
    </ul>
+   <h2 class="heading settled" data-level="7" id="mime-registration"><span class="secno">7. </span><span class="content">AVIF Media Type Registrations</span><a class="self-link" href="#mime-registration"></a></h2>
+   <h3 class="heading settled" data-level="7.1" id="avif-mime-definition"><span class="secno">7.1. </span><span class="content">AVIF Image Item Media Type Registration</span><a class="self-link" href="#avif-mime-definition"></a></h3>
+    This section registers a new media type, <code>"image/avif"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). 
+   <p><strong>MIME media type name:</strong> image</p>
+   <p><strong>MIME subtype name:</strong> avif</p>
+   <p><strong>Required parameters:</strong> None.</p>
+   <p><strong>Optional parameters:</strong></p>
+   <ul>
+    <li data-md>
+     <p><strong>codecs</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a></p>
+    <li data-md>
+     <p><strong>profile</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a></p>
+    <li data-md>
+     <p><strong>itemtypes</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a></p>
+   </ul>
+   <p><strong>Encoding considerations:</strong> as for image/heif</p>
+   <p><strong>Security considerations:</strong> See section 4 of RFC 4337 and section 7 of RFC 6381. This format does not supply integrity or confidentiality protection and so they are applied externally when needed. The security considerations of URLs are discussed in RFC 3986.</p>
+   <p><strong>Interoperability considerations:</strong> The AVIF specification is based on a set of specifications (AV1, ISOBMFF, HEIF, MIAF) and builds upon their interoperability considerations. Further more, AVIF defines specific constraints and signals them with specific code points to improve interoperability between readers and writers of AV1 content.</p>
+   <p><strong>Published specification:</strong> This media type registration is extracted from the <a href="https://aomedia.github.io/av1-avif/">AV1 Image Format</a>.</p>
+   <p><strong>Applications:</strong> Multimedia, Imaging, Pictures</p>
+   <p><strong>Fragment identifier considerations:</strong> Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as a Publicly Available Standard at http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html</p>
+   <p><strong>Additional information:</strong></p>
+   <ul>
+    <li data-md>
+     <p><strong>Magic number(s):</strong> none</p>
+    <li data-md>
+     <p><strong>File extension(s):</strong> avif, heif or hif</p>
+    <li data-md>
+     <p><strong>Macintosh File Type Code(s):</strong> None</p>
+   </ul>
+   <p><strong>Intended usage:</strong> Common</p>
+   <p><strong>Restrictions on usage:</strong> None</p>
+   <p><strong>Author/Change controller:</strong> The published specification is a work product of the Alliance for Open Media, http://aomedia.org.</p>
+   <h3 class="heading settled" data-level="7.2" id="avis-mime-definition"><span class="secno">7.2. </span><span class="content">AVIF Image Sequence Media Type Registration</span><a class="self-link" href="#avis-mime-definition"></a></h3>
+    This section registers a new media type, <code>"image/avif-sequence"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). 
+   <p><strong>MIME media type name:</strong> image</p>
+   <p><strong>MIME subtype name:</strong> avif-sequence</p>
+   <p><strong>Required parameters:</strong> None.</p>
+   <p><strong>Optional parameters:</strong></p>
+   <ul>
+    <li data-md>
+     <p><strong>codecs</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif-sequence">image/heif-sequence Media Type Registration</a></p>
+    <li data-md>
+     <p><strong>profile</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif-sequence">image/heif-sequence Media Type Registration</a></p>
+    <li data-md>
+     <p><strong>itemtypes</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif-sequence">image/heif-sequence Media Type Registration</a></p>
+   </ul>
+   <p><strong>Encoding considerations:</strong> as for image/heif-sequence</p>
+   <p><strong>Security considerations:</strong> See section 4 of RFC 4337 and section 7 of RFC 6381. This format does not supply integrity or confidentiality protection and so they are applied externally when needed. The security considerations of URLs are discussed in RFC 3986.</p>
+   <p><strong>Interoperability considerations:</strong> The AVIF specification is based on a set of specifications (AV1, ISOBMFF, HEIF, MIAF) and builds upon their interoperability considerations. Further more, AVIF defines specific constraints and signals them with specific code points to improve interoperability between readers and writers of AV1 content.</p>
+   <p><strong>Published specification:</strong> This media type registration is extracted from the <a href="https://aomedia.github.io/av1-avif/">AV1 Image Format</a>.</p>
+   <p><strong>Applications:</strong> Multimedia, Imaging, Pictures</p>
+   <p><strong>Fragment identifier considerations:</strong> Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as a Publicly Available Standard at http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html</p>
+   <p><strong>Additional information:</strong></p>
+   <ul>
+    <li data-md>
+     <p><strong>Magic number(s):</strong> none</p>
+    <li data-md>
+     <p><strong>File extension(s):</strong> avifs, heifs or hif</p>
+    <li data-md>
+     <p><strong>Macintosh File Type Code(s):</strong> None</p>
+   </ul>
+   <p><strong>Intended usage:</strong> Common</p>
+   <p><strong>Restrictions on usage:</strong> None</p>
+   <p><strong>Author/Change controller:</strong> The published specification is a work product of the Alliance for Open Media, http://aomedia.org.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
