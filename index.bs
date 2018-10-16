@@ -97,8 +97,6 @@ New Image Formats and Brands" of [[!HEIF]].
 
 This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
-ISSUE: Should this specification also define a structural brand stricter than 'miaf' to profile out some features?
-
 <h2 id="image-item-and-properties">Image Items and properties</h2>
 
 <h3 id="image-item">AV1 Image Item</h3>
