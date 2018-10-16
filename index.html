@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="a71ccb1ed3b409db99ef7c8e12c5d4bdf07b0cbb" name="document-revision">
+  <meta content="b966f06b43b25bb9da78f0ac67a37f65fbd4906f" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1557,14 +1557,28 @@ Quantity:                 One for an image item of type 'av01'
    <p>In <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> or <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> files, if an <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively. an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
    <h2 class="heading settled" data-level="5" id="brands-and-file-extensions"><span class="secno">5. </span><span class="content">Brands and file extensions</span><a class="self-link" href="#brands-and-file-extensions"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="image-and-image-collection-brand"><span class="secno">5.1. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
-    Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>) should include the brand <dfn class="css" data-dfn-for="AVIF Image brand" data-dfn-type="value" data-export id="valdef-avif-image-brand-avif">avif<a class="self-link" href="#valdef-avif-image-brand-avif"></a></dfn> in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>. 
-   <p>Files should also carry a compatible brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
-   <p>If <code>avif</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avif".
+    Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>) should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>: 
+   <ul>
+    <li data-md>
+     <p>the brand <dfn class="css" data-dfn-for="AVIF Image brand" data-dfn-type="value" data-export id="valdef-avif-image-brand-avif">avif<a class="self-link" href="#valdef-avif-image-brand-avif"></a></dfn> ,</p>
+    <li data-md>
+     <p>the brand <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③②">mif1</a> as recommended in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>,</p>
+    <li data-md>
+     <p>a brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
+   </ul>
+   <p>If the brand <code>avif</code> is specified in the <code>major_brand</code> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③③">FileTypeBox</a>, the file extension should be ".avif".
 The MIME Content Type for files with the ".avif" file extension shall be "image/avif".</p>
    <h3 class="heading settled" data-level="5.2" id="image-sequence-brand"><span class="secno">5.2. </span><span class="content">AVIF image sequence brand</span><a class="self-link" href="#image-sequence-brand"></a></h3>
-    Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a>, <a href="#image-sequences">§3 Image Sequences</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>), should include the brand <dfn class="css" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="value" data-export id="valdef-avif-image-sequence-brand-avis">avis<a class="self-link" href="#valdef-avif-image-sequence-brand-avis"></a></dfn> in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③②">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③③">FileTypeBox</a>. 
-   <p>Files should also carry a compatible brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
-   <p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension should be ".avifs".
+    Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a>, <a href="#image-sequences">§3 Image Sequences</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>), should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③④">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑤">FileTypeBox</a>: 
+   <ul>
+    <li data-md>
+     <p>the brand <dfn class="css" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="value" data-export id="valdef-avif-image-sequence-brand-avis">avis<a class="self-link" href="#valdef-avif-image-sequence-brand-avis"></a></dfn>,</p>
+    <li data-md>
+     <p>the brand <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③⑥">msf1</a> as recommended in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>,</p>
+    <li data-md>
+     <p>a brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
+   </ul>
+   <p>If <code>avis</code> is specified in the <code>major_brand</code> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑦">FileTypeBox</a>, the file extension should be ".avifs".
 The MIME Content Type for files with the ".avifs" file extension shall be "image/avif-sequence".</p>
    <h2 class="heading settled" data-level="6" id="profiles"><span class="secno">6. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format②">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format③">AV1 Image File Format</a> readers/parsers.
@@ -1574,13 +1588,13 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
    <p>The following constraints are common to all profiles defined in this specification:</p>
    <ul>
     <li data-md>
-     <p>The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification and list <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③④">miaf</a> in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑤">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑥">FileTypeBox</a>.</p>
+     <p>The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification and list <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③⑧">miaf</a> in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑨">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⓪">FileTypeBox</a>.</p>
     <li data-md>
-     <p>The <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑦">primary image</a>, or one of its alternates, shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑥">AV1 Image Item</a> or be a derived image that references one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑦">AV1 Image Items</a>.</p>
+     <p>The <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④①">primary image</a>, or one of its alternates, shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑥">AV1 Image Item</a> or be a derived image that references one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑦">AV1 Image Items</a>.</p>
    </ul>
    <h3 class="heading settled" data-level="6.1" id="baseline-profile"><span class="secno">6.1. </span><span class="content">AVIF Baseline Profile</span><a class="self-link" href="#baseline-profile"></a></h3>
    <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1b">MA1B<a class="self-link" href="#valdef-av1-image-item-type-ma1b"></a></dfn>.</p>
-   <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑧">compatible_brands</a> of a TrackTypeBox or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑨">FileTypeBox</a>, the common constraints in the Profiles and brands section shall apply.</p>
+   <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④②">compatible_brands</a> of a <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④③">TrackTypeBox</a> or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④④">FileTypeBox</a>, the common constraints in the section <a href="#brands-and-file-extensions">§5 Brands and file extensions</a> shall apply.</p>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑧">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence②">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
@@ -1593,9 +1607,15 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
    </ul>
    <p class="note" role="note"><span>NOTE:</span> AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.</p>
    <p class="note" role="note"><span>NOTE:</span> Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.</p>
+   <div class="example" id="example-4a96d1f5">
+    <a class="self-link" href="#example-4a96d1f5"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⑤">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⑥">FileTypeBox</a>: 
+    <p><code>avif, mif1, miaf, MA1B</code></p>
+    <p>A file containing a <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-④⑦">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⑧">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⑨">FileTypeBox</a>:</p>
+    <p><code>avis, msf1, miaf, MA1B</code></p>
+   </div>
    <h3 class="heading settled" data-level="6.2" id="advanced-profile"><span class="secno">6.2. </span><span class="content">AVIF Advanced Profile</span><a class="self-link" href="#advanced-profile"></a></h3>
    <p>This section defines the MIAF AV1 Advanced profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1a">MA1A<a class="self-link" href="#valdef-av1-image-item-type-ma1a"></a></dfn>.</p>
-   <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⓪">compatible_brands</a> of a TrackTypeBox or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④①">FileTypeBox</a>, the common constraints in the Profiles and brands section shall apply.</p>
+   <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⓪">compatible_brands</a> of a =[TrackTypeBox=] or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤①">FileTypeBox</a>, the common constraints in the section <a href="#brands-and-file-extensions">§5 Brands and file extensions</a> shall apply.</p>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑨">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
@@ -1610,6 +1630,12 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li data-md>
      <p>The AV1 level for High Profile shall be 5.1 or lower.</p>
    </ul>
+   <div class="example" id="example-e237da1f">
+    <a class="self-link" href="#example-e237da1f"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤②">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤③">FileTypeBox</a>: 
+    <p><code>avif, mif1, miaf, MA1A</code></p>
+    <p>A file containing a <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-⑤④">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑤">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑥">FileTypeBox</a>:</p>
+    <p><code>avis, msf1, miaf, MA1A</code></p>
+   </div>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -1872,11 +1898,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1885,11 +1911,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1898,11 +1924,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1911,11 +1937,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1924,11 +1950,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1937,11 +1963,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1950,11 +1976,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1963,11 +1989,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1976,11 +2002,11 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1989,11 +2015,63 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <li><a href="#termref-for-">1. Scope</a>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
-    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
-    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="http://iso.org/#">http://iso.org/#</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="http://iso.org/#">http://iso.org/#</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="http://iso.org/#">http://iso.org/#</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="http://iso.org/#">http://iso.org/#</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.2. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">5.1. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image sequence brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6. Profiles</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">6.1. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">6.2. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2020,23 +2098,27 @@ The MIME Content Type for files with the ".avifs" file extension shall be "image
     <a data-link-type="biblio">[HEIF]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-①⓪" style="color:initial">colr</span>
-     <li><span class="dfn-paneled" id="term-for-①①" style="color:initial">pasp</span>
-     <li><span class="dfn-paneled" id="term-for-①②" style="color:initial">pixi</span>
+     <li><span class="dfn-paneled" id="term-for-①①" style="color:initial">mif1</span>
+     <li><span class="dfn-paneled" id="term-for-①②" style="color:initial">msf1</span>
+     <li><span class="dfn-paneled" id="term-for-①③" style="color:initial">pasp</span>
+     <li><span class="dfn-paneled" id="term-for-①④" style="color:initial">pict</span>
+     <li><span class="dfn-paneled" id="term-for-①⑤" style="color:initial">pixi</span>
     </ul>
    <li>
     <a data-link-type="biblio">[ISOBMFF]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-①③" style="color:initial">compatible_brands</span>
-     <li><span class="dfn-paneled" id="term-for-①④" style="color:initial">filetypebox</span>
-     <li><span class="dfn-paneled" id="term-for-①⑤" style="color:initial">sync</span>
+     <li><span class="dfn-paneled" id="term-for-①⑥" style="color:initial">compatible_brands</span>
+     <li><span class="dfn-paneled" id="term-for-①⑦" style="color:initial">filetypebox</span>
+     <li><span class="dfn-paneled" id="term-for-①⑧" style="color:initial">sync</span>
+     <li><span class="dfn-paneled" id="term-for-①⑨" style="color:initial">tracktypebox</span>
     </ul>
    <li>
     <a data-link-type="biblio">[MIAF]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-①⑥" style="color:initial">clli</span>
-     <li><span class="dfn-paneled" id="term-for-①⑦" style="color:initial">mdcv</span>
-     <li><span class="dfn-paneled" id="term-for-①⑧" style="color:initial">miaf</span>
-     <li><span class="dfn-paneled" id="term-for-①⑨" style="color:initial">primary image</span>
+     <li><span class="dfn-paneled" id="term-for-②⓪" style="color:initial">clli</span>
+     <li><span class="dfn-paneled" id="term-for-②①" style="color:initial">mdcv</span>
+     <li><span class="dfn-paneled" id="term-for-②②" style="color:initial">miaf</span>
+     <li><span class="dfn-paneled" id="term-for-②③" style="color:initial">primary image</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
