@@ -188,7 +188,7 @@ Files which contain one or more image sequences, and which conform with the prof
 
 This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.
 
-If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands-and-file-extensions]] shall apply.
+If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
   The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
   - The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.
@@ -215,7 +215,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
 
-If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a =[TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands-and-file-extensions]] shall apply.
+If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a =[TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
 - The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.
@@ -237,8 +237,9 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
   <h2 id="mime-registration">AVIF Media Type Registrations</h2>
 
+<em>This section registers two new media types, <code>"image/avif"</code> and <code>"image/avif-sequence"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). Once formally published by IANA, it will be removed from this specification.</em>
+
   <h3 id="avif-mime-definition">AVIF Image Item Media Type Registration</h2>
-This section registers a new media type, <code>"image/avif"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA).
 
 <strong>MIME media type name:</strong> image
 
@@ -280,7 +281,6 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
 
   <h3 id="avis-mime-definition">AVIF Image Sequence Media Type Registration</h2>
-This section registers a new media type, <code>"image/avif-sequence"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA).
 
 <strong>MIME media type name:</strong> image
 
