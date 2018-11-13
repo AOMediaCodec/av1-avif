@@ -163,13 +163,15 @@ Files that conform with the profile-independent restrictions in this document (s
 
 <p>If <code>avif</code> is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in [[#avif-mime-definition]].</p>
 
-<h3 id="image-sequence-brand">AVIF image sequence brand</h3>
+<h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#alpha-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
 - the brand <dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn>,
 - the brand 'msf1' as recommended in [[!HEIF]],
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
 <p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be respectively ".avifs" and "image/avif-sequence" as defined in [[#avis-mime-definition]].</p>
+
+Additionally, if the image sequences are made only of [=AV1 Samples=] marked as 'sync', then the brand <dfn value="" export="" for="AVIF Intra-only brand">avio</dfn> should be used.
 
   <h2 id="profiles">Profiles</h2>
 
@@ -210,6 +212,10 @@ A file containing items compliant with this profile is expected to list the foll
 A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, msf1, miaf, MA1B</code>
+
+A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+
+  <code>avis, avio, msf1, miaf, MA1B</code>
 
 </div>
 
