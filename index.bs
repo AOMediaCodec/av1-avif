@@ -211,6 +211,10 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
   <code>avis, msf1, miaf, MA1B</code>
 
+A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+
+  <code>avis, avio, msf1, miaf, MA1B</code>
+
 </div>
 
   <h3 id="advanced-profile">AVIF Advanced Profile</h3>
