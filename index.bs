@@ -104,7 +104,7 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
-    - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]]. Since such [[AV1 Samples]] may be composed of multiple frames, e.g. each corresponding to a different spatial layer, [[AV1 Image Items]] may represent multi-layered images.
+    - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]]. Since such [[=AV1 Samples=]] may be composed of multiple frames, e.g. each corresponding to a different spatial layer, [[=AV1 Image Items=]] may represent multi-layered images.
     - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
     - The [=AV1 Image Item Data=] should have its <code>[=still_picture=]</code> flag set to 1.
     - The [=AV1 Image Item Data=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
