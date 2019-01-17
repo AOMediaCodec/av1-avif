@@ -38,6 +38,14 @@ Chimera_10bit_cropped_to_1920x1008.avif
 Chimera_10bit_cropped_to_1920x1008_with_HDR_metadata.avif
 This file is encoded the same way as Chimera_10bit_cropped_to_1920x1008.avif but also includes Mastering Display Color Volume metadata and Content Light Level metadata. Note, the metadata values were chosen arbitrarily and may not match the encoding.
 
+still_picture.avif
+Encode and display resolution: 1280x720. This file has the "still_picture" flag set to 1 in the AV1 Sequence Header.
+
+reduced_still_picture_header.avif
+This file is encoded the same way as "still_picture.avif" but it also has the "reduced_still_picture_header" flag set to 1 in the AV1 Sequence Header.
+
+Monochrome.avif
+Encode and display resolution: 1280x720. This file is encoded as monochrome.
 
 ==== Attributions/Copyright =====
 bbb_4k.avif: 
@@ -50,4 +58,7 @@ Copyright Netflix Inc. These video sequences are licensed under the Creative Com
 
 Summer_in_Tomsk_720p_5x4_grid.avif:
 Summer_Nature_4k.avif:
+still_picture.avif:
+reduced_still_picture_header.avif:
+Monochrome.avif:
 Derived from video streams downloaded from https://www.elecard.com/videos
