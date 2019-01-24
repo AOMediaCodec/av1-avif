@@ -47,6 +47,9 @@ This file is encoded the same way as "still_picture.avif" but it also has the "r
 Monochrome.avif
 Encode and display resolution: 1280x720. This file is encoded as monochrome.
 
+Tomsk_with_thumbnails.avif
+The primary image is encoded at 1280x720. The file contains two embedded thumbnails, encoded at 320x180 and 160x90 resolution, respectively.
+
 ==== Attributions/Copyright =====
 bbb_4k.avif: 
 Copyright Blender Foundation 2008, Janus Bager Kristensen 2013 - Creative Commons Attribution 3.0 - http://bbb3d.renderfarming.net
@@ -61,4 +64,5 @@ Summer_Nature_4k.avif:
 still_picture.avif:
 reduced_still_picture_header.avif:
 Monochrome.avif:
+Tomsk_with_thumbnails.avif:
 Derived from video streams downloaded from https://www.elecard.com/videos
