@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="99948b42bd183b7ba53db9573cb19bec3b84e9b9" name="document-revision">
+  <meta content="bae09f5b982aca911b7ad94129514bcb0ac63ab0" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1500,6 +1500,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
 The <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format">AV1 Image File Format</a> defines multiple profiles, which restrict the allowed syntax and semantics of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②">AV1 bitstream</a>.
 The profiles defined in this specification follow the conventions of the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification.</p>
    <p><a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①">AV1 Image File Format</a> supports High Dynamic Range (HDR) and Wide Color Gamut (WCG) images as well as Standard Dynamic Range (SDR). It supports monochrome images as well as multi-channel images with all the bit depths and color spaces specified in <a data-link-type="biblio" href="#biblio-av1">[AV1]</a>.</p>
+   <p><a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format②">AV1 Image File Format</a> also supports multi-layer images as specified in <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> to be stored both in image items and image sequences.</p>
    <p>An AVIF file is designed to be a conformant <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> file for both image items and image sequences. Specifically, this specification follows the recommendations given in "Annex I: Guidelines On Defining
 New Image Formats and Brands" of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>.</p>
    <p>This specification reuses syntax and semantics used in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>.</p>
@@ -1589,10 +1590,10 @@ Quantity:                 One for an image item of type 'av01'
    <p>Additionally, if the image sequences are made only of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-③⑦">AV1 Samples</a> marked as <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③⑧">sync</a>, then the brand <dfn class="css" data-dfn-for="AVIF Intra-only brand" data-dfn-type="value" data-export id="valdef-avif-intra-only-brand-avio">avio<a class="self-link" href="#valdef-avif-intra-only-brand-avio"></a></dfn> should be used.</p>
    <h2 class="heading settled" data-level="6" id="profiles"><span class="secno">6. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="profiles-overview"><span class="secno">6.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
-   <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format②">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format③">AV1 Image File Format</a> readers/parsers.
+   <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format③">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format④">AV1 Image File Format</a> readers/parsers.
   A profile imposes a set of specific restrictions.
-  The presence of a brand indicating a profile can be interpreted as the permission for those <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format④">AV1 Image File Format</a> readers/parsers and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑤">AV1 Image File Format</a> renderers that only implement the features required by the profile, to process the corresponding file.
-  An <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑥">AV1 Image File Format</a> file may conform to multiple profiles. Similarly, an <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑦">AV1 Image File Format</a> reader/parser or <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> renderer may be capable of processing one or more profiles.</p>
+  The presence of a brand indicating a profile can be interpreted as the permission for those <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑤">AV1 Image File Format</a> readers/parsers and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑥">AV1 Image File Format</a> renderers that only implement the features required by the profile, to process the corresponding file.
+  An <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑦">AV1 Image File Format</a> file may conform to multiple profiles. Similarly, an <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> reader/parser or <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> renderer may be capable of processing one or more profiles.</p>
    <h3 class="heading settled" data-level="6.2" id="profiles-constraints"><span class="secno">6.2. </span><span class="content">Common constraints</span><a class="self-link" href="#profiles-constraints"></a></h3>
    <p>The following constraints are common to all profiles defined in this specification:</p>
    <ul>
@@ -2205,8 +2206,8 @@ Quantity:                 One for an image item of type 'av01'
   <aside class="dfn-panel" data-for="av1-image-file-format">
    <b><a href="#av1-image-file-format">#av1-image-file-format</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-av1-image-file-format">1. Scope</a> <a href="#ref-for-av1-image-file-format①">(2)</a>
-    <li><a href="#ref-for-av1-image-file-format②">6.1. Overview</a> <a href="#ref-for-av1-image-file-format③">(2)</a> <a href="#ref-for-av1-image-file-format④">(3)</a> <a href="#ref-for-av1-image-file-format⑤">(4)</a> <a href="#ref-for-av1-image-file-format⑥">(5)</a> <a href="#ref-for-av1-image-file-format⑦">(6)</a> <a href="#ref-for-av1-image-file-format⑧">(7)</a>
+    <li><a href="#ref-for-av1-image-file-format">1. Scope</a> <a href="#ref-for-av1-image-file-format①">(2)</a> <a href="#ref-for-av1-image-file-format②">(3)</a>
+    <li><a href="#ref-for-av1-image-file-format③">6.1. Overview</a> <a href="#ref-for-av1-image-file-format④">(2)</a> <a href="#ref-for-av1-image-file-format⑤">(3)</a> <a href="#ref-for-av1-image-file-format⑥">(4)</a> <a href="#ref-for-av1-image-file-format⑦">(5)</a> <a href="#ref-for-av1-image-file-format⑧">(6)</a> <a href="#ref-for-av1-image-file-format⑨">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="av1-image-item">
