@@ -50,8 +50,14 @@ Encode and display resolution: 1280x720. This file is encoded as monochrome.
 Tomsk_with_thumbnails.avif
 The primary image is encoded at 1280x720. The file contains two embedded thumbnails, encoded at 320x180 and 160x90 resolution, respectively.
 
+bbb_alpha_inverted.avif
+An image with an associated alpha plane image. Both the master image and the alpha plane image have a resolution of 3840x2160 pixels.
+The alpha image is encoded as a monochrome image in AV1 format.
+Note: In this particular image, the transparancy is applied on the "Big Buck BUNNY" text, while the background remains solid.
+
 ==== Attributions/Copyright =====
-bbb_4k.avif: 
+bbb_4k.avif:
+bbb_alpha_inverted.avif:
 Copyright Blender Foundation 2008, Janus Bager Kristensen 2013 - Creative Commons Attribution 3.0 - http://bbb3d.renderfarming.net
 
 Chimera_8bit_cropped_480x256.avif:
