@@ -159,6 +159,12 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 
   <h2 id="brands">Brands, Internet media types and file extensions</h2>
 
+<h3 id="brands-overview">Brands overview</h3>
+
+<p>As defined by [[!ISOBMFF]], the presence of a brand in the <code>FileTypeBox</code> (respectively <code>TrackTypeBox</code>) can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the brand, to process the corresponding file (respectively item or sequence).</p>
+
+<p>An [=AV1 Image File Format=] file may conform to multiple brands. Similarly, an [=AV1 Image File Format=] reader/parser or [=AV1 Image File Format=] renderer may be capable of processing the features associated with one or more brands.</p>
+
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
 Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#auxiliary-images]]) should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
 - the brand <dfn value="" export="" for="AVIF Image brand">avif</dfn> ,
@@ -177,14 +183,15 @@ Files which contain one or more image sequences, and which conform with the prof
 
 Additionally, if the image sequences are made only of [=AV1 Samples=] marked as 'sync', then the brand <dfn value="" export="" for="AVIF Intra-only brand">avio</dfn> should be used.
 
+NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least a primary image item. Hence, it can also declare brands for signaling the image item.
+
   <h2 id="profiles">Profiles</h2>
 
   <h3 id="profiles-overview">Overview</h3>
 
-  The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers.
-  A profile imposes a set of specific restrictions.
-  The presence of a brand indicating a profile can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the profile, to process the corresponding file.
-  An [=AV1 Image File Format=] file may conform to multiple profiles. Similarly, an [=AV1 Image File Format=] reader/parser or [=AV1 Image File Format=] renderer may be capable of processing one or more profiles.
+  The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.
+
+  When auxiliary images or sequences are used, it is recommended to declare profiles via brands in the <code>FileTypeBox</code> that enable processing of at least the master image or sequence. That is, if the requirements of the profile of the auxiliary image or sequence are met by the processor needed for the associated master image, the brands for the auxiliary image or sequence should not be indicated in the <code>FileTypeBox</code>. If the auxiliary image or sequence uses a profile that requires more features than the associate master image or sequence, the brands in the <code>FileTypeBox</code> should reflect the requirements of the auxiliary image or sequence unless it is acceptable to process the file without the auxiliary image or sequence.
 
   <h3 id="profiles-constraints">Common constraints</h3>
 
