@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="bae09f5b982aca911b7ad94129514bcb0ac63ab0" name="document-revision">
+  <meta content="220b11858c3fa209b54135eac5131791004ec596" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1459,7 +1459,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
        </ol>
      </ol>
     <li><a href="#image-sequences"><span class="secno">3</span> <span class="content">Image Sequences</span></a>
-    <li><a href="#alpha-images"><span class="secno">4</span> <span class="content">Alpha Image Items and Sequences</span></a>
+    <li><a href="#auxiliary-images"><span class="secno">4</span> <span class="content">Auxiliary Image Items and Sequences</span></a>
     <li>
      <a href="#brands"><span class="secno">5</span> <span class="content">Brands, Internet media types and file extensions</span></a>
      <ol class="toc">
@@ -1557,16 +1557,17 @@ Quantity:                 One for an image item of type 'av01'
     <li data-md>
      <p>The track handler for an <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence">AV1 Image Sequence</a> shall be <code>pict</code>.</p>
    </ul>
-   <h2 class="heading settled" data-level="4" id="alpha-images"><span class="secno">4. </span><span class="content">Alpha Image Items and Sequences</span><a class="self-link" href="#alpha-images"></a></h2>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-alpha-image-item">AV1 Alpha Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-alpha-image-sequence">AV1 Alpha Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑥">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints: </p>
+   <h2 class="heading settled" data-level="4" id="auxiliary-images"><span class="secno">4. </span><span class="content">Auxiliary Image Items and Sequences</span><a class="self-link" href="#auxiliary-images"></a></h2>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-item">AV1 Auxiliary Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑥">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints: </p>
    <ul>
     <li data-md>
      <p>The <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑧">mono_chrome</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑨">Sequence Header OBU</a> shall be set to 1.</p>
    </ul>
-   <p>In <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a> or <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> files, if an <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively. an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
+   <p>An <dfn data-dfn-type="dfn" data-export id="av1-alpha-image-item">AV1 Alpha Image Item<a class="self-link" href="#av1-alpha-image-item"></a></dfn> (respectively an <dfn data-dfn-type="dfn" data-export id="av1-alpha-image-sequence">AV1 Alpha Image Sequence<a class="self-link" href="#av1-alpha-image-sequence"></a></dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.</p>
+   <p>An <dfn data-dfn-type="dfn" data-export id="av1-depth-image-item">AV1 Depth Image Item<a class="self-link" href="#av1-depth-image-item"></a></dfn> (respectively an <dfn data-dfn-type="dfn" data-export id="av1-depth-image-sequence">AV1 Depth Image Sequence<a class="self-link" href="#av1-depth-image-sequence"></a></dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item①">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence①">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
    <h2 class="heading settled" data-level="5" id="brands"><span class="secno">5. </span><span class="content">Brands, Internet media types and file extensions</span><a class="self-link" href="#brands"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="image-and-image-collection-brand"><span class="secno">5.1. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
-    Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>) should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>: 
+    Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a> and <a href="#auxiliary-images">§4 Auxiliary Image Items and Sequences</a>) should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>: 
    <ul>
     <li data-md>
      <p>the brand <dfn class="css" data-dfn-for="AVIF Image brand" data-dfn-type="value" data-export id="valdef-avif-image-brand-avif">avif<a class="self-link" href="#valdef-avif-image-brand-avif"></a></dfn> ,</p>
@@ -1577,7 +1578,7 @@ Quantity:                 One for an image item of type 'av01'
    </ul>
    <p>If <code>avif</code> is specified in the <code>major_brand</code> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③③">FileTypeBox</a>, the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in <a href="#avif-mime-definition">§7.1 AVIF Image Item Media Type Registration</a>.</p>
    <h3 class="heading settled" data-level="5.2" id="image-sequence-brand"><span class="secno">5.2. </span><span class="content">AVIF image sequence brands</span><a class="self-link" href="#image-sequence-brand"></a></h3>
-    Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a>, <a href="#image-sequences">§3 Image Sequences</a> and <a href="#alpha-images">§4 Alpha Image Items and Sequences</a>), should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③④">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑤">FileTypeBox</a>: 
+    Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a>, <a href="#image-sequences">§3 Image Sequences</a> and <a href="#auxiliary-images">§4 Auxiliary Image Items and Sequences</a>), should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③④">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑤">FileTypeBox</a>: 
    <ul>
     <li data-md>
      <p>the brand <dfn class="css" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="value" data-export id="valdef-avif-image-sequence-brand-avis">avis<a class="self-link" href="#valdef-avif-image-sequence-brand-avis"></a></dfn>,</p>
@@ -1865,7 +1866,11 @@ Quantity:                 One for an image item of type 'av01'
    <li><a href="#valdef-av1-image-item-type-av01">av01</a><span>, in §2.1</span>
    <li><a href="#av1-alpha-image-item">AV1 Alpha Image Item</a><span>, in §4</span>
    <li><a href="#av1-alpha-image-sequence">AV1 Alpha Image Sequence</a><span>, in §4</span>
+   <li><a href="#av1-auxiliary-image-item">AV1 Auxiliary Image Item</a><span>, in §4</span>
+   <li><a href="#av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</a><span>, in §4</span>
    <li><a href="#valdef-av1-item-configuration-property-av1c">av1C</a><span>, in §2.2.1</span>
+   <li><a href="#av1-depth-image-item">AV1 Depth Image Item</a><span>, in §4</span>
+   <li><a href="#av1-depth-image-sequence">AV1 Depth Image Sequence</a><span>, in §4</span>
    <li><a href="#av1-image-file-format">AV1 Image File Format</a><span>, in §1</span>
    <li><a href="#av1-image-item">AV1 Image Item</a><span>, in §2.1</span>
    <li><a href="#av1-image-item-data">AV1 Image Item Data</a><span>, in §2.1</span>
@@ -1885,7 +1890,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1896,7 +1901,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1904,7 +1909,7 @@ Quantity:                 One for an image item of type 'av01'
    <ul>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a>
     <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1912,7 +1917,7 @@ Quantity:                 One for an image item of type 'av01'
    <ul>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a>
     <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1923,7 +1928,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1931,7 +1936,7 @@ Quantity:                 One for an image item of type 'av01'
    <ul>
     <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a>
     <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1942,7 +1947,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
     <li><a href="#termref-for-">2.2.2. Other Item Properties</a>
     <li><a href="#termref-for-">3. Image Sequences</a>
-    <li><a href="#termref-for-">4. Alpha Image Items and Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2191,7 +2196,7 @@ Quantity:                 One for an image item of type 'av01'
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-av1">[AV1]
-   <dd><a href="http://av1-spec.argondesign.com/av1-spec/av1-spec.html">AV1 Bitstream &amp; Decoding Process Specification</a>. LS. URL: <a href="http://av1-spec.argondesign.com/av1-spec/av1-spec.html">http://av1-spec.argondesign.com/av1-spec/av1-spec.html</a>
+   <dd><a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">AV1 Bitstream &amp; Decoding Process Specification</a>. LS. URL: <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a>
    <dt id="biblio-av1-isobmff">[AV1-ISOBMFF]
    <dd><a href="https://aomediacodec.github.io/av1-isobmff/">AV1 Codec ISO Media File Format Binding</a>. LS. URL: <a href="https://aomediacodec.github.io/av1-isobmff/">https://aomediacodec.github.io/av1-isobmff/</a>
    <dt id="biblio-heif">[HEIF]
@@ -2216,7 +2221,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#ref-for-av1-image-item">2.1. AV1 Image Item</a> <a href="#ref-for-av1-image-item①">(2)</a> <a href="#ref-for-av1-image-item②">(3)</a>
     <li><a href="#ref-for-av1-image-item③">2.2.2. Other Item Properties</a>
     <li><a href="#ref-for-av1-image-item④">3. Image Sequences</a> <a href="#ref-for-av1-image-item⑤">(2)</a>
-    <li><a href="#ref-for-av1-image-item⑥">4. Alpha Image Items and Sequences</a>
+    <li><a href="#ref-for-av1-image-item⑥">4. Auxiliary Image Items and Sequences</a>
     <li><a href="#ref-for-av1-image-item⑦">6.2. Common constraints</a> <a href="#ref-for-av1-image-item⑧">(2)</a>
     <li><a href="#ref-for-av1-image-item⑨">6.3. AVIF Baseline Profile</a>
     <li><a href="#ref-for-av1-image-item①⓪">6.4. AVIF Advanced Profile</a>
@@ -2240,21 +2245,21 @@ Quantity:                 One for an image item of type 'av01'
    <b><a href="#av1-image-sequence">#av1-image-sequence</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-av1-image-sequence">3. Image Sequences</a>
-    <li><a href="#ref-for-av1-image-sequence①">4. Alpha Image Items and Sequences</a>
+    <li><a href="#ref-for-av1-image-sequence①">4. Auxiliary Image Items and Sequences</a>
     <li><a href="#ref-for-av1-image-sequence②">6.3. AVIF Baseline Profile</a> <a href="#ref-for-av1-image-sequence③">(2)</a>
     <li><a href="#ref-for-av1-image-sequence④">6.4. AVIF Advanced Profile</a> <a href="#ref-for-av1-image-sequence⑤">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="av1-alpha-image-item">
-   <b><a href="#av1-alpha-image-item">#av1-alpha-image-item</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="av1-auxiliary-image-item">
+   <b><a href="#av1-auxiliary-image-item">#av1-auxiliary-image-item</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-av1-alpha-image-item">4. Alpha Image Items and Sequences</a>
+    <li><a href="#ref-for-av1-auxiliary-image-item">4. Auxiliary Image Items and Sequences</a> <a href="#ref-for-av1-auxiliary-image-item①">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="av1-alpha-image-sequence">
-   <b><a href="#av1-alpha-image-sequence">#av1-alpha-image-sequence</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="av1-auxiliary-image-sequence">
+   <b><a href="#av1-auxiliary-image-sequence">#av1-auxiliary-image-sequence</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-av1-alpha-image-sequence">4. Alpha Image Items and Sequences</a>
+    <li><a href="#ref-for-av1-auxiliary-image-sequence">4. Auxiliary Image Items and Sequences</a> <a href="#ref-for-av1-auxiliary-image-sequence①">(2)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
