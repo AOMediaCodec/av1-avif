@@ -149,16 +149,18 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
     - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
     - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
 
-    <h2 id="alpha-images">Alpha Image Items and Sequences</h2>
-<p>An <dfn>AV1 Alpha Image Item</dfn> (respectively an <dfn>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
+    <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
+<p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
     - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
 
-<p>In [[!ISOBMFF]] or [[!HEIF]] files, if an [=AV1 Alpha Image Item=] (respectively. an [=AV1 Alpha Image Sequence=]) is used, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>, as defined in [[!MIAF]].</p>
+<p>An <dfn export="">AV1 Alpha Image Item</dfn> (respectively an <dfn export="">AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.</p>
+
+<p>An <dfn export="">AV1 Depth Image Item</dfn> (respectively an <dfn export="">AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
   <h2 id="brands">Brands, Internet media types and file extensions</h2>
 
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
-Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#alpha-images]]) should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
+Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#auxiliary-images]]) should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
 - the brand <dfn value="" export="" for="AVIF Image brand">avif</dfn> ,
 - the brand 'mif1' as recommended in [[!HEIF]],
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
@@ -166,7 +168,7 @@ Files that conform with the profile-independent restrictions in this document (s
 <p>If <code>avif</code> is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in [[#avif-mime-definition]].</p>
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
-Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#alpha-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
+Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#auxiliary-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
 - the brand <dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn>,
 - the brand 'msf1' as recommended in [[!HEIF]],
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
