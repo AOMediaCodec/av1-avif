@@ -191,7 +191,9 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.
 
-  When auxiliary images or sequences are used, it is recommended to declare profiles via brands in the <code>FileTypeBox</code> that enable processing of at least the master image or sequence. That is, if the requirements of the profile of the auxiliary image or sequence are met by the processor needed for the associated master image, the brands for the auxiliary image or sequence should not be indicated in the <code>FileTypeBox</code>. If the auxiliary image or sequence uses a profile that requires more features than the associate master image or sequence, the brands in the <code>FileTypeBox</code> should reflect the requirements of the auxiliary image or sequence unless it is acceptable to process the file without the auxiliary image or sequence.
+  The FileTypeBox should declare at least one profile that enables decoding of the primary image item, or one of its alternates. The profile should allow decoding of any associated auxiliary images, unless it is acceptable to decode the image item without its auxiliary images.
+
+  If an image sequence brand is declared in the FileTypeBox, if a profile is declared in the FileTypeBox, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
   <h3 id="profiles-constraints">Common constraints</h3>
 
