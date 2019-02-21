@@ -20,7 +20,7 @@ Status Text: Version A.1
 </pre>
 
 <div boilerplate='copyright'>
-<p>Copyright 2018, The Alliance for Open Media</p>
+<p>Copyright 2019, The Alliance for Open Media</p>
 
 <p>Licensing information is available at http://aomedia.org/license/</p>
 
