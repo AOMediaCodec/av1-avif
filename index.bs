@@ -16,6 +16,53 @@ Group: AOM
 Status Text: Version A.1
 </pre>
 
+<pre class='biblio'>
+{
+    "AV1": {
+  "href": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf",
+  "id": "AV1",
+  "title": "AV1 Bitstream & Decoding Process Specification",
+  "status": "LS",
+  "publisher": "AOM"
+    },
+
+    "AV1-ISOBMFF": {
+  "href": "https://aomediacodec.github.io/av1-isobmff/",
+  "id": "AV1-ISOBMFF",
+  "title": "AV1 Codec ISO Media File Format Binding",
+  "status": "LS",
+  "publisher": "AOM"
+    },
+
+    "HEIF": {
+  "id": "HEIF",
+  "href": "https://www.iso.org/standard/66067.html",
+  "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
+  "status": "International Standard",
+  "publisher": "ISO/IEC",
+  "isoNumber":"ISO/IEC 23008-12:2017"
+    },
+
+    "ISOBMFF": {
+  "id": "ISOBMFF",
+  "href": "https://www.iso.org/standard/68960.html",
+  "title": "Information technology — Coding of audio-visual objects — Part 12: ISO base media file format",
+  "status": "International Standard",
+  "publisher": "ISO/IEC",
+  "isoNumber":"ISO/IEC 14496-12:2015"
+    },
+
+    "MIAF": {
+  "href": "https://www.iso.org/standard/74417.html",
+  "id": "MIAF",
+  "title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)",
+  "status": "Enquiry",
+  "publisher": "ISO/IEC",
+  "isoNumber": "ISO/IEC DIS 23000-22"
+    }
+}
+</pre>
+
 <div boilerplate='copyright'>
 <p>Copyright 2019, The Alliance for Open Media</p>
 
