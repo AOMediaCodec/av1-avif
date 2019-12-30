@@ -280,7 +280,7 @@ A file containing a 'pict' track compliant with this profile and made only of sa
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
 
-If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a =[TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
 - The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.
