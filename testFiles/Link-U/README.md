@@ -20,23 +20,23 @@ Additional test images may to be added. Please check [our repositories](https://
 
 #### YUV 420
 
-| profile | bit depth | Monochrome | CDEF | Loop Restration | file                                                                      |
-|---------|-----------|------------|------|-----------------|---------------------------------------------------------------------------|
-| 0       | 8         |            | NO   | YES             | [here](hato.profile0.8bpc.yuv420.no-cdef.avif)                            |
-| 0       | 8         | YES        | NO   | YES             | [here](hato.profile0.8bpc.yuv420.monochrome.no-cdef.avif)                 |
-| 0       | 10        |            | NO   | NO              | [here](hato.profile0.10bpc.yuv420.no-cdef.no-restoration.avif)            |
-| 0       | 10        | YES        | NO   | NO              | [here](hato.profile0.10bpc.yuv420.monochrome.no-cdef.no-restoration.avif) |
+| profile | bit depth | Monochrome | CDEF | Loop Restoration | file                                                                      |
+|---------|-----------|------------|------|------------------|---------------------------------------------------------------------------|
+| 0       | 8         |            | NO   | YES              | [here](hato.profile0.8bpc.yuv420.no-cdef.avif)                            |
+| 0       | 8         | YES        | NO   | YES              | [here](hato.profile0.8bpc.yuv420.monochrome.no-cdef.avif)                 |
+| 0       | 10        |            | NO   | NO               | [here](hato.profile0.10bpc.yuv420.no-cdef.no-restoration.avif)            |
+| 0       | 10        | YES        | NO   | NO               | [here](hato.profile0.10bpc.yuv420.monochrome.no-cdef.no-restoration.avif) |
 
 #### YUV422
 
-| profile | bit depth | Monochrome | CDEF | Loop Restration | file                                                                      |
-|---------|-----------|------------|------|-----------------|---------------------------------------------------------------------------|
-| 0       | 8         |            | NO   | YES             | [here](hato.profile2.8bpc.yuv422.no-cdef.avif)                            |
-| 0       | 8         | YES        | NO   | YES             | [here](hato.profile2.8bpc.yuv422.monochrome.no-cdef.avif)                 |
-| 0       | 10        |            | NO   | YES             | [here](hato.profile2.10bpc.yuv422.no-cdef.no-restoration.avif)            |
-| 0       | 10        | YES        | NO   | NO              | [here](hato.profile2.10bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
-| 0       | 12        |            | NO   | NO              | [here](hato.profile2.12bpc.yuv422.no-cdef.no-restoration.avif)            |
-| 0       | 12        | YES        | NO   | NO              | [here](hato.profile2.12bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
+| profile | bit depth | Monochrome | CDEF | Loop Restroation | file                                                                      |
+|---------|-----------|------------|------|------------------|---------------------------------------------------------------------------|
+| 0       | 8         |            | NO   | YES              | [here](hato.profile2.8bpc.yuv422.no-cdef.avif)                            |
+| 0       | 8         | YES        | NO   | YES              | [here](hato.profile2.8bpc.yuv422.monochrome.no-cdef.avif)                 |
+| 0       | 10        |            | NO   | NO               | [here](hato.profile2.10bpc.yuv422.no-cdef.no-restoration.avif)            |
+| 0       | 10        | YES        | NO   | NO               | [here](hato.profile2.10bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
+| 0       | 12        |            | NO   | NO               | [here](hato.profile2.12bpc.yuv422.no-cdef.no-restoration.avif)            |
+| 0       | 12        | YES        | NO   | NO               | [here](hato.profile2.12bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
 
 ## Kimono - Transformation tests
 
