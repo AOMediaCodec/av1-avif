@@ -44,7 +44,7 @@ Additional test images may to be added. Please check [our repositories](https://
 
  - size: 722x1024
  - By Momiji Jinzamomi([@momiji-san](https://github.com/momiji-san)) and Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
- - Downloaded from [their website](https://hexe.net/2017/11/27/12:27:02/).
+ - Downloaded from [their website](https://hexe.net/2018/12/24/18:59:01/).
 
 Test images for rotation(`irot`), mirroring(`imir`), cropping(`clap`).
 
