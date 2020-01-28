@@ -1,8 +1,11 @@
 # AVIF Example files from [Link-U](https://www.link-u.co.jp/)
 
-All files does not contain Exif metadata and are tagged as MIAF compatible.  
-All files are tagged as compatible with the AVIF Baseline or Advanced Profile if possible.  
-All images are licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en).
+
+ - All files does not contain Exif metadata.
+ - All files are tagged as MIAF compatible.
+ - All files are tagged as compatible with the AVIF Baseline or Advanced Profile if possible.
+ - All images have the "reduced_still_picture_header" and "still_picture" flags set to 1 in the AV1 Sequence Header.
+ - All images are licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en).
 
 [Makefile](Makefile) describes how they were created. To generate files yourself, you have to install [cavif](https://github.com/link-u/cavif) and [davif](https://github.com/link-u/davif)
 
