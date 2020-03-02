@@ -1,6 +1,6 @@
 # AVIF Example files from [Link-U](https://www.link-u.co.jp/)
 
- - All files does not contain Exif metadata.
+ - All files do not contain Exif metadata.
  - All files are tagged as MIAF compatible.
  - All files are tagged as compatible with the AVIF Baseline or Advanced Profile if possible.
  - All images have the "reduced_still_picture_header" and "still_picture" flags set to 1 in the AV1 Sequence Header.
