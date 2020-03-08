@@ -33,12 +33,12 @@ Additional test images may to be added. Please check [our repositories](https://
 
 | profile | bit depth | Monochrome | CDEF | Loop Restroation | file                                                                      |
 |---------|-----------|------------|------|------------------|---------------------------------------------------------------------------|
-| 0       | 8         |            | NO   | YES              | [here](hato.profile2.8bpc.yuv422.no-cdef.avif)                            |
-| 0       | 8         | YES        | NO   | YES              | [here](hato.profile2.8bpc.yuv422.monochrome.no-cdef.avif)                 |
-| 0       | 10        |            | NO   | NO               | [here](hato.profile2.10bpc.yuv422.no-cdef.no-restoration.avif)            |
-| 0       | 10        | YES        | NO   | NO               | [here](hato.profile2.10bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
-| 0       | 12        |            | NO   | NO               | [here](hato.profile2.12bpc.yuv422.no-cdef.no-restoration.avif)            |
-| 0       | 12        | YES        | NO   | NO               | [here](hato.profile2.12bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
+| 1       | 8         |            | NO   | YES              | [here](hato.profile2.8bpc.yuv422.no-cdef.avif)                            |
+| 1       | 8         | YES        | NO   | YES              | [here](hato.profile2.8bpc.yuv422.monochrome.no-cdef.avif)                 |
+| 1       | 10        |            | NO   | NO               | [here](hato.profile2.10bpc.yuv422.no-cdef.no-restoration.avif)            |
+| 1       | 10        | YES        | NO   | NO               | [here](hato.profile2.10bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
+| 1       | 12        |            | NO   | NO               | [here](hato.profile2.12bpc.yuv422.no-cdef.no-restoration.avif)            |
+| 1       | 12        | YES        | NO   | NO               | [here](hato.profile2.12bpc.yuv422.monochrome.no-cdef.no-restoration.avif) |
 
 ## Kimono - Transformation tests
 
@@ -222,10 +222,10 @@ Resulted image should be as the same as above.
 | 1       | 10        | YUV444  |            | YES       |            | [here](fox.profile1.10bpc.yuv444.odd-width.avif)                       |
 | 1       | 10        | YUV444  |            |           | YES        | [here](fox.profile1.10bpc.yuv444.odd-height.avif)                      |
 | 1       | 10        | YUV444  |            | YES       | YES        | [here](fox.profile1.10bpc.yuv444.odd-width.odd-height.avif)            |
-| 1       | 12        | YUV444  |            |           |            | [here](fox.profile2.12bpc.yuv444.avif)                                 |
-| 1       | 12        | YUV444  |            | YES       |            | [here](fox.profile2.12bpc.yuv444.odd-width.avif)                       |
-| 1       | 12        | YUV444  |            |           | YES        | [here](fox.profile2.12bpc.yuv444.odd-height.avif)                      |
-| 1       | 12        | YUV444  |            | YES       | YES        | [here](fox.profile2.12bpc.yuv444.odd-width.odd-height.avif)            |
+| 2       | 12        | YUV444  |            |           |            | [here](fox.profile2.12bpc.yuv444.avif)                                 |
+| 2       | 12        | YUV444  |            | YES       |            | [here](fox.profile2.12bpc.yuv444.odd-width.avif)                       |
+| 2       | 12        | YUV444  |            |           | YES        | [here](fox.profile2.12bpc.yuv444.odd-height.avif)                      |
+| 2       | 12        | YUV444  |            | YES       | YES        | [here](fox.profile2.12bpc.yuv444.odd-width.odd-height.avif)            |
 | 2       | 12        | YUV444  | YES        |           |            | [here](fox.profile2.12bpc.yuv444.monochrome.avif)                      |
 | 2       | 12        | YUV444  | YES        | YES       |            | [here](fox.profile2.12bpc.yuv444.monochrome.odd-width.avif)            |
 | 2       | 12        | YUV444  | YES        |           | YES        | [here](fox.profile2.12bpc.yuv444.monochrome.odd-height.avif)           |
