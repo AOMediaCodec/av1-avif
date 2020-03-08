@@ -15,7 +15,7 @@ Additional test images may to be added. Please check [our repositories](https://
 ![hato.jpg](hato.jpg)
 
  - size: 3082x2048
- - By Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
+ - Author: Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
  - Retrieved from [her website](https://hexe.net/2017/11/27/12:27:02/).
 
 ### AVIF version
@@ -45,7 +45,7 @@ Additional test images may to be added. Please check [our repositories](https://
 [<img src="https://raw.githubusercontent.com/link-u/avif-sample-images/master/kimono.jpg" alt="kimono.jpg" height="512">](kimono.jpg)
 
  - size: 722x1024
- - By Momiji Jinzamomi([@momiji-san](https://github.com/momiji-san)) and Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
+ - Authors: Momiji Jinzamomi([@momiji-san](https://github.com/momiji-san)) and Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
  - Retrieved from [their website](https://hexe.net/2018/12/24/18:59:01/).
 
 Test images for rotation(`irot`), mirroring(`imir`), cropping(`clap`).
@@ -145,7 +145,7 @@ Resulted image should be as the same as above.
 [<img src="https://raw.githubusercontent.com/link-u/avif-sample-images/master/fox.jpg" alt="fox.jpg" height="512">](fox.jpg)
 
  - size: 1204 x 800
- - By Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
+ - Author: Kaede Fujisaki ([@ledyba](https://github.com/ledyba))
  - Retrieved from [her website](https://hexe.net/2017/12/02/16:33:53/).
 
 #### Odd-Width
