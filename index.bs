@@ -215,7 +215,7 @@ Files that conform with the profile-independent restrictions in this document (s
 - the brand 'mif1' as recommended in [[!HEIF]],
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
-<p>If <code>avif</code> is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in [[#avif-mime-definition]].</p>
+<p>If <code>avif</code> is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in [[#mime-registration]].</p>
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#auxiliary-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
@@ -223,7 +223,7 @@ Files which contain one or more image sequences, and which conform with the prof
 - the brand 'msf1' as recommended in [[!HEIF]],
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
-<p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be respectively ".avifs" and "image/avif-sequence" as defined in [[#avis-mime-definition]].</p>
+<p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be respectively ".avifs" and "image/avif" as defined in [[#mime-registration]].</p>
 
 Additionally, if the image sequences are made only of [=AV1 Samples=] marked as 'sync', then the brand <dfn value="" export="" for="AVIF Intra-only brand">avio</dfn> should be used.
 
@@ -300,11 +300,9 @@ A file containing a 'pict' track compliant with this profile is expected to list
   <code>avis, msf1, miaf, MA1A</code>
 </div>
 
-  <h2 id="mime-registration">AVIF Media Type Registrations</h2>
+  <h2 id="mime-registration">AVIF Media Type Registration</h2>
 
-<em>This section registers two new media types, <code>"image/avif"</code> and <code>"image/avif-sequence"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). Once formally published by IANA, it will be removed from this specification.</em>
-
-  <h3 id="avif-mime-definition">AVIF Image Item Media Type Registration</h2>
+<em>This section registers a new media type <code>"image/avif"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). Once formally published by IANA, it will be removed from this specification.</em>
 
 <strong>MIME media type name:</strong> image
 
@@ -317,7 +315,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
   - <strong>profile</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a>
   - <strong>itemtypes</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a>
 
-<strong>Encoding considerations:</strong> as for image/heif
+<strong>Encoding considerations:</strong> as for image/heif or image/heif-sequence
 
 <strong>Security considerations:</strong>
 See section 4 of RFC 4337 and section 7 of RFC 6381. This format does not supply integrity or confidentiality protection and so they are applied externally when needed. The security considerations of URLs are discussed in RFC 3986.
@@ -335,48 +333,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 
 <strong>Additional information:</strong>
     - <strong>Magic number(s):</strong> none
-    - <strong>File extension(s):</strong> avif, heif or hif
-    - <strong>Macintosh File Type Code(s):</strong> None
-
-<strong>Intended usage:</strong> Common
-
-<strong>Restrictions on usage:</strong> None
-
-<strong>Author/Change controller:</strong>
-The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
-
-  <h3 id="avis-mime-definition">AVIF Image Sequence Media Type Registration</h2>
-
-<strong>MIME media type name:</strong> image
-
-<strong>MIME subtype name:</strong> avif-sequence
-
-<strong>Required parameters:</strong> None.
-
-<strong>Optional parameters:</strong>
-  - <strong>codecs</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif-sequence">image/heif-sequence Media Type Registration</a>
-  - <strong>profile</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif-sequence">image/heif-sequence Media Type Registration</a>
-  - <strong>itemtypes</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif-sequence">image/heif-sequence Media Type Registration</a>
-
-<strong>Encoding considerations:</strong> as for image/heif-sequence
-
-<strong>Security considerations:</strong>
-See section 4 of RFC 4337 and section 7 of RFC 6381. This format does not supply integrity or confidentiality protection and so they are applied externally when needed. The security considerations of URLs are discussed in RFC 3986.
-
-<strong>Interoperability considerations:</strong>
-The AVIF specification is based on a set of specifications (AV1, ISOBMFF, HEIF, MIAF) and builds upon their interoperability considerations. Further more, AVIF defines specific constraints and signals them with specific code points to improve interoperability between readers and writers of AV1 content.
-
-<strong>Published specification:</strong>
-This media type registration is extracted from the <a href="https://aomedia.github.io/av1-avif/">AV1 Image Format</a>.
-
-<strong>Applications:</strong> Multimedia, Imaging, Pictures
-
-<strong>Fragment identifier considerations:</strong>
-Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as a Publicly Available Standard at http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html
-
-<strong>Additional information:</strong>
-    - <strong>Magic number(s):</strong> none
-    - <strong>File extension(s):</strong> avifs, heifs or hif
+    - <strong>File extension(s):</strong> avif, avifs, heif, heifs or hif
     - <strong>Macintosh File Type Code(s):</strong> None
 
 <strong>Intended usage:</strong> Common
