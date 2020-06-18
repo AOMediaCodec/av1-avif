@@ -331,7 +331,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 
 <strong>Additional information:</strong>
     - <strong>Magic number(s):</strong> none
-    - <strong>File extension(s):</strong> avif, avifs, heif, heifs or hif
+    - <strong>File extension(s):</strong> avif, heif, heifs or hif
     - <strong>Macintosh File Type Code(s):</strong> None
 
 <strong>Intended usage:</strong> Common
