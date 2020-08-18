@@ -24,16 +24,18 @@ Custom Warning Text: This specification is a draft of a potential new version of
     "AV1": {
   "href": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf",
   "id": "AV1",
-  "title": "AV1 Bitstream & Decoding Process Specification",
-  "status": "LS",
+  "date": "8 January 2019",
+  "title": "AV1 Bitstream & Decoding Process Specification, Version 1.0.0 with Errata 1",
+  "status": "Published",
   "publisher": "AOM"
     },
 
     "AV1-ISOBMFF": {
   "href": "https://aomediacodec.github.io/av1-isobmff/",
   "id": "AV1-ISOBMFF",
-  "title": "AV1 Codec ISO Media File Format Binding",
-  "status": "LS",
+  "title": "AV1 Codec ISO Media File Format Binding, v1.1.0",
+  "date": "28 May 2019",
+  "status": "Published",
   "publisher": "AOM"
     },
 
@@ -41,6 +43,7 @@ Custom Warning Text: This specification is a draft of a potential new version of
   "id": "HEIF",
   "href": "https://www.iso.org/standard/66067.html",
   "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
+  "date": "2017",
   "status": "International Standard",
   "publisher": "ISO/IEC",
   "isoNumber":"ISO/IEC 23008-12:2017"
@@ -51,6 +54,7 @@ Custom Warning Text: This specification is a draft of a potential new version of
   "href": "https://www.iso.org/standard/68960.html",
   "title": "Information technology — Coding of audio-visual objects — Part 12: ISO base media file format",
   "status": "International Standard",
+  "date": "2015",
   "publisher": "ISO/IEC",
   "isoNumber":"ISO/IEC 14496-12:2015"
     },
@@ -59,9 +63,10 @@ Custom Warning Text: This specification is a draft of a potential new version of
   "href": "https://www.iso.org/standard/74417.html",
   "id": "MIAF",
   "title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)",
-  "status": "Enquiry",
+  "date": "2019",
+  "status": "International Standard",
   "publisher": "ISO/IEC",
-  "isoNumber": "ISO/IEC DIS 23000-22"
+  "isoNumber": "ISO/IEC DIS 23000-22:2019"
     }
 }
 </pre>
