@@ -1212,9 +1212,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 018be3f805d3272ce699a232398d6e3902d1ea8d" name="generator">
+  <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="a8b685f59a112c5e4660bac7af913c7b0d7e0286" name="document-revision">
+  <meta content="770c779d81877276a21bf718dc7039288c5c2720" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1403,7 +1403,7 @@ pre .property::before, pre .property::after {
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">AV1 Image File Format (AVIF)</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">v1.0.0, <time class="dt-updated" datetime="2019-02-19">19 February 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2020-08-18">18 August 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1415,9 +1415,16 @@ pre .property::before, pre .property::after {
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:Anders.Klemets@microsoft.com">Anders Klemets</a> (<span class="p-org org">Microsoft</span>)
      <dt class="editor">Former Editor:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:pkerr@netflix.com">Paul Kerr</a> (<span class="p-org org">Netflix</span>)
+     <dt>Last approved version:
+     <dd><a href="https://rawcdn.githack.com/AOMediaCodec/av1-avif/67a92add6cd642a8863e386fa4db87954a6735d1/index.html">v1.0.0</a>
     </dl>
    </div>
-   <div data-fill-with="warning"></div>
+   <div data-fill-with="warning">
+    <details class="annoying-warning" open>
+     <summary>Warning</summary>
+     <p>This specification is a draft of a potential new version of this specification and should not be referenced other than as a working draft.</p>
+    </details>
+   </div>
    <p class="copyright" data-fill-with="copyright">
     <p>Copyright 2019, The Alliance for Open Media</p>
     <p>Licensing information is available at http://aomedia.org/license/</p>
@@ -1566,27 +1573,27 @@ Quantity:                 One for an image item of type 'av01'
    <p>As defined by <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>, the presence of a brand in the <code>FileTypeBox</code> (respectively <code>TrackTypeBox</code>) can be interpreted as the permission for those <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format③">AV1 Image File Format</a> readers/parsers and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format④">AV1 Image File Format</a> renderers that only implement the features required by the brand, to process the corresponding file (respectively item or sequence).</p>
    <p>An <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑤">AV1 Image File Format</a> file may conform to multiple brands. Similarly, an <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑥">AV1 Image File Format</a> reader/parser or <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑦">AV1 Image File Format</a> renderer may be capable of processing the features associated with one or more brands.</p>
    <h3 class="heading settled" data-level="5.2" id="image-and-image-collection-brand"><span class="secno">5.2. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
-    Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a> and <a href="#auxiliary-images">§4 Auxiliary Image Items and Sequences</a>) should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>: 
+    Files that conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§ 2 Image Items and properties</a> and <a href="#auxiliary-images">§ 4 Auxiliary Image Items and Sequences</a>) should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③①">FileTypeBox</a>: 
    <ul>
     <li data-md>
      <p>the brand <dfn class="css" data-dfn-for="AVIF Image brand" data-dfn-type="value" data-export id="valdef-avif-image-brand-avif">avif<a class="self-link" href="#valdef-avif-image-brand-avif"></a></dfn> ,</p>
     <li data-md>
      <p>the brand <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③②">mif1</a> as recommended in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>,</p>
     <li data-md>
-     <p>a brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
+     <p>a brand to identify the AVIF profile (see section <a href="#profiles">§ 6 Profiles</a>), if any, with which the file complies.</p>
    </ul>
-   <p>If <code>avif</code> is specified in the <code>major_brand</code> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③③">FileTypeBox</a>, the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in <a href="#avif-mime-definition">§7.1 AVIF Image Item Media Type Registration</a>.</p>
+   <p>If <code>avif</code> is specified in the <code>major_brand</code> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③③">FileTypeBox</a>, the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in <a href="#avif-mime-definition">§ 7.1 AVIF Image Item Media Type Registration</a>.</p>
    <h3 class="heading settled" data-level="5.3" id="image-sequence-brand"><span class="secno">5.3. </span><span class="content">AVIF image sequence brands</span><a class="self-link" href="#image-sequence-brand"></a></h3>
-    Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§2 Image Items and properties</a>, <a href="#image-sequences">§3 Image Sequences</a> and <a href="#auxiliary-images">§4 Auxiliary Image Items and Sequences</a>), should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③④">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑤">FileTypeBox</a>: 
+    Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections <a href="#image-item-and-properties">§ 2 Image Items and properties</a>, <a href="#image-sequences">§ 3 Image Sequences</a> and <a href="#auxiliary-images">§ 4 Auxiliary Image Items and Sequences</a>), should include in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③④">compatible_brands</a> field of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-③⑤">FileTypeBox</a>: 
    <ul>
     <li data-md>
      <p>the brand <dfn class="css" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="value" data-export id="valdef-avif-image-sequence-brand-avis">avis<a class="self-link" href="#valdef-avif-image-sequence-brand-avis"></a></dfn>,</p>
     <li data-md>
      <p>the brand <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③⑥">msf1</a> as recommended in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>,</p>
     <li data-md>
-     <p>a brand to identify the AVIF profile (see section <a href="#profiles">§6 Profiles</a>), if any, with which the file complies.</p>
+     <p>a brand to identify the AVIF profile (see section <a href="#profiles">§ 6 Profiles</a>), if any, with which the file complies.</p>
    </ul>
-   <p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be respectively ".avifs" and "image/avif-sequence" as defined in <a href="#avis-mime-definition">§7.2 AVIF Image Sequence Media Type Registration</a>.</p>
+   <p>If <code>avis</code> is specified in the major_brand field of the FileTypeBox, the file extension and Internet Media Type should be respectively ".avifs" and "image/avif-sequence" as defined in <a href="#avis-mime-definition">§ 7.2 AVIF Image Sequence Media Type Registration</a>.</p>
    <p>Additionally, if the image sequences are made only of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/#" id="termref-for-③⑦">AV1 Samples</a> marked as <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-③⑧">sync</a>, then the brand <dfn class="css" data-dfn-for="AVIF Intra-only brand" data-dfn-type="value" data-export id="valdef-avif-intra-only-brand-avio">avio<a class="self-link" href="#valdef-avif-intra-only-brand-avio"></a></dfn> should be used.</p>
    <p class="note" role="note"><span>NOTE:</span> As defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, a file that is primarily an image sequence still has at least a primary image item. Hence, it can also declare brands for signaling the image item.</p>
    <h2 class="heading settled" data-level="6" id="profiles"><span class="secno">6. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
@@ -1604,7 +1611,7 @@ Quantity:                 One for an image item of type 'av01'
    </ul>
    <h3 class="heading settled" data-level="6.3" id="baseline-profile"><span class="secno">6.3. </span><span class="content">AVIF Baseline Profile</span><a class="self-link" href="#baseline-profile"></a></h3>
    <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1b">MA1B<a class="self-link" href="#valdef-av1-image-item-type-ma1b"></a></dfn>.</p>
-   <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④③">compatible_brands</a> of a <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④④">TrackTypeBox</a> or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⑤">FileTypeBox</a>, the common constraints in the section <a href="#brands">§5 Brands, Internet media types and file extensions</a> shall apply.</p>
+   <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④③">compatible_brands</a> of a <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④④">TrackTypeBox</a> or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-④⑤">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑨">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence②">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
@@ -1627,7 +1634,7 @@ Quantity:                 One for an image item of type 'av01'
    </div>
    <h3 class="heading settled" data-level="6.4" id="advanced-profile"><span class="secno">6.4. </span><span class="content">AVIF Advanced Profile</span><a class="self-link" href="#advanced-profile"></a></h3>
    <p>This section defines the MIAF AV1 Advanced profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1a">MA1A<a class="self-link" href="#valdef-av1-image-item-type-ma1a"></a></dfn>.</p>
-   <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑤">compatible_brands</a> of a =[TrackTypeBox=] or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑥">FileTypeBox</a>, the common constraints in the section <a href="#brands">§5 Brands, Internet media types and file extensions</a> shall apply.</p>
+   <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑤">compatible_brands</a> of a <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑥">TrackTypeBox</a> or <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑦">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⓪">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
@@ -1643,9 +1650,9 @@ Quantity:                 One for an image item of type 'av01'
      <p>The AV1 level for High Profile shall be 5.1 or lower.</p>
    </ul>
    <div class="example" id="example-e237da1f">
-    <a class="self-link" href="#example-e237da1f"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑦">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑧">FileTypeBox</a>: 
+    <a class="self-link" href="#example-e237da1f"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑧">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑤⑨">FileTypeBox</a>: 
     <p><code>avif, mif1, miaf, MA1A</code></p>
-    <p>A file containing a <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-⑤⑨">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑥⓪">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑥①">FileTypeBox</a>:</p>
+    <p>A file containing a <a class="property" data-link-type="propdesc" href="http://iso.org/#" id="termref-for-⑥⓪">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑥①">compatible_brands</a> of the <a data-link-type="dfn" href="http://iso.org/#" id="termref-for-⑥②">FileTypeBox</a>:</p>
     <p><code>avis, msf1, miaf, MA1A</code></p>
    </div>
    <h2 class="heading settled" data-level="7" id="mime-registration"><span class="secno">7. </span><span class="content">AVIF Media Type Registrations</span><a class="self-link" href="#mime-registration"></a></h2>
@@ -1985,7 +1992,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -1997,7 +2004,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2009,7 +2016,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2021,7 +2028,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2033,7 +2040,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2045,7 +2052,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2057,7 +2064,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2069,7 +2076,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2081,7 +2088,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2093,7 +2100,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2105,7 +2112,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2117,7 +2124,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2129,7 +2136,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-">
@@ -2141,7 +2148,7 @@ Quantity:                 One for an image item of type 'av01'
     <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.2. Common constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
     <li><a href="#termref-for-">6.3. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
-    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6.4. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
