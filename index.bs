@@ -1,19 +1,22 @@
 <pre class='metadata'>
 Title: AV1 Image File Format (AVIF)
-Status: LS
+Status: LS-COMMIT
 URL: https://AOMediaCodec.github.io/av1-avif
 Shortname: av1-avif
 Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2019-02-19
+Date: 2020-08-18
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
 Boilerplate: property-index no, issues-index no, copyright yes
 Markup Shorthands: css on
 Group: AOM
-Status Text: Version A.1
+Warning: Custom
+Custom Warning Title: Warning
+Custom Warning Text: This specification is a draft of a potential new version of this specification and should not be referenced other than as a working draft.
+!Last approved version: <a href="https://rawcdn.githack.com/AOMediaCodec/av1-avif/67a92add6cd642a8863e386fa4db87954a6735d1/index.html">v1.0.0</a>
 </pre>
 
 <pre class='biblio'>
@@ -197,7 +200,7 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 <p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
     - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
 
-<p>An <dfn export="">AV1 Alpha Image Item</dfn> (respectively an <dfn export="">AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.</p>
+<p>An <dfn export="">AV1 Alpha Image Item</dfn> (respectively an <dfn export="">AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An <a>AV1 Alpha Image Item</a> (respectively an <a>AV1 Alpha Image Sequence</a>) shall be encoded with the same bit depth as the associated master AV1 Image Item (respectively AV1 Image Sequence).</p>
 
 <p>An <dfn export="">AV1 Depth Image Item</dfn> (respectively an <dfn export="">AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 

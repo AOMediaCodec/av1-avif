@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="bcb318f5bfec1a809f852089757765dd8e4d5fd6" name="document-revision">
+  <meta content="770c779d81877276a21bf718dc7039288c5c2720" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1415,9 +1415,16 @@ pre .property::before, pre .property::after {
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:Anders.Klemets@microsoft.com">Anders Klemets</a> (<span class="p-org org">Microsoft</span>)
      <dt class="editor">Former Editor:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:pkerr@netflix.com">Paul Kerr</a> (<span class="p-org org">Netflix</span>)
+     <dt>Last approved version:
+     <dd><a href="https://rawcdn.githack.com/AOMediaCodec/av1-avif/67a92add6cd642a8863e386fa4db87954a6735d1/index.html">v1.0.0</a>
     </dl>
    </div>
-   <div data-fill-with="warning"></div>
+   <div data-fill-with="warning">
+    <details class="annoying-warning" open>
+     <summary>Warning</summary>
+     <p>This specification is a draft of a potential new version of this specification and should not be referenced other than as a working draft.</p>
+    </details>
+   </div>
    <p class="copyright" data-fill-with="copyright">
     <p>Copyright 2019, The Alliance for Open Media</p>
     <p>Licensing information is available at http://aomedia.org/license/</p>
@@ -1554,7 +1561,7 @@ Quantity:                 One for an image item of type 'av01'
     <li data-md>
      <p>The <code><a data-link-type="dfn" href="http://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑧">mono_chrome</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf#" id="termref-for-②⑨">Sequence Header OBU</a> shall be set to 1.</p>
    </ul>
-   <p>An <dfn data-dfn-type="dfn" data-export id="av1-alpha-image-item">AV1 Alpha Image Item<a class="self-link" href="#av1-alpha-image-item"></a></dfn> (respectively an <dfn data-dfn-type="dfn" data-export id="av1-alpha-image-sequence">AV1 Alpha Image Sequence<a class="self-link" href="#av1-alpha-image-sequence"></a></dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.</p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-alpha-image-item">AV1 Alpha Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-alpha-image-sequence">AV1 Alpha Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) shall be encoded with the same bit depth as the associated master AV1 Image Item (respectively AV1 Image Sequence).</p>
    <p>An <dfn data-dfn-type="dfn" data-export id="av1-depth-image-item">AV1 Depth Image Item<a class="self-link" href="#av1-depth-image-item"></a></dfn> (respectively an <dfn data-dfn-type="dfn" data-export id="av1-depth-image-sequence">AV1 Depth Image Sequence<a class="self-link" href="#av1-depth-image-sequence"></a></dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item①">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence①">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
    <h2 class="heading settled" data-level="5" id="brands"><span class="secno">5. </span><span class="content">Brands, Internet media types and file extensions</span><a class="self-link" href="#brands"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="brands-overview"><span class="secno">5.1. </span><span class="content">Brands overview</span><a class="self-link" href="#brands-overview"></a></h3>
@@ -2236,6 +2243,18 @@ Quantity:                 One for an image item of type 'av01'
    <b><a href="#av1-auxiliary-image-sequence">#av1-auxiliary-image-sequence</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-av1-auxiliary-image-sequence">4. Auxiliary Image Items and Sequences</a> <a href="#ref-for-av1-auxiliary-image-sequence①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="av1-alpha-image-item">
+   <b><a href="#av1-alpha-image-item">#av1-alpha-image-item</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-av1-alpha-image-item">4. Auxiliary Image Items and Sequences</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="av1-alpha-image-sequence">
+   <b><a href="#av1-alpha-image-sequence">#av1-alpha-image-sequence</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-av1-alpha-image-sequence">4. Auxiliary Image Items and Sequences</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
