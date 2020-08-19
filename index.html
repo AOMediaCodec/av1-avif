@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="770c779d81877276a21bf718dc7039288c5c2720" name="document-revision">
+  <meta content="45d9ea682a67eb19afc09df83960e15990ed7275" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1403,7 +1403,7 @@ pre .property::before, pre .property::after {
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">AV1 Image File Format (AVIF)</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Standard, <time class="dt-updated" datetime="2019-02-19">19 February 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2020-08-19">19 August 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1478,6 +1478,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
       <li><a href="#advanced-profile"><span class="secno">6.4</span> <span class="content">AVIF Advanced Profile</span></a>
      </ol>
     <li><a href="#mime-registration"><span class="secno">7</span> <span class="content">AVIF Media Type Registration</span></a>
+    <li><a href="#change-list"><span class="secno">8</span> <span class="content">Changes since v1.0.0 release</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1681,6 +1682,13 @@ Quantity:                 One for an image item of type 'av01'
    <p><strong>Intended usage:</strong> Common</p>
    <p><strong>Restrictions on usage:</strong> None</p>
    <p><strong>Author/Change controller:</strong> The published specification is a work product of the Alliance for Open Media, http://aomedia.org.</p>
+   <h2 class="heading settled" data-level="8" id="change-list"><span class="secno">8. </span><span class="content">Changes since v1.0.0 release</span><a class="self-link" href="#change-list"></a></h2>
+   <ul>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a></p>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.</p>
+   </ul>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
