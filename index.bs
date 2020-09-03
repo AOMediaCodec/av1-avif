@@ -347,7 +347,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/87">Add constraint that all frames in a sequence have the same width and height.</a> This is backwards incompatible change.
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/99">Add constraint that all frames in a sequence have the same width and height.</a> This is backwards incompatible change.
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a backwards incompatible change.
 
