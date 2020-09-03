@@ -127,6 +127,7 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn
 
 url: http://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
     text: mono_chrome
+    text: color_range
     text: still_picture
     text: reduced_still_picture_header
 </pre>
@@ -199,8 +200,11 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
     <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 <p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
     - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
+    - The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
 
 <p>An <dfn export="">AV1 Alpha Image Item</dfn> (respectively an <dfn export="">AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An <a>AV1 Alpha Image Item</a> (respectively an <a>AV1 Alpha Image Sequence</a>) shall be encoded with the same bit depth as the associated master AV1 Image Item (respectively AV1 Image Sequence).</p>
+
+<p>For [=AV1 Alpha Image Item=] and [=AV1 Alpha Image Sequence=], the ColourInformationBox should be omitted. If present, readers shall ignore it.</p>
 
 <p>An <dfn export="">AV1 Depth Image Item</dfn> (respectively an <dfn export="">AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) shall be set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
