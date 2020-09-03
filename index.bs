@@ -124,8 +124,9 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn
     text: Sequence Header OBU
     text: Metadata OBU
     text: Temporal Unit
-
-url: http://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
+    text: Frame
+    text: FrameWidth
+    text: FrameHeight
     text: mono_chrome
     text: still_picture
     text: reduced_still_picture_header
@@ -153,7 +154,7 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
-    - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]]. Since such [[=AV1 Samples=]] may be composed of multiple frames, e.g. each corresponding to a different spatial layer, [[=AV1 Image Items=]] may represent multi-layered images.
+    - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]]. Since such [[=AV1 Samples=]] may be composed of multiple [=Frames=], e.g. each corresponding to a different spatial layer, [[=AV1 Image Items=]] may represent multi-layered images.
     - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
     - The [=AV1 Image Item Data=] should have its <code>[=still_picture=]</code> flag set to 1.
     - The [=AV1 Image Item Data=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
@@ -192,9 +193,10 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 <p>
     An <dfn>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
-    - The [=AV1 Image Item=] should have its <code>[=still_picture=]</code> flag set to 1.
-    - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
+    - [=Frames=] should have their <code>[=still_picture=]</code> flag set to 1.
+    - [=Frames=] should have their <code>[=reduced_still_picture_header=]</code> flag set to 1.
     - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
+    - All [=Frames=] shall have the same [=FrameWidth=] and [=FrameHeight=].
 
     <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 <p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
@@ -345,6 +347,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/87">Add constraint that all frames in a sequence have the same width and height.</a> This is backwards incompatible change.
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a backwards incompatible change.
 
