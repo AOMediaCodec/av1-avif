@@ -259,9 +259,6 @@ If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a [=Tr
   The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
   - The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.
 
-  The following additional constraints apply only to [=AV1 Image Sequences=]:
-  - The AV1 profile level shall be Main Profile and the level shall be 5.1 or lower.
-
 NOTE:  AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.
 
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.
@@ -287,11 +284,11 @@ This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically fo
 
 If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
-The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
+The following additional constraints apply to all [=AV1 Image Items=]:
 - The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.
 
 The following additional constraints apply only to [=AV1 Image Sequences=]:
-- The AV1 profile level shall be either Main Profile or High Profile.
+- The AV1 profile shall be either Main Profile or High Profile.
 - The AV1 level for Main Profile shall be 5.1 or lower.
 - The AV1 level for High Profile shall be 5.1 or lower.
 
@@ -349,6 +346,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
