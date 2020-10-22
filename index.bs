@@ -193,8 +193,6 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 <p>
     An <dfn>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
-    - The [=AV1 Image Item=] should have its <code>[=still_picture=]</code> flag set to 1.
-    - The [=AV1 Image Item=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
     - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
 
     <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
@@ -349,6 +347,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still flags in image sequences.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
