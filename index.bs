@@ -124,6 +124,7 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn
     text: Sequence Header OBU
     text: Metadata OBU
     text: Temporal Unit
+    text: Key Frame
 
 url: http://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
     text: mono_chrome
@@ -223,6 +224,8 @@ Files that conform with the profile-independent restrictions in this document (s
 - the brand <dfn value="" export="" for="AVIF Image brand">avif</dfn> ,
 - the brand 'mif1' as recommended in [[!HEIF]],
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
+
+Additionally, if the image items are made only of [=Key Frames=], then the brand '<code>avio</code>' should be used.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#auxiliary-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
@@ -349,6 +352,7 @@ Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as 
 The published specification is a work product of the Alliance for Open Media, http://aomedia.org.
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
