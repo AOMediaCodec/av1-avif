@@ -84,12 +84,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </div>
 
 <pre class="anchors">
-url: http://iso.org/#; spec: HEIF; type: dfn;
-    text: coded image
-    text: coded image item
-    text: image item
-
-url: http://iso.org/#; spec: HEIF; type: property;
+url: #biblio-heif; spec: HEIF; type: property;
     text: colr
     text: mif1
     text: msf1
@@ -97,35 +92,35 @@ url: http://iso.org/#; spec: HEIF; type: property;
     text: pict
     text: pixi
 
-url: http://iso.org/#; spec: ISOBMFF; type: dfn;
+url: #biblio-isobmff; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
     text: TrackTypeBox
 
-url: http://iso.org/#; spec: ISOBMFF; type: property;
+url: #biblio-isobmff; spec: ISOBMFF; type: property;
     text: sync
-
-url: http://iso.org/#; spec: MIAF; type: property;
     text: clli
     text: mdcv
+
+url: #biblio-miaf; spec: MIAF; type: property;
     text: miaf
 
-url: http://iso.org/#; spec: MIAF; type: dfn;
+url: #biblio-miaf; spec: MIAF; type: dfn;
     text: primary image
 
-url: https://aomediacodec.github.io/av1-isobmff/#; spec: AV1-ISOBMFF; type: dfn;
+url: #biblio-av1-isobmff; spec: AV1-ISOBMFF; type: dfn;
     text: av1codecconfigurationbox
     text: AV1 Sample
     text: AV1 Track
 
-url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
+url: #biblio-av1; spec: AV1; type: dfn;
     text: AV1 bitstream
     text: Sequence Header OBU
     text: Metadata OBU
     text: Temporal Unit
 
-url: http://aomediacodec.github.io/av1-spec/av1-spec.pdf#; spec: AV1; type: dfn;
+url: #biblio-av1; spec: AV1; type: dfn;
     text: mono_chrome
     text: color_range
     text: still_picture
