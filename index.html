@@ -1593,7 +1593,7 @@ Quantity:                 One for an image item of type 'av01'
    <h2 class="heading settled" data-level="6" id="profiles"><span class="secno">6. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <h3 class="heading settled" data-level="6.1" id="profiles-overview"><span class="secno">6.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.</p>
-   <p>The FileTypeBox should declare at least one profile that enables decoding of the primary image item, or one of its alternates. The profile should allow decoding of any associated auxiliary images, unless it is acceptable to decode the image item without its auxiliary images.</p>
+   <p>The FileTypeBox should declare at least one profile that enables decoding of the primary image item, or one of its alternates. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).</p>
    <p>If an image sequence brand is declared in the FileTypeBox, if a profile is declared in the FileTypeBox, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
    <h3 class="heading settled" data-level="6.2" id="profiles-constraints"><span class="secno">6.2. </span><span class="content">Common constraints</span><a class="self-link" href="#profiles-constraints"></a></h3>
    <p>The following constraints are common to all profiles defined in this specification:</p>
@@ -1687,6 +1687,8 @@ Quantity:                 One for an image item of type 'av01'
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still flags in image sequences.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a></p>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/100">Rephrase statement about auxiliary images and profiles.</a> (Editorial change)</p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a></p>
     <li data-md>
