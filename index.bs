@@ -240,7 +240,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.
 
-  The FileTypeBox should declare at least one profile that enables decoding of the primary image item, or one of its alternates. The profile should allow decoding of any associated auxiliary images, unless it is acceptable to decode the image item without its auxiliary images.
+  The FileTypeBox should declare at least one profile that enables decoding of the primary image item, or one of its alternates. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
   If an image sequence brand is declared in the FileTypeBox, if a profile is declared in the FileTypeBox, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
@@ -350,6 +350,7 @@ The published specification is a work product of the Alliance for Open Media, ht
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/100">Rephrase statement about auxiliary images and profiles.</a> (Editorial change)
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
 
