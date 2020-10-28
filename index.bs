@@ -96,7 +96,6 @@ url: #biblio-isobmff; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
-    text: TrackTypeBox
 
 url: #biblio-isobmff; spec: ISOBMFF; type: property;
     text: sync
@@ -109,6 +108,11 @@ url: #biblio-miaf; spec: MIAF; type: property;
 
 url: #biblio-miaf; spec: MIAF; type: dfn;
     text: primary image
+    text: MIAF image item
+    text: MIAF image sequence
+    text: MIAF auxiliary image item
+    text: MIAF auxiliary image sequence
+    text: MIAF file
 
 url: #biblio-av1-isobmff; spec: AV1-ISOBMFF; type: dfn;
     text: av1codecconfigurationbox
@@ -148,7 +152,8 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
 <h3 id="image-item">AV1 Image Item</h3>
 
-When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
+When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
+  - The [=AV1 Image Item=] shall be a conformant [=MIAF image item=].
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
     - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]]. Since such [[=AV1 Samples=]] may be composed of multiple frames, e.g. each corresponding to a different spatial layer, [[=AV1 Image Items=]] may represent multi-layered images.
@@ -190,10 +195,12 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 <p>
     An <dfn>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
+    - The track shall be a valid [=MIAF image sequence=].
     - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
 
     <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 <p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
+    - It shall be a compliant [=MIAF Auxiliary Image Item=] (respectively [=MIAF Auxiliary Image Sequence=])
     - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
     - The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
 
@@ -207,27 +214,37 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 
 <h3 id="brands-overview">Brands overview</h3>
 
-<p>As defined by [[!ISOBMFF]], the presence of a brand in the <code>FileTypeBox</code> (respectively <code>TrackTypeBox</code>) can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the brand, to process the corresponding file (respectively item or sequence).</p>
+<p>As defined by [[!ISOBMFF]], the presence of a brand in the <code>[=compatible_brands=]</code> list in the <code>[=FileTypeBox=]</code> can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the brand, to process the corresponding file and only the parts (e.g. items or sequences) that comply with the brand.</p>
 
 <p>An [=AV1 Image File Format=] file may conform to multiple brands. Similarly, an [=AV1 Image File Format=] reader/parser or [=AV1 Image File Format=] renderer may be capable of processing the features associated with one or more brands.</p>
 
-<p>If any of the brands defined in this document (e.g. <code>avif</code> or <code>avis</code>) is specified in the <code>major_brand</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be ".avif" and "image/avif" as defined in [[#mime-registration]].</p>
+<p>If any of the brands defined in this document (e.g. <code>[=avif=]</code> or <code>[=avis=]</code>) is specified in the <code>[=major_brand=]</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in [[#mime-registration]].</p>
 
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
-Files that conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]] and [[#auxiliary-images]]) should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
-- the brand <dfn value="" export="" for="AVIF Image brand">avif</dfn> ,
-- the brand 'mif1' as recommended in [[!HEIF]],
+The brand to identify [=AV1 image items=] is <dfn value="avif" export="" for="AVIF Image brand">avif</dfn>.
+
+Files that indicate this brand shall be compliant [=MIAF files=] and in particular:
+- there shall be an [=AV1 image item=] among the set of items comprised of the primary item and its alternates.
+- [=AV1 auxiliary image items=] as specified in [[#auxiliary-images]] may be present in the file.
+
+Files that conform with these restrictions should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
+- the brand <code>'[=avif=]'</code>,
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
-Additionally, if the image items are made only of [=Key Frames=], then the brand '<code>avio</code>' should be used.
+Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code>, then there shall be an [=AV1 image item=] made only of [=Key Frames=] among the set of items comprised of the primary item and its alternates. Conversely, if such item exists, the brand <code>[=avio=]</code> should be used.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
-Files which contain one or more image sequences, and which conform with the profile-independent restrictions in this document (sections [[#image-item-and-properties]], [[#image-sequences]] and [[#auxiliary-images]]), should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
-- the brand <dfn value="" export="" for="AVIF Image Sequence brand">avis</dfn>,
-- the brand 'msf1' as recommended in [[!HEIF]],
+The brand to identify AVIF image sequences is <dfn value="avis" export="" for="AVIF Image Sequence brand">avis</dfn>.
+
+Files that indicate this brand shalll be compliant [=MIAF files=] with the following additional constraints:
+- they shall contain one or more [=AV1 image sequences=] as defined in [[#image-sequences]].
+- they may contain [=AV1 auxiliary image sequences=] as defined in [[#auxiliary-images]].
+
+Files that conform with these constraints should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
+- the brand <code>'[=avis=]'</code>,
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
-Additionally, if the image sequences are made only of [=AV1 Samples=] marked as 'sync', then the brand <dfn value="" export="" for="AVIF Intra-only brand">avio</dfn> should be used.
+Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used, the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'. Conversely, if such track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used.
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least a primary image item. Hence, it can also declare brands for signaling the image item.
 
@@ -237,9 +254,9 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.
 
-  The FileTypeBox should declare at least one profile that enables decoding of the primary image item, or one of its alternates. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
+  The [=FileTypeBox=] should declare at least one profile that enables decoding of the primary image item, or one of its alternates. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
-  If an image sequence brand is declared in the FileTypeBox, if a profile is declared in the FileTypeBox, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
+  If an image sequence brand is declared in the [=FileTypeBox=], if a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
   <h3 id="profiles-constraints">Common constraints</h3>
 
@@ -251,7 +268,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
 This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.
 
-If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
   The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
   - The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.
@@ -282,7 +299,7 @@ A file containing a 'pict' track compliant with this profile and made only of sa
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
 
-If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of a [=TrackTypeBox=] or [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
 - The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.
