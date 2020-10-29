@@ -91,18 +91,23 @@ url: #biblio-heif; spec: HEIF; type: property;
     text: pasp
     text: pict
     text: pixi
+    text: ispe
+    text: lsel
+    text: layer_id
 
 url: #biblio-isobmff; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
     text: TrackTypeBox
+    text: extent
 
 url: #biblio-isobmff; spec: ISOBMFF; type: property;
     text: sync
     text: cclv
     text: clli
     text: mdcv
+    text: iloc
 
 url: #biblio-miaf; spec: MIAF; type: property;
     text: miaf
@@ -117,6 +122,7 @@ url: #biblio-av1-isobmff; spec: AV1-ISOBMFF; type: dfn;
 
 url: #biblio-av1; spec: AV1; type: dfn;
     text: AV1 bitstream
+    text: AV1 Frame
     text: Sequence Header OBU
     text: Metadata OBU
     text: Temporal Unit
@@ -150,7 +156,7 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 When an image item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
-    - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]]. Since such [[=AV1 Samples=]] may be composed of multiple frames, e.g. each corresponding to a different spatial layer, [[=AV1 Image Items=]] may represent multi-layered images.
+    - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].
     - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
     - The [=AV1 Image Item Data=] should have its <code>[=still_picture=]</code> flag set to 1.
     - The [=AV1 Image Item Data=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
@@ -170,19 +176,27 @@ When an image item is of type <dfn value export for="AV1 Image Item Type">av01</
 The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
 
   - [=Sequence Header OBUs=] should not be present in the [=AV1CodecConfigurationBox=].
-  - If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the  [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
+  - If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
   - The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
   - [=Metadata OBUs=], if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
 
 This property shall be marked as essential.
 
-<h4 id ="other-item-property">Other Item Properties</H4>
+<h4 id ="other-item-property">Other Item Properties</h4>
 
 In addition to the Image Properties defined in [[!HEIF]], such as 'colr', 'pixi' or 'pasp', [=AV1 image items=] MAY also be associated with 'clli', 'cclv' and 'mdcv' introduced in [[!MIAF]].
 
 In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1 Item Configuration Property=].
 
-For multi-layered images, the LayerSelectorProperty may be present as defined in [[!HEIF]].
+<h3 id ="layered-items">Multi-layered image items</h3>
+
+When multi-layer encoding is used as defined in [[!AV1]] to encode an [=AV1 Image Item=], the [=AV1 Image Item Data=] is composed of multiple [=AV1 Frames=], each corresponding to a different spatial layer. A spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Not all layers are expected to produce an image meant to be renderered. Some decoded images may be used only as intermediate encodes. The [=Sequence Header OBU=] defines the combinations of layers that are expected to produce output images. Each combination is called an Operating Point. An [=AV1 Image Item=] may contain data from multiple operating points. It may have operating points representing the same image in multiple resolutions or qualities. It may have operating points representing different images encoded based on a common set of layers.
+
+NOTE: The mapping of the layers of a multi-layered [=AV1 Image Item=] to item [=extents=] in the 'iloc' box is not constrained. For example, all the layers may be stored in a single item [=extent=]. Alternatively, each layer may be stored in a separate [=extent=] of the item and interleaved with other data in the file (e.g. auxiliary item data or other item data). Other mappings are possible.
+
+If a 'lsel' property is associated with an [=AV1 Image Item=], renderers shall render only the output image of the operating point whose index is equal to the 'layer_id' value and the 'ispe' property shall describe that output image. In the absence of an 'lsel' property association, the 'ispe' property shall describe the last output image and renderers are free to either render operation point outputs as they are decoded or to wait until the last operating point output image is decoded before rendering the image item.
+
+NOTE: When a controlled rendering of the different output images is needed, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different 'lsel' properties, each with a different value of 'layer_id'. If an image grid is composed of 4 layered images, each made of 2 operating points, one could create a set of items as follows: 4 items each corresponding to the low quality/resolution image of the first operating point each of the 4 multi-layered images, i.e. with 'layer_id' set to 0; 4 items corresponding the second operating point, i.e. with 'layer_id' set to 1; a grid item composing the first set of 4 images; another grid item composing the second set of 4 images.
 
 <h2 id="image-sequences">Image Sequences</h2>
 
@@ -323,7 +337,7 @@ See section 4 of RFC 4337 and section 7 of RFC 6381. This format does not supply
 The AVIF specification is based on a set of specifications (AV1, ISOBMFF, HEIF, MIAF) and builds upon their interoperability considerations. Further more, AVIF defines specific constraints and signals them with specific code points to improve interoperability between readers and writers of AV1 content.
 
 <strong>Published specification:</strong>
-This media type registration is extracted from the <a href="https://aomedia.github.io/av1-avif/">AV1 Image Format</a>.
+This media type registration is extracted from the <a href="https://aomedia.github.io/av1-avif/">AV1 Image File Format</a>.
 
 <strong>Applications:</strong> Multimedia, Imaging, Pictures
 
