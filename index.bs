@@ -223,7 +223,7 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
 The brand to identify [=AV1 image items=] is <dfn value="avif" export="" for="AVIF Image brand">avif</dfn>.
 
-Files that indicate this brand shall be compliant [=MIAF files=] and in particular:
+Files that indicate this brand shall comply with the following:
 - there shall be an [=AV1 image item=] among the set of items comprised of the primary item and its alternates.
 - [=AV1 auxiliary image items=] as specified in [[#auxiliary-images]] may be present in the file.
 
@@ -236,7 +236,7 @@ Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify AVIF image sequences is <dfn value="avis" export="" for="AVIF Image Sequence brand">avis</dfn>.
 
-Files that indicate this brand shalll be compliant [=MIAF files=] with the following additional constraints:
+Files that indicate this brand shall comply with the following:
 - they shall contain one or more [=AV1 image sequences=] as defined in [[#image-sequences]].
 - they may contain [=AV1 auxiliary image sequences=] as defined in [[#auxiliary-images]].
 
@@ -262,6 +262,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   The following constraints are common to all profiles defined in this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
+  - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more items that all are [=AV1 Image Items=].
 
   <h3 id="baseline-profile">AVIF Baseline Profile</h3>
