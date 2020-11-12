@@ -231,7 +231,7 @@ Files that conform with these restrictions should include in the [=compatible_br
 - the brand <code>'[=avif=]'</code>,
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
-Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code>, then there shall be an [=AV1 image item=] made only of [=Key Frames=] among the set of items comprised of the primary item and its alternates. Conversely, if such item exists, the brand <code>[=avio=]</code> should be used.
+Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then there shall be an [=AV1 image item=] made only of [=Key Frames=] among the set of items comprised of the primary item and its alternates. Conversely, if such item exists, the brand <code>[=avio=]</code> should be used.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify AVIF image sequences is <dfn value="avis" export="" for="AVIF Image Sequence brand">avis</dfn>.
@@ -244,9 +244,16 @@ Files that conform with these constraints should include in the [=compatible_bra
 - the brand <code>'[=avis=]'</code>,
 - a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
-Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used, the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'. Conversely, if such track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used.
+Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the [=compatible_brands=] field of the [=FileTypeBox=], the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'. Conversely, if such track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used.
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least a primary image item. Hence, it can also declare brands for signaling the image item.
+
+  <h2 id="file-constraints">File constraints</h3>
+
+  The following constraints are common to files compliant to this specification:
+  - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
+  - The file shall list <code>'[=avif=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
+  - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more items that all are [=AV1 Image Items=].
 
   <h2 id="profiles">Profiles</h2>
 
@@ -257,13 +264,6 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
   The [=FileTypeBox=] should declare at least one profile that enables decoding of the primary image item, or one of its alternates. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
   If an image sequence brand is declared in the [=FileTypeBox=], if a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
-
-  <h3 id="profiles-constraints">Common constraints</h3>
-
-  The following constraints are common to all profiles defined in this specification:
-  - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The [=primary image=], or one of its alternates, shall be an [=AV1 Image Item=] or be a derived image that references one or more items that all are [=AV1 Image Items=].
 
   <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 
