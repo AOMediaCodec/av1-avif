@@ -227,10 +227,6 @@ Files that indicate this brand shall comply with the following:
 - there shall be an [=AV1 image item=] among the set of items comprised of the primary item and its alternates.
 - [=AV1 auxiliary image items=] as specified in [[#auxiliary-images]] may be present in the file.
 
-Files that conform with these restrictions should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
-- the brand <code>'[=avif=]'</code>,
-- a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
-
 Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then there shall be an [=AV1 image item=] made only of [=Key Frames=] among the set of items comprised of the primary item and its alternates. Conversely, if such item exists, the brand <code>[=avio=]</code> should be used.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
@@ -242,7 +238,6 @@ Files that indicate this brand shall comply with the following:
 
 Files that conform with these constraints should include in the [=compatible_brands=] field of the [=FileTypeBox=]:
 - the brand <code>'[=avis=]'</code>,
-- a brand to identify the AVIF profile (see section [[#profiles]]), if any, with which the file complies.
 
 Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the [=compatible_brands=] field of the [=FileTypeBox=], the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'. Conversely, if such track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used.
 
