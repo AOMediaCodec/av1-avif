@@ -280,11 +280,11 @@ A file containing items compliant with this profile is expected to list the foll
 
 A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
-  <code>avis, msf1, miaf, MA1B</code>
+  <code>avis, avif, msf1, miaf, MA1B</code>
 
 A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
-  <code>avis, avio, msf1, miaf, MA1B</code>
+  <code>avis, avif, avio, msf1, miaf, MA1B</code>
 
 </div>
 
@@ -309,7 +309,7 @@ A file containing items compliant with this profile is expected to list the foll
 
 A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
-  <code>avis, msf1, miaf, MA1A</code>
+  <code>avis, avif, msf1, miaf, MA1A</code>
 </div>
 
   <h2 id="mime-registration">AVIF Media Type Registration</h2>

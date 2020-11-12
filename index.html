@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="6ca255efda01935a854fd6236807ccbc47375360" name="document-revision">
+  <meta content="a6bdf27de47b5a71d6622c9ff4a4c7f380e45b9f" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1625,13 +1625,13 @@ Quantity:                 One for an image item of type 'av01'
    </ul>
    <p class="note" role="note"><span>NOTE:</span> AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.</p>
    <p class="note" role="note"><span>NOTE:</span> Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. It is still possible to use Baseline profile to create larger images using grid derivation.</p>
-   <div class="example" id="example-fd090b5d">
-    <a class="self-link" href="#example-fd090b5d"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②④">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑤">FileTypeBox</a>: 
+   <div class="example" id="example-77a2d111">
+    <a class="self-link" href="#example-77a2d111"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②④">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑤">FileTypeBox</a>: 
     <p><code>avif, mif1, miaf, MA1B</code></p>
     <p>A file containing a <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif③">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑥">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑦">FileTypeBox</a>:</p>
-    <p><code>avis, msf1, miaf, MA1B</code></p>
+    <p><code>avis, avif, msf1, miaf, MA1B</code></p>
     <p>A file containing a <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif④">pict</a> track compliant with this profile and made only of samples marked <a class="property" data-link-type="propdesc" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑧">sync</a> is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑨">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⓪">FileTypeBox</a>:</p>
-    <p><code>avis, avio, msf1, miaf, MA1B</code></p>
+    <p><code>avis, avif, avio, msf1, miaf, MA1B</code></p>
    </div>
    <h3 class="heading settled" data-level="7.3" id="advanced-profile"><span class="secno">7.3. </span><span class="content">AVIF Advanced Profile</span><a class="self-link" href="#advanced-profile"></a></h3>
    <p>This section defines the MIAF AV1 Advanced profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1a">MA1A<a class="self-link" href="#valdef-av1-image-item-type-ma1a"></a></dfn>.</p>
@@ -1650,11 +1650,11 @@ Quantity:                 One for an image item of type 'av01'
     <li data-md>
      <p>The AV1 level for High Profile shall be 5.1 or lower.</p>
    </ul>
-   <div class="example" id="example-e237da1f">
-    <a class="self-link" href="#example-e237da1f"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③③">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③④">FileTypeBox</a>: 
+   <div class="example" id="example-c2d63e56">
+    <a class="self-link" href="#example-c2d63e56"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③③">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③④">FileTypeBox</a>: 
     <p><code>avif, mif1, miaf, MA1A</code></p>
     <p>A file containing a <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif⑤">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑤">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑥">FileTypeBox</a>:</p>
-    <p><code>avis, msf1, miaf, MA1A</code></p>
+    <p><code>avis, avif, msf1, miaf, MA1A</code></p>
    </div>
    <h2 class="heading settled" data-level="8" id="mime-registration"><span class="secno">8. </span><span class="content">AVIF Media Type Registration</span><a class="self-link" href="#mime-registration"></a></h2>
    <p><em>This section registers a new media type <code>"image/avif"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). Once formally published by IANA, it will be removed from this specification.</em></p>
