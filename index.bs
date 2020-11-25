@@ -125,6 +125,7 @@ url: #biblio-av1; spec: AV1; type: dfn;
     text: Metadata OBU
     text: Temporal Unit
     text: Key Frame
+    text: Intra Frame
 
 url: #biblio-av1; spec: AV1; type: dfn;
     text: mono_chrome
@@ -227,7 +228,7 @@ Files that indicate this brand shall comply with the following:
 - there shall be an [=AV1 image item=] among the set of items comprised of the primary item and its alternates.
 - [=AV1 auxiliary image items=] as specified in [[#auxiliary-images]] may be present in the file.
 
-Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then there shall be an [=AV1 image item=] made only of [=Key Frames=] among the set of items comprised of the primary item and its alternates. Conversely, if such item exists, the brand <code>[=avio=]</code> should be used.
+Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then there shall be an [=AV1 image item=] made only of [=Key Frames=] or [=Intra Frames=] among the set of items comprised of the primary item and its alternates. Conversely, if such item exists, the brand <code>[=avio=]</code> should be used.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify AVIF image sequences is <dfn value="avis" export="" for="AVIF Image Sequence brand">avis</dfn>.
