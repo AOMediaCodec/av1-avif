@@ -201,7 +201,7 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 
     <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 <p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
-    - It shall be a compliant [=MIAF Auxiliary Image Item=] (respectively [=MIAF Auxiliary Image Sequence=])
+    - It shall be a compliant [=MIAF Auxiliary Image Item=] (respectively [=MIAF Auxiliary Image Sequence=]).
     - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
     - The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
 
@@ -241,13 +241,13 @@ Files that indicate this brand in the [=compatible_brands=] field of the [=FileT
 
 Files that conform with these constraints should include the brand <code>[=avis=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
 
-Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the [=compatible_brands=] field of the [=FileTypeBox=], the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'. Conversely, if such track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used.
+Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the [=compatible_brands=] field of the [=FileTypeBox=], the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'. Conversely, if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used.
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.
 
   <h2 id="file-constraints">File constraints</h3>
 
-  The following constraints are common to files compliant to this specification:
+  The following constraints are common to files compliant with this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
 
@@ -259,7 +259,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   The [=FileTypeBox=] should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
-  If an image sequence brand is declared in the [=FileTypeBox=], if a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
+  If an image sequence brand is declared in the [=FileTypeBox=] and a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
   <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 
