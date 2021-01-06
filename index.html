@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="5cc37bea3d4b967db340051d9be3941a9bdf178f" name="document-revision">
+  <meta content="763f7db4d34738abb963617bf0c031c8b125f28b" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1584,7 +1584,7 @@ Quantity:                 One for an image item of type 'av01'
      <p><a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item②">AV1 auxiliary image items</a> may be present in the file.</p>
    </ul>
    <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif">avif</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①①">FileTypeBox</a>.</p>
-   <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio" value="avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①②">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①③">FileTypeBox</a>, then the primary item or all the items referenced by the primary item shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑨">AV1 image items</a> made only of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑦">Key Frames</a> or <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑧">Intra Frames</a>. Conversely, if the previous constraint applies, the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> should be used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①④">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑤">FileTypeBox</a>.</p>
+   <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio" value="avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①②">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①③">FileTypeBox</a>, then the primary item or all the items referenced by the primary item shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑨">AV1 image items</a> made only of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑦">Intra Frames</a>. Conversely, if the previous constraint applies, the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> should be used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①④">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑤">FileTypeBox</a>.</p>
    <h3 class="heading settled" data-level="5.3" id="image-sequence-brand"><span class="secno">5.3. </span><span class="content">AVIF image sequence brands</span><a class="self-link" href="#image-sequence-brand"></a></h3>
     The brand to identify AVIF image sequences is <dfn class="dfn-paneled" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="dfn" data-export id="avif-image-sequence-brand-avis" value="avis">avis</dfn>. 
    <p>Files that indicate this brand in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑥">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑦">FileTypeBox</a> shall comply with the following:</p>
@@ -1907,10 +1907,6 @@ Quantity:                 One for an image item of type 'av01'
    <a href="#biblio-av1">#biblio-av1</a><b>Referenced in:</b>
    <ul></ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-biblio-av1">
-   <a href="#biblio-av1">#biblio-av1</a><b>Referenced in:</b>
-   <ul></ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-biblio-av1-isobmff">
    <a href="#biblio-av1-isobmff">#biblio-av1-isobmff</a><b>Referenced in:</b>
    <ul></ul>
@@ -1995,13 +1991,12 @@ Quantity:                 One for an image item of type 'av01'
      <li><span class="dfn-paneled" id="term-for-biblio-av1" style="color:initial">av1 bitstream</span>
      <li><span class="dfn-paneled" id="term-for-biblio-av1①" style="color:initial">color_range</span>
      <li><span class="dfn-paneled" id="term-for-biblio-av1②" style="color:initial">intra frame</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1③" style="color:initial">key frame</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1④" style="color:initial">metadata obu</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑤" style="color:initial">mono_chrome</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑥" style="color:initial">reduced_still_picture_header</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑦" style="color:initial">sequence header obu</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑧" style="color:initial">still_picture</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑨" style="color:initial">temporal unit</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1③" style="color:initial">metadata obu</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1④" style="color:initial">mono_chrome</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1⑤" style="color:initial">reduced_still_picture_header</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1⑥" style="color:initial">sequence header obu</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1⑦" style="color:initial">still_picture</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1⑧" style="color:initial">temporal unit</span>
     </ul>
    <li>
     <a data-link-type="biblio">[AV1-ISOBMFF]</a> defines the following terms:
