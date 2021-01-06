@@ -199,15 +199,15 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 <h4 id ="layered-items-overview">Overview</h4>
 When multi-layer encoding is used as defined in [[!AV1]] to encode an [=AV1 Image Item=], the item is called an <dfn>AV1 Multi-Layered Image Item</dfn>. Its [=AV1 Image Item Data=] contains multiple [=AV1 Frames=], each corresponding to a different spatial layer, and shall conform to specific constraints given in [[!AV1]], for example on the use of [=OBU extension headers=] or on the ordering of [=OBUs=].
 
-In an [=AV1 Multi-Layered Image Item=], a spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate encodes. The [=Sequence Header OBU=] defines the combinations of layers that are expected to produce output images. Each combination is called an [=Operating Point=]. An [=AV1 Image Item=] may contain data from multiple [=Operating Points=]. It may have [=Operating Points=] representing the same image in multiple resolutions or qualities. It may have [=Operating Points=] representing different images encoded based on a common set of layers.
+In an [=AV1 Multi-Layered Image Item=], a spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate decodes. The [=Sequence Header OBU=] defines the combinations of layers that are expected to produce output images. Each combination is called an [=Operating Point=]. An [=AV1 Image Item=] may contain data from multiple [=Operating Points=]. It may have [=Operating Points=] representing the same image in multiple resolutions or qualities. It may have [=Operating Points=] representing different images encoded based on a common set of layers.
 
 <h4 id ="layered-properties">Properties</h4>
 <h5 id ="layer-selector-property">Use of Layer Selector Property</h4>
-The 'lsel' property defined in [[!HEIF]] may be associated to an [=AV1 Multi-Layered Image Item=].
+The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Multi-Layered Image Item=].
 
 If an [=AV1 Multi-Layered Image Item=] is associated with an 'lsel' property, the 'layer_id' value shall be between 0 and [=operating_points_cnt_minus_1=]. The 'ispe' property shall describe the dimension of the output image of the corresponding [=Operating Point=]. Renderers should use the 'layer_id' value as the return of the [=choose_operating_point=] function and should not render any other output image corresponding to other [=Operating Points=]. If the [=Operating Point=] corresponding to the 'layer_id' value exceeds the renderer's decoding capabilities, the renderer should not process the item.
 
-If an [=AV1 Multi-Layered Image Item=] is not associated with an 'lsel' property, the 'ispe' property shall describe the dimension of the output image of the operating point whose index is 0. Renderers are free to render either: only the output image of the [=Operating Point=] matching best its decoding capabilities, or to render all output images of all the [=Operating Points=] processed, resulting in a form of progressive decoding.
+If an [=AV1 Multi-Layered Image Item=] is not associated with an 'lsel' property, the 'ispe' property shall describe the dimension of the output image of the operating point whose index is 0. Renderers are free to render either: only the output image of the [=Operating Point=] best matching its decoding capabilities, or to render all output images of all the [=Operating Points=] processed, resulting in a form of progressive decoding.
 
 NOTE: The dimensions of the final or intermediate output images might not match the ones given in the 'ispe' property. Renderers are expected to scale the output image to match the 'ispe' property.
 
@@ -229,7 +229,7 @@ NOTE: When such a progressive decoding is not desired (e.g. for multi-view image
 
 The <dfn>AV1LayeredImageIndexingProperty</dfn> provides the size in bytes of each layer in the image data. It enables determining the byte ranges required to process an [=Operating Point=].
 
-The [=AV1LayeredImageIndexingProperty=] property may be associated to an [=AV1 Multi-Layered Image Item=]. It shall not be marked as essential. It shall not be associated with [=AV1 Image Items=] that are not using multiple layers.
+The [=AV1LayeredImageIndexingProperty=] property may be associated with an [=AV1 Multi-Layered Image Item=]. It shall not be marked as essential. It shall not be associated with [=AV1 Image Items=] that are not using multiple layers.
 
 <h6 id ="layered-image-selector-property-syntax" class="no-toc">Syntax</h6>
 
