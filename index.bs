@@ -258,7 +258,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   The [=FileTypeBox=] should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
-  If an image sequence brand is declared in the [=FileTypeBox=] and a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
+  If <code>'[=avis=]'</code> is declared in the [=FileTypeBox=] and a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
   <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 

@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="a866396999a602643a2a314119042ea9084cdf3a" name="document-revision">
+  <meta content="9900ef600a1956b275601823712c1021b989c821" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1609,7 +1609,7 @@ Quantity:                 One for an image item of type 'av01'
    <h3 class="heading settled" data-level="7.1" id="profiles-overview"><span class="secno">7.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.</p>
    <p>The <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑦">FileTypeBox</a> should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).</p>
-   <p>If an image sequence brand is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑧">FileTypeBox</a> and a profile is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑨">FileTypeBox</a>, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
+   <p>If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑧">FileTypeBox</a> and a profile is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑨">FileTypeBox</a>, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
    <h3 class="heading settled" data-level="7.2" id="baseline-profile"><span class="secno">7.2. </span><span class="content">AVIF Baseline Profile</span><a class="self-link" href="#baseline-profile"></a></h3>
    <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1b">MA1B<a class="self-link" href="#valdef-av1-image-item-type-ma1b"></a></dfn>.</p>
    <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⓪">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③①">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
@@ -2139,6 +2139,7 @@ Quantity:                 One for an image item of type 'av01'
    <ul>
     <li><a href="#ref-for-avif-image-sequence-brand-avis">5.3. AVIF image sequence brands</a>
     <li><a href="#ref-for-avif-image-sequence-brand-avis①">6. File constraints</a>
+    <li><a href="#ref-for-avif-image-sequence-brand-avis②">7.1. Overview</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
