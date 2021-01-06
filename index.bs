@@ -224,7 +224,7 @@ For multi-layered images, the LayerSelectorProperty may be present as defined in
 The brand to identify [=AV1 image items=] is <dfn value="avif" export="" for="AVIF Image brand">avif</dfn>.
 
 Files that indicate this brand in the [=compatible_brands=] field of the [=FileTypeBox=] shall comply with the following:
-- The primary item shall be an [=AV1 Image Item=] or be a derived image that references one or more items that all are [=AV1 Image Items=].
+- The primary item shall be an [=AV1 Image Item=] or be a derived image that references directly or indirectly one or more items that all are [=AV1 Image Items=].
 - [=AV1 auxiliary image items=] may be present in the file.
 
 Files that conform with these constraints should include the brand <code>[=avif=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
