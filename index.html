@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="c84559c2e528bea20f97f38dd12e104820b985d9" name="document-revision">
+  <meta content="a86907329782935a3d986ed9a16917e768b7018a" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1604,7 +1604,7 @@ Mandatory:      No
 Quantity:       One
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.2" id="layered-indexing-property-description"><span class="secno">2.3.2.3.2. </span><span class="content">Description</span><a class="self-link" href="#layered-indexing-property-description"></a></h6>
-   <p>The <dfn data-dfn-type="dfn" data-noexport id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty<a class="self-link" href="#av1layeredimageindexingproperty"></a></dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Item</a>. It documents the size in bytes of each layer in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑨">AV1 Image Item Data</a>, and enables determining the byte ranges required to process an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑤">Operating Point</a>. If associated, it shall not be marked as essential.</p>
+   <p>The <dfn data-dfn-type="dfn" data-noexport id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty<a class="self-link" href="#av1layeredimageindexingproperty"></a></dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Item</a>. It documents the size in bytes of each layer in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑨">AV1 Image Item Data</a>, and enables determining the byte ranges required to process a specific layer or an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑤">Operating Point</a>. If associated, it shall not be marked as essential.</p>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.3" id="layered-indexing-property-syntax"><span class="secno">2.3.2.3.3. </span><span class="content">Syntax</span><a class="self-link" href="#layered-indexing-property-syntax"></a></h6>
 <pre>class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version = 0, flags) {
     FieldLength = ((flags &amp; 1) + 1) * 16;

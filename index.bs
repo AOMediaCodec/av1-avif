@@ -265,7 +265,7 @@ NOTE: The dimensions of possible intermediate output images might not match the 
 
 <h6 id ="layered-indexing-property-description" class="no-toc">Description</h6>
 
-The <dfn>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process an [=Operating Point=]. If associated, it shall not be marked as essential.
+The <dfn>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process a specific layer or an [=Operating Point=]. If associated, it shall not be marked as essential.
 
 <h6 id ="layered-indexing-property-syntax" class="no-toc">Syntax</h6>
 
