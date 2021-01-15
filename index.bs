@@ -251,9 +251,9 @@ If this property is associated with an item, the 'ispe' property documents the d
 
 NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. Renderers are expected to scale the output image to match the 'ispe' property.
 
-<h5 id ="layered-image-selector-property">Layered Image Indexing Property</h5>
+<h5 id ="layered-image-indexing-property">Layered Image Indexing Property</h5>
 
-<h6 id ="layered-image-selector-property-definition" class="no-toc">Definition</h6>
+<h6 id ="layered-image-indexing-property-definition" class="no-toc">Definition</h6>
 
 <pre class="def">
   Box Type:       <dfn value export for="AV1LayeredImageIndexingProperty">a1lx</dfn>
@@ -263,11 +263,11 @@ NOTE: The dimensions of possible intermediate output images might not match the 
   Quantity:       One
 </pre>
 
-<h6 id ="layered-indexing-property-description" class="no-toc">Description</h6>
+<h6 id ="layered-image-indexing-property-description" class="no-toc">Description</h6>
 
-The <dfn>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process a specific layer or an [=Operating Point=]. If associated, it shall not be marked as essential.
+The <dfn export>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process a specific layer or an [=Operating Point=]. If associated, it shall not be marked as essential.
 
-<h6 id ="layered-indexing-property-syntax" class="no-toc">Syntax</h6>
+<h6 id ="layered-image-indexing-property-syntax" class="no-toc">Syntax</h6>
 
 ```
 class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version = 0, flags) {
@@ -276,7 +276,7 @@ class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version =
 }
 ```
 
-<h6 id ="layered-indexing-property-semantics" class="no-toc">Semantics</h6>
+<h6 id ="layered-image-indexing-property-semantics" class="no-toc">Semantics</h6>
 
 <dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload. Values in the array are in the order of the layer [=spatial_id=].
 

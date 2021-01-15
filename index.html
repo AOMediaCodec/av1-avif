@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="a86907329782935a3d986ed9a16917e768b7018a" name="document-revision">
+  <meta content="b0b73f146dfd5c4f4a82d5fefb42f983dc6b2225" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1468,7 +1468,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
          <ol class="toc">
           <li><a href="#operating-point-selector-property"><span class="secno">2.3.2.1</span> <span class="content">Operating Point Selector Property</span></a>
           <li><a href="#layer-selector-property"><span class="secno">2.3.2.2</span> <span class="content">Layer Selector Property</span></a>
-          <li><a href="#layered-image-selector-property"><span class="secno">2.3.2.3</span> <span class="content">Layered Image Indexing Property</span></a>
+          <li><a href="#layered-image-indexing-property"><span class="secno">2.3.2.3</span> <span class="content">Layered Image Indexing Property</span></a>
          </ol>
        </ol>
      </ol>
@@ -1595,23 +1595,23 @@ Quantity:       One
     The <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif①③">lsel</a> property defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①③">AV1 Image Item</a>. The <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif①④">layer_id</a> indicates the value of the spatial id to render. The corresponding spatial layer shall produce an output frame. Other layers may be needed to decode the indicated layer. 
    <p>If this property is associated with an item, the <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif①⑤">ispe</a> property documents the dimensions of the output frame produced by decoding this layer.</p>
    <p class="note" role="note"><span>NOTE:</span> The dimensions of possible intermediate output images might not match the ones given in the <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif①⑥">ispe</a> property. Renderers are expected to scale the output image to match the <a class="property" data-link-type="propdesc" href="#biblio-heif" id="ref-for-biblio-heif①⑦">ispe</a> property.</p>
-   <h5 class="heading settled" data-level="2.3.2.3" id="layered-image-selector-property"><span class="secno">2.3.2.3. </span><span class="content">Layered Image Indexing Property</span><a class="self-link" href="#layered-image-selector-property"></a></h5>
-   <h6 class="no-toc heading settled" data-level="2.3.2.3.1" id="layered-image-selector-property-definition"><span class="secno">2.3.2.3.1. </span><span class="content">Definition</span><a class="self-link" href="#layered-image-selector-property-definition"></a></h6>
+   <h5 class="heading settled" data-level="2.3.2.3" id="layered-image-indexing-property"><span class="secno">2.3.2.3. </span><span class="content">Layered Image Indexing Property</span><a class="self-link" href="#layered-image-indexing-property"></a></h5>
+   <h6 class="no-toc heading settled" data-level="2.3.2.3.1" id="layered-image-indexing-property-definition"><span class="secno">2.3.2.3.1. </span><span class="content">Definition</span><a class="self-link" href="#layered-image-indexing-property-definition"></a></h6>
 <pre class="def">Box Type:       <dfn data-dfn-for="AV1LayeredImageIndexingProperty" data-dfn-type="value" data-export id="valdef-av1layeredimageindexingproperty-a1lx">a1lx<a class="self-link" href="#valdef-av1layeredimageindexingproperty-a1lx"></a></dfn>
 Property type:  Descriptive item property
 Container:      <code>ItemPropertyContainerBox</code>
 Mandatory:      No
 Quantity:       One
 </pre>
-   <h6 class="no-toc heading settled" data-level="2.3.2.3.2" id="layered-indexing-property-description"><span class="secno">2.3.2.3.2. </span><span class="content">Description</span><a class="self-link" href="#layered-indexing-property-description"></a></h6>
-   <p>The <dfn data-dfn-type="dfn" data-noexport id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty<a class="self-link" href="#av1layeredimageindexingproperty"></a></dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Item</a>. It documents the size in bytes of each layer in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑨">AV1 Image Item Data</a>, and enables determining the byte ranges required to process a specific layer or an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑤">Operating Point</a>. If associated, it shall not be marked as essential.</p>
-   <h6 class="no-toc heading settled" data-level="2.3.2.3.3" id="layered-indexing-property-syntax"><span class="secno">2.3.2.3.3. </span><span class="content">Syntax</span><a class="self-link" href="#layered-indexing-property-syntax"></a></h6>
+   <h6 class="no-toc heading settled" data-level="2.3.2.3.2" id="layered-image-indexing-property-description"><span class="secno">2.3.2.3.2. </span><span class="content">Description</span><a class="self-link" href="#layered-image-indexing-property-description"></a></h6>
+   <p>The <dfn data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty<a class="self-link" href="#av1layeredimageindexingproperty"></a></dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Item</a>. It documents the size in bytes of each layer in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑨">AV1 Image Item Data</a>, and enables determining the byte ranges required to process a specific layer or an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑤">Operating Point</a>. If associated, it shall not be marked as essential.</p>
+   <h6 class="no-toc heading settled" data-level="2.3.2.3.3" id="layered-image-indexing-property-syntax"><span class="secno">2.3.2.3.3. </span><span class="content">Syntax</span><a class="self-link" href="#layered-image-indexing-property-syntax"></a></h6>
 <pre>class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version = 0, flags) {
     FieldLength = ((flags &amp; 1) + 1) * 16;
     unsigned int(FieldLength)[4] layer_size;
 }
 </pre>
-   <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-indexing-property-semantics"></a></h6>
+   <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-image-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-image-indexing-property-semantics"></a></h6>
    <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload. Values in the array are in the order of the layer <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑥">spatial_id</a>.</p>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
    <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑦">Temporal Units</a> stored in an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑤">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
