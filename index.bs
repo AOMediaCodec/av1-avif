@@ -245,7 +245,7 @@ class OperatingPointSelectorProperty extends ItemFullProperty('a1op', version = 
 <dfn noexport>op_index</dfn> indicates index of the operating point to be processed for this item. Its value shall be between 0 and [=operating_points_cnt_minus_1=].
 
 <h5 id ="layer-selector-property">Layer Selector Property</h5>
-The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The 'layer_id' indicates the value of the spatial id to render. The corresponding spatial layer shall produce an output frame. Other layers may be needed to decode the indicated layer.
+The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The 'layer_id' indicates the value of the [=spatial_id=] to render. The value shall be between 0 and 3. The corresponding spatial layer shall be present in the bitstream and shall produce an output frame. Other layers may be needed to decode the indicated layer.
 
 If this property is associated with an item, the 'ispe' property documents the dimensions of the output frame produced by decoding this layer.
 
