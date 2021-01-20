@@ -203,13 +203,13 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
 [[!AV1]] supports encoding a frame using multiple spatial layers. A spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Additionally, not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate decodes. Finally, layers are grouped into one or more [=Operating Points=]. The [=Sequence Header OBU=] defines the list of [=Operating Points=], provides required decoding capabilities, and indicates which layers form each [=Operating Point=].
 
-[[!AV1]] delegates the selection of which [=Operating Point=] to process to the application. AVIF defines the [=OperatingPointSelectorProperty=] to control this selection. In the absence of an [=OperatingPointSelectorProperty=] associated with an [=AV1 Image Item=], the AVIF renderer is free to process any [=Operating Point=] present in the [=AV1 Image Item Data=]. In particular, when the [=AV1 Image Item=] is composed of a unique [=Operating Point=], the [=OperatingPointSelectorProperty=] should not be present. If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the <code>op_index</code> field indicates which [=Operating Point=] is expected to be presented for this item.
+[[!AV1]] delegates the selection of which [=Operating Point=] to process to the application. AVIF defines the [=OperatingPointSelectorProperty=] to control this selection. In the absence of an [=OperatingPointSelectorProperty=] associated with an [=AV1 Image Item=], the AVIF renderer is free to process any [=Operating Point=] present in the [=AV1 Image Item Data=]. In particular, when the [=AV1 Image Item=] is composed of a unique [=Operating Point=], the [=OperatingPointSelectorProperty=] should not be present. If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the <code>op_index</code> field indicates which [=Operating Point=] is expected to be processed for this item.
 
 NOTE: When an author wants to offer the ability to render multiple [=Operating Points=] from the same AV1 image (e.g. in the case of multi-view images), multiple [=AV1 Image Items=] can be created that share the same [=AV1 Image Item Data=] but have different [=OperatingPointSelectorProperty=]s.
 
 [[!AV1]] expects the renderer to display only one frame within the selected [=Operating Point=], which should be the highest spatial layer that is both within the [=Operating Point=] and present within the temporal unit, but [[!AV1]] leaves the option for other applications to set their own policy about which frames are output. AVIF sets a different policy, and defines how the 'lsel' property (defined in [[!HEIF]]) is used to control which layer is rendered. In the absence of a 'lsel' property associated with an [=AV1 Image Item=], the renderer is free to render either: only the output image of the highest spatial layer, or to render all output images of all the intermediate layers, resulting in a form of progressive decoding. If a 'lsel' property is associated with an [=AV1 Image Item=], the renderer is expected to render only the output image for that layer.
 
-NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when a controlled rendering of the different output images is desired (e.g. grid of layered images), multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different 'lsel' properties, each with a different value of 'layer_id'. In the case of an image grid composed of 4 layered images, each made of 2 layers, controlled rendering could be achieved by creating a set of items as follows: 4 items each corresponding to the low quality/resolution image as decoded from the first layer of each of the 4 layered images, i.e. with 'layer_id' set to 0; 4 items corresponding the second layer, i.e. with 'layer_id' set to 1; a grid item composing the first set of 4 images; another grid item composing the second set of 4 images.
+NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when an author wants to expose each layer as a specific item, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different 'lsel' properties, each with a different value of 'layer_id'.
 
 <h4 id ="layered-properties">Properties</h4>
 <h5 id ="operating-point-selector-property">Operating Point Selector Property</h5>
@@ -230,7 +230,9 @@ An <dfn>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Ima
 
 In the absence of a 'lsel' property associated with the item:
 - If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the 'ispe' property associated with this item shall describe the dimension of the output image corresponding to the operating point.
-- If it is not associated with an item, the 'ispe' documents the dimensions of the the operating point whose index is 0.
+- If no [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the 'ispe' documents the dimensions of the operating point whose index is 0.
+
+NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. Renderers are expected to scale the output image to match the 'ispe' property.
 
 <h6 id ="operating-point-selector-property-syntax" class="no-toc">Syntax</h6>
 
@@ -242,14 +244,12 @@ class OperatingPointSelectorProperty extends ItemFullProperty('a1op', version = 
 
 <h6 id ="operating-point-selector-property-semantics" class="no-toc">Semantics</h6>
 
-<dfn noexport>op_index</dfn> indicates index of the operating point to be processed for this item. Its value shall be between 0 and [=operating_points_cnt_minus_1=].
+<dfn noexport>op_index</dfn> indicates the index of the operating point to be processed for this item. Its value shall be between 0 and [=operating_points_cnt_minus_1=].
 
 <h5 id ="layer-selector-property">Layer Selector Property</h5>
 The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The 'layer_id' indicates the value of the [=spatial_id=] to render. The value shall be between 0 and 3. The corresponding spatial layer shall be present in the bitstream and shall produce an output frame. Other layers may be needed to decode the indicated layer.
 
 If this property is associated with an item, the 'ispe' property documents the dimensions of the output frame produced by decoding this layer.
-
-NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. Renderers are expected to scale the output image to match the 'ispe' property.
 
 <h5 id ="layered-image-indexing-property">Layered Image Indexing Property</h5>
 
@@ -265,7 +265,7 @@ NOTE: The dimensions of possible intermediate output images might not match the 
 
 <h6 id ="layered-image-indexing-property-description" class="no-toc">Description</h6>
 
-The <dfn export>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process a specific layer or an [=Operating Point=]. If associated, it shall not be marked as essential.
+The <dfn export>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process one or more layers of an [=Operating Point=]. If associated, it shall not be marked as essential.
 
 <h6 id ="layered-image-indexing-property-syntax" class="no-toc">Syntax</h6>
 
