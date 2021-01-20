@@ -432,7 +432,7 @@ This media type registration is extracted from the <a href="https://aomedia.gith
 <strong>Applications:</strong> Multimedia, Imaging, Pictures
 
 <strong>Fragment identifier considerations:</strong>
-Fragment identifiers are specified in Annex L of ISO/IEC 14496-12, available as a Publicly Available Standard at http://standards.iso.org/ittf/PubliclyAvailableStandards/index.html
+Fragment identifiers are specified in Annex C of ISO/IEC 14496-12:2020, available at https://www.iso.org/standard/74428.html.
 
 <strong>Additional information:</strong>
     - <strong>Magic number(s):</strong> none
