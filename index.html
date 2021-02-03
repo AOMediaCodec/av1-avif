@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="22a75722f19f048ee09016a9adee98e19849e16b" name="document-revision">
+  <meta content="b824aaaaaeb3806f13a6b1cb8a1fb2c33b49ce06" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1481,7 +1481,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
       <li><a href="#image-and-image-collection-brand"><span class="secno">5.2</span> <span class="content">AVIF image and image collection brand</span></a>
       <li><a href="#image-sequence-brand"><span class="secno">5.3</span> <span class="content">AVIF image sequence brands</span></a>
      </ol>
-    <li><a href="#file-constraints"><span class="secno">6</span> <span class="content">File constraints</span></a>
+    <li><a href="#file-constraints"><span class="secno">6</span> <span class="content">General constraints</span></a>
     <li>
      <a href="#profiles"><span class="secno">7</span> <span class="content">Profiles</span></a>
      <ol class="toc">
@@ -1662,14 +1662,17 @@ Quantity:       Zero or one
    <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis">avis</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑧">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑨">FileTypeBox</a>.</p>
    <p>Additionally, if a file contains <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> and the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio②">avio</a></code> is used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②①">FileTypeBox</a>, the item constraints for this brand shall be met and at least one of the <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a> shall be made only of <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑥">AV1 Samples</a> marked as <a class="property" data-link-type="propdesc" href="#biblio-isobmff" id="ref-for-biblio-isobmff②②">sync</a>. Conversely, if such a track exists and the constraints of the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio③">avio</a></code> on <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②①">AV1 image items</a> are met, the brand should be used.</p>
    <p class="note" role="note"><span>NOTE:</span> As defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.</p>
-   <h2 class="heading settled" data-level="6" id="file-constraints"><span class="secno">6. </span><span class="content">File constraints</span><a class="self-link" href="#file-constraints"></a></h2>
+   <h2 class="heading settled" data-level="6" id="file-constraints"><span class="secno">6. </span><span class="content">General constraints</span><a class="self-link" href="#file-constraints"></a></h2>
    <p>The following constraints are common to files compliant with this specification:</p>
    <ul>
     <li data-md>
      <p>The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification and list <a class="property" data-link-type="propdesc" href="#biblio-miaf" id="ref-for-biblio-miaf④">miaf</a> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②③">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②④">FileTypeBox</a>.</p>
     <li data-md>
      <p>The file shall list <code>'<a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif①">avif</a>'</code> or <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis①">avis</a>'</code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑤">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑥">FileTypeBox</a>.</p>
+    <li data-md>
+     <p>If transformative properties are used in derivation chains (as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.</p>
    </ul>
+   <p class="note" role="note"><span>NOTE:</span> This constraints further restricts files compared to <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
    <h2 class="heading settled" data-level="7" id="profiles"><span class="secno">7. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <h3 class="heading settled" data-level="7.1" id="profiles-overview"><span class="secno">7.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.</p>
@@ -1752,6 +1755,8 @@ Quantity:       Zero or one
    <ul>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a></p>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/125">Add restriction on transformative properties in derivation chains.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a></p>
     <li data-md>
@@ -2240,7 +2245,7 @@ Quantity:       Zero or one
    <b><a href="#avif-image-brand-avif">#avif-image-brand-avif</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-avif-image-brand-avif">5.2. AVIF image and image collection brand</a>
-    <li><a href="#ref-for-avif-image-brand-avif①">6. File constraints</a>
+    <li><a href="#ref-for-avif-image-brand-avif①">6. General constraints</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="avif-intra-only-brand-avio">
@@ -2254,7 +2259,7 @@ Quantity:       Zero or one
    <b><a href="#avif-image-sequence-brand-avis">#avif-image-sequence-brand-avis</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-avif-image-sequence-brand-avis">5.3. AVIF image sequence brands</a>
-    <li><a href="#ref-for-avif-image-sequence-brand-avis①">6. File constraints</a>
+    <li><a href="#ref-for-avif-image-sequence-brand-avis①">6. General constraints</a>
     <li><a href="#ref-for-avif-image-sequence-brand-avis②">7.1. Overview</a>
    </ul>
   </aside>

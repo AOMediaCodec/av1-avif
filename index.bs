@@ -335,11 +335,14 @@ Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=a
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.
 
-  <h2 id="file-constraints">File constraints</h3>
+  <h2 id="file-constraints">General constraints</h3>
 
   The following constraints are common to files compliant with this specification:
   - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
   - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
+  - If transformative properties are used in derivation chains (as defined in [[MIAF]]), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
+
+  NOTE: This constraints further restricts files compared to [[MIAF]].
 
   <h2 id="profiles">Profiles</h2>
 
@@ -448,6 +451,7 @@ The published specification is a work product of the Alliance for Open Media, ht
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/125">Add restriction on transformative properties in derivation chains.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/116">add support for the ContentColourVolumeBox property.</a>
