@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="b824aaaaaeb3806f13a6b1cb8a1fb2c33b49ce06" name="document-revision">
+  <meta content="d1220be39e3b8a20c00ad151edfc7977452486a1" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1720,39 +1720,11 @@ Quantity:       Zero or one
     <p><code>avis, msf1, miaf, MA1A</code></p>
    </div>
    <h2 class="heading settled" data-level="8" id="mime-registration"><span class="secno">8. </span><span class="content">AVIF Media Type Registration</span><a class="self-link" href="#mime-registration"></a></h2>
-   <p><em>This section registers a new media type <code>"image/avif"</code> in conformance with BCP 13. The information in this section is being submitted to the Internet Engineering Steering Group (IESG) for review, approval, and registration with the Internet Assigned Numbers Authority (IANA). Once formally published by IANA, it will be removed from this specification.</em></p>
-   <p><strong>MIME media type name:</strong> image</p>
-   <p><strong>MIME subtype name:</strong> avif</p>
-   <p><strong>Required parameters:</strong> None.</p>
-   <p><strong>Optional parameters:</strong></p>
-   <ul>
-    <li data-md>
-     <p><strong>codecs</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a></p>
-    <li data-md>
-     <p><strong>profile</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a></p>
-    <li data-md>
-     <p><strong>itemtypes</strong>: As specified in <a href="https://www.iana.org/assignments/media-types/image/heif">image/heif Media Type Registration</a></p>
-   </ul>
-   <p><strong>Encoding considerations:</strong> as for image/heif or image/heif-sequence</p>
-   <p><strong>Security considerations:</strong> See section 4 of RFC 4337 and section 7 of RFC 6381. This format does not supply integrity or confidentiality protection and so they are applied externally when needed. The security considerations of URLs are discussed in RFC 3986.</p>
-   <p><strong>Interoperability considerations:</strong> The AVIF specification is based on a set of specifications (AV1, ISOBMFF, HEIF, MIAF) and builds upon their interoperability considerations. Further more, AVIF defines specific constraints and signals them with specific code points to improve interoperability between readers and writers of AV1 content.</p>
-   <p><strong>Published specification:</strong> This media type registration is extracted from the <a href="https://aomedia.github.io/av1-avif/">AV1 Image File Format</a>.</p>
-   <p><strong>Applications:</strong> Multimedia, Imaging, Pictures</p>
-   <p><strong>Fragment identifier considerations:</strong> Fragment identifiers are specified in Annex C of ISO/IEC 14496-12:2020, available at https://www.iso.org/standard/74428.html.</p>
-   <p><strong>Additional information:</strong></p>
-   <ul>
-    <li data-md>
-     <p><strong>Magic number(s):</strong> none</p>
-    <li data-md>
-     <p><strong>File extension(s):</strong> avif, heif, heifs or hif</p>
-    <li data-md>
-     <p><strong>Macintosh File Type Code(s):</strong> None</p>
-   </ul>
-   <p><strong>Intended usage:</strong> Common</p>
-   <p><strong>Restrictions on usage:</strong> None</p>
-   <p><strong>Author/Change controller:</strong> The published specification is a work product of the Alliance for Open Media, http://aomedia.org.</p>
+   <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
    <h2 class="heading settled" data-level="9" id="change-list"><span class="secno">9. </span><span class="content">Changes since v1.0.0 release</span><a class="self-link" href="#change-list"></a></h2>
    <ul>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a></p>
     <li data-md>
