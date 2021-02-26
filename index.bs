@@ -302,7 +302,7 @@ class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version =
 
 <p>An <dfn export="">AV1 Depth Image Item</dfn> (respectively an <dfn export="">AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
-NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>matrix_coefficients</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>aux_type</code> field. In such case, the maximum number of components is restricted by number of possible items in file, coded on 16 or 32 bits.
+NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>matrix_coefficients</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>aux_type</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.
 
   <h2 id="brands">Brands, Internet media types and file extensions</h2>
 
@@ -357,7 +357,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   If <code>'[=avis=]'</code> is declared in the [=FileTypeBox=] and a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
-  It is possible for a file compliant to this [=AV1 Image File Format=] to not declare a profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
+  It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare a profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
 
   NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when coded with level 31.
 
