@@ -145,7 +145,7 @@ url: #biblio-av1; spec: AV1; type: dfn;
 <h2 id="general">Scope</h2>
 
 [[!AV1]] defines the syntax and semantics of an [=AV1 bitstream=]. The <dfn>AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an [=AV1 bitstream=] in a [[!HEIF]] file.
-The [=AV1 Image File Format=] defines multiple profiles, which restrict the allowed syntax and semantics of the [=AV1 bitstream=] with the goal to improve interoperability.
+The [=AV1 Image File Format=] defines multiple profiles, which restrict the allowed syntax and semantics of the [=AV1 bitstream=] with the goal to improve interoperability, especially for hardware implementations.
 The profiles defined in this specification follow the conventions of the [[!MIAF]] specification.
 Images encoded with AV1 and not meeting the restrictions of the defined profiles may still be compliant to this [=AV1 Image File Format=] if they adhere to the general AVIF requirements.
 
@@ -357,7 +357,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   If <code>'[=avis=]'</code> is declared in the [=FileTypeBox=] and a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.
 
-  It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare a profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
+  It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
 
   NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when coded with level 31.
 
