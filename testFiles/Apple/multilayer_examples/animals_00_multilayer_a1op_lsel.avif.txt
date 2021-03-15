@@ -25,11 +25,18 @@ aom_codec_control(codec, AOME_SET_SCALEMODE, &{ AOME_NORMAL, AOME_NORMAL })
 
 AV1 stream contains two operating points. Operating point 0 contains both layers, operating point 1 contains the base layer (layer 0).
 
-Stream is embedded in a HEIF container as two items.
+Stream is embedded in a HEIF container as three items.
 Item 1:
-	ispe = 1024x768
-	iloc points to layer 0 only
+	ispe = 2048x1536
+	a1op property selects operating point 0, lsel selects layer 1
+	iloc points to layer 0 and layer 1, separated in two extents
 
 Item 2:
-	ispe = 2048x1535
+	ispe = 1024x768
+	a1op property selects operating point 0, lsel selects layer 0
+	iloc points to layer 0 and layer 1, separated in two extents
+
+Item 3:
+	ispe = 1024x768
+	a1op property selects operating point 1, lsel selects layer 0
 	iloc points to layer 0 and layer 1, separated in two extents
