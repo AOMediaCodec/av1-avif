@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="59a66afafd76fad1f192b325cd88c97ea541eb52" name="document-revision">
+  <meta content="cc1fbf2bf584b8ef39112bcf471f3a43e9ccbdc0" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1681,7 +1681,7 @@ Quantity:       Zero or one
    <p>The <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑦">FileTypeBox</a> should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).</p>
    <p>If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑧">FileTypeBox</a> and a profile is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑨">FileTypeBox</a>, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
    <p>It is possible for a file compliant to this <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①①">AV1 Image File Format</a> to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.</p>
-   <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when coded with level 31.</p>
+   <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">seq_level_idx</a> is set to 31 (maximum parameters level).</p>
    <div class="example" id="example-ee584b29"><a class="self-link" href="#example-ee584b29"></a>If an image is encoded with dimensions (respectively a bit depth) that exceed the maximum dimensions (respectively bit depth) required by the AV1 profile and level of the AVIF profiles defined in this specification, the file will only signal general AVIF brands.</div>
    <h3 class="heading settled" data-level="7.2" id="baseline-profile"><span class="secno">7.2. </span><span class="content">AVIF Baseline Profile</span><a class="self-link" href="#baseline-profile"></a></h3>
    <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1b">MA1B<a class="self-link" href="#valdef-av1-image-item-type-ma1b"></a></dfn>.</p>
@@ -1977,6 +1977,10 @@ Quantity:       Zero or one
    <a href="#biblio-av1">#biblio-av1</a><b>Referenced in:</b>
    <ul></ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-biblio-av1">
+   <a href="#biblio-av1">#biblio-av1</a><b>Referenced in:</b>
+   <ul></ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-biblio-av1-isobmff">
    <a href="#biblio-av1-isobmff">#biblio-av1-isobmff</a><b>Referenced in:</b>
    <ul></ul>
@@ -2078,10 +2082,11 @@ Quantity:       Zero or one
      <li><span class="dfn-paneled" id="term-for-biblio-av1⑤" style="color:initial">operating point</span>
      <li><span class="dfn-paneled" id="term-for-biblio-av1⑥" style="color:initial">operating_points_cnt_minus_1</span>
      <li><span class="dfn-paneled" id="term-for-biblio-av1⑦" style="color:initial">reduced_still_picture_header</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑧" style="color:initial">sequence header obu</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1⑨" style="color:initial">spatial_id</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1①⓪" style="color:initial">still_picture</span>
-     <li><span class="dfn-paneled" id="term-for-biblio-av1①①" style="color:initial">temporal unit</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1⑧" style="color:initial">seq_level_idx</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1⑨" style="color:initial">sequence header obu</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1①⓪" style="color:initial">spatial_id</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1①①" style="color:initial">still_picture</span>
+     <li><span class="dfn-paneled" id="term-for-biblio-av1①②" style="color:initial">temporal unit</span>
     </ul>
    <li>
     <a data-link-type="biblio">[AV1-ISOBMFF]</a> defines the following terms:

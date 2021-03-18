@@ -140,6 +140,7 @@ url: #biblio-av1; spec: AV1; type: dfn;
     text: operating_points_cnt_minus_1
     text: choose_operating_point
     text: spatial_id
+    text: seq_level_idx
 </pre>
 
 <h2 id="general">Scope</h2>
@@ -359,7 +360,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 
   It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
 
-  NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when coded with level 31.
+  NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when [=seq_level_idx=] is set to 31 (maximum parameters level).
 
   <div class="example">If an image is encoded with dimensions (respectively a bit depth) that exceed the maximum dimensions (respectively bit depth) required by the AV1 profile and level of the AVIF profiles defined in this specification, the file will only signal general AVIF brands.</div>
 
