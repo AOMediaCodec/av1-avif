@@ -1,7 +1,8 @@
 Input image is animals_00 from the Apple test set, rotated to upright (i.e. 180 degrees) and downscaled to 2048x1536 so encoding is faster.
 
-AV1 is encoded using libaom and the following settings:
+Image is split into 4 tiles of size 1024x768, where each tile is encoded as follows:
 
+AV1 is encoded using libaom and the following settings:
 rc_end_usage = AOM_Q
 g_error_resilient = 0
 g_lag_in_frames = 0
@@ -23,9 +24,22 @@ flags = AOM_EFLAG_NO_REF_LAST2 | AOM_EFLAG_NO_REF_LAST3 |
 aom_codec_control(codec, AOME_SET_CQ_LEVEL, 3)
 aom_codec_control(codec, AOME_SET_SCALEMODE, &{ AOME_NORMAL, AOME_NORMAL })
 
-AV1 stream contains two operating points. Operating point 0 contains both layers, operating point 1 contains the base layer (layer 0).
+AV1 streams contains two operating points. Operating point 0 contains both layers, operating point 1 contains the base layer (layer 0).
 
-Stream is embedded in a HEIF container as a single item, with no lsel or a1op used.
-ispe = 2048x1536
-iloc points to layer 0 and layer 1, separated in two extents
-a1lx property is used to explicitly mark the sizes of the two layers.
+Stream is embedded in a HEIF container as follows:
+item 1:
+	grid
+	ispe = 2048x1536
+	references to items 3-6
+item 2:
+	grid
+	ispe = 1024x738
+	references to items 7-10
+items 3-6:
+	ispe = 1024x1536
+	iloc points to layer 0 and layer 1, separated in two extents
+	lsel property selects layer 1
+items 7-10:
+	ispe = 1024x1536
+	iloc points to layer 0 and layer 1, separated in two extents
+	lsel property selects layer 0
