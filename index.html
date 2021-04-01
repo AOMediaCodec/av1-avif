@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="cc1fbf2bf584b8ef39112bcf471f3a43e9ccbdc0" name="document-revision">
+  <meta content="68abca09f94e16bb42baeaa65defb70cbfb90019" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1403,7 +1403,7 @@ pre .property::before, pre .property::after {
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">AV1 Image File Format (AVIF)</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2020-08-19">19 August 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Commit Snapshot, <time class="dt-updated" datetime="2021-03-31">31 March 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1605,17 +1605,22 @@ Mandatory:      No
 Quantity:       Zero or one
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.2" id="layered-image-indexing-property-description"><span class="secno">2.3.2.3.2. </span><span class="content">Description</span><a class="self-link" href="#layered-image-indexing-property-description"></a></h6>
-   <p>The <dfn data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty<a class="self-link" href="#av1layeredimageindexingproperty"></a></dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑤">AV1 Image Item</a>. It documents the size in bytes of each layer in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑨">AV1 Image Item Data</a>, and enables determining the byte ranges required to process one or more layers of an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑥">Operating Point</a>. If associated, it shall not be marked as essential.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑤">AV1 Image Item</a>. It should not be associated with <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑥">AV1 Image Items</a> consisting of only one layer.</p>
+   <p>The <a data-link-type="dfn" href="#av1layeredimageindexingproperty" id="ref-for-av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</a> documents the size in bytes of each layer (except the last one) in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑨">AV1 Image Item Data</a>, and enables determining the byte ranges required to process one or more layers of an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑥">Operating Point</a>. If associated, it shall not be marked as essential.</p>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.3" id="layered-image-indexing-property-syntax"><span class="secno">2.3.2.3.3. </span><span class="content">Syntax</span><a class="self-link" href="#layered-image-indexing-property-syntax"></a></h6>
-<pre>class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version = 0, flags) {
-    FieldLength = ((flags &amp; 1) + 1) * 16;
-    unsigned int(FieldLength)[4] layer_size;
+<pre>class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
+    unsigned int(7) reserved = 0;
+    unsigned int(1) large_size;
+    FieldLength = ((large_size &amp; 1) + 1) * 16;
+    unsigned int(FieldLength)[3] layer_size;
 }
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-image-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-image-indexing-property-semantics"></a></h6>
-   <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload. Values in the array are in the order of the layer <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑦">spatial_id</a>.</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑦">spatial_id</a>. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.</p>
+   <p class="note" role="note"><span>NOTE:</span> The size of the last layer can be determined by substracting the sum of the sizes of all layers indicated in this property from the entire item size.</p>
+   <div class="example" id="example-2a30869f"><a class="self-link" href="#example-2a30869f"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑧">spatial_id</a> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑨">spatial_id</a> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
-   <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑧">Temporal Units</a> stored in an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑤">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
+   <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⓪">Temporal Units</a> stored in an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑤">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
    <ul>
     <li data-md>
      <p>The track shall be a valid <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf①">MIAF image sequence</a>.</p>
@@ -1623,14 +1628,14 @@ Quantity:       Zero or one
      <p>The track handler for an <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence">AV1 Image Sequence</a> shall be <code>pict</code>.</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="auxiliary-images"><span class="secno">4. </span><span class="content">Auxiliary Image Items and Sequences</span><a class="self-link" href="#auxiliary-images"></a></h2>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-item">AV1 Auxiliary Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑥">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints: </p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-item">AV1 Auxiliary Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑦">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints: </p>
    <ul>
     <li data-md>
      <p>It shall be a compliant <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf②">MIAF Auxiliary Image Item</a> (respectively <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf③">MIAF Auxiliary Image Sequence</a>).</p>
     <li data-md>
-     <p>The <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑨">mono_chrome</a></code> field in the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⓪">Sequence Header OBU</a> shall be set to 1.</p>
+     <p>The <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③①">mono_chrome</a></code> field in the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③②">Sequence Header OBU</a> shall be set to 1.</p>
     <li data-md>
-     <p>The <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③①">color_range</a></code> field in the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③②">Sequence Header OBU</a> shall be set to 1.</p>
+     <p>The <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③③">color_range</a></code> field in the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">Sequence Header OBU</a> shall be set to 1.</p>
    </ul>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-alpha-image-item">AV1 Alpha Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-alpha-image-sequence">AV1 Alpha Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) shall be encoded with the same bit depth as the associated master AV1 Image Item (respectively AV1 Image Sequence).</p>
    <p>For <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item①">AV1 Alpha Image Item</a> and <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence①">AV1 Alpha Image Sequence</a>, the ColourInformationBox should be omitted. If present, readers shall ignore it.</p>
@@ -1642,16 +1647,16 @@ Quantity:       Zero or one
    <p>An <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑥">AV1 Image File Format</a> file may conform to multiple brands. Similarly, an <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑦">AV1 Image File Format</a> reader/parser or <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> renderer may be capable of processing the features associated with one or more brands.</p>
    <p>If any of the brands defined in this document is specified in the <code><a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑥">major_brand</a></code> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑦">FileTypeBox</a>, the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in <a href="#mime-registration">§ 8 AVIF Media Type Registration</a>.</p>
    <h3 class="heading settled" data-level="5.2" id="image-and-image-collection-brand"><span class="secno">5.2. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
-    The brand to identify <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑦">AV1 image items</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image brand" data-dfn-type="dfn" data-export id="avif-image-brand-avif" value="avif">avif</dfn>. 
+    The brand to identify <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑧">AV1 image items</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image brand" data-dfn-type="dfn" data-export id="avif-image-brand-avif" value="avif">avif</dfn>. 
    <p>Files that indicate this brand in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑧">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑨">FileTypeBox</a> shall comply with the following:</p>
    <ul>
     <li data-md>
-     <p>The primary item shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑧">AV1 Image Item</a> or be a derived image that references directly or indirectly one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑨">AV1 Image Items</a>.</p>
+     <p>The primary item shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑨">AV1 Image Item</a> or be a derived image that references directly or indirectly one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②⓪">AV1 Image Items</a>.</p>
     <li data-md>
      <p><a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item②">AV1 auxiliary image items</a> may be present in the file.</p>
    </ul>
    <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif">avif</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①①">FileTypeBox</a>.</p>
-   <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio" value="avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①②">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①③">FileTypeBox</a>, then the primary item or all the items referenced by the primary item shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②⓪">AV1 image items</a> made only of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③③">Intra Frames</a>. Conversely, if the previous constraint applies, the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> should be used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①④">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑤">FileTypeBox</a>.</p>
+   <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio" value="avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①②">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①③">FileTypeBox</a>, then the primary item or all the items referenced by the primary item shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②①">AV1 image items</a> made only of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑤">Intra Frames</a>. Conversely, if the previous constraint applies, the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> should be used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①④">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑤">FileTypeBox</a>.</p>
    <h3 class="heading settled" data-level="5.3" id="image-sequence-brand"><span class="secno">5.3. </span><span class="content">AVIF image sequence brands</span><a class="self-link" href="#image-sequence-brand"></a></h3>
     The brand to identify AVIF image sequences is <dfn class="dfn-paneled" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="dfn" data-export id="avif-image-sequence-brand-avis" value="avis">avis</dfn>. 
    <p>Files that indicate this brand in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑥">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑦">FileTypeBox</a> shall comply with the following:</p>
@@ -1662,7 +1667,7 @@ Quantity:       Zero or one
      <p>they may contain <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence②">AV1 auxiliary image sequences</a>.</p>
    </ul>
    <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis">avis</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑧">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑨">FileTypeBox</a>.</p>
-   <p>Additionally, if a file contains <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> and the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio②">avio</a></code> is used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②①">FileTypeBox</a>, the item constraints for this brand shall be met and at least one of the <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a> shall be made only of <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑥">AV1 Samples</a> marked as <a class="property" data-link-type="propdesc" href="#biblio-isobmff" id="ref-for-biblio-isobmff②②">sync</a>. Conversely, if such a track exists and the constraints of the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio③">avio</a></code> on <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②①">AV1 image items</a> are met, the brand should be used.</p>
+   <p>Additionally, if a file contains <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> and the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio②">avio</a></code> is used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②①">FileTypeBox</a>, the item constraints for this brand shall be met and at least one of the <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a> shall be made only of <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑥">AV1 Samples</a> marked as <a class="property" data-link-type="propdesc" href="#biblio-isobmff" id="ref-for-biblio-isobmff②②">sync</a>. Conversely, if such a track exists and the constraints of the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio③">avio</a></code> on <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②②">AV1 image items</a> are met, the brand should be used.</p>
    <p class="note" role="note"><span>NOTE:</span> As defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.</p>
    <h2 class="heading settled" data-level="6" id="file-constraints"><span class="secno">6. </span><span class="content">General constraints</span><a class="self-link" href="#file-constraints"></a></h2>
    <p>The following constraints are common to files compliant with this specification:</p>
@@ -1681,12 +1686,12 @@ Quantity:       Zero or one
    <p>The <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑦">FileTypeBox</a> should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).</p>
    <p>If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑧">FileTypeBox</a> and a profile is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑨">FileTypeBox</a>, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
    <p>It is possible for a file compliant to this <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①①">AV1 Image File Format</a> to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.</p>
-   <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">seq_level_idx</a> is set to 31 (maximum parameters level).</p>
+   <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑥">seq_level_idx</a> is set to 31 (maximum parameters level).</p>
    <div class="example" id="example-ee584b29"><a class="self-link" href="#example-ee584b29"></a>If an image is encoded with dimensions (respectively a bit depth) that exceed the maximum dimensions (respectively bit depth) required by the AV1 profile and level of the AVIF profiles defined in this specification, the file will only signal general AVIF brands.</div>
    <h3 class="heading settled" data-level="7.2" id="baseline-profile"><span class="secno">7.2. </span><span class="content">AVIF Baseline Profile</span><a class="self-link" href="#baseline-profile"></a></h3>
    <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1b">MA1B<a class="self-link" href="#valdef-av1-image-item-type-ma1b"></a></dfn>.</p>
    <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⓪">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③①">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
-   <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②②">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑤">AV1 Image Sequences</a>:</p>
+   <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②③">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑤">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
      <p>The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</p>
@@ -1704,7 +1709,7 @@ Quantity:       Zero or one
    <h3 class="heading settled" data-level="7.3" id="advanced-profile"><span class="secno">7.3. </span><span class="content">AVIF Advanced Profile</span><a class="self-link" href="#advanced-profile"></a></h3>
    <p>This section defines the MIAF AV1 Advanced profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1a">MA1A<a class="self-link" href="#valdef-av1-image-item-type-ma1a"></a></dfn>.</p>
    <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑨">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④⓪">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
-   <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②③">AV1 Image Items</a>:</p>
+   <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②④">AV1 Image Items</a>:</p>
    <ul>
     <li data-md>
      <p>The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.</p>
@@ -1729,6 +1734,8 @@ Quantity:       Zero or one
    <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
    <h2 class="heading settled" data-level="9" id="change-list"><span class="secno">9. </span><span class="content">Changes since v1.0.0 release</span><a class="self-link" href="#change-list"></a></h2>
    <ul>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/139">Update a1lx property syntax and semantics.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a></p>
     <li data-md>
@@ -2159,12 +2166,12 @@ Quantity:       Zero or one
     <li><a href="#ref-for-av1-image-item④">2.3.1. Overview</a> <a href="#ref-for-av1-image-item⑤">(2)</a> <a href="#ref-for-av1-image-item⑥">(3)</a> <a href="#ref-for-av1-image-item⑦">(4)</a> <a href="#ref-for-av1-image-item⑧">(5)</a> <a href="#ref-for-av1-image-item⑨">(6)</a> <a href="#ref-for-av1-image-item①⓪">(7)</a>
     <li><a href="#ref-for-av1-image-item①①">2.3.2.1.2. Description</a> <a href="#ref-for-av1-image-item①②">(2)</a> <a href="#ref-for-av1-image-item①③">(3)</a>
     <li><a href="#ref-for-av1-image-item①④">2.3.2.2. Layer Selector Property</a>
-    <li><a href="#ref-for-av1-image-item①⑤">2.3.2.3.2. Description</a>
-    <li><a href="#ref-for-av1-image-item①⑥">4. Auxiliary Image Items and Sequences</a>
-    <li><a href="#ref-for-av1-image-item①⑦">5.2. AVIF image and image collection brand</a> <a href="#ref-for-av1-image-item①⑧">(2)</a> <a href="#ref-for-av1-image-item①⑨">(3)</a> <a href="#ref-for-av1-image-item②⓪">(4)</a>
-    <li><a href="#ref-for-av1-image-item②①">5.3. AVIF image sequence brands</a>
-    <li><a href="#ref-for-av1-image-item②②">7.2. AVIF Baseline Profile</a>
-    <li><a href="#ref-for-av1-image-item②③">7.3. AVIF Advanced Profile</a>
+    <li><a href="#ref-for-av1-image-item①⑤">2.3.2.3.2. Description</a> <a href="#ref-for-av1-image-item①⑥">(2)</a>
+    <li><a href="#ref-for-av1-image-item①⑦">4. Auxiliary Image Items and Sequences</a>
+    <li><a href="#ref-for-av1-image-item①⑧">5.2. AVIF image and image collection brand</a> <a href="#ref-for-av1-image-item①⑨">(2)</a> <a href="#ref-for-av1-image-item②⓪">(3)</a> <a href="#ref-for-av1-image-item②①">(4)</a>
+    <li><a href="#ref-for-av1-image-item②②">5.3. AVIF image sequence brands</a>
+    <li><a href="#ref-for-av1-image-item②③">7.2. AVIF Baseline Profile</a>
+    <li><a href="#ref-for-av1-image-item②④">7.3. AVIF Advanced Profile</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="av1-image-item-data">
@@ -2188,6 +2195,12 @@ Quantity:       Zero or one
    <ul>
     <li><a href="#ref-for-operatingpointselectorproperty">2.3.1. Overview</a> <a href="#ref-for-operatingpointselectorproperty①">(2)</a> <a href="#ref-for-operatingpointselectorproperty②">(3)</a> <a href="#ref-for-operatingpointselectorproperty③">(4)</a> <a href="#ref-for-operatingpointselectorproperty④">(5)</a>
     <li><a href="#ref-for-operatingpointselectorproperty⑤">2.3.2.1.2. Description</a> <a href="#ref-for-operatingpointselectorproperty⑥">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="av1layeredimageindexingproperty">
+   <b><a href="#av1layeredimageindexingproperty">#av1layeredimageindexingproperty</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-av1layeredimageindexingproperty">2.3.2.3.2. Description</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="av1-image-sequence">

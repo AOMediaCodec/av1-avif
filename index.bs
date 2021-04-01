@@ -7,7 +7,7 @@ Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2020-08-19
+Date: 2021-03-31
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
 Boilerplate: property-index no, issues-index no, copyright yes
@@ -267,21 +267,28 @@ If this property is associated with an item, the 'ispe' property documents the d
 
 <h6 id ="layered-image-indexing-property-description" class="no-toc">Description</h6>
 
-The <dfn export>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It documents the size in bytes of each layer in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process one or more layers of an [=Operating Point=]. If associated, it shall not be marked as essential.
+The <dfn export>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. It should not be associated with [=AV1 Image Items=] consisting of only one layer.
+
+The [=AV1LayeredImageIndexingProperty=] documents the size in bytes of each layer (except the last one) in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process one or more layers of an [=Operating Point=]. If associated, it shall not be marked as essential.
 
 <h6 id ="layered-image-indexing-property-syntax" class="no-toc">Syntax</h6>
 
 ```
-class AV1LayeredImageIndexingProperty extends ItemFullProperty('a1lx', version = 0, flags) {
-    FieldLength = ((flags & 1) + 1) * 16;
-    unsigned int(FieldLength)[4] layer_size;
+class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
+    unsigned int(7) reserved = 0;
+    unsigned int(1) large_size;
+    FieldLength = ((large_size & 1) + 1) * 16;
+    unsigned int(FieldLength)[3] layer_size;
 }
 ```
 
 <h6 id ="layered-image-indexing-property-semantics" class="no-toc">Semantics</h6>
 
-<dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload. Values in the array are in the order of the layer [=spatial_id=].
+<dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of [=spatial_id=]. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.
 
+NOTE: The size of the last layer can be determined by substracting the sum of the sizes of all layers indicated in this property from the entire item size.
+
+<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
 
@@ -423,6 +430,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/139">Update a1lx property syntax and semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
