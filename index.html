@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="68abca09f94e16bb42baeaa65defb70cbfb90019" name="document-revision">
+  <meta content="835ed501c1550ad4b3c07f920b43d72924f77653" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1532,11 +1532,13 @@ New Image Formats and Brands" of <a data-link-type="biblio" href="#biblio-heif">
       <li data-md>
        <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall have exactly one <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③">Sequence Header OBU</a>.</p>
       <li data-md>
-       <p>If the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data②">AV1 Image Item Data</a> is made of a single frame (i.e. when using a single layer),</p>
-      <li data-md>
-       <p>It should have its <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④">still_picture</a></code> flag set to 1.</p>
-      <li data-md>
-       <p>It should have its <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑤">reduced_still_picture_header</a></code> flag set to 1.</p>
+       <p>If the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data②">AV1 Image Item Data</a> consists of a single frame (i.e. when using a single layer),</p>
+       <ul>
+        <li data-md>
+         <p>It should have its <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④">still_picture</a></code> flag set to 1.</p>
+        <li data-md>
+         <p>It should have its <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑤">reduced_still_picture_header</a></code> flag set to 1.</p>
+       </ul>
      </ul>
    </ul>
    <h3 class="heading settled" data-level="2.2" id="image-item-properties"><span class="secno">2.2. </span><span class="content">Image Item Properties</span><a class="self-link" href="#image-item-properties"></a></h3>

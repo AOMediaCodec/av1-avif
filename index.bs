@@ -169,9 +169,9 @@ When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, 
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
     - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].
     - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
-    - If the [=AV1 Image Item Data=] is made of a single frame (i.e. when using a single layer),
-      - It should have its <code>[=still_picture=]</code> flag set to 1.
-      - It should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
+    - If the [=AV1 Image Item Data=] consists of a single frame (i.e. when using a single layer),
+        - It should have its <code>[=still_picture=]</code> flag set to 1.
+        - It should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
 
 <h3 id="image-item-properties">Image Item Properties</h3>
 
