@@ -141,6 +141,12 @@ url: #biblio-av1; spec: AV1; type: dfn;
     text: choose_operating_point
     text: spatial_id
     text: seq_level_idx
+    text: render_width_minus1
+    text: render_height_minus1
+    text: FrameWidth
+    text: FrameHeight
+    text: max_frame_width_minus1
+    text: max_frame_height_minus1
 </pre>
 
 <h2 id="general">Scope</h2>
@@ -193,6 +199,23 @@ The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are i
 
 This property shall be marked as essential.
 
+<h4 id ="image-spatial-extents-property">Image Spatial Extents Property</h4>
+
+The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, it corresponds to the [=FrameWidth=] and [=FrameHeight=] values as defined in [[!AV1]] for a frame that depends on the presence of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
+
+- In the absence of a 'lsel' property associated with the item:
+    - If no [=OperatingPointSelectorProperty=] is associated with the item, the 'ispe' shall document the dimensions of the last frame decoded when processing the operating point whose index is 0.
+
+    - If an [=OperatingPointSelectorProperty=] is associated with the item, the 'ispe' property shall document the dimension of last frame decoded when processing the corresponding operating point.
+
+    NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. If they display these intermediate images, renderers are expected to scale the output image to match the 'ispe' property.
+
+- If a 'lsel' property is associated with an item, the 'ispe' property documents the dimensions of the output frame produced by decoding the corresponding layer.
+
+NOTE: The dimensions indicated in the 'ispe' property might not match the values [=max_frame_width_minus1=]+1 and [=max_frame_height_minus1=]+1 indicated in the AV1 bitstream.
+
+NOTE: The values of [=render_width_minus1=] and [=render_height_minus1=] possibly present in the AV1 bistream are not exposed in the AVIF container level.
+
 <h4 id ="other-item-property">Other Item Properties</h4>
 
 In addition to the Image Properties defined in [[!HEIF]], such as 'colr', 'pixi' or 'pasp', [=AV1 image items=] MAY also be associated with 'clli', 'cclv' and 'mdcv' introduced in [[!MIAF]].
@@ -219,7 +242,7 @@ NOTE: When such a progressive decoding of the layers within an [=Operating Point
 <h6 id ="operating-point-selector-property-definition" class="no-toc">Definition</h6>
 
 <pre class="def">
-  Box Type:       <dfn value export for="OperatingPointSelectorProperty">a1op</dfn>
+  Box Type:       <dfn value="a1op" export for="OperatingPointSelectorProperty">a1op</dfn>
   Property type:  Descriptive item property
   Container:      <code>ItemPropertyContainerBox</code>
   Mandatory:      No
@@ -229,12 +252,6 @@ NOTE: When such a progressive decoding of the layers within an [=Operating Point
 <h6 id="operating-point-selector-property-description" class="no-toc">Description</h6>
 
 An <dfn>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Image Item=] to provide the index of the operating point to be processed for this item. If associated, it shall be marked as essential.
-
-In the absence of a 'lsel' property associated with the item:
-- If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the 'ispe' property associated with this item shall describe the dimension of the output image corresponding to the operating point.
-- If no [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the 'ispe' documents the dimensions of the operating point whose index is 0.
-
-NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. Renderers are expected to scale the output image to match the 'ispe' property.
 
 <h6 id ="operating-point-selector-property-syntax" class="no-toc">Syntax</h6>
 
@@ -250,8 +267,6 @@ class OperatingPointSelectorProperty extends ItemFullProperty('a1op', version = 
 
 <h5 id ="layer-selector-property">Layer Selector Property</h5>
 The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The 'layer_id' indicates the value of the [=spatial_id=] to render. The value shall be between 0 and 3. The corresponding spatial layer shall be present in the bitstream and shall produce an output frame. Other layers may be needed to decode the indicated layer.
-
-If this property is associated with an item, the 'ispe' property documents the dimensions of the output frame produced by decoding this layer.
 
 <h5 id ="layered-image-indexing-property">Layered Image Indexing Property</h5>
 
