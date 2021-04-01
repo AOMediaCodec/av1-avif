@@ -191,7 +191,7 @@ The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are i
   - The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
   - [=Metadata OBUs=], if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
 
-This property shall be marked as essential.
+This property should be marked as essential.
 
 <h4 id ="other-item-property">Other Item Properties</h4>
 
@@ -423,6 +423,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
