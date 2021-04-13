@@ -175,8 +175,9 @@ When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, 
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
     - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].
     - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
-    - The [=AV1 Image Item Data=] should have its <code>[=still_picture=]</code> flag set to 1.
-    - The [=AV1 Image Item Data=] should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
+    - If the [=AV1 Image Item Data=] consists of a single frame (i.e. when using a single layer),
+        - It should have its <code>[=still_picture=]</code> flag set to 1.
+        - It should have its <code>[=reduced_still_picture_header=]</code> flag set to 1.
 
 <h3 id="image-item-properties">Image Item Properties</h3>
 
@@ -197,7 +198,7 @@ The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are i
   - The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
   - [=Metadata OBUs=], if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.
 
-This property shall be marked as essential.
+This property should be marked as essential.
 
 <h4 id ="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
@@ -439,6 +440,8 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on reduced flags apply to non-layered images.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
