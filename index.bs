@@ -7,7 +7,7 @@ Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2021-03-31
+Date: 2021-04-13
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
 Boilerplate: property-index no, issues-index no, copyright yes
