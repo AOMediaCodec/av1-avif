@@ -302,7 +302,7 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
 
 <dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of [=spatial_id=]. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.
 
-NOTE: The size of the last layer can be determined by substracting the sum of the sizes of all layers indicated in this property from the entire item size.
+NOTE: The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.
 
 <div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
 

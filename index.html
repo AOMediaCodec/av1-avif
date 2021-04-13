@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="69e48e8e16c1f961871a71383f291e1af312ed68" name="document-revision">
+  <meta content="65764c5664476a546f6fac262600bec35d4bf957" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1630,7 +1630,7 @@ Quantity:       Zero or one
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-image-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-image-indexing-property-semantics"></a></h6>
    <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③③">spatial_id</a>. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.</p>
-   <p class="note" role="note"><span>NOTE:</span> The size of the last layer can be determined by substracting the sum of the sizes of all layers indicated in this property from the entire item size.</p>
+   <p class="note" role="note"><span>NOTE:</span> The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.</p>
    <div class="example" id="example-2a30869f"><a class="self-link" href="#example-2a30869f"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">spatial_id</a> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑤">spatial_id</a> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
    <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑥">Temporal Units</a> stored in an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑤">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
