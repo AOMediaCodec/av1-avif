@@ -463,3 +463,125 @@ A file containing a 'pict' track compliant with this profile is expected to list
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
 
+  <h2 id="example">Annex - Example (informative)</h2>
+
+  <h3 id="minimal-file">A minimal AVIF file</h2>
+  The simplest, minimal AVIF file is one that contains only one image item. Its box structure hierarchy is as follows:
+  <style>
+    table.box-hierarchy-table, table.box-hierarchy-table thead tr th, table.box-hierarchy-table tbody tr td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+
+  <table class="box-hierarchy-table">
+<thead>
+  <tr>
+    <th>Box Hierarchy Level 1 <br>(top-level boxes)</th>
+    <th>Box Hierarchy Level 2</th>
+    <th>Box Hierarchy Level 3</th>
+    <th>Box Hierarchy Level 4</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>ftyp</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Indicates the brands to which the file complies. See [[#brands]] and [[#file-constraints]].</td>
+  </tr>
+  <tr>
+    <td>meta</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Top-level container box whose content is box-structured and describes the items present in the file.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>hdlr</td>
+    <td></td>
+    <td></td>
+    <td>AVIF's underlying standards allow the <code>meta</code> box to be used for various usages. The <code>hdlr</code> box provides indication about the main usage of the file. In AVIF, <code>hdlr</code> indicates that the file carries image data.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>pitm</td>
+    <td></td>
+    <td></td>
+    <td>In the general case, a <code>meta</code> box could carry multiple images, the <code>pitm</code> indicates which image is the primary one, e.g. if only one has to be displayed, it should be this one.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>iinf</td>
+    <td></td>
+    <td></td>
+    <td>In our minimal case, it contains only one <code>infe</code> box.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>infe</td>
+    <td></td>
+    <td>Indicates the codec used to code the image, i.e. AV1 in our case. It may also provide a short name for the image.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>iloc</td>
+    <td></td>
+    <td></td>
+    <td>Tells the reader where to locate the sequence of bytes corresponding to an image. In a minimal file, only one extent is used and the offset and length point to the <code>mdat</code> box contents.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>iprp</td>
+    <td></td>
+    <td></td>
+    <td>Container for the <code>ipco</code> and <code>ipma</code> boxes, which are specific boxes used when images are stored in the <code>meta</code> box.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ipco</td>
+    <td></td>
+    <td>This is a container for boxes describing the image properties (e.g. width, height, aspect ratio, color space ...) of all the images in the file. In the general case, a property can be shared between images.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>ispe</td>
+    <td>Box providing the dimensions of the image.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>pasp</td>
+    <td>Box providing the pixel aspect ratio of the image.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>av1C</td>
+    <td>Box providing the decoding configuration of the image. It may be needed to initialize some decoders.</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>ipma</td>
+    <td></td>
+    <td>This box associates a property contained in the <code>ipco</code> box with a particular image. In our minimal case, the association is simple. All the properties apply to the unique image.</td>
+  </tr>
+  <tr>
+    <td>mdat</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Box where the actual image bytes are stored.</td>
+  </tr>
+</tbody>
+</table>

@@ -1214,7 +1214,13 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="7ee4a1432d77d75042da68059569152685630bf4" name="document-revision">
+  <meta content="781b787ea20096265b526c40575c1c820edd1531" name="document-revision">
+<style>
+    table.box-hierarchy-table, table.box-hierarchy-table thead tr th, table.box-hierarchy-table tbody tr td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1492,6 +1498,11 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </p>
      </ol>
     <li><a href="#mime-registration"><span class="secno">8</span> <span class="content">AVIF Media Type Registration</span></a>
     <li><a href="#change-list"><span class="secno">9</span> <span class="content">Changes since v1.0.0 release</span></a>
+    <li>
+     <a href="#example"><span class="secno">10</span> <span class="content">Annex - Example (informative)</span></a>
+     <ol class="toc">
+      <li><a href="#minimal-file"><span class="secno">10.1</span> <span class="content">A minimal AVIF file</span></a>
+     </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1780,6 +1791,103 @@ Quantity:       Zero or one
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.</p>
    </ul>
+   <h2 class="heading settled" data-level="10" id="example"><span class="secno">10. </span><span class="content">Annex - Example (informative)</span><a class="self-link" href="#example"></a></h2>
+   <h3 class="heading settled" data-level="10.1" id="minimal-file"><span class="secno">10.1. </span><span class="content">A minimal AVIF file</span><a class="self-link" href="#minimal-file"></a></h3>
+    The simplest, minimal AVIF file is one that contains only one image item. Its box structure hierarchy is as follows: 
+   <table class="box-hierarchy-table">
+    <thead>
+     <tr>
+      <th>Box Hierarchy Level 1 <br>(top-level boxes)
+      <th>Box Hierarchy Level 2
+      <th>Box Hierarchy Level 3
+      <th>Box Hierarchy Level 4
+      <th>Description
+    <tbody>
+     <tr>
+      <td>ftyp
+      <td>
+      <td>
+      <td>
+      <td>Indicates the brands to which the file complies. See <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> and <a href="#file-constraints">§ 6 General constraints</a>.
+     <tr>
+      <td>meta
+      <td>
+      <td>
+      <td>
+      <td>Top-level container box whose content is box-structured and describes the items present in the file.
+     <tr>
+      <td>
+      <td>hdlr
+      <td>
+      <td>
+      <td>AVIF’s underlying standards allow the <code>meta</code> box to be used for various usages. The <code>hdlr</code> box provides indication about the main usage of the file. In AVIF, <code>hdlr</code> indicates that the file carries image data.
+     <tr>
+      <td>
+      <td>pitm
+      <td>
+      <td>
+      <td>In the general case, a <code>meta</code> box could carry multiple images, the <code>pitm</code> indicates which image is the primary one, e.g. if only one has to be displayed, it should be this one.
+     <tr>
+      <td>
+      <td>iinf
+      <td>
+      <td>
+      <td>In our minimal case, it contains only one <code>infe</code> box.
+     <tr>
+      <td>
+      <td>
+      <td>infe
+      <td>
+      <td>Indicates the codec used to code the image, i.e. AV1 in our case. It may also provide a short name for the image.
+     <tr>
+      <td>
+      <td>iloc
+      <td>
+      <td>
+      <td>Tells the reader where to locate the sequence of bytes corresponding to an image. In a minimal file, only one extent is used and the offset and length point to the <code>mdat</code> box contents.
+     <tr>
+      <td>
+      <td>iprp
+      <td>
+      <td>
+      <td>Container for the <code>ipco</code> and <code>ipma</code> boxes, which are specific boxes used when images are stored in the <code>meta</code> box.
+     <tr>
+      <td>
+      <td>
+      <td>ipco
+      <td>
+      <td>This is a container for boxes describing the image properties (e.g. width, height, aspect ratio, color space ...) of all the images in the file. In the general case, a property can be shared between images.
+     <tr>
+      <td>
+      <td>
+      <td>
+      <td>ispe
+      <td>Box providing the dimensions of the image.
+     <tr>
+      <td>
+      <td>
+      <td>
+      <td>pasp
+      <td>Box providing the pixel aspect ratio of the image.
+     <tr>
+      <td>
+      <td>
+      <td>
+      <td>av1C
+      <td>Box providing the decoding configuration of the image. It may be needed to initialize some decoders.
+     <tr>
+      <td>
+      <td>
+      <td>ipma
+      <td>
+      <td>This box associates a property contained in the <code>ipco</code> box with a particular image. In our minimal case, the association is simple. All the properties apply to the unique image.
+     <tr>
+      <td>mdat
+      <td>
+      <td>
+      <td>
+      <td>Box where the actual image bytes are stored.
+   </table>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
