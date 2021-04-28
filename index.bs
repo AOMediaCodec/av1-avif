@@ -257,7 +257,7 @@ An <dfn>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Ima
 <h6 id ="operating-point-selector-property-syntax" class="no-toc">Syntax</h6>
 
 ```
-class OperatingPointSelectorProperty extends ItemFullProperty('a1op', version = 0, flags) {
+class OperatingPointSelectorProperty extends ItemProperty('a1op') {
     u8 op_index;
 }
 ```

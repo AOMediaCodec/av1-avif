@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="7ee4a1432d77d75042da68059569152685630bf4" name="document-revision">
+  <meta content="781b787ea20096265b526c40575c1c820edd1531" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1601,7 +1601,7 @@ Quantity:       Zero or one
    <h6 class="no-toc heading settled" data-level="2.3.2.1.2" id="operating-point-selector-property-description"><span class="secno">2.3.2.1.2. </span><span class="content">Description</span><a class="self-link" href="#operating-point-selector-property-description"></a></h6>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="operatingpointselectorproperty">OperatingPointSelectorProperty</dfn> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①①">AV1 Image Item</a> to provide the index of the operating point to be processed for this item. If associated, it shall be marked as essential.</p>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.3" id="operating-point-selector-property-syntax"><span class="secno">2.3.2.1.3. </span><span class="content">Syntax</span><a class="self-link" href="#operating-point-selector-property-syntax"></a></h6>
-<pre>class OperatingPointSelectorProperty extends ItemFullProperty('a1op', version = 0, flags) {
+<pre>class OperatingPointSelectorProperty extends ItemProperty('a1op') {
     u8 op_index;
 }
 </pre>
