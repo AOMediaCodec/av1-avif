@@ -257,7 +257,7 @@ An <dfn>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Ima
 <h6 id ="operating-point-selector-property-syntax" class="no-toc">Syntax</h6>
 
 ```
-class OperatingPointSelectorProperty extends ItemFullProperty('a1op', version = 0, flags) {
+class OperatingPointSelectorProperty extends ItemProperty('a1op') {
     u8 op_index;
 }
 ```
@@ -446,6 +446,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/146">Update a1op to simple box.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/143">Update a1lx property syntax and semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a>
