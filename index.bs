@@ -7,7 +7,7 @@ Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2021-04-13
+Date: 2021-04-30
 Repository: AOMediaCodec/av1-avif
 Inline Github Issues: full
 Boilerplate: property-index no, issues-index no, copyright yes
@@ -67,7 +67,7 @@ Custom Warning Text: This specification is a draft of a potential new version of
 </pre>
 
 <div boilerplate='copyright'>
-<p>Copyright 2019, The Alliance for Open Media</p>
+<p>Copyright 2021, The Alliance for Open Media</p>
 
 <p>Licensing information is available at http://aomedia.org/license/</p>
 
@@ -465,5 +465,5 @@ A file containing a 'pict' track compliant with this profile is expected to list
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/100">Rephrase statement about auxiliary images and profiles.</a> (Editorial change)
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a> This is a non-backwards compatible change.
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a>
 
