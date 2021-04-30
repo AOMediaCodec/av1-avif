@@ -313,6 +313,8 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 
     - The track shall be a valid [=MIAF image sequence=].
     - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
+    - The track shall have only one sample description entry.
+    - If multiple [=Sequence Header OBUs=] are present in the track payload, they shall be identical.
 
     <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 <p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
@@ -446,6 +448,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/147">Constrain image sequence to one sample description entry and constant sequence header.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/146">Update a1op to simple box.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/143">Update a1lx property syntax and semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a>
