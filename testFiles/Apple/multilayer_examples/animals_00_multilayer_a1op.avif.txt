@@ -1,0 +1,37 @@
+Input image is animals_00 from the Apple test set, rotated to upright (i.e. 180 degrees) and downscaled to 2048x1536 so encoding is faster.
+
+AV1 is encoded using libaom and the following settings:
+
+rc_end_usage = AOM_Q
+g_error_resilient = 0
+g_lag_in_frames = 0
+save_as_annexb = 0
+aom_codec_control(codec, AOME_SET_NUMBER_SPATIAL_LAYERS, 2)
+aom_codec_control(codec, AV1E_SET_COLOR_RANGE, 1)
+
+Layer 0:
+flags = AOM_EFLAG_FORCE_KF
+aom_codec_control(codec, AOME_SET_CQ_LEVEL, 62)
+aom_codec_control(codec, AOME_SET_SCALEMODE, &{ AOME_ONETWO, AOME_ONETWO })
+
+Layer 1:
+flags = AOM_EFLAG_NO_REF_LAST2 | AOM_EFLAG_NO_REF_LAST3 |
+	AOM_EFLAG_NO_REF_GF | AOM_EFLAG_NO_REF_ARF |
+	AOM_EFLAG_NO_REF_BWD | AOM_EFLAG_NO_REF_ARF2 |
+	AOM_EFLAG_NO_UPD_GF | AOM_EFLAG_NO_UPD_ARF |
+	AOM_EFLAG_NO_UPD_ENTROPY;
+aom_codec_control(codec, AOME_SET_CQ_LEVEL, 3)
+aom_codec_control(codec, AOME_SET_SCALEMODE, &{ AOME_NORMAL, AOME_NORMAL })
+
+AV1 stream contains two operating points. Operating point 0 contains both layers, operating point 1 contains the base layer (layer 0).
+
+Stream is embedded in a HEIF container as two items.
+Item 1:
+	ispe = 2048x1536
+	a1op property selects operating point 0 (with layer defaulting to layer 1)
+	iloc points to layer 0 and layer 1, separated in two extents
+
+Item 2:
+	ispe = 1024x768
+	a1op property selects operating point 1 (layer 0)
+	iloc points to layer 0 and layer 1, separated in two extents
