@@ -85,7 +85,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <pre class="anchors">
 url: #biblio-heif; spec: HEIF; type: property;
-    text: colr
+    text: colr 
     text: mif1
     text: msf1
     text: pasp
@@ -105,6 +105,7 @@ url: #biblio-isobmff; spec: ISOBMFF; type: property;
     text: cclv
     text: clli
     text: mdcv
+    text: clap
     text: iloc
 
 url: #biblio-miaf; spec: MIAF; type: property;
@@ -222,6 +223,8 @@ NOTE: The values of [=render_width_minus1=] and [=render_height_minus1=] possibl
 In addition to the Image Properties defined in [[!HEIF]], such as 'colr', 'pixi' or 'pasp', [=AV1 image items=] MAY also be associated with 'clli', 'cclv' and 'mdcv' introduced in [[!MIAF]].
 
 In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1 Item Configuration Property=].
+
+NOTE: Although the clean aperture property ('clap') defined in [[!HEIF]] is applicable to AVIF, implementers of authoring tools should be aware of the possibility of unintended consequences since users may not realize image data outside the clap region is still in the file. A future revision of this specification may place normative restrictions on how clap can be used.
 
 <h3 id ="layered-items">AV1 Layered Image Items</h3>
 
