@@ -85,7 +85,7 @@ THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <pre class="anchors">
 url: #biblio-heif; spec: HEIF; type: property;
-    text: colr 
+    text: colr
     text: mif1
     text: msf1
     text: pasp
