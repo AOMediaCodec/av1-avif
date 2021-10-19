@@ -296,7 +296,7 @@ The [=AV1LayeredImageIndexingProperty=] documents the size in bytes of each laye
 class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
     unsigned int(7) reserved = 0;
     unsigned int(1) large_size;
-    FieldLength = ((large_size & 1) + 1) * 16;
+    FieldLength = (large_size + 1) * 16;
     unsigned int(FieldLength)[3] layer_size;
 }
 ```
