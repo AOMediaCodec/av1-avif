@@ -1,0 +1,17 @@
+name: Auto-Publish
+on:
+  push:
+    branches: [master]
+jobs:
+  main:
+    name: Deploy to GitHub pages
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: w3c/spec-prod@v2
+        with:
+          GH_PAGES_BRANCH: gh-pages
+          TOOLCHAIN: bikeshed
+          SOURCE: index.bs
+          DESTINATION: index.html
+          VALIDATE_MARKUP: false
