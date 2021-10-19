@@ -307,7 +307,7 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
 
 NOTE: The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.
 
-<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
+<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
 
@@ -374,7 +374,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
   - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
   - If transformative properties are used in derivation chains (as defined in [[MIAF]]), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
-  NOTE: This constraints further restricts files compared to [[MIAF]].
+  NOTE: This constraint further restricts files compared to [[MIAF]].
 
   <h2 id="profiles">Profiles</h2>
 
