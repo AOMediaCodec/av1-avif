@@ -582,7 +582,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
             <td>&nbsp;</td>
             <td>ipma</td>
             <td>&nbsp;</td>
-            <td>-</td>
+            <td>0, 1</td>
             <td>ISOBMFF</td>
             <td>&nbsp;</td>
         </tr>
