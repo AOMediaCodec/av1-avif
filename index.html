@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version bbc364800, updated Mon Nov 15 13:57:55 2021 -0800" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="dc6a80dcbc500057b0c1a524dd15f13d7447347d" name="document-revision">
+  <meta content="0b6858bedc765579abbfd6bdb8cec6cc140fa6de" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -2156,14 +2156,14 @@ Quantity:       Zero or one
 <pre>class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
     unsigned int(7) reserved = 0;
     unsigned int(1) large_size;
-    FieldLength = ((large_size &amp; 1) + 1) * 16;
+    FieldLength = (large_size + 1) * 16;
     unsigned int(FieldLength)[3] layer_size;
 }
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-image-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-image-indexing-property-semantics"></a></h6>
    <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③③">spatial_id</a>. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.</p>
    <p class="note" role="note"><span>NOTE:</span> The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.</p>
-   <div class="example" id="example-2a30869f"><a class="self-link" href="#example-2a30869f"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">spatial_id</a> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑤">spatial_id</a> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
+   <div class="example" id="example-4f7751ed"><a class="self-link" href="#example-4f7751ed"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">spatial_id</a> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑤">spatial_id</a> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
    <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑥">Temporal Units</a> stored in an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑤">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
    <ul>
@@ -2228,7 +2228,7 @@ Quantity:       Zero or one
     <li data-md>
      <p>If transformative properties are used in derivation chains (as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.</p>
    </ul>
-   <p class="note" role="note"><span>NOTE:</span> This constraints further restricts files compared to <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
+   <p class="note" role="note"><span>NOTE:</span> This constraint further restricts files compared to <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
    <h2 class="heading settled" data-level="7" id="profiles"><span class="secno">7. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <h3 class="heading settled" data-level="7.1" id="profiles-overview"><span class="secno">7.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①⓪">AV1 Image File Format</a> readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.</p>
@@ -2286,15 +2286,11 @@ Quantity:       Zero or one
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/147">Constrain image sequence to one sample description entry and constant sequence header.</a></p>
     <li data-md>
-     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/146">Update a1op to simple box.</a></p>
-    <li data-md>
-     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/143">Update a1lx property syntax and semantics.</a></p>
-    <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a></p>
     <li data-md>
-     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on reduced flags apply to non-layered images.</a></p>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on still picture flags apply to non-layered images.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a></p>
     <li data-md>
@@ -2310,7 +2306,7 @@ Quantity:       Zero or one
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/116">add support for the ContentColourVolumeBox property.</a></p>
     <li data-md>
-     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still flags in image sequences.</a></p>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still picture flags in image sequences.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a></p>
     <li data-md>
