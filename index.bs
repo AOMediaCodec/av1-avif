@@ -293,7 +293,7 @@ The [=AV1LayeredImageIndexingProperty=] documents the size in bytes of each laye
 class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
     unsigned int(7) reserved = 0;
     unsigned int(1) large_size;
-    FieldLength = ((large_size & 1) + 1) * 16;
+    FieldLength = (large_size + 1) * 16;
     unsigned int(FieldLength)[3] layer_size;
 }
 ```
@@ -304,7 +304,7 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
 
 NOTE: The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.
 
-<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
+<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
 
@@ -371,7 +371,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
   - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
   - If transformative properties are used in derivation chains (as defined in [[MIAF]]), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
-  NOTE: This constraints further restricts files compared to [[MIAF]].
+  NOTE: This constraint further restricts files compared to [[MIAF]].
 
   <h2 id="profiles">Profiles</h2>
 
@@ -449,11 +449,9 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/147">Constrain image sequence to one sample description entry and constant sequence header.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/146">Update a1op to simple box.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/143">Update a1lx property syntax and semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on reduced flags apply to non-layered images.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on still picture flags apply to non-layered images.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
@@ -461,7 +459,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/116">add support for the ContentColourVolumeBox property.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still flags in image sequences.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still picture flags in image sequences.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/100">Rephrase statement about auxiliary images and profiles.</a> (Editorial change)
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
