@@ -10,6 +10,7 @@ Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
 Date: 2021-04-30
 Repository: AOMediaCodec/av1-avif
+Local Boilerplate: logo yes
 Warning: Custom
 Custom Warning Title: Warning
 Custom Warning Text: This specification is a draft of a potential new version of this specification and should not be referenced other than as a working draft.
