@@ -8,8 +8,5 @@ to enable generation of cross-references, syntax highlighting, ...
 The file using this syntax is index.bs.
 
 index.bs is processed to produce an HTML version (index.html) by a tool
-called Bikeshed (https://github.com/tabatkins/bikeshed).
-
-The repository contains both the input and the result of the Bikeshed processing.
-
-Pull requests should contain updates to both files index.html and index.bs, and possibly to other files (Bibliography biblio.json).
+called Bikeshed (https://github.com/tabatkins/bikeshed), which is run when content is
+pushed onto the master branch or when Pull Requests are made.

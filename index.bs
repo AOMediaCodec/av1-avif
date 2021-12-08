@@ -1,6 +1,7 @@
 <pre class='metadata'>
+Group: AOM
+Status: WGA
 Title: AV1 Image File Format (AVIF)
-Status: LS-COMMIT
 URL: https://AOMediaCodec.github.io/av1-avif
 Shortname: av1-avif
 Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
@@ -9,14 +10,8 @@ Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
 Date: 2021-04-30
 Repository: AOMediaCodec/av1-avif
-Inline Github Issues: full
-Boilerplate: property-index no, issues-index no, copyright yes
-Markup Shorthands: css on
-Group: AOM
-Warning: Custom
-Custom Warning Title: Warning
-Custom Warning Text: This specification is a draft of a potential new version of this specification and should not be referenced other than as a working draft.
-!Last approved version: <a href="https://rawcdn.githack.com/AOMediaCodec/av1-avif/67a92add6cd642a8863e386fa4db87954a6735d1/index.html">v1.0.0</a>
+Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
+!Previously approved version: <a href="v1.0.0.html">v1.0.0</a>
 </pre>
 
 <pre class='biblio'>
@@ -66,22 +61,6 @@ Custom Warning Text: This specification is a draft of a potential new version of
 }
 </pre>
 
-<div boilerplate='copyright'>
-<p>Copyright 2021, The Alliance for Open Media</p>
-
-<p>Licensing information is available at http://aomedia.org/license/</p>
-
-<p>The MATERIALS ARE PROVIDED “AS IS.” The Alliance for Open Media, its members, and its contributors
-expressly disclaim any warranties (express, implied, or otherwise), including implied warranties of
-merchantability, non-infringement, fitness for a particular purpose, or title, related to the materials.
-The entire risk as to implementing or otherwise using the materials is assumed by the implementer and user.
-IN NO EVENT WILL THE ALLIANCE FOR OPEN MEDIA, ITS MEMBERS, OR CONTRIBUTORS BE LIABLE TO ANY OTHER PARTY
-FOR LOST PROFITS OR ANY FORM OF INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER
-FROM ANY CAUSES OF ACTION OF ANY KIND WITH RESPECT TO THIS DELIVERABLE OR ITS GOVERNING AGREEMENT,
-WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, AND WHETHER OR NOT
-THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-</p>
-</div>
 
 <pre class="anchors">
 url: #biblio-heif; spec: HEIF; type: property;
@@ -296,7 +275,7 @@ The [=AV1LayeredImageIndexingProperty=] documents the size in bytes of each laye
 class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
     unsigned int(7) reserved = 0;
     unsigned int(1) large_size;
-    FieldLength = ((large_size & 1) + 1) * 16;
+    FieldLength = (large_size + 1) * 16;
     unsigned int(FieldLength)[3] layer_size;
 }
 ```
@@ -307,7 +286,7 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
 
 NOTE: The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.
 
-<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image is made of 3 layers.</div>
+<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
 
@@ -374,7 +353,7 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
   - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
   - If transformative properties are used in derivation chains (as defined in [[MIAF]]), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
-  NOTE: This constraints further restricts files compared to [[MIAF]].
+  NOTE: This constraint further restricts files compared to [[MIAF]].
 
   <h2 id="profiles">Profiles</h2>
 
@@ -805,11 +784,9 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
   <h2 id="change-list">Changes since v1.0.0 release</h2>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/147">Constrain image sequence to one sample description entry and constant sequence header.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/146">Update a1op to simple box.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/143">Update a1lx property syntax and semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on reduced flags apply to non-layered images.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on still picture flags apply to non-layered images.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
@@ -817,7 +794,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/116">add support for the ContentColourVolumeBox property.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still flags in image sequences.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still picture flags in image sequences.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/100">Rephrase statement about auxiliary images and profiles.</a> (Editorial change)
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
