@@ -670,7 +670,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
         <tr>
             <td>&nbsp;</td>
             <td>altr</td>
-            <td>-</td>
+            <td>0</td>
             <td>ISOBMFF</td>
             <td>&nbsp;</td>
             <td>Used when images in a group are alternative to each other</td>
@@ -702,7 +702,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
         <tr>
             <td>clap</td>
             <td>&nbsp;</td>
-            <td>0</td>
+            <td>-</td>
             <td>ISOBMFF</td>
             <td>ipco</td>
             <td>Used to signal cropping applied to an image</td>
@@ -727,7 +727,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
             <td>clli</td>
             <td>&nbsp;</td>
             <td>-</td>
-            <td>MIAF</td>
+            <td>ISOBMFF</td>
             <td>ipco</td>
             <td>Used to signal HDR light level information for an image</td>
         </tr>
@@ -743,7 +743,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
             <td>mdcv</td>
             <td>&nbsp;</td>
             <td>-</td>
-            <td>MIAF</td>
+            <td>ISOBMFF</td>
             <td>ipco</td>
             <td>Used to signal HDR mastering information for an image</td>
         </tr>
