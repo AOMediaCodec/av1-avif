@@ -240,7 +240,7 @@ An <dfn>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Ima
 
 ```
 class OperatingPointSelectorProperty extends ItemProperty('a1op') {
-    u8 op_index;
+    unsigned int(8) op_index;
 }
 ```
 
@@ -276,7 +276,7 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
     unsigned int(7) reserved = 0;
     unsigned int(1) large_size;
     FieldLength = (large_size + 1) * 16;
-    unsigned int(FieldLength)[3] layer_size;
+    unsigned int(FieldLength) layer_size[3];
 }
 ```
 
