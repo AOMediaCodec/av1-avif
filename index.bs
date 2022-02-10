@@ -182,7 +182,7 @@ This property should be marked as essential.
 
 <h4 id ="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
-The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, it corresponds to the [=FrameWidth=] and [=FrameHeight=] values as defined in [[!AV1]] for a frame that depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
+The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, the values of 'image_width' and 'image_height' shall respectively equal the values of [=FrameWidth=] and [=FrameHeight=] as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
 
 - In the absence of a 'lsel' property associated with the item, or if it is present and its 'layer_id' value is set to 0xFFFF:
     - If no [=OperatingPointSelectorProperty=] is associated with the item, the 'ispe' shall document the dimensions of the last frame decoded when processing the operating point whose index is 0.
