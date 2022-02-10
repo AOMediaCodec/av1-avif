@@ -187,7 +187,7 @@ The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifi
 - In the absence of a 'lsel' property associated with the item, or if it is present and its 'layer_id' value is set to 0xFFFF:
     - If no [=OperatingPointSelectorProperty=] is associated with the item, the 'ispe' shall document the dimensions of the last frame decoded when processing the operating point whose index is 0.
 
-    - If an [=OperatingPointSelectorProperty=] is associated with the item, the 'ispe' property shall document the dimension of last frame decoded when processing the corresponding operating point.
+    - If an [=OperatingPointSelectorProperty=] is associated with the item, the 'ispe' property shall document the dimensions of the last frame decoded when processing the corresponding operating point.
 
     NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. If they display these intermediate images, renderers are expected to scale the output image to match the 'ispe' property.
 
