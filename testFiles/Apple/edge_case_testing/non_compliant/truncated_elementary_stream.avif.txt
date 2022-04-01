@@ -37,3 +37,4 @@ Item 1:
 Item 2:
 	ispe = 2048x1535
 	iloc points to layer 0 and layer 1, separated in two extents
+	lsel is set to 0xFFFF, which means layer 1 should be displayed
