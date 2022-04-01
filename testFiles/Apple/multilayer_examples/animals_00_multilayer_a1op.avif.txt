@@ -28,10 +28,12 @@ AV1 stream contains two operating points. Operating point 0 contains both layers
 Stream is embedded in a HEIF container as two items.
 Item 1:
 	ispe = 2048x1536
-	a1op property selects operating point 0 (with layer defaulting to layer 1)
+	a1op property selects operating point 0
+	lsel property is set to 0xFFFF, which indicates that layer 1 should be displayed
 	iloc points to layer 0 and layer 1, separated in two extents
 
 Item 2:
 	ispe = 1024x768
-	a1op property selects operating point 1 (layer 0)
+	a1op property selects operating point 1
+	lsel property is set to 0xFFFF, which indicates that layer 0 should be displayed
 	iloc points to layer 0 and layer 1, separated in two extents
