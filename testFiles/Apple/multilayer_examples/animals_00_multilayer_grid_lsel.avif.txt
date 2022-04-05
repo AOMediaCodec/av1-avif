@@ -33,13 +33,13 @@ item 1:
 	references to items 3-6
 item 2:
 	grid
-	ispe = 1024x738
+	ispe = 1024x768
 	references to items 7-10
 items 3-6:
-	ispe = 1024x1536
+	ispe = 1024x768
 	iloc points to layer 0 and layer 1, separated in two extents
 	lsel property selects layer 1
 items 7-10:
-	ispe = 1024x1536
+	ispe = 512x384
 	iloc points to layer 0 and layer 1, separated in two extents
 	lsel property selects layer 0

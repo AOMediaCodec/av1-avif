@@ -1,3 +1,7 @@
+IMPORTANT:
+This file is technically not correct since the first item points to an incomplete elementary stream. How a parser handles this is undefined. See https://github.com/AOMediaCodec/av1-avif/issues/152.
+
+
 Input image is animals_00 from the Apple test set, rotated to upright (i.e. 180 degrees) and downscaled to 2048x1536 so encoding is faster.
 
 AV1 is encoded using libaom and the following settings:
