@@ -1,17 +1,20 @@
 <pre class='metadata'>
 Group: AOM
-Status: WGA
+Status: FD
+Text Macro: SPECVERSION v1.1.0
 Title: AV1 Image File Format (AVIF)
-URL: https://AOMediaCodec.github.io/av1-avif
+URL: https://AOMediaCodec.github.io/av1-avif/v1.1.0.html
+!Latest version: <a href="https://AOMediaCodec.github.io/av1-avif">https://AOMediaCodec.github.io/av1-avif</a>
+!Previously approved version: <a href="v1.0.0.html">v1.0.0</a>
 Shortname: av1-avif
 Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
-Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
+Former Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2021-04-30
+Date: 2022-04-15
 Repository: AOMediaCodec/av1-avif
 Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
-!Previously approved version: <a href="v1.0.0.html">v1.0.0</a>
+Metadata Order: This version, !*, *
 </pre>
 
 <pre class='biblio'>
@@ -438,7 +441,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on still picture flags apply to non-layered images.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images to allow selective or progressive decoding of layers.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/125">Add restriction on transformative properties in derivation chains.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
