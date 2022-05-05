@@ -441,7 +441,8 @@ A file containing a 'pict' track compliant with this profile is expected to list
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on still picture flags apply to non-layered images.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a>
+- <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered
+images to allow selective or progressive decoding of layers.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/125">Add restriction on transformative properties in derivation chains.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a>
 - <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
