@@ -1488,8 +1488,8 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version fb1e763a4, updated Tue Mar 1 13:13:50 2022 -0800" name="generator">
-  <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="98ef5db5cd435431e624979a6b1caef783bbb01e" name="document-revision">
+  <link href="https://AOMediaCodec.github.io/av1-avif/v1.1.0.html" rel="canonical">
+  <meta content="507662b3d86dc462144a83a7185211885e463790" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1934,30 +1934,28 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.aomedia.org/" style="width: 200px"> <img alt="AOM" height="60" src="https://aomedia.org/assets/images/aomedia-logo-rgb.svg" width="200"> <img src="https://aomedia.org/assets/images/avif-logo-rgb.svg" width="200"> </a> </p>
    <h1 class="p-name no-ref" id="title">AV1 Image File Format (AVIF)</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">AOM Working Group Approved Draft, <time class="dt-updated" datetime="2021-04-30">30 April 2021</time></span></h2>
+   <h2 class="p-name no-num no-toc no-ref heading settled" id="subtitle"><span class="content">v1.1.0</span></h2>
+   <h3 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">AOM Final Deliverable, <time class="dt-updated" datetime="2022-04-15">15 April 2022</time></span></h3>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
-     <dd><a class="u-url" href="https://AOMediaCodec.github.io/av1-avif">https://AOMediaCodec.github.io/av1-avif</a>
-     <dt>Issue Tracking:
-     <dd><a href="https://github.com/AOMediaCodec/av1-avif/issues/">GitHub</a>
-     <dt class="editor">Editors:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:cconcolato@netflix.com">Cyril Concolato</a> (<span class="p-org org">Netflix</span>)
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:Anders.Klemets@microsoft.com">Anders Klemets</a> (<span class="p-org org">Microsoft</span>)
-     <dt class="editor">Former Editor:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:pkerr@netflix.com">Paul Kerr</a> (<span class="p-org org">Netflix</span>)
+     <dd><a class="u-url" href="https://AOMediaCodec.github.io/av1-avif/v1.1.0.html">https://AOMediaCodec.github.io/av1-avif/v1.1.0.html</a>
+     <dt>Latest version:
+     <dd><a href="https://AOMediaCodec.github.io/av1-avif">https://AOMediaCodec.github.io/av1-avif</a>
      <dt>Previously approved version:
      <dd><a href="v1.0.0.html">v1.0.0</a>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/AOMediaCodec/av1-avif/issues/">GitHub</a>
+     <dt class="editor">Editor:
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:cconcolato@netflix.com">Cyril Concolato</a> (<span class="p-org org">Netflix</span>)
+     <dt class="editor">Former Editors:
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:pkerr@netflix.com">Paul Kerr</a> (<span class="p-org org">Netflix</span>)
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:Anders.Klemets@microsoft.com">Anders Klemets</a> (<span class="p-org org">Microsoft</span>)
     </dl>
    </div>
-   <div data-fill-with="warning">
-    <details class="annoying-warning" open>
-     <summary>Release Candidate</summary>
-     <p>This document is the release candidate for the next version of this specification. It awaits formal approval by the AOM.</p>
-    </details>
-   </div>
+   <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright">
-    <p>Copyright 2021, <a href="https://aomedia.org">AOM</a></p>
+    <p>Copyright 2022, <a href="https://aomedia.org">AOM</a></p>
     <p>Licensing information is available at <a href="http://aomedia.org/license/">http://aomedia.org/license/</a></p>
     <p>The MATERIALS ARE PROVIDED “AS IS.” The Alliance for Open Media, its members, and its contributors expressly disclaim any warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to the materials. The entire risk as to implementing or otherwise using the materials is assumed by the implementer and user. IN NO EVENT WILL THE ALLIANCE FOR OPEN MEDIA, ITS MEMBERS, OR CONTRIBUTORS BE LIABLE TO ANY OTHER PARTY FOR LOST PROFITS OR ANY FORM OF INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER FROM ANY CAUSES OF ACTION OF ANY KIND WITH RESPECT TO THIS DELIVERABLE OR ITS GOVERNING AGREEMENT, WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, AND WHETHER OR NOT THE OTHER MEMBER HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
    </p>
@@ -1967,7 +1965,6 @@ dfn > a.self-link::before      { content: "#"; }
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This document specifies syntax and semantics for the storage of <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> images in the generic image file format <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, which is based on <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>. While <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> is used with <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> images. These constraints are based on constraints defined in the Multi-Image Application Format <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and are grouped into profiles inspired by the profiles defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
   </div>
-  <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
@@ -2288,7 +2285,7 @@ Quantity:       Zero or one
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a></p>
     <li data-md>
-     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images.</a></p>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images to allow selective or progressive decoding of layers.</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/125">Add restriction on transformative properties in derivation chains.</a></p>
     <li data-md>
