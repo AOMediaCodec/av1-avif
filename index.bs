@@ -78,11 +78,29 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: layer_id
     text: image_width
     text: image_height
+    text: ImageSpatialExtentsProperty
+    text: PixelInformationProperty
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
+    text: minor_version
+    text: ItemLocationBox
+    text: ItemInfoBox
+    text: ItemInfoEntry
+    text: Item ID
+    text: Item
+    text: ItemPropertiesBox
+    text: HandlerBox
+    text: Primary Item
+    text: MediaDataBox
+    text: IdentifiedMediaDataBox
+    text: Metabox
+    text: PrimaryItemBox
+    text: ItemReferenceBox
+    text: SingleItemTypeReferenceBox
+    text: ItemPropertyAssociationBox
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: sync
@@ -150,11 +168,17 @@ New Image Formats and Brands" of [[!HEIF]].
 
 This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
+<h3 id="general-version-two">AVIF version 2</h3>
+
+<p>Files or streams that indicate the brand <code>[=avif=]</code> as the [=major_brand=] field and <code>2</code> as the [=minor_version=] field of the [=FileTypeBox=] shall be referred to as <dfn>AVIF2 files</dfn>.
+
+NOTE: Brand <code>[=avif=]</code> version <code>2</code> was picked to avoid any confusion with the versions 1.x of this specification, whose implementations usually output brand <code>[=avif=]</code> version <code>0</code>.</p>
+
 <h2 id="image-item-and-properties">Image Items and properties</h2>
 
 <h3 id="image-item">AV1 Image Item</h3>
 
-When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
+When an item is of type <dfn value="av01" export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
   - The [=AV1 Image Item=] shall be a conformant [=MIAF image item=].
   - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
   - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
@@ -169,7 +193,7 @@ When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, 
 <h4 id ="av1-configuration-item-property">AV1 Item Configuration Property</h4>
 
 <pre class="def">
-  Box Type:                 <dfn value export for="AV1 Item Configuration Property">av1C</dfn>
+  Box Type:                 <dfn value="av1c" export for="AV1 Item Configuration Property">av1C</dfn>
   Property type:            Descriptive item property
   Container:                ItemPropertyContainerBox
   Mandatory (per  item):    Yes, for an image item of type 'av01'
@@ -293,6 +317,137 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 
 <div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
+<h3 id="implicit-items">Implicit AV1 Image Items</h3>
+
+<p>[=AVIF2 files=] may contain [=Implicit AV1 Image Items=].
+
+An <dfn>Implicit AV1 Image Item</dfn> is defined by a conformant [=AV1 Image Item Data=] blob that does not overlap any extent of any resource or item defined and located by an explicit [=ItemLocationBox=].
+
+NOTE: The purpose of an [=Implicit AV1 Image Item=] is to reduce the file size by omitting boxes whose content can easily be extracted from [=AV1 Image Item Data=] or deduced.</p>
+
+<h4 id="implicit-items-requirements">Requirements on readers</h4>
+
+<p>For each [=Implicit AV1 Image Item=], readers shall consider the following as being implicitly defined:
+
+  - The corresponding [=AV1 Image Item=], as if it was defined in an [=ItemInfoBox=] with the following fields:
+
+    - <code>version</code> set to <code>2</code>,
+    - <code>flags</code> set to <code>0</code>,
+    - <code>entry_count</code> set to <code>1</code>,
+    - <code>item_infos</code> set to an [=ItemInfoEntry=] with the following fields:
+
+      - <code>item_ID</code> set to the smallest possible [=Item ID=] greater than <code>0</code> that is not already assigned to an explicitly defined [=Item=] and not already assigned to an [=Implicit AV1 Image Item=] whose [=AV1 Image Item Data=] appears earlier in the file,
+      - <code>item_protection_index</code> set to <code>0</code>,
+      - <code>item_type</code> set to <code>[=av01=]</code>,
+      - <code>item_name</code> set to an empty string.
+
+  - The corresponding [=AV1 Image Item Data=] location, as if it was defined in an [=ItemLocationBox=] with the following fields:
+
+    - <code>version</code> set to <code>2</code>,
+    - <code>flags</code> set to <code>0</code>,
+    - <code>offset_size</code> set to <code>8</code>,
+    - <code>length_size</code> set to <code>8</code>,
+    - <code>base_offset_size</code> set to <code>8</code>,
+    - <code>index_size</code> set to <code>0</code>,
+    - <code>item_count</code> set to <code>1</code>, with the following fields for that single item:
+
+      - <code>item_ID</code> set to the [=Item ID=] of the corresponding [=ItemInfoBox=],
+      - <code>construction_method</code> set to <code>0</code>,
+      - <code>data_reference_index</code> set to <code>0</code>,
+      - <code>base_offset</code> set to <code>0</code>,
+      - <code>extent_count</code> set to <code>1</code>, with the following fields for that single extent:
+
+        - <code>extent_offset</code> set to the absolute offset, in bytes from the data origin of the container, of the corresponding [=AV1 Image Item Data=],
+        - <code>extent_length</code> set to the absolute length in bytes of the corresponding [=AV1 Image Item Data=].
+
+  - If there is no [=MetaBox=], compliance to Clause 7.2.1.1 of [[!MIAF]], as if the [=MetaBox=] was present with the following fields:
+
+    - <code>theHandler</code> set to a [=HandlerBox=] with the following field:
+
+      - <code>handler_type</code> set to <code>pict</code>.
+
+  - Compliance to [[!MIAF]], as if the following brands were part of the [=compatible_brands=] of the [=FileTypeBox=]:
+
+    - <code>avif, mif1, miaf, MA1B</code></p>
+
+<h5 id="implicit-items-restrictions">Restrictions</h5>
+
+<p>The [=AV1 Image Item Data=] of an [=Implicit AV1 Image Item=] shall be a single, contiguous, in-order byte array located in the [=MediaDataBox=] payload in [=AVIF2 files=] (corresponds to <code>construction_method == 0</code>, <code>data_reference_index == 0</code> and <code>extent_count == 1</code> in an [=ItemLocationBox=]). Readers shall ignore any [=Implicit AV1 Image Item=] not defined this way.
+
+NOTE: The rationale for forbidding [=Implicit AV1 Image Item=] with associated [=AV1 Image Item Data=] located in the [=IdentifiedMediaDataBox=] for example, is that storing them in the top-level [=MediaDataBox=] requires fewer bytes in the AVIF stream, and that readers only have to parse one box without worrying about the order of appearance of [=AV1 Image Item Data=] in two top-level boxes. Splitting the [=AV1 Image Item Data=] into several extents makes it difficult or impossible for readers to parse.</p>
+
+<p>There should be no [=MetaBox=] past the [=MediaDataBox=] in [=AVIF2 files=]. If there is, its content shall be set in a way that would lead to the same rendered image or extracted information by readers as if there was none. Readers may ignore any [=MetaBox=] defined this way.
+
+NOTE: The rationale for discouraging a late [=MetaBox=] is to avoid readers having to wait for the full [=MediaDataBox=] payload to be available before knowing if they should consider [=Implicit AV1 Image Items=] or explicit ones, because there is no way to know it earlier. It also avoids the possibility of a valid [=AVIF2 file=] being truncated as a smaller valid [=AVIF2 file=] with a potentially different output.</p>
+
+<p>There shall be at most one [=Implicit AV1 Image Item=] in a [=MediaDataBox=] of <code>size</code> <code>0</code> (whose payload extends to the end of the [=AVIF2 file=]). Readers shall ignore any [=Implicit AV1 Image Item=] defined this way past the first one.
+
+NOTE: The rationale is to avoid readers having to wait for the full [=MediaDataBox=] payload to be available before knowing the number of [=Implicit AV1 Image Items=]. It also avoids the possibility of a valid [=AVIF2 file=] being truncated as a smaller valid [=AVIF2 file=] with a potentially different output.</p>
+
+<h5 id="implicit-items-primary">Implicit primary item</h5>
+
+<p>If there is no explicitly defined [=Primary Item=] (meaning no [=PrimaryItemBox=]), readers shall consider the [=Item ID=] of the [=Primary Item=] to be the smallest [=Item ID=] associated with an [=AV1 Image Item=], or of a derived image that references directly or indirectly one or more items that all are [=AV1 Image Items=].</p>
+
+<h5 id="implicit-items-alpha">Implicit AV1 Alpha Image Item</h5>
+
+<p>Any [=AV1 Image Item=] matching the following is called a <dfn>Potential Implicit AV1 Alpha Image Item</dfn>:
+
+  - Not the primary item,
+  - Same bit depth as the primary item,
+  - <code>mono_chrome</code> field in the [=Sequence Header OBU=] set to 1,
+  - <code>color_range</code> field in the [=Sequence Header OBU=] set to 1,
+  - Not explicitly associated with any item,
+  - No associated <code>AuxiliaryTypeProperty</code>, unless its <code>aux_type</code> field is set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.
+
+If the primary item has no inherent alpha, and if there is no explicitly defined [=AV1 Alpha Image Item=] associated with the primary item, and if there is at least one [=Potential Implicit AV1 Alpha Image Item=], readers shall consider the first [=Potential Implicit AV1 Alpha Image Item=], in the order they appear in the [=AVIF2 file=], as an [=Implicit AV1 Alpha Image Item=].</p>
+
+<p>An <dfn>Implicit AV1 Alpha Image Item</dfn> is an [=AV1 Alpha Image Item=] with the following being implicitly defined:
+
+  - The corresponding item association, as if it was defined in an [=ItemReferenceBox=] with the following fields:
+
+    - <code>version</code> set to <code>0</code>,
+    - <code>flags</code> set to <code>0</code>,
+    - <code>references</code> set to a [=SingleItemTypeReferenceBox=] with the following fields:
+
+      - <code>from_item_ID</code> set to the [=Item ID=] of the associated [=Implicit AV1 Alpha Image Item=],
+      - <code>reference_count</code> set to <code>1</code>, with the following field for that single reference:
+
+        - <code>to_item_ID</code> set to the associated primary item ID.
+
+  - An <code>AuxiliaryTypeProperty</code> with its <code>aux_type</code> set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.</p>
+
+<h5 id="implicit-items-properties">Implicit AV1 Image Item Properties</h5>
+
+<p>[=AVIF2 files=] may contain [=Implicit AV1 Image Item Properties=]. An <dfn>Implicit AV1 Image Item Property</dfn> is defined by the default association of an [=Item=], implicit or explicit, with a small data record.</p>
+
+<p>An [=AV1 Image Item=] with no explicitly defined 'ispe' property has the following being implicitly defined:
+
+  - The corresponding image spatial extents, as if they were defined in an [=ImageSpatialExtentsProperty=] with the following fields:
+
+    - <code>image_width</code> set to <code>max_frame_width_minus_1+1</code> from the [=Sequence Header OBU=] of the corresponding [=AV1 Image Item Data=].
+    - <code>image_height</code> set to <code>max_frame_height_minus_1+1</code> from the [=Sequence Header OBU=] of the corresponding [=AV1 Image Item Data=].
+
+  - An [=ItemPropertyAssociationBox=] associating that property with the [=AV1 Image Item=].</p>
+
+<p>An [=AV1 Image Item=] with no explicitly defined 'pixi' property has the following being implicitly defined:
+
+  - The corresponding pixel information, as if it was defined in a [=PixelInformationProperty=] with the following fields:
+
+    - <code>num_channels</code> set to <code>1</code> if <code>mono_chrome</code> is set to <code>1</code> in the [=Sequence Header OBU=] of the corresponding [=AV1 Image Item Data=]; otherwise <code>num_channels</code> set to 3.
+    - <code>bits_per_channel</code> set to <code>8</code> if <code>high_bitdepth</code> is set to <code>0</code> in the [=Sequence Header OBU=] of the corresponding [=AV1 Image Item Data=]; otherwise <code>bits_per_channel</code> set to <code>10</code> if <code>twelve_bit</code> is set to <code>0</code>; otherwise <code>bits_per_channel</code> set to <code>12</code>.
+
+  - An [=ItemPropertyAssociationBox=] associating that property with the [=AV1 Image Item=].</p>
+
+<p>An [=AV1 Image Item=] with no explicitly defined [=av1C=] property has the following being implicitly defined:
+
+  - The corresponding AV1 configuration, as if it was defined in an [=AV1 Item Configuration Property=] with the following fields:
+
+    - <code>marker</code> set to <code>1</code>,
+    - <code>version</code> set to <code>1</code>,
+    - <code>seq_profile</code>, <code>seq_level_idx_0</code>, <code>seq_tier_0</code>, <code>high_bitdepth</code>, <code>twelve_bit</code>, <code>monochrome</code>, <code>chroma_subsampling_x</code>, <code>chroma_subsampling_y</code> and <code>chroma_sample_position</code> set to the same values as in the [=Sequence Header OBU=] of the corresponding [=AV1 Image Item Data=].
+
+  - An [=ItemPropertyAssociationBox=] associating that property with the [=AV1 Image Item=].</p>
+
 <h2 id="image-sequences">Image Sequences</h2>
 
 <p>
@@ -330,13 +485,26 @@ NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are 
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
 The brand to identify [=AV1 image items=] is <dfn value="avif" export="" for="AVIF Image brand">avif</dfn>.
 
-Files that indicate this brand in the [=compatible_brands=] field of the [=FileTypeBox=] shall comply with the following:
+Files that indicate this brand in the [=compatible_brands=] field and/or in the [=major_brand=] field of the [=FileTypeBox=] shall comply with the following:
 - The primary item shall be an [=AV1 Image Item=] or be a derived image that references directly or indirectly one or more items that all are [=AV1 Image Items=].
 - [=AV1 auxiliary image items=] may be present in the file.
 
-Files that conform with these constraints should include the brand <code>[=avif=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
+Files that conform with these constraints should include the brand <code>[=avif=]</code> in the [=compatible_brands=] field and/or in the [=major_brand=] field of the [=FileTypeBox=].
 
 Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]. Conversely, if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the [=compatible_brands=] field of the [=FileTypeBox=].
+
+<h4 id="image-and-image-collection-brand-version-two">AVIF image and image collection brand version 2</h4>
+
+[=AVIF2 files] shall comply with the following:
+
+  - The file shall be [[!ISOBMFF]] compliant.
+  - There shall be one explicitly defined [=FileTypeBox=] and one explicitly defined [=MediaDataBox=] in that order.
+  - There shall be zero or one explicitly defined [=MetaBox=] between the [=FileTypeBox=] and the [=MediaDataBox=].
+  - There shall be at least one explicitly defined [=AV1 Image Item=] or at least one [=Implicit AV1 Image Item=].
+  - Any byte belonging to the content of a [=MediaDataBox=] shall either:
+
+    - be part of the [=AV1 Image Item Data=] of a conformant [=Implicit AV1 Image Item=], or
+    - be included in the extent of an explicitly located resource; in other words, the extent offset and length shall be defined by an explicit [=ItemLocationBox=].
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify AVIF image sequences is <dfn value="avis" export="" for="AVIF Image Sequence brand">avis</dfn>.
@@ -354,8 +522,9 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
   <h2 id="file-constraints">General constraints</h3>
 
   The following constraints are common to files compliant with this specification:
-  - The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].
-  - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
+  - The file shall be compliant with the [[!MIAF]] specification after applying the section on the [=Implicit AV1 Image Items=].
+  - The file shall list <code>'miaf'</code> in the [=compatible_brands=] field of the [=FileTypeBox=] if it is compliant to that brand before applying the section on the [=Implicit AV1 Image Items=].
+  - The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=] if it is compliant to that brand before applying the section on the [=Implicit AV1 Image Items=].
   - If transformative properties are used in derivation chains (as defined in [[MIAF]]), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
   NOTE: This constraint further restricts files compared to [[MIAF]].
