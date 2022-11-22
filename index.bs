@@ -1,17 +1,16 @@
 <pre class='metadata'>
 Group: AOM
-Status: FD
-Text Macro: SPECVERSION v1.1.0
+Status: WGD
 Title: AV1 Image File Format (AVIF)
-URL: https://AOMediaCodec.github.io/av1-avif/v1.1.0.html
+URL: https://AOMediaCodec.github.io/av1-avif
 !Latest version: <a href="https://AOMediaCodec.github.io/av1-avif">https://AOMediaCodec.github.io/av1-avif</a>
-!Previously approved version: <a href="v1.0.0.html">v1.0.0</a>
+!Previously approved version: <a href="v1.1.0.html">v1.1.0</a>
 Shortname: av1-avif
 Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Former Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2022-04-15
+Date: 2022-11-22
 Repository: AOMediaCodec/av1-avif
 Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
 Metadata Order: This version, !*, *
@@ -434,21 +433,4 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
-  <h2 id="change-list">Changes since v1.0.0 release</h2>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/147">Constrain image sequence to one sample description entry and constant sequence header.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/145">Clarify ispe semantics.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/144">Update use of essential field for av1C.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/138">Clarify that constraints on still picture flags apply to non-layered images.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/130">Clarify in-profile and out-of-profile restrictions.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/127">Replace Media Type section with link to IANA official registration.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/118">Define properties for layered images to allow selective or progressive decoding of layers.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/125">Add restriction on transformative properties in derivation chains.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/114">Extend semantics of avio brand to image items and clarify brand usage.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/113">Clarify image sequence constraints in profile definitions.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/116">add support for the ContentColourVolumeBox property.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/112">Remove wrong recommendations regarding still picture flags in image sequences.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/101">constrain auxiliary images to be full range, and ignore colr for alpha planes.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/100">Rephrase statement about auxiliary images and profiles.</a> (Editorial change)
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/86">Remove the definition of the image/avif-sequence MIME type.</a>
-- <a href="https://github.com/AOMediaCodec/av1-avif/pull/85">Adding bitdepth constraint for alpha and master images.</a>
-
+  <h2 id="change-list">Changes since v1.1.0 release</h2>
