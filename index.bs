@@ -66,7 +66,7 @@ Metadata Order: This version, !*, *
 
 
 <pre class="anchors">
-url: #biblio-heif; spec: HEIF; type: property;
+url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: colr
     text: mif1
     text: msf1
@@ -79,12 +79,12 @@ url: #biblio-heif; spec: HEIF; type: property;
     text: image_width
     text: image_height
 
-url: #biblio-isobmff; spec: ISOBMFF; type: dfn;
+url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
 
-url: #biblio-isobmff; spec: ISOBMFF; type: property;
+url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: sync
     text: cclv
     text: clli
@@ -92,10 +92,10 @@ url: #biblio-isobmff; spec: ISOBMFF; type: property;
     text: clap
     text: iloc
 
-url: #biblio-miaf; spec: MIAF; type: property;
+url: https://www.iso.org/standard/74417.html; spec: MIAF; type: property;
     text: miaf
 
-url: #biblio-miaf; spec: MIAF; type: dfn;
+url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
     text: primary image
     text: MIAF image item
     text: MIAF image sequence
@@ -103,12 +103,12 @@ url: #biblio-miaf; spec: MIAF; type: dfn;
     text: MIAF auxiliary image sequence
     text: MIAF file
 
-url: #biblio-av1-isobmff; spec: AV1-ISOBMFF; type: dfn;
+url: https://aomediacodec.github.io/av1-isobmff/; spec: AV1-ISOBMFF; type: dfn;
     text: av1codecconfigurationbox
     text: AV1 Sample
     text: AV1 Track
 
-url: #biblio-av1; spec: AV1; type: dfn;
+url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: AV1 bitstream
     text: AV1 Frame
     text: Sequence Header OBU
@@ -117,7 +117,7 @@ url: #biblio-av1; spec: AV1; type: dfn;
     text: Operating Point
     text: Intra Frame
 
-url: #biblio-av1; spec: AV1; type: dfn;
+url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: mono_chrome
     text: color_range
     text: still_picture
