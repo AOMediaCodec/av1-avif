@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 37b7e7e68, updated Fri May 27 15:08:11 2022 -0700" name="generator">
+  <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif/v1.1.0.html" rel="canonical">
-  <meta content="bde4abda08b7934e7b78da2de4d1f7b1157f4548" name="document-revision">
+  <meta content="77bd20d59d7cade4ab98f276ff4828433ebd089b" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1778,6 +1778,14 @@ a.self-link:hover {
 .heading > a.self-link {
     font-size: 83%;
 }
+.example > a.self-link,
+.note > a.self-link,
+.issue > a.self-link {
+    /* These blocks are overflow:auto, so positioning outside
+       doesn't work. */
+    left: auto;
+    right: 0;
+}
 li > a.self-link {
     left: calc(-1 * (3.5rem - 26px) - 2em);
 }
@@ -2028,8 +2036,8 @@ dfn > a.self-link::before      { content: "#"; }
   </nav>
   <main>
    <h2 class="heading settled" data-level="1" id="general"><span class="secno">1. </span><span class="content">Scope</span><a class="self-link" href="#general"></a></h2>
-   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> defines the syntax and semantics of an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1">AV1 bitstream</a>. The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-file-format">AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①">AV1 bitstream</a> in a <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> file.
-The <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format">AV1 Image File Format</a> defines multiple profiles, which restrict the allowed syntax and semantics of the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②">AV1 bitstream</a> with the goal to improve interoperability, especially for hardware implementations.
+   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> defines the syntax and semantics of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-">AV1 bitstream</a>. The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-file-format">AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①">AV1 bitstream</a> in a <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> file.
+The <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format">AV1 Image File Format</a> defines multiple profiles, which restrict the allowed syntax and semantics of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-②">AV1 bitstream</a> with the goal to improve interoperability, especially for hardware implementations.
 The profiles defined in this specification follow the conventions of the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification.
 Images encoded with AV1 and not meeting the restrictions of the defined profiles may still be compliant to this <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①">AV1 Image File Format</a> if they adhere to the general AVIF requirements.</p>
    <p><a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format②">AV1 Image File Format</a> supports High Dynamic Range (HDR) and Wide Color Gamut (WCG) images as well as Standard Dynamic Range (SDR). It supports monochrome images as well as multi-channel images with all the bit depths and color spaces specified in <a data-link-type="biblio" href="#biblio-av1">[AV1]</a>.</p>
@@ -2042,23 +2050,23 @@ New Image Formats and Brands" of <a data-link-type="biblio" href="#biblio-heif">
    <p>When an item is of type <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-av01">av01<a class="self-link" href="#valdef-av1-image-item-type-av01"></a></dfn>, it is called an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-item">AV1 Image Item</dfn>, and shall obey the following constraints:</p>
    <ul>
     <li data-md>
-     <p>The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item">AV1 Image Item</a> shall be a conformant <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf">MIAF image item</a>.</p>
+     <p>The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item">AV1 Image Item</a> shall be a conformant <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="termref-for-③">MIAF image item</a>.</p>
     <li data-md>
      <p>The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①">AV1 Image Item</a> shall be associated with an <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property">AV1 Item Configuration Property</a>.</p>
     <li data-md>
      <p>The content of an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②">AV1 Image Item</a> is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-item-data">AV1 Image Item Data</dfn> and shall obey the following constraints:</p>
      <ul>
       <li data-md>
-       <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data">AV1 Image Item Data</a> shall be identical to the content of an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff">AV1 Sample</a> marked as <a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff">sync</a>, as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>.</p>
+       <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data">AV1 Image Item Data</a> shall be identical to the content of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-④">AV1 Sample</a> marked as <a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-⑤">sync</a>, as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>.</p>
       <li data-md>
-       <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall have exactly one <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③">Sequence Header OBU</a>.</p>
+       <p>The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall have exactly one <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑥">Sequence Header OBU</a>.</p>
       <li data-md>
        <p>If the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data②">AV1 Image Item Data</a> consists of a single frame (i.e. when using a single layer),</p>
        <ul>
         <li data-md>
-         <p>It should have its <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④">still_picture</a></code> flag set to 1.</p>
+         <p>It should have its <code><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦">still_picture</a></code> flag set to 1.</p>
         <li data-md>
-         <p>It should have its <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑤">reduced_still_picture_header</a></code> flag set to 1.</p>
+         <p>It should have its <code><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑧">reduced_still_picture_header</a></code> flag set to 1.</p>
        </ul>
      </ul>
    </ul>
@@ -2070,46 +2078,46 @@ Container:                ItemPropertyContainerBox
 Mandatory (per  item):    Yes, for an image item of type 'av01'
 Quantity:                 One for an image item of type 'av01'
 </pre>
-   <p>The syntax and semantics of the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-item-configuration-property">AV1 Item Configuration Property</dfn> are identical to those of the <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff①">AV1CodecConfigurationBox</a> defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>, with the following constraints:</p>
+   <p>The syntax and semantics of the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-item-configuration-property">AV1 Item Configuration Property</dfn> are identical to those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-⑨">AV1CodecConfigurationBox</a> defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a>, with the following constraints:</p>
    <ul>
     <li data-md>
-     <p><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑥">Sequence Header OBUs</a> should not be present in the <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff②">AV1CodecConfigurationBox</a>.</p>
+     <p><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①⓪">Sequence Header OBUs</a> should not be present in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-①①">AV1CodecConfigurationBox</a>.</p>
     <li data-md>
-     <p>If a <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑦">Sequence Header OBU</a> is present in the <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff③">AV1CodecConfigurationBox</a>, it shall match the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑧">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data③">AV1 Image Item Data</a>.</p>
+     <p>If a <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①②">Sequence Header OBU</a> is present in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-①③">AV1CodecConfigurationBox</a>, it shall match the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①④">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data③">AV1 Image Item Data</a>.</p>
     <li data-md>
-     <p>The values of the fields in the <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff④">AV1CodecConfigurationBox</a> shall match those of the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1⑨">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data④">AV1 Image Item Data</a>.</p>
+     <p>The values of the fields in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-①⑤">AV1CodecConfigurationBox</a> shall match those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①⑥">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data④">AV1 Image Item Data</a>.</p>
     <li data-md>
-     <p><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⓪">Metadata OBUs</a>, if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.</p>
+     <p><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①⑦">Metadata OBUs</a>, if present, shall match the values given in other item properties, such as the PixelInformationProperty or ColourInformationBox.</p>
    </ul>
    <p>This property should be marked as essential.</p>
    <h4 class="heading settled" data-level="2.2.2" id="image-spatial-extents-property"><span class="secno">2.2.2. </span><span class="content">Image Spatial Extents Property</span><a class="self-link" href="#image-spatial-extents-property"></a></h4>
-   <p>The semantics of the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif">ispe</a> property as defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> apply. More specifically, for AV1 images, the values of <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①">image_width</a> and <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②">image_height</a> shall respectively equal the values of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①①">FrameWidth</a> and <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①②">FrameHeight</a> as defined in <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> but for a specific frame in the item payload. The exact frame depends on the presence and content of the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif③">lsel</a> and <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty">OperatingPointSelectorProperty</a> properties as follows:</p>
+   <p>The semantics of the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-①⑧">ispe</a> property as defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> apply. More specifically, for AV1 images, the values of <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-①⑨">image_width</a> and <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②⓪">image_height</a> shall respectively equal the values of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-②①">FrameWidth</a> and <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-②②">FrameHeight</a> as defined in <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> but for a specific frame in the item payload. The exact frame depends on the presence and content of the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②③">lsel</a> and <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty">OperatingPointSelectorProperty</a> properties as follows:</p>
    <ul>
     <li data-md>
-     <p>In the absence of a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif④">lsel</a> property associated with the item, or if it is present and its <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif⑤">layer_id</a> value is set to 0xFFFF:</p>
+     <p>In the absence of a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②④">lsel</a> property associated with the item, or if it is present and its <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②⑤">layer_id</a> value is set to 0xFFFF:</p>
      <ul>
       <li data-md>
-       <p>If no <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty①">OperatingPointSelectorProperty</a> is associated with the item, the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif⑥">ispe</a> shall document the dimensions of the last frame decoded when processing the operating point whose index is 0.</p>
+       <p>If no <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty①">OperatingPointSelectorProperty</a> is associated with the item, the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②⑥">ispe</a> shall document the dimensions of the last frame decoded when processing the operating point whose index is 0.</p>
       <li data-md>
-       <p>If an <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty②">OperatingPointSelectorProperty</a> is associated with the item, the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif⑦">ispe</a> property shall document the dimensions of the last frame decoded when processing the corresponding operating point.</p>
+       <p>If an <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty②">OperatingPointSelectorProperty</a> is associated with the item, the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②⑦">ispe</a> property shall document the dimensions of the last frame decoded when processing the corresponding operating point.</p>
      </ul>
-     <p class="note" role="note"><span>NOTE:</span> The dimensions of possible intermediate output images might not match the ones given in the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif⑧">ispe</a> property. If they display these intermediate images, renderers are expected to scale the output image to match the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif⑨">ispe</a> property.</p>
+     <p class="note" role="note"><span>NOTE:</span> The dimensions of possible intermediate output images might not match the ones given in the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②⑧">ispe</a> property. If they display these intermediate images, renderers are expected to scale the output image to match the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-②⑨">ispe</a> property.</p>
     <li data-md>
-     <p>If a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①⓪">lsel</a> property is associated with an item and its <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①①">layer_id</a> is different from 0xFFFF, the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①②">ispe</a> property documents the dimensions of the output frame produced by decoding the corresponding layer.</p>
+     <p>If a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-③⓪">lsel</a> property is associated with an item and its <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-③①">layer_id</a> is different from 0xFFFF, the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-③②">ispe</a> property documents the dimensions of the output frame produced by decoding the corresponding layer.</p>
    </ul>
-   <p class="note" role="note"><span>NOTE:</span> The dimensions indicated in the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①③">ispe</a> property might not match the values <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①③">max_frame_width_minus1</a>+1 and <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①④">max_frame_height_minus1</a>+1 indicated in the AV1 bitstream.</p>
-   <p class="note" role="note"><span>NOTE:</span> The values of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑤">render_width_minus1</a> and <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑥">render_height_minus1</a> possibly present in the AV1 bistream are not exposed in the AVIF container level.</p>
+   <p class="note" role="note"><span>NOTE:</span> The dimensions indicated in the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-③③">ispe</a> property might not match the values <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-③④">max_frame_width_minus1</a>+1 and <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-③⑤">max_frame_height_minus1</a>+1 indicated in the AV1 bitstream.</p>
+   <p class="note" role="note"><span>NOTE:</span> The values of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-③⑥">render_width_minus1</a> and <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-③⑦">render_height_minus1</a> possibly present in the AV1 bistream are not exposed in the AVIF container level.</p>
    <h4 class="heading settled" data-level="2.2.3" id="other-item-property"><span class="secno">2.2.3. </span><span class="content">Other Item Properties</span><a class="self-link" href="#other-item-property"></a></h4>
-   <p>In addition to the Image Properties defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, such as <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①④">colr</a>, <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①⑤">pixi</a> or <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①⑥">pasp</a>, <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item③">AV1 image items</a> MAY also be associated with <a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff①">clli</a>, <a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff②">cclv</a> and <a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff③">mdcv</a> introduced in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
-   <p>In general, it is recommended to use properties instead of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑦">Metadata OBUs</a> in the <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property①">AV1 Item Configuration Property</a>.</p>
-   <p class="note" role="note"><span>NOTE:</span> Although the clean aperture property (<a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff④">clap</a>) defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> is applicable to AVIF, implementers of authoring tools should be aware of the possibility of unintended consequences since users may not realize image data outside the clap region is still in the file. A future revision of this specification may place normative restrictions on how clap can be used.</p>
+   <p>In addition to the Image Properties defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, such as <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-③⑧">colr</a>, <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-③⑨">pixi</a> or <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-④⓪">pasp</a>, <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item③">AV1 image items</a> MAY also be associated with <a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-④①">clli</a>, <a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-④②">cclv</a> and <a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-④③">mdcv</a> introduced in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>.</p>
+   <p>In general, it is recommended to use properties instead of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-④④">Metadata OBUs</a> in the <a data-link-type="dfn" href="#av1-item-configuration-property" id="ref-for-av1-item-configuration-property①">AV1 Item Configuration Property</a>.</p>
+   <p class="note" role="note"><span>NOTE:</span> Although the clean aperture property (<a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-④⑤">clap</a>) defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> is applicable to AVIF, implementers of authoring tools should be aware of the possibility of unintended consequences since users may not realize image data outside the clap region is still in the file. A future revision of this specification may place normative restrictions on how clap can be used.</p>
    <h3 class="heading settled" data-level="2.3" id="layered-items"><span class="secno">2.3. </span><span class="content">AV1 Layered Image Items</span><a class="self-link" href="#layered-items"></a></h3>
    <h4 class="heading settled" data-level="2.3.1" id="layered-items-overview"><span class="secno">2.3.1. </span><span class="content">Overview</span><a class="self-link" href="#layered-items-overview"></a></h4>
-   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports encoding a frame using multiple spatial layers. A spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Additionally, not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate decodes. Finally, layers are grouped into one or more <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑧">Operating Points</a>. The <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1①⑨">Sequence Header OBU</a> defines the list of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⓪">Operating Points</a>, provides required decoding capabilities, and indicates which layers form each <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②①">Operating Point</a>.</p>
-   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> delegates the selection of which <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②②">Operating Point</a> to process to the application, by means of a function called <code>choose_operating_point()</code>. AVIF defines the <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty③">OperatingPointSelectorProperty</a> to control this selection. In the absence of an <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty④">OperatingPointSelectorProperty</a> associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item④">AV1 Image Item</a>, the AVIF renderer is free to process any <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②③">Operating Point</a> present in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑤">AV1 Image Item Data</a>. In particular, when the <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑤">AV1 Image Item</a> is composed of a unique <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②④">Operating Point</a>, the <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty⑤">OperatingPointSelectorProperty</a> should not be present. If an <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty⑥">OperatingPointSelectorProperty</a> is associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑥">AV1 Image Item</a>, the <code>op_index</code> field indicates which <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑤">Operating Point</a> is expected to be processed for this item.</p>
-   <p class="note" role="note"><span>NOTE:</span> When an author wants to offer the ability to render multiple <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑥">Operating Points</a> from the same AV1 image (e.g. in the case of multi-view images), multiple <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑦">AV1 Image Items</a> can be created that share the same <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑥">AV1 Image Item Data</a> but have different <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty⑦">OperatingPointSelectorProperty</a>s.</p>
-   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> expects the renderer to display only one frame within the selected <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑦">Operating Point</a>, which should be the highest spatial layer that is both within the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑧">Operating Point</a> and present within the temporal unit, but <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①⑦">lsel</a> property (mandated by <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> for layered images) is used to control which layer is rendered. According to <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, the interpretation of the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①⑧">layer_id</a> field in the <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif①⑨">lsel</a> property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②⓪">lsel</a> property is associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑧">AV1 Image Item</a> but its <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②①">layer_id</a> value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②②">lsel</a> property is associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑨">AV1 Image Item</a> and the value of <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②③">layer_id</a> is not 0xFFFF, the renderer is expected to render only the output image for that layer.</p>
-   <p class="note" role="note"><span>NOTE:</span> When such a progressive decoding of the layers within an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1②⑨">Operating Point</a> is not desired or when an author wants to expose each layer as a specific item, multiple <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⓪">AV1 Image Items</a> sharing the same <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑦">AV1 Image Item Data</a> can be created and associated with different <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②④">lsel</a> properties, each with a different value of <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②⑤">layer_id</a>.</p>
+   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports encoding a frame using multiple spatial layers. A spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Additionally, not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate decodes. Finally, layers are grouped into one or more <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-④⑥">Operating Points</a>. The <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-④⑦">Sequence Header OBU</a> defines the list of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-④⑧">Operating Points</a>, provides required decoding capabilities, and indicates which layers form each <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-④⑨">Operating Point</a>.</p>
+   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> delegates the selection of which <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤⓪">Operating Point</a> to process to the application, by means of a function called <code>choose_operating_point()</code>. AVIF defines the <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty③">OperatingPointSelectorProperty</a> to control this selection. In the absence of an <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty④">OperatingPointSelectorProperty</a> associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item④">AV1 Image Item</a>, the AVIF renderer is free to process any <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤①">Operating Point</a> present in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑤">AV1 Image Item Data</a>. In particular, when the <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑤">AV1 Image Item</a> is composed of a unique <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤②">Operating Point</a>, the <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty⑤">OperatingPointSelectorProperty</a> should not be present. If an <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty⑥">OperatingPointSelectorProperty</a> is associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑥">AV1 Image Item</a>, the <code>op_index</code> field indicates which <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤③">Operating Point</a> is expected to be processed for this item.</p>
+   <p class="note" role="note"><span>NOTE:</span> When an author wants to offer the ability to render multiple <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤④">Operating Points</a> from the same AV1 image (e.g. in the case of multi-view images), multiple <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑦">AV1 Image Items</a> can be created that share the same <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑥">AV1 Image Item Data</a> but have different <a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty⑦">OperatingPointSelectorProperty</a>s.</p>
+   <p><a data-link-type="biblio" href="#biblio-av1">[AV1]</a> expects the renderer to display only one frame within the selected <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤⑤">Operating Point</a>, which should be the highest spatial layer that is both within the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑤⑥">Operating Point</a> and present within the temporal unit, but <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑤⑦">lsel</a> property (mandated by <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> for layered images) is used to control which layer is rendered. According to <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, the interpretation of the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑤⑧">layer_id</a> field in the <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑤⑨">lsel</a> property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥⓪">lsel</a> property is associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑧">AV1 Image Item</a> but its <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥①">layer_id</a> value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥②">lsel</a> property is associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item⑨">AV1 Image Item</a> and the value of <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥③">layer_id</a> is not 0xFFFF, the renderer is expected to render only the output image for that layer.</p>
+   <p class="note" role="note"><span>NOTE:</span> When such a progressive decoding of the layers within an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑥④">Operating Point</a> is not desired or when an author wants to expose each layer as a specific item, multiple <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⓪">AV1 Image Items</a> sharing the same <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑦">AV1 Image Item Data</a> can be created and associated with different <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥⑤">lsel</a> properties, each with a different value of <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥⑥">layer_id</a>.</p>
    <h4 class="heading settled" data-level="2.3.2" id="layered-properties"><span class="secno">2.3.2. </span><span class="content">Properties</span><a class="self-link" href="#layered-properties"></a></h4>
    <h5 class="heading settled" data-level="2.3.2.1" id="operating-point-selector-property"><span class="secno">2.3.2.1. </span><span class="content">Operating Point Selector Property</span><a class="self-link" href="#operating-point-selector-property"></a></h5>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.1" id="operating-point-selector-property-definition"><span class="secno">2.3.2.1.1. </span><span class="content">Definition</span><a class="self-link" href="#operating-point-selector-property-definition"></a></h6>
@@ -2127,9 +2135,9 @@ Quantity:       Zero or one
 }
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.4" id="operating-point-selector-property-semantics"><span class="secno">2.3.2.1.4. </span><span class="content">Semantics</span><a class="self-link" href="#operating-point-selector-property-semantics"></a></h6>
-   <p><dfn data-dfn-type="dfn" data-noexport id="op_index">op_index<a class="self-link" href="#op_index"></a></dfn> indicates the index of the operating point to be processed for this item. Its value shall be between 0 and <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⓪">operating_points_cnt_minus_1</a>.</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="op_index">op_index<a class="self-link" href="#op_index"></a></dfn> indicates the index of the operating point to be processed for this item. Its value shall be between 0 and <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑥⑦">operating_points_cnt_minus_1</a>.</p>
    <h5 class="heading settled" data-level="2.3.2.2" id="layer-selector-property"><span class="secno">2.3.2.2. </span><span class="content">Layer Selector Property</span><a class="self-link" href="#layer-selector-property"></a></h5>
-    The <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②⑥">lsel</a> property defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①②">AV1 Image Item</a>. The <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②⑦">layer_id</a> indicates the value of the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③①">spatial_id</a> to render. The value shall be between 0 and 3, or the special value 0xFFFF. When a value between 0 and 3 is used, the corresponding spatial layer shall be present in the bitstream and shall produce an output frame. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in <a href="#layered-items-overview">§ 2.3.1 Overview</a>. 
+    The <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥⑧">lsel</a> property defined in <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①②">AV1 Image Item</a>. The <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-⑥⑨">layer_id</a> indicates the value of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦⓪">spatial_id</a> to render. The value shall be between 0 and 3, or the special value 0xFFFF. When a value between 0 and 3 is used, the corresponding spatial layer shall be present in the bitstream and shall produce an output frame. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in <a href="#layered-items-overview">§ 2.3.1 Overview</a>. 
    <h5 class="heading settled" data-level="2.3.2.3" id="layered-image-indexing-property"><span class="secno">2.3.2.3. </span><span class="content">Layered Image Indexing Property</span><a class="self-link" href="#layered-image-indexing-property"></a></h5>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.1" id="layered-image-indexing-property-definition"><span class="secno">2.3.2.3.1. </span><span class="content">Definition</span><a class="self-link" href="#layered-image-indexing-property-definition"></a></h6>
 <pre class="def">Box Type:       <dfn data-dfn-for="AV1LayeredImageIndexingProperty" data-dfn-type="value" data-export id="valdef-av1layeredimageindexingproperty-a1lx">a1lx<a class="self-link" href="#valdef-av1layeredimageindexingproperty-a1lx"></a></dfn>
@@ -2140,7 +2148,7 @@ Quantity:       Zero or one
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.2" id="layered-image-indexing-property-description"><span class="secno">2.3.2.3.2. </span><span class="content">Description</span><a class="self-link" href="#layered-image-indexing-property-description"></a></h6>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①③">AV1 Image Item</a>. It should not be associated with <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Items</a> consisting of only one layer.</p>
-   <p>The <a data-link-type="dfn" href="#av1layeredimageindexingproperty" id="ref-for-av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</a> documents the size in bytes of each layer (except the last one) in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑧">AV1 Image Item Data</a>, and enables determining the byte ranges required to process one or more layers of an <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③②">Operating Point</a>. If associated, it shall not be marked as essential.</p>
+   <p>The <a data-link-type="dfn" href="#av1layeredimageindexingproperty" id="ref-for-av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</a> documents the size in bytes of each layer (except the last one) in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑧">AV1 Image Item Data</a>, and enables determining the byte ranges required to process one or more layers of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦①">Operating Point</a>. If associated, it shall not be marked as essential.</p>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.3" id="layered-image-indexing-property-syntax"><span class="secno">2.3.2.3.3. </span><span class="content">Syntax</span><a class="self-link" href="#layered-image-indexing-property-syntax"></a></h6>
 <pre>class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
     unsigned int(7) reserved = 0;
@@ -2150,30 +2158,30 @@ Quantity:       Zero or one
 }
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-image-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-image-indexing-property-semantics"></a></h6>
-   <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③③">spatial_id</a>. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦②">spatial_id</a>. A value of zero means that all the layers except the last one have been documented and following values shall be 0. The number of non-zero values shall match the number of layers in the image minus one.</p>
    <p class="note" role="note"><span>NOTE:</span> The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.</p>
-   <div class="example" id="example-4f7751ed"><a class="self-link" href="#example-4f7751ed"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③④">spatial_id</a> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑤">spatial_id</a> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
+   <div class="example" id="example-4f7751ed"><a class="self-link" href="#example-4f7751ed"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦③">spatial_id</a> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦④">spatial_id</a> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
-   <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑥">Temporal Units</a> stored in an <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑤">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
+   <p> An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦⑤">Temporal Units</a> stored in an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-⑦⑥">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff">[AV1-ISOBMFF]</a> with the following constraints: </p>
    <ul>
     <li data-md>
-     <p>The track shall be a valid <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf①">MIAF image sequence</a>.</p>
+     <p>The track shall be a valid <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="termref-for-⑦⑦">MIAF image sequence</a>.</p>
     <li data-md>
      <p>The track handler for an <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence">AV1 Image Sequence</a> shall be <code>pict</code>.</p>
     <li data-md>
      <p>The track shall have only one sample description entry.</p>
     <li data-md>
-     <p>If multiple <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑦">Sequence Header OBUs</a> are present in the track payload, they shall be identical.</p>
+     <p>If multiple <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑦⑧">Sequence Header OBUs</a> are present in the track payload, they shall be identical.</p>
    </ul>
    <h2 class="heading settled" data-level="4" id="auxiliary-images"><span class="secno">4. </span><span class="content">Auxiliary Image Items and Sequences</span><a class="self-link" href="#auxiliary-images"></a></h2>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-item">AV1 Auxiliary Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑤">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints: </p>
    <ul>
     <li data-md>
-     <p>It shall be a compliant <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf②">MIAF Auxiliary Image Item</a> (respectively <a data-link-type="dfn" href="#biblio-miaf" id="ref-for-biblio-miaf③">MIAF Auxiliary Image Sequence</a>).</p>
+     <p>It shall be a compliant <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="termref-for-⑦⑨">MIAF Auxiliary Image Item</a> (respectively <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="termref-for-⑧⓪">MIAF Auxiliary Image Sequence</a>).</p>
     <li data-md>
-     <p>The <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑧">mono_chrome</a></code> field in the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1③⑨">Sequence Header OBU</a> shall be set to 1.</p>
+     <p>The <code><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑧①">mono_chrome</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑧②">Sequence Header OBU</a> shall be set to 1.</p>
     <li data-md>
-     <p>The <code><a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④⓪">color_range</a></code> field in the <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④①">Sequence Header OBU</a> shall be set to 1.</p>
+     <p>The <code><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑧③">color_range</a></code> field in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑧④">Sequence Header OBU</a> shall be set to 1.</p>
    </ul>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-alpha-image-item">AV1 Alpha Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-alpha-image-sequence">AV1 Alpha Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item">AV1 Auxiliary Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</a>), and as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item">AV1 Alpha Image Item</a> (respectively an <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence">AV1 Alpha Image Sequence</a>) shall be encoded with the same bit depth as the associated master AV1 Image Item (respectively AV1 Image Sequence).</p>
    <p>For <a data-link-type="dfn" href="#av1-alpha-image-item" id="ref-for-av1-alpha-image-item①">AV1 Alpha Image Item</a> and <a data-link-type="dfn" href="#av1-alpha-image-sequence" id="ref-for-av1-alpha-image-sequence①">AV1 Alpha Image Sequence</a>, the ColourInformationBox should be omitted. If present, readers shall ignore it.</p>
@@ -2181,39 +2189,39 @@ Quantity:       Zero or one
    <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports encoding either 3-component images (whose semantics are given by the <code>matrix_coefficients</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>aux_type</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.</p>
    <h2 class="heading settled" data-level="5" id="brands"><span class="secno">5. </span><span class="content">Brands, Internet media types and file extensions</span><a class="self-link" href="#brands"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="brands-overview"><span class="secno">5.1. </span><span class="content">Brands overview</span><a class="self-link" href="#brands-overview"></a></h3>
-   <p>As defined by <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>, the presence of a brand in the <code><a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑤">compatible_brands</a></code> list in the <code><a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑥">FileTypeBox</a></code> can be interpreted as the permission for those <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format④">AV1 Image File Format</a> readers/parsers and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑤">AV1 Image File Format</a> renderers that only implement the features required by the brand, to process the corresponding file and only the parts (e.g. items or sequences) that comply with the brand.</p>
+   <p>As defined by <a data-link-type="biblio" href="#biblio-isobmff">[ISOBMFF]</a>, the presence of a brand in the <code><a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑧⑤">compatible_brands</a></code> list in the <code><a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑧⑥">FileTypeBox</a></code> can be interpreted as the permission for those <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format④">AV1 Image File Format</a> readers/parsers and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑤">AV1 Image File Format</a> renderers that only implement the features required by the brand, to process the corresponding file and only the parts (e.g. items or sequences) that comply with the brand.</p>
    <p>An <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑥">AV1 Image File Format</a> file may conform to multiple brands. Similarly, an <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑦">AV1 Image File Format</a> reader/parser or <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> renderer may be capable of processing the features associated with one or more brands.</p>
-   <p>If any of the brands defined in this document is specified in the <code><a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑦">major_brand</a></code> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑧">FileTypeBox</a>, the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in <a href="#mime-registration">§ 8 AVIF Media Type Registration</a>.</p>
+   <p>If any of the brands defined in this document is specified in the <code><a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑧⑦">major_brand</a></code> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑧⑧">FileTypeBox</a>, the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in <a href="#mime-registration">§ 8 AVIF Media Type Registration</a>.</p>
    <h3 class="heading settled" data-level="5.2" id="image-and-image-collection-brand"><span class="secno">5.2. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
     The brand to identify <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑥">AV1 image items</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image brand" data-dfn-type="dfn" data-export id="avif-image-brand-avif" value="avif">avif</dfn>. 
-   <p>Files that indicate this brand in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff⑨">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⓪">FileTypeBox</a> shall comply with the following:</p>
+   <p>Files that indicate this brand in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑧⑨">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨⓪">FileTypeBox</a> shall comply with the following:</p>
    <ul>
     <li data-md>
      <p>The primary item shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑦">AV1 Image Item</a> or be a derived image that references directly or indirectly one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑧">AV1 Image Items</a>.</p>
     <li data-md>
      <p><a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item②">AV1 auxiliary image items</a> may be present in the file.</p>
    </ul>
-   <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif">avif</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①①">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①②">FileTypeBox</a>.</p>
-   <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio" value="avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①③">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①④">FileTypeBox</a>, then the primary item or all the items referenced by the primary item shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑨">AV1 image items</a> made only of <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④②">Intra Frames</a>. Conversely, if the previous constraint applies, the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> should be used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑤">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑥">FileTypeBox</a>.</p>
+   <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif">avif</a></code> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨①">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨②">FileTypeBox</a>.</p>
+   <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio" value="avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨③">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨④">FileTypeBox</a>, then the primary item or all the items referenced by the primary item shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑨">AV1 image items</a> made only of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-⑨⑤">Intra Frames</a>. Conversely, if the previous constraint applies, the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> should be used in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨⑥">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨⑦">FileTypeBox</a>.</p>
    <h3 class="heading settled" data-level="5.3" id="image-sequence-brand"><span class="secno">5.3. </span><span class="content">AVIF image sequence brands</span><a class="self-link" href="#image-sequence-brand"></a></h3>
     The brand to identify AVIF image sequences is <dfn class="dfn-paneled" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="dfn" data-export id="avif-image-sequence-brand-avis" value="avis">avis</dfn>. 
-   <p>Files that indicate this brand in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑦">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑧">FileTypeBox</a> shall comply with the following:</p>
+   <p>Files that indicate this brand in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨⑧">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-⑨⑨">FileTypeBox</a> shall comply with the following:</p>
    <ul>
     <li data-md>
      <p>they shall contain one or more <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence②">AV1 image sequences</a>.</p>
     <li data-md>
      <p>they may contain <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence②">AV1 auxiliary image sequences</a>.</p>
    </ul>
-   <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis">avis</a></code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff①⑨">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⓪">FileTypeBox</a>.</p>
-   <p>Additionally, if a file contains <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> and the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio②">avio</a></code> is used in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②①">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②②">FileTypeBox</a>, the item constraints for this brand shall be met and at least one of the <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a> shall be made only of <a data-link-type="dfn" href="#biblio-av1-isobmff" id="ref-for-biblio-av1-isobmff⑥">AV1 Samples</a> marked as <a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff②③">sync</a>. Conversely, if such a track exists and the constraints of the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio③">avio</a></code> on <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②⓪">AV1 image items</a> are met, the brand should be used.</p>
+   <p>Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis">avis</a></code> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪⓪">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪①">FileTypeBox</a>.</p>
+   <p>Additionally, if a file contains <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> and the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio②">avio</a></code> is used in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪②">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪③">FileTypeBox</a>, the item constraints for this brand shall be met and at least one of the <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a> shall be made only of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="termref-for-①⓪④">AV1 Samples</a> marked as <a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪⑤">sync</a>. Conversely, if such a track exists and the constraints of the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio③">avio</a></code> on <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②⓪">AV1 image items</a> are met, the brand should be used.</p>
    <p class="note" role="note"><span>NOTE:</span> As defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>, a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.</p>
    <h2 class="heading settled" data-level="6" id="file-constraints"><span class="secno">6. </span><span class="content">General constraints</span><a class="self-link" href="#file-constraints"></a></h2>
    <p>The following constraints are common to files compliant with this specification:</p>
    <ul>
     <li data-md>
-     <p>The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification and list <a class="property css" data-link-type="property" href="#biblio-miaf" id="ref-for-biblio-miaf④">miaf</a> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②④">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑤">FileTypeBox</a>.</p>
+     <p>The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> specification and list <a class="property css" data-link-type="property" href="https://www.iso.org/standard/74417.html" id="termref-for-①⓪⑥">miaf</a> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪⑦">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪⑧">FileTypeBox</a>.</p>
     <li data-md>
-     <p>The file shall list <code>'<a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif①">avif</a>'</code> or <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis①">avis</a>'</code> in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑥">compatible_brands</a> field of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑦">FileTypeBox</a>.</p>
+     <p>The file shall list <code>'<a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif①">avif</a>'</code> or <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis①">avis</a>'</code> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①⓪⑨">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①⓪">FileTypeBox</a>.</p>
     <li data-md>
      <p>If transformative properties are used in derivation chains (as defined in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a>), they shall only be associated with items that are not referenced by another derived item. For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.</p>
    </ul>
@@ -2221,14 +2229,14 @@ Quantity:       Zero or one
    <h2 class="heading settled" data-level="7" id="profiles"><span class="secno">7. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <h3 class="heading settled" data-level="7.1" id="profiles-overview"><span class="secno">7.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①⓪">AV1 Image File Format</a> readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.</p>
-   <p>The <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑧">FileTypeBox</a> should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).</p>
-   <p>If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff②⑨">FileTypeBox</a> and a profile is declared in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⓪">FileTypeBox</a>, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
+   <p>The <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①①">FileTypeBox</a> should declare at least one profile that enables decoding of the primary image item. It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).</p>
+   <p>If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①②">FileTypeBox</a> and a profile is declared in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①③">FileTypeBox</a>, the profile shall also enable decoding of at least one image sequence track. The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</p>
    <p>It is possible for a file compliant to this <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①①">AV1 Image File Format</a> to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.</p>
-   <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <a data-link-type="dfn" href="#biblio-av1" id="ref-for-biblio-av1④③">seq_level_idx</a> is set to 31 (maximum parameters level).</p>
+   <p class="note" role="note"><span>NOTE:</span> <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="termref-for-①①④">seq_level_idx</a> is set to 31 (maximum parameters level).</p>
    <div class="example" id="example-ee584b29"><a class="self-link" href="#example-ee584b29"></a>If an image is encoded with dimensions (respectively a bit depth) that exceed the maximum dimensions (respectively bit depth) required by the AV1 profile and level of the AVIF profiles defined in this specification, the file will only signal general AVIF brands.</div>
    <h3 class="heading settled" data-level="7.2" id="baseline-profile"><span class="secno">7.2. </span><span class="content">AVIF Baseline Profile</span><a class="self-link" href="#baseline-profile"></a></h3>
    <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1b">MA1B<a class="self-link" href="#valdef-av1-image-item-type-ma1b"></a></dfn>.</p>
-   <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③①">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③②">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
+   <p>If the brand <code>MA1B</code> is in the list of <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①⑤">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①⑥">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②①">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑤">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
@@ -2237,16 +2245,16 @@ Quantity:       Zero or one
    <p class="note" role="note"><span>NOTE:</span> AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.</p>
    <p class="note" role="note"><span>NOTE:</span> Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> level definitions, coded image items compliant to the AVIF Baseline profile may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using grid derivation.</p>
    <div class="example" id="example-fd090b5d">
-    <a class="self-link" href="#example-fd090b5d"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③③">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③④">FileTypeBox</a>: 
+    <a class="self-link" href="#example-fd090b5d"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①⑦">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①①⑧">FileTypeBox</a>: 
     <p><code>avif, mif1, miaf, MA1B</code></p>
-    <p>A file containing a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②⑧">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑤">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑥">FileTypeBox</a>:</p>
+    <p>A file containing a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-①①⑨">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②⓪">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②①">FileTypeBox</a>:</p>
     <p><code>avis, msf1, miaf, MA1B</code></p>
-    <p>A file containing a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif②⑨">pict</a> track compliant with this profile and made only of samples marked <a class="property css" data-link-type="property" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑦">sync</a> is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑧">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff③⑨">FileTypeBox</a>:</p>
+    <p>A file containing a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-①②②">pict</a> track compliant with this profile and made only of samples marked <a class="property css" data-link-type="property" href="https://www.iso.org/standard/68960.html" id="termref-for-①②③">sync</a> is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②④">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②⑤">FileTypeBox</a>:</p>
     <p><code>avis, avio, msf1, miaf, MA1B</code></p>
    </div>
    <h3 class="heading settled" data-level="7.3" id="advanced-profile"><span class="secno">7.3. </span><span class="content">AVIF Advanced Profile</span><a class="self-link" href="#advanced-profile"></a></h3>
    <p>This section defines the MIAF AV1 Advanced profile of <a data-link-type="biblio" href="#biblio-heif">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf">[MIAF]</a> and identified by the brand <dfn class="css" data-dfn-for="AV1 Image Item Type" data-dfn-type="value" data-export id="valdef-av1-image-item-type-ma1a">MA1A<a class="self-link" href="#valdef-av1-image-item-type-ma1a"></a></dfn>.</p>
-   <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④⓪">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④①">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
+   <p>If the brand <code>MA1A</code> is in the list of <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②⑥">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②⑦">FileTypeBox</a>, the common constraints in the section <a href="#brands">§ 5 Brands, Internet media types and file extensions</a> shall apply.</p>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②②">AV1 Image Items</a>:</p>
    <ul>
     <li data-md>
@@ -2263,9 +2271,9 @@ Quantity:       Zero or one
      <p>The AV1 level for High Profile shall be 5.1 or lower.</p>
    </ul>
    <div class="example" id="example-e237da1f">
-    <a class="self-link" href="#example-e237da1f"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④②">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④③">FileTypeBox</a>: 
+    <a class="self-link" href="#example-e237da1f"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②⑧">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①②⑨">FileTypeBox</a>: 
     <p><code>avif, mif1, miaf, MA1A</code></p>
-    <p>A file containing a <a class="property css" data-link-type="property" href="#biblio-heif" id="ref-for-biblio-heif③⓪">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④④">compatible_brands</a> of the <a data-link-type="dfn" href="#biblio-isobmff" id="ref-for-biblio-isobmff④⑤">FileTypeBox</a>:</p>
+    <p>A file containing a <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="termref-for-①③⓪">pict</a> track compliant with this profile is expected to list the following brands, in any order, in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①③①">compatible_brands</a> of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="termref-for-①③②">FileTypeBox</a>:</p>
     <p><code>avis, msf1, miaf, MA1A</code></p>
    </div>
    <h2 class="heading settled" data-level="8" id="mime-registration"><span class="secno">8. </span><span class="content">AVIF Media Type Registration</span><a class="self-link" href="#mime-registration"></a></h2>
@@ -2321,7 +2329,7 @@ Quantity:       Zero or one
    <div class="example" id="example-example"><a class="self-link" href="#example-example"></a> This is an example of an informative example. </div>
    <p> Informative notes begin with the word “Note”
             and are set apart from the normative text with <code>class="note"</code>, like this: </p>
-   <p class="note" role="note"> Note, this is an informative note. </p>
+   <p class="note" role="note"> Note, this is an informative note.</p>
   </div>
 <script>
 (function() {
@@ -2480,71 +2488,715 @@ Quantity:       Zero or one
    <li><a href="#operatingpointselectorproperty">OperatingPointSelectorProperty</a><span>, in § 2.3.2.1.2</span>
    <li><a href="#op_index">op_index</a><span>, in § 2.3.2.1.4</span>
   </ul>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf">https://aomediacodec.github.io/av1-spec/av1-spec.pdf</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">1. Scope</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a>
+    <li><a href="#termref-for-">2.3.2.1.4. Semantics</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a>
+    <li><a href="#termref-for-">2.3.2.3.2. Description</a>
+    <li><a href="#termref-for-">2.3.2.3.4. Semantics</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a>
+    <li><a href="#termref-for-">7.1. Overview</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-isobmff/">https://aomediacodec.github.io/av1-isobmff/</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-isobmff/">https://aomediacodec.github.io/av1-isobmff/</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://aomediacodec.github.io/av1-isobmff/">https://aomediacodec.github.io/av1-isobmff/</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.1. AV1 Item Configuration Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/66067.html">https://www.iso.org/standard/66067.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.2.2. Image Spatial Extents Property</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a> <a href="#termref-for-">(10)</a> <a href="#termref-for-">(11)</a> <a href="#termref-for-">(12)</a> <a href="#termref-for-">(13)</a> <a href="#termref-for-">(14)</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">2.3.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">2.3.2.2. Layer Selector Property</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/68960.html">https://www.iso.org/standard/68960.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">2.2.3. Other Item Properties</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.1. Brands overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">5.2. AVIF image and image collection brand</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a>
+    <li><a href="#termref-for-">5.3. AVIF image sequence brands</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a>
+    <li><a href="#termref-for-">6. General constraints</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a>
+    <li><a href="#termref-for-">7.1. Overview</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a>
+    <li><a href="#termref-for-">7.2. AVIF Baseline Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a> <a href="#termref-for-">(7)</a> <a href="#termref-for-">(8)</a> <a href="#termref-for-">(9)</a>
+    <li><a href="#termref-for-">7.3. AVIF Advanced Profile</a> <a href="#termref-for-">(2)</a> <a href="#termref-for-">(3)</a> <a href="#termref-for-">(4)</a> <a href="#termref-for-">(5)</a> <a href="#termref-for-">(6)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/74417.html">https://www.iso.org/standard/74417.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6. General constraints</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/74417.html">https://www.iso.org/standard/74417.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6. General constraints</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/74417.html">https://www.iso.org/standard/74417.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6. General constraints</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/74417.html">https://www.iso.org/standard/74417.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6. General constraints</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-">
+   <a href="https://www.iso.org/standard/74417.html">https://www.iso.org/standard/74417.html</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#termref-for-">2.1. AV1 Image Item</a>
+    <li><a href="#termref-for-">3. Image Sequences</a>
+    <li><a href="#termref-for-">4. Auxiliary Image Items and Sequences</a> <a href="#termref-for-">(2)</a>
+    <li><a href="#termref-for-">6. General constraints</a>
+   </ul>
+  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[AV1]</a> defines the following terms:
     <ul>
-     <li><span>av1 bitstream</span>
-     <li><span>color_range</span>
-     <li><span>frameheight</span>
-     <li><span>framewidth</span>
-     <li><span>intra frame</span>
-     <li><span>max_frame_height_minus1</span>
-     <li><span>max_frame_width_minus1</span>
-     <li><span>metadata obu</span>
-     <li><span>mono_chrome</span>
-     <li><span>operating point</span>
-     <li><span>operating_points_cnt_minus_1</span>
-     <li><span>reduced_still_picture_header</span>
-     <li><span>render_height_minus1</span>
-     <li><span>render_width_minus1</span>
-     <li><span>seq_level_idx</span>
-     <li><span>sequence header obu</span>
-     <li><span>spatial_id</span>
-     <li><span>still_picture</span>
-     <li><span>temporal unit</span>
+     <li><span class="dfn-paneled" id="term-for-">av1 bitstream</span>
+     <li><span class="dfn-paneled" id="term-for-①">color_range</span>
+     <li><span class="dfn-paneled" id="term-for-②">frameheight</span>
+     <li><span class="dfn-paneled" id="term-for-③">framewidth</span>
+     <li><span class="dfn-paneled" id="term-for-④">intra frame</span>
+     <li><span class="dfn-paneled" id="term-for-⑤">max_frame_height_minus1</span>
+     <li><span class="dfn-paneled" id="term-for-⑥">max_frame_width_minus1</span>
+     <li><span class="dfn-paneled" id="term-for-⑦">metadata obu</span>
+     <li><span class="dfn-paneled" id="term-for-⑧">mono_chrome</span>
+     <li><span class="dfn-paneled" id="term-for-⑨">operating point</span>
+     <li><span class="dfn-paneled" id="term-for-①⓪">operating_points_cnt_minus_1</span>
+     <li><span class="dfn-paneled" id="term-for-①①">reduced_still_picture_header</span>
+     <li><span class="dfn-paneled" id="term-for-①②">render_height_minus1</span>
+     <li><span class="dfn-paneled" id="term-for-①③">render_width_minus1</span>
+     <li><span class="dfn-paneled" id="term-for-①④">seq_level_idx</span>
+     <li><span class="dfn-paneled" id="term-for-①⑤">sequence header obu</span>
+     <li><span class="dfn-paneled" id="term-for-①⑥">spatial_id</span>
+     <li><span class="dfn-paneled" id="term-for-①⑦">still_picture</span>
+     <li><span class="dfn-paneled" id="term-for-①⑧">temporal unit</span>
     </ul>
    <li>
     <a data-link-type="biblio">[AV1-ISOBMFF]</a> defines the following terms:
     <ul>
-     <li><span>av1 sample</span>
-     <li><span>av1 track</span>
-     <li><span>av1codecconfigurationbox</span>
+     <li><span class="dfn-paneled" id="term-for-①⑨">av1 sample</span>
+     <li><span class="dfn-paneled" id="term-for-②⓪">av1 track</span>
+     <li><span class="dfn-paneled" id="term-for-②①">av1codecconfigurationbox</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HEIF]</a> defines the following terms:
     <ul>
-     <li><span>colr</span>
-     <li><span>image_height</span>
-     <li><span>image_width</span>
-     <li><span>ispe</span>
-     <li><span>layer_id</span>
-     <li><span>lsel</span>
-     <li><span>pasp</span>
-     <li><span>pict</span>
-     <li><span>pixi</span>
+     <li><span class="dfn-paneled" id="term-for-②②">colr</span>
+     <li><span class="dfn-paneled" id="term-for-②③">image_height</span>
+     <li><span class="dfn-paneled" id="term-for-②④">image_width</span>
+     <li><span class="dfn-paneled" id="term-for-②⑤">ispe</span>
+     <li><span class="dfn-paneled" id="term-for-②⑥">layer_id</span>
+     <li><span class="dfn-paneled" id="term-for-②⑦">lsel</span>
+     <li><span class="dfn-paneled" id="term-for-②⑧">pasp</span>
+     <li><span class="dfn-paneled" id="term-for-②⑨">pict</span>
+     <li><span class="dfn-paneled" id="term-for-③⓪">pixi</span>
     </ul>
    <li>
     <a data-link-type="biblio">[ISOBMFF]</a> defines the following terms:
     <ul>
-     <li><span>cclv</span>
-     <li><span>clap</span>
-     <li><span>clli</span>
-     <li><span>compatible_brands</span>
-     <li><span>filetypebox</span>
-     <li><span>major_brand</span>
-     <li><span>mdcv</span>
-     <li><span>sync</span>
+     <li><span class="dfn-paneled" id="term-for-③①">cclv</span>
+     <li><span class="dfn-paneled" id="term-for-③②">clap</span>
+     <li><span class="dfn-paneled" id="term-for-③③">clli</span>
+     <li><span class="dfn-paneled" id="term-for-③④">compatible_brands</span>
+     <li><span class="dfn-paneled" id="term-for-③⑤">filetypebox</span>
+     <li><span class="dfn-paneled" id="term-for-③⑥">major_brand</span>
+     <li><span class="dfn-paneled" id="term-for-③⑦">mdcv</span>
+     <li><span class="dfn-paneled" id="term-for-③⑧">sync</span>
     </ul>
    <li>
     <a data-link-type="biblio">[MIAF]</a> defines the following terms:
     <ul>
-     <li><span>miaf</span>
-     <li><span>miaf auxiliary image item</span>
-     <li><span>miaf auxiliary image sequence</span>
-     <li><span>miaf image item</span>
-     <li><span>miaf image sequence</span>
+     <li><span class="dfn-paneled" id="term-for-③⑨">miaf</span>
+     <li><span class="dfn-paneled" id="term-for-④⓪">miaf auxiliary image item</span>
+     <li><span class="dfn-paneled" id="term-for-④①">miaf auxiliary image sequence</span>
+     <li><span class="dfn-paneled" id="term-for-④②">miaf image item</span>
+     <li><span class="dfn-paneled" id="term-for-④③">miaf image sequence</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
