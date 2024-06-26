@@ -1,6 +1,7 @@
 <pre class='metadata'>
 Group: AOM
 Status: WGD
+Text Macro: SPECVERSION v1.2.0
 Title: AV1 Image File Format (AVIF)
 URL: https://AOMediaCodec.github.io/av1-avif
 !Latest version: <a href="https://AOMediaCodec.github.io/av1-avif">https://AOMediaCodec.github.io/av1-avif</a>
