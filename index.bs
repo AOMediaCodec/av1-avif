@@ -4,8 +4,6 @@ Status: WGD
 Text Macro: SPECVERSION v1.2.0
 Title: AV1 Image File Format (AVIF)
 URL: https://AOMediaCodec.github.io/av1-avif
-!Latest version: <a href="https://AOMediaCodec.github.io/av1-avif">https://AOMediaCodec.github.io/av1-avif</a>
-!Previously approved version: <a href="v1.1.0.html">v1.1.0</a>
 Shortname: av1-avif
 Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
@@ -14,6 +12,9 @@ Abstract: This document specifies syntax and semantics for the storage of [[!AV1
 Date: 2024-06-25
 Repository: AOMediaCodec/av1-avif
 Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
+!Previously approved version: <a href="v1.1.0.html">https://aomediacodec.github.io/av1-avif/v1.1.0.html</a>
+!Latest approved version: <a href="latest-approved.html">https://aomediacodec.github.io/av1-avif/latest-approved.html</a>
+!Latest draft version: <a href="latest-draft.html">https://aomediacodec.github.io/av1-avif/latest-draft.html</a>
 Metadata Order: This version, !*, *
 </pre>
 
