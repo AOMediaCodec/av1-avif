@@ -435,4 +435,5 @@ The following additional constraints apply only to [=AV1 Image Sequences=]:
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
 <h2 id="change-list">Changes since v1.1.0 release</h2>
+  - <a href="https://github.com/AOMediaCodec/av1-avif/pull/223">Stop using `dfn value` for definitions.</a>
 
