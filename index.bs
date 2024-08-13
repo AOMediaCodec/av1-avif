@@ -6,6 +6,7 @@ Title: AV1 Image File Format (AVIF)
 URL: https://AOMediaCodec.github.io/av1-avif
 Shortname: av1-avif
 Editor: Yannis Guyon, Google, yguyon@google.com
+Editor: Leo Barnes, Apple, lbarnes@apple.com
 Former Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Former Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
@@ -21,123 +22,123 @@ Metadata Order: This version, !*, *
 
 <pre class='biblio'>
 {
-    "AV1": {
-  "href": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf",
-  "id": "AV1",
-  "title": "AV1 Bitstream & Decoding Process Specification",
-  "status": "LS",
-  "publisher": "AOM"
-    },
+  "AV1": {
+    "href": "https://aomediacodec.github.io/av1-spec/av1-spec.pdf",
+    "id": "AV1",
+    "title": "AV1 Bitstream & Decoding Process Specification",
+    "status": "LS",
+    "publisher": "AOM"
+  },
 
-    "AV1-ISOBMFF": {
-  "href": "https://aomediacodec.github.io/av1-isobmff/",
-  "id": "AV1-ISOBMFF",
-  "title": "AV1 Codec ISO Media File Format Binding",
-  "status": "LS",
-  "publisher": "AOM"
-    },
+  "AV1-ISOBMFF": {
+    "href": "https://aomediacodec.github.io/av1-isobmff/",
+    "id": "AV1-ISOBMFF",
+    "title": "AV1 Codec ISO Media File Format Binding",
+    "status": "LS",
+    "publisher": "AOM"
+  },
 
-    "HEIF": {
-  "id": "HEIF",
-  "href": "https://www.iso.org/standard/66067.html",
-  "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
-  "status": "International Standard",
-  "publisher": "ISO/IEC",
-  "isoNumber":"ISO/IEC 23008-12:2017"
-    },
+  "HEIF": {
+    "id": "HEIF",
+    "href": "https://www.iso.org/standard/66067.html",
+    "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
+    "status": "International Standard",
+    "publisher": "ISO/IEC",
+    "isoNumber":"ISO/IEC 23008-12:2017"
+  },
 
-    "ISOBMFF": {
-  "id": "ISOBMFF",
-  "href": "https://www.iso.org/standard/68960.html",
-  "title": "Information technology — Coding of audio-visual objects — Part 12: ISO base media file format",
-  "status": "International Standard",
-  "publisher": "ISO/IEC",
-  "isoNumber":"ISO/IEC 14496-12:2015"
-    },
+  "ISOBMFF": {
+    "id": "ISOBMFF",
+    "href": "https://www.iso.org/standard/68960.html",
+    "title": "Information technology — Coding of audio-visual objects — Part 12: ISO base media file format",
+    "status": "International Standard",
+    "publisher": "ISO/IEC",
+    "isoNumber":"ISO/IEC 14496-12:2015"
+  },
 
-    "MIAF": {
-  "href": "https://www.iso.org/standard/74417.html",
-  "id": "MIAF",
-  "title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)",
-  "status": "Enquiry",
-  "publisher": "ISO/IEC",
-  "isoNumber": "ISO/IEC DIS 23000-22"
-    }
+  "MIAF": {
+    "href": "https://www.iso.org/standard/74417.html",
+    "id": "MIAF",
+    "title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)",
+    "status": "Enquiry",
+    "publisher": "ISO/IEC",
+    "isoNumber": "ISO/IEC DIS 23000-22"
+  }
 }
 </pre>
 
 <pre class="anchors">
 url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
-    text: colr
-    text: mif1
-    text: msf1
-    text: pasp
-    text: pict
-    text: pixi
-    text: ispe
-    text: lsel
-    text: layer_id
-    text: image_width
-    text: image_height
+  text: colr
+  text: mif1
+  text: msf1
+  text: pasp
+  text: pict
+  text: pixi
+  text: ispe
+  text: lsel
+  text: layer_id
+  text: image_width
+  text: image_height
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
-    text: compatible_brands
-    text: FileTypeBox
-    text: major_brand
+  text: compatible_brands
+  text: FileTypeBox
+  text: major_brand
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
-    text: sync
-    text: cclv
-    text: clli
-    text: mdcv
-    text: clap
-    text: iloc
+  text: sync
+  text: cclv
+  text: clli
+  text: mdcv
+  text: clap
+  text: iloc
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: property;
-    text: miaf
+  text: miaf
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
-    text: primary image
-    text: MIAF image item
-    text: MIAF image sequence
-    text: MIAF auxiliary image item
-    text: MIAF auxiliary image sequence
-    text: MIAF file
+  text: primary image
+  text: MIAF image item
+  text: MIAF image sequence
+  text: MIAF auxiliary image item
+  text: MIAF auxiliary image sequence
+  text: MIAF file
 
 url: https://aomediacodec.github.io/av1-isobmff/; spec: AV1-ISOBMFF; type: dfn;
-    text: av1codecconfigurationbox
-    text: AV1 Sample
-    text: AV1 Track
+  text: AV1CodecConfigurationBox
+  text: AV1 Sample
+  text: AV1 Track
 
 url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
-    text: AV1 bitstream
-    text: AV1 Frame
-    text: Sequence Header OBU
-    text: Metadata OBU
-    text: Temporal Unit
-    text: Operating Point
-    text: Intra Frame
+  text: AV1 bitstream
+  text: AV1 Frame
+  text: Sequence Header OBU
+  text: Metadata OBU
+  text: Temporal Unit
+  text: Operating Point
+  text: Intra Frame
 
 url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
-    text: mono_chrome
-    text: color_range
-    text: still_picture
-    text: reduced_still_picture_header
-    text: operating_points_cnt_minus_1
-    text: choose_operating_point
-    text: spatial_id
-    text: seq_level_idx
-    text: render_width_minus1
-    text: render_height_minus1
-    text: FrameWidth
-    text: FrameHeight
-    text: max_frame_width_minus1
-    text: max_frame_height_minus1
+  text: mono_chrome
+  text: color_range
+  text: still_picture
+  text: reduced_still_picture_header
+  text: operating_points_cnt_minus_1
+  text: choose_operating_point
+  text: spatial_id
+  text: seq_level_idx
+  text: render_width_minus1
+  text: render_height_minus1
+  text: FrameWidth
+  text: FrameHeight
+  text: max_frame_width_minus1
+  text: max_frame_height_minus1
 </pre>
 
 <h2 id="general">Scope</h2>
 
-[[!AV1]] defines the syntax and semantics of an [=AV1 bitstream=]. The <dfn>AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an [=AV1 bitstream=] in a [[!HEIF]] file.
+[[!AV1]] defines the syntax and semantics of an [=AV1 bitstream=]. The <dfn export>AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an [=AV1 bitstream=] in a [[!HEIF]] file.
 The [=AV1 Image File Format=] defines multiple profiles, which restrict the allowed syntax and semantics of the [=AV1 bitstream=] with the goal to improve interoperability, especially for hardware implementations.
 The profiles defined in this specification follow the conventions of the [[!MIAF]] specification.
 Images encoded with AV1 and not meeting the restrictions of the defined profiles may still be compliant to this [=AV1 Image File Format=] if they adhere to the general AVIF requirements.
@@ -155,10 +156,10 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
 <h3 id="image-item">AV1 Image Item</h3>
 
-When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn>AV1 Image Item</dfn>, and shall obey the following constraints:
+When an item is of type <dfn export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn export>AV1 Image Item</dfn>, and shall obey the following constraints:
   - The [=AV1 Image Item=] shall be a conformant [=MIAF image item=].
-  - The [=AV1 Image Item=] shall be associated with an [=AV1 Item Configuration Property=].
-  - The content of an [=AV1 Image Item=] is called the <dfn>AV1 Image Item Data</dfn> and shall obey the following constraints:
+  - The [=AV1 Image Item=] shall be associated with an [=AV1ItemConfigurationProperty=].
+  - The content of an [=AV1 Image Item=] is called the <dfn export>AV1 Image Item Data</dfn> and shall obey the following constraints:
     - The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].
     - The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].
     - If the [=AV1 Image Item Data=] consists of a single frame (i.e. when using a single layer),
@@ -167,17 +168,17 @@ When an item is of type <dfn value export for="AV1 Image Item Type">av01</dfn>, 
 
 <h3 id="image-item-properties">Image Item Properties</h3>
 
-<h4 id="av1-configuration-item-property">AV1 Item Configuration Property</h4>
+<h4 id="av1-item-configuration-property">AV1 Item Configuration Property</h4>
 
 <pre class="def">
-  Box Type:                 <dfn value export for="AV1 Item Configuration Property">av1C</dfn>
+  Box Type:                 <dfn export for="AV1ItemConfigurationProperty">av1C</dfn>
   Property type:            Descriptive item property
   Container:                ItemPropertyContainerBox
   Mandatory (per  item):    Yes, for an image item of type 'av01'
   Quantity:                 One for an image item of type 'av01'
 </pre>
 
-The syntax and semantics of the <dfn>AV1 Item Configuration Property</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
+The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
 
   - [=Sequence Header OBUs=] should not be present in the [=AV1CodecConfigurationBox=].
   - If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].
@@ -207,7 +208,7 @@ NOTE: The values of [=render_width_minus1=] and [=render_height_minus1=] possibl
 
 In addition to the Image Properties defined in [[!HEIF]], such as 'colr', 'pixi' or 'pasp', [=AV1 image items=] MAY also be associated with 'clli', 'cclv' and 'mdcv' introduced in [[!MIAF]].
 
-In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1 Item Configuration Property=].
+In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1ItemConfigurationProperty=].
 
 NOTE: Although the clean aperture property ('clap') defined in [[!HEIF]] is applicable to AVIF, implementers of authoring tools should be aware of the possibility of unintended consequences since users may not realize image data outside the clap region is still in the file. A future revision of this specification may place normative restrictions on how clap can be used.
 
@@ -231,7 +232,7 @@ NOTE: When such a progressive decoding of the layers within an [=Operating Point
 <h6 id="operating-point-selector-property-definition" class="no-toc">Definition</h6>
 
 <pre class="def">
-  Box Type:       <dfn value="a1op" export for="OperatingPointSelectorProperty">a1op</dfn>
+  Box Type:       <dfn export for="OperatingPointSelectorProperty">a1op</dfn>
   Property type:  Descriptive item property
   Container:      <code>ItemPropertyContainerBox</code>
   Mandatory:      No
@@ -240,7 +241,7 @@ NOTE: When such a progressive decoding of the layers within an [=Operating Point
 
 <h6 id="operating-point-selector-property-description" class="no-toc">Description</h6>
 
-An <dfn>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Image Item=] to provide the index of the operating point to be processed for this item. If associated, it shall be marked as essential.
+An <dfn export>OperatingPointSelectorProperty</dfn> may be associated with an [=AV1 Image Item=] to provide the index of the operating point to be processed for this item. If associated, it shall be marked as essential.
 
 <h6 id="operating-point-selector-property-syntax" class="no-toc">Syntax</h6>
 
@@ -262,7 +263,7 @@ The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image I
 <h6 id="layered-image-indexing-property-definition" class="no-toc">Definition</h6>
 
 <pre class="def">
-  Box Type:       <dfn value export for="AV1LayeredImageIndexingProperty">a1lx</dfn>
+  Box Type:       <dfn export for="AV1LayeredImageIndexingProperty">a1lx</dfn>
   Property type:  Descriptive item property
   Container:      <code>ItemPropertyContainerBox</code>
   Mandatory:      No
@@ -295,8 +296,7 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 <div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
-
-<p>An <dfn>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
+<p>An <dfn export>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
   - The track shall be a valid [=MIAF image sequence=].
   - The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.
@@ -305,16 +305,16 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 
 <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 
-<p>An <dfn>AV1 Auxiliary Image Item</dfn> (respectively an <dfn>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]) with the following additional constraints:
+<p>An <dfn export>AV1 Auxiliary Image Item</dfn> (respectively an <dfn export>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
   - It shall be a compliant [=MIAF Auxiliary Image Item=] (respectively [=MIAF Auxiliary Image Sequence=]).
   - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
   - The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</p>
 
-<p>An <dfn export="">AV1 Alpha Image Item</dfn> (respectively an <dfn export="">AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An <a>AV1 Alpha Image Item</a> (respectively an <a>AV1 Alpha Image Sequence</a>) shall be encoded with the same bit depth as the associated master AV1 Image Item (respectively AV1 Image Sequence).</p>
+<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. An [=AV1 Alpha Image Item=] (respectively an [=AV1 Alpha Image Sequence=]) shall be encoded with the same bit depth as the associated master [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]).</p>
 
 <p>For [=AV1 Alpha Image Item=] and [=AV1 Alpha Image Sequence=], the ColourInformationBox should be omitted. If present, readers shall ignore it.</p>
 
-<p>An <dfn export="">AV1 Depth Image Item</dfn> (respectively an <dfn export="">AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
+<p>An <dfn export>AV1 Depth Image Item</dfn> (respectively an <dfn export>AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
 NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>matrix_coefficients</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>aux_type</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.
 
@@ -329,7 +329,7 @@ NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are 
 <p>If any of the brands defined in this document is specified in the <code>[=major_brand=]</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in [[#mime-registration]].</p>
 
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
-The brand to identify [=AV1 image items=] is <dfn value="avif" export="" for="AVIF Image brand">avif</dfn>.
+The brand to identify [=AV1 image items=] is <dfn export for="AVIF Image brand">avif</dfn>.
 
 Files that indicate this brand in the [=compatible_brands=] field of the [=FileTypeBox=] shall comply with the following:
   - The primary item shall be an [=AV1 Image Item=] or be a derived image that references directly or indirectly one or more items that all are [=AV1 Image Items=].
@@ -337,10 +337,10 @@ Files that indicate this brand in the [=compatible_brands=] field of the [=FileT
 
 Files that conform with these constraints should include the brand <code>[=avif=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=].
 
-Additionally, the brand <dfn value="avio" export="" for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]. Conversely, if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the [=compatible_brands=] field of the [=FileTypeBox=].
+Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]. Conversely, if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the [=compatible_brands=] field of the [=FileTypeBox=].
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
-The brand to identify AVIF image sequences is <dfn value="avis" export="" for="AVIF Image Sequence brand">avis</dfn>.
+The brand to identify AVIF image sequences is <dfn export for="AVIF Image Sequence brand">avis</dfn>.
 
 Files that indicate this brand in the [=compatible_brands=] field of the [=FileTypeBox=] shall comply with the following:
   - they shall contain one or more [=AV1 image sequences=].
@@ -379,7 +379,7 @@ NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensi
 
 <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 
-This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value export for="AV1 Image Item Type">MA1B</dfn>.
+This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
 
 If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
@@ -391,22 +391,22 @@ NOTE:  AV1 tiers are not constrained because timing is optional in image sequenc
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the AVIF Baseline profile may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using grid derivation.
 
 <div class="example">
-A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+  A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avif, mif1, miaf, MA1B</code>
 
-A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+  A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, msf1, miaf, MA1B</code>
 
-A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+  A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, avio, msf1, miaf, MA1B</code>
 </div>
 
 <h3 id="advanced-profile">AVIF Advanced Profile</h3>
 
-This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn value="" export="" for="AV1 Image Item Type">MA1A</dfn>.
+This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand <dfn export for="AVIF Advanced Profile">MA1A</dfn>.
 
 If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
@@ -421,11 +421,11 @@ The following additional constraints apply only to [=AV1 Image Sequences=]:
   - The AV1 level for High Profile shall be 5.1 or lower.
 
 <div class="example">
-A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+  A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avif, mif1, miaf, MA1A</code>
 
-A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+  A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, msf1, miaf, MA1A</code>
 </div>
@@ -435,3 +435,4 @@ A file containing a 'pict' track compliant with this profile is expected to list
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
 <h2 id="change-list">Changes since v1.1.0 release</h2>
+
