@@ -42,9 +42,9 @@ Metadata Order: This version, !*, *
         "id": "HEIF",
         "href": "https://www.iso.org/standard/66067.html",
         "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
-        "status": "International Standard",
+        "status": "Committee Draft Amendment",
         "publisher": "ISO/IEC",
-        "isoNumber":"ISO/IEC 23008-12:2017"
+        "isoNumber":"ISO/IEC 23008-12:2024 CDAM 2"
     },
 
     "ISOBMFF": {
@@ -63,6 +63,15 @@ Metadata Order: This version, !*, *
         "status": "Enquiry",
         "publisher": "ISO/IEC",
         "isoNumber": "ISO/IEC DIS 23000-22"
+    },
+
+    "CICP": {
+        "href": "https://www.iso.org/standard/85291.html",
+        "id": "CICP",
+        "title": "Information technology — Coding-independent code points — Part 2: Video",
+        "status": "Draft International Standard",
+        "publisher": "ISO/IEC",
+        "isoNumber": "ISO/IEC 23091-2"
     }
 }
 </pre>
@@ -93,11 +102,19 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: image_height
     text: ster
     text: tmap
+    text: dimg
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
+    text: SingleItemTypeReferenceBox
+    text: SingleItemTypeReferenceBoxLarge
+    text: ItemReferenceBox
+    text: reference_count
+    text: from_item_ID
+    text: to_item_ID
+    text: altr
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: sync
@@ -105,6 +122,7 @@ url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: mdat
     text: idat
     text: altr
+    text: nclx
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: property;
     text: miaf
@@ -115,6 +133,7 @@ url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
     text: MIAF image sequence
     text: MIAF auxiliary image item
     text: MIAF auxiliary image sequence
+    text: MIAF derived image item
     text: MIAF file
 
 url: https://aomediacodec.github.io/av1-isobmff/; spec: AV1-ISOBMFF; type: dfn;
@@ -326,7 +345,7 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 
     - <assert>The track shall be a valid [=MIAF image sequence=].</assert>
     - <assert>The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.</assert>
-    - <assert>The track shall have only one sample description entry.</assert>
+    - <assert>The track shall have only one [=AV1 Sample=] description entry.</assert>
     - <assert>If multiple [=Sequence Header OBUs=] are present in the track payload, they shall be identical.</assert></p>
 
 <h2 id="other-images">Other Image Items and Sequences</h2>
@@ -352,6 +371,321 @@ NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are 
 
 A tone map derived image item ('tmap') as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the 'tmap' image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
 
+<h4 id="sample-transform">Sample Transform Derived Image Item</h4>
+
+In these sections, a "sample" refers to the value of a pixel for a given channel.
+
+<h5 id="sample-transform-definition">Definition</h5>
+
+When a [=MIAF derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
+
+The input images are specified in, and in the same order as the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the field <code>[=from_item_ID=]</code> identifies the [=Sample Transform Derived Image Item=], and the values of the field <code>[=to_item_ID=]</code> identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
+
+The input image items and the [=Sample Transform Derived Image Item=] shall:
+  - each have a 'pixi' property with version 1, an 'ispe' property and at least one 'colr' property;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' property;
+  - have the same dimensions as defined by the 'ispe' property;
+  - have the same colour type and space as defined by the 'colr' properties.
+
+For each output sample of the [=Sample Transform Derived Image Item=], a series of integer operations (an expression) is applied to operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
+
+No colour space conversion, matrix coefficients, or transfer function shall be applied to the input samples. They are already in the same colour model as the output samples.
+
+Input samples shall have their field <code>channel_format</code> set to 0 (unsigned integer) or 3 (signed integer) as defined by the 'pixi' property. This constraint does not apply to output samples.
+
+The output reconstructed image is made up of the output samples, whose values are each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The field <code>full_range_flag</code> of the 'colr' property of <code>colour_type</code> 'nclx' also defines a range of values to clamp to, as defined in [[!CICP]].
+
+<div class="example">A primary [=MIAF image item=] can be completed with another hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same [=altr=] group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
+
+<h5 id="sample-transform-syntax">Syntax</h5>
+
+An expression is a series of tokens. A token is an operand or an operator. An operand can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An operator takes either one or two input operands. Each unary operator pops one value from the stack. Each binary operator pops two values from the stack, being the right operand then the left operand. Each token results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
+
+```c
+aligned(8) class SampleTransform {
+    unsigned int(6) version = 0;
+    unsigned int(2) bit_depth; // Signed 8, 16, 32 or 64-bit.
+    unsigned int(8) token_count;
+    for (i=0; i<token_count; i++) {
+        unsigned int(8) token;
+        if (token == 0) {
+            // Push the 'constant' value to the stack.
+            signed int(1<<(bit_depth+3)) constant;
+        } else if (token == 1) {
+            // Push the sample value from the 'input_image_item_index'th
+            // input image item to the stack. At most 'reference_count'.
+            unsigned int(8) input_image_item_index; // 1-based
+        } else {
+            if (token == 2 || token == 3 || token == 11 || token == 12) {
+                // Unary operator. Pop an operand from the stack.
+            } else {
+                // Binary operator. Pop a right operand
+                // then a left operand from the stack.
+            }
+            // Apply operator 'token' and push the result to the stack.
+        }
+    }
+}
+```
+
+<h5 id="sample-transform-semantics">Semantics</h5>
+
+<dfn noexport>version</dfn> shall be equal to 0.
+
+<dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the precision of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
+
+<table class="data">
+  <caption style="caption-side:bottom">
+    Table 1 - Mapping from <code>bit_depth</code> to the intermediate bit depth.
+  </caption>
+  <thead>
+    <tr>
+      <th>Value of <code>bit_depth</code></th>
+      <th>Intermediate bit depth (sign bit inclusive) <code>num_bits</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>8</td></tr>
+    <tr><td>1</td><td>16</td></tr>
+    <tr><td>2</td><td>32</td></tr>
+    <tr><td>3</td><td>64</td></tr>
+  </tbody>
+</table>
+
+The result of any computation under- or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1-1</sup>, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and adapt the results accordingly. Computations with operands of negative value use the two’s-complement representation.
+
+<dfn noexport>token_count</dfn> expected number of tokens to read.
+
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values greater than 15 are reserved.
+
+<table class="data">
+  <caption style="caption-side:bottom">
+    Table 2 - Meaning of the value of <code>token</code>.
+  </caption>
+  <thead>
+    <tr>
+      <th>Value of <code>token</code></th>
+      <th>Name</th>
+      <th>Input count</th>
+      <th>Meaning before pushing to the stack</th>
+      <th>Representation (<var>L</var> being the left operand, <var>R</var> being the right operand if any, <var>S</var> being the result)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <style> table.formula td { padding:0 4px 0 4px; border:0; white-space: nowrap; } </style>
+    <tr>
+      <td>0</td>
+      <td>constant operand</td>
+      <td>0</td>
+      <td>1 \<\< (<code>bit_depth</code> + 3) bits from the stream read as a signed integer.</td>
+      <td><var>L</var> or <var>R</var></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>sample operand</td>
+      <td>0</td>
+      <td>Sample value from the <code>input_image_item_index</code><sup>th</sup> input image item.</td>
+      <td><var>L</var> or <var>R</var></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>negate operator</td>
+      <td>1</td>
+      <td>Negation of the left operand.</td>
+      <td><var>S</var> = -<var>L</var></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>absolute value operator</td>
+      <td>1</td>
+      <td>Absolute value of the left operand.</td>
+      <td><var>S</var> = |<var>L</var>|</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>sum operator</td>
+      <td>2</td>
+      <td>Left operand added to the right operand.</td>
+      <td><var>S</var> = <var>L</var> + <var>R</var></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>difference operator</td>
+      <td>2</td>
+      <td>Right operand subtracted from the left operand.</td>
+      <td><var>S</var> = <var>L</var> - <var>R</var></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>product operator</td>
+      <td>2</td>
+      <td>Left operand multiplied by the right operand.</td>
+      <td><var>S</var> = <var>L</var> × <var>R</var></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>divide operator</td>
+      <td>2</td>
+      <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
+      <td>
+        <table class="formula">
+          <tr>
+            <td rowspan=2><var>S</var></td>
+            <td rowspan=2>=</td>
+            <td rowspan=2><div style="transform:scale(1.5,5)">{</div></td>
+            <td><var>L</var></td>
+            <td>if <var>R</var> = 0</td>
+          </tr>
+          <tr>
+            <td>
+              <table>
+                <tr>
+                  <td rowspan=2>truncate</td>
+                  <td rowspan=2 style="transform:scale(1,2)">(</td>
+                  <td><var>L</var></td>
+                  <td rowspan=2 style="transform:scale(1,2)">)</td>
+                </tr>
+                <tr><td style="border-top:1px solid"><var>R</var></td></tr>
+              </table>
+            </td>
+            <td>otherwise</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>and operator</td>
+      <td>2</td>
+      <td>Bitwise conjunction of the operands.</td>
+      <td><var>S</var> = <var>L</var> ∧ <var>R</var></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>or operator</td>
+      <td>2</td>
+      <td>Bitwise inclusive disjunction of the operands.</td>
+      <td><var>S</var> = <var>L</var> ∨ <var>R</var></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>xor operator</td>
+      <td>2</td>
+      <td>Bitwise exclusive disjunction of the operands.</td>
+      <td><var>S</var> = <var>L</var> ⊻ <var>R</var></td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>not operator</td>
+      <td>1</td>
+      <td>Bitwise complement of the operand.</td>
+      <td><var>S</var> = ¬<var>L</var></td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>bsr operator</td>
+      <td>1</td>
+      <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
+      <td>
+        <table class="formula">
+          <tr>
+            <td rowspan=2><var>S</var></td>
+            <td rowspan=2>=</td>
+            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
+            <td>0</td>
+            <td>if <var>L</var> ≤ 0</td>
+          </tr>
+          <tr>
+            <td>truncate(log<sub>2</sub><var>L</var>)</td>
+            <td>otherwise</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>pow operator</td>
+      <td>2</td>
+      <td>Left operand raised to the exponent being the right operand if the left operand is not zero, zero otherwise.</td>
+      <td>
+        <table class="formula">
+          <tr>
+            <td rowspan=2><var>S</var></td>
+            <td rowspan=2>=</td>
+            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
+            <td>0</td>
+            <td>if <var>L</var> = 0</td>
+          </tr>
+          <tr>
+            <td>truncate(<var>L</var><sup><var>R</var></sup></var>)</td>
+            <td>otherwise</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>min operator</td>
+      <td>2</td>
+      <td>Minimum value among the operands.</td>
+      <td>
+        <table class="formula">
+          <tr>
+            <td rowspan=2><var>S</var></td>
+            <td rowspan=2>=</td>
+            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
+            <td><var>L</var></td>
+            <td>if <var>L</var> ≤ <var>R</var></td>
+          </tr>
+          <tr>
+            <td><var>R</var></td>
+            <td>otherwise</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>max operator</td>
+      <td>2</td>
+      <td>Maximum value among the operands.</td>
+      <td>
+        <table class="formula">
+          <tr>
+            <td rowspan=2><var>S</var></td>
+            <td rowspan=2>=</td>
+            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
+            <td><var>R</var></td>
+            <td>if <var>L</var> ≤ <var>R</var></td>
+          </tr>
+          <tr>
+            <td><var>L</var></td>
+            <td>otherwise</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<dfn noexport>constant</dfn> literal signed value extracted from the stream with a precision of intermediate bit depth, pushed to the stack.
+
+<dfn noexport>input_image_item_index</dfn> 1-based index of the input image item whose sample is pushed to the stack. Shall be at most <code>[=reference_count=]</code>.
+
+<h5 id="sample-transform-constraints">Constraints</h5>
+
+The [=Sample Transform Derived Image Item=] uses the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
+
+  - The tokens shall be evaluated in the order they are defined in the metadata of the Sample Transform Derived Image Item.
+  - There shall be at least one token.
+  - The stack is empty before evaluating the first token.
+  - There shall be at least C elements in the stack before evaluating a <code>token</code>, C being that <code>token</code>'s Input count (defined by Table 2).
+  - There shall be exactly one remaining element in the stack after evaluating the last token. This element is the value of the reconstructed image item sample.
+
+Non-compliant expressions shall be rejected by parsers as invalid files.
+
+Note: Because each operator pops one or two elements then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least floor(<code>token_count</code>/2) operators and at most ceil(<code>token_count</code>/2) operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
+
 <h2 id="groups">Entity groups</h2>
 
 The GroupsListBox ('<dfn for="AVIF">grpl</dfn>') defined in [[!ISOBMFF]] may be used to group multiple image items in a file together. The type of the group describes how the image items are related. <assert>Decoders should ignore groups of unknown type.</assert>
@@ -363,6 +697,8 @@ The '<dfn for="AVIF">altr</dfn>' entity group as defined in [[!ISOBMFF]] may be 
 <h3 id="ster-group">'ster' group</h3>
 
 The '<dfn for="AVIF">ster</dfn>' entity group as defined in [[!HEIF]] may be used to indicate that two image items form a stereo pair suitable for stereoscopic viewing.
+
+<h3 id="derived-images">Derived Image Items and Sequences</h3>
 
 <h2 id="brands">Brands, Internet media types and file extensions</h2>
 
@@ -425,7 +761,7 @@ NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensi
 
 <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 
-This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
+This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
 
 If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
@@ -445,7 +781,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
     <code>avis, msf1, miaf, MA1B</code>
 
-A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a 'pict' track compliant with this profile and made only of [=AV1 Samples=] marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
     <code>avis, avio, msf1, miaf, MA1B</code>
 </div>
@@ -857,3 +1193,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.1 "Sample Transform Derived Image Item"</a>
