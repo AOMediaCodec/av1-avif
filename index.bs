@@ -403,7 +403,8 @@ An expression is a series of tokens. A token is an operand or an operator. An op
 
 ```c
 aligned(8) class SampleTransform {
-    unsigned int(6) version = 0;
+    unsigned int(2) version = 0;
+    unsigned int(4) reserved;
     unsigned int(2) bit_depth; // Signed 8, 16, 32 or 64-bit.
     unsigned int(8) token_count;
     for (i=0; i<token_count; i++) {
@@ -432,7 +433,9 @@ aligned(8) class SampleTransform {
 
 <dfn noexport>version</dfn> shall be equal to 0.
 
-<dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the precision of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
+<dfn noexport>reserved</dfn> for future use.
+
+<dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
 
 <table class="data">
   <caption style="caption-side:bottom">
@@ -452,9 +455,9 @@ aligned(8) class SampleTransform {
   </tbody>
 </table>
 
-The result of any computation under- or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1-1</sup>, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and adapt the results accordingly. Computations with operands of negative value use the two’s-complement representation.
+The result of any computation under- or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and adapt the results accordingly. Computations with operands of negative value use the two’s-complement representation.
 
-<dfn noexport>token_count</dfn> expected number of tokens to read.
+<dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
 <dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values greater than 15 are reserved.
 
@@ -468,59 +471,58 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <th>Name</th>
       <th>Input count</th>
       <th>Meaning before pushing to the stack</th>
-      <th>Representation (<var>L</var> being the left operand, <var>R</var> being the right operand if any, <var>S</var> being the result)</th>
+      <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> being operands popped from the stack for operators)</th>
     </tr>
   </thead>
   <tbody>
-    <style> table.formula td { padding:0 4px 0 4px; border:0; white-space: nowrap; } </style>
     <tr>
       <td>0</td>
       <td>constant operand</td>
       <td>0</td>
-      <td>1 \<\< (<code>bit_depth</code> + 3) bits from the stream read as a signed integer.</td>
-      <td><var>L</var> or <var>R</var></td>
+      <td><math><msup><mn>2</mn><mrow><mi>bit_depth</mi><mo>+</mo><mn>3</mn></mrow></math> bits from the stream read as a signed integer.</td>
+      <td>constant value</td>
     </tr>
     <tr>
       <td>1</td>
       <td>sample operand</td>
       <td>0</td>
       <td>Sample value from the <code>input_image_item_index</code><sup>th</sup> input image item.</td>
-      <td><var>L</var> or <var>R</var></td>
+      <td>input image item sample value</td>
     </tr>
     <tr>
       <td>2</td>
       <td>negate operator</td>
       <td>1</td>
       <td>Negation of the left operand.</td>
-      <td><var>S</var> = -<var>L</var></td>
+      <td><math><mo>-</mo><mi>L</mi></math></td>
     </tr>
     <tr>
       <td>3</td>
       <td>absolute value operator</td>
       <td>1</td>
       <td>Absolute value of the left operand.</td>
-      <td><var>S</var> = |<var>L</var>|</td>
+      <td><math><mo>|</mo><mi>L</mi><mo>|</mo></math></td>
     </tr>
     <tr>
       <td>4</td>
       <td>sum operator</td>
       <td>2</td>
       <td>Left operand added to the right operand.</td>
-      <td><var>S</var> = <var>L</var> + <var>R</var></td>
+      <td><math><mi>L</mi><mo>+</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>5</td>
       <td>difference operator</td>
       <td>2</td>
       <td>Right operand subtracted from the left operand.</td>
-      <td><var>S</var> = <var>L</var> - <var>R</var></td>
+      <td><math><mi>L</mi><mo>-</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>6</td>
       <td>product operator</td>
       <td>2</td>
       <td>Left operand multiplied by the right operand.</td>
-      <td><var>S</var> = <var>L</var> × <var>R</var></td>
+      <td><math><mi>L</mi><mo>×</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>7</td>
@@ -528,29 +530,13 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <td>2</td>
       <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
       <td>
-        <table class="formula">
-          <tr>
-            <td rowspan=2><var>S</var></td>
-            <td rowspan=2>=</td>
-            <td rowspan=2><div style="transform:scale(1.5,5)">{</div></td>
-            <td><var>L</var></td>
-            <td>if <var>R</var> = 0</td>
-          </tr>
-          <tr>
-            <td>
-              <table>
-                <tr>
-                  <td rowspan=2>truncate</td>
-                  <td rowspan=2 style="transform:scale(1,2)">(</td>
-                  <td><var>L</var></td>
-                  <td rowspan=2 style="transform:scale(1,2)">)</td>
-                </tr>
-                <tr><td style="border-top:1px solid"><var>R</var></td></tr>
-              </table>
-            </td>
-            <td>otherwise</td>
-          </tr>
-        </table>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>L</mi></mtd><mtd><mo>if</mo><mi>R</mi><mo>=</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><mfrac><mi>L</mi><mi>R</mi></mfrac><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
       </td>
     </tr>
     <tr>
@@ -558,28 +544,28 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <td>and operator</td>
       <td>2</td>
       <td>Bitwise conjunction of the operands.</td>
-      <td><var>S</var> = <var>L</var> ∧ <var>R</var></td>
+      <td><math><mi>L</mi><mo>∧</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>9</td>
       <td>or operator</td>
       <td>2</td>
       <td>Bitwise inclusive disjunction of the operands.</td>
-      <td><var>S</var> = <var>L</var> ∨ <var>R</var></td>
+      <td><math><mi>L</mi><mo>∨</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>10</td>
       <td>xor operator</td>
       <td>2</td>
       <td>Bitwise exclusive disjunction of the operands.</td>
-      <td><var>S</var> = <var>L</var> ⊻ <var>R</var></td>
+      <td><math><mi>L</mi><mo>⊻</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>11</td>
       <td>not operator</td>
       <td>1</td>
       <td>Bitwise complement of the operand.</td>
-      <td><var>S</var> = ¬<var>L</var></td>
+      <td><math><mo>¬</mo><mi>L</mi></math></td>
     </tr>
     <tr>
       <td>12</td>
@@ -587,19 +573,13 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <td>1</td>
       <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
       <td>
-        <table class="formula">
-          <tr>
-            <td rowspan=2><var>S</var></td>
-            <td rowspan=2>=</td>
-            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
-            <td>0</td>
-            <td>if <var>L</var> ≤ 0</td>
-          </tr>
-          <tr>
-            <td>truncate(log<sub>2</sub><var>L</var>)</td>
-            <td>otherwise</td>
-          </tr>
-        </table>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mo>if</mo><mi>L</mi><mo>≤</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><msub><mo>log</mo><mn>2</mn></msub><mi>L</mi><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
       </td>
     </tr>
     <tr>
@@ -608,19 +588,13 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <td>2</td>
       <td>Left operand raised to the exponent being the right operand if the left operand is not zero, zero otherwise.</td>
       <td>
-        <table class="formula">
-          <tr>
-            <td rowspan=2><var>S</var></td>
-            <td rowspan=2>=</td>
-            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
-            <td>0</td>
-            <td>if <var>L</var> = 0</td>
-          </tr>
-          <tr>
-            <td>truncate(<var>L</var><sup><var>R</var></sup></var>)</td>
-            <td>otherwise</td>
-          </tr>
-        </table>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mo>if</mo><mi>L</mi><mo>=</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><msup><mi>L</mi><mi>R</mi></msup><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
       </td>
     </tr>
     <tr>
@@ -629,19 +603,13 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <td>2</td>
       <td>Minimum value among the operands.</td>
       <td>
-        <table class="formula">
-          <tr>
-            <td rowspan=2><var>S</var></td>
-            <td rowspan=2>=</td>
-            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
-            <td><var>L</var></td>
-            <td>if <var>L</var> ≤ <var>R</var></td>
-          </tr>
-          <tr>
-            <td><var>R</var></td>
-            <td>otherwise</td>
-          </tr>
-        </table>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>L</mi></mtd><mtd><mo>if</mo><mi>L</mi><mo>≤</mo><mn>R</mn></mtd></mtr>
+            <mtr><mtd><mi>R</mi></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
       </td>
     </tr>
     <tr>
@@ -650,33 +618,27 @@ The result of any computation under- or overflowing the intermediate bit depth i
       <td>2</td>
       <td>Maximum value among the operands.</td>
       <td>
-        <table class="formula">
-          <tr>
-            <td rowspan=2><var>S</var></td>
-            <td rowspan=2>=</td>
-            <td rowspan=2><div style="transform:scale(1,2)">{</div></td>
-            <td><var>R</var></td>
-            <td>if <var>L</var> ≤ <var>R</var></td>
-          </tr>
-          <tr>
-            <td><var>L</var></td>
-            <td>otherwise</td>
-          </tr>
-        </table>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>R</mi></mtd><mtd><mo>if</mo><mi>L</mi><mo>≤</mo><mn>R</mn></mtd></mtr>
+            <mtr><mtd><mi>L</mi></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
       </td>
     </tr>
   </tbody>
 </table>
 
-<dfn noexport>constant</dfn> literal signed value extracted from the stream with a precision of intermediate bit depth, pushed to the stack.
+<dfn noexport>constant</dfn> is a literal signed value extracted from the stream with a precision of intermediate bit depth, pushed to the stack.
 
-<dfn noexport>input_image_item_index</dfn> 1-based index of the input image item whose sample is pushed to the stack. Shall be at most <code>[=reference_count=]</code>.
+<dfn noexport>input_image_item_index</dfn> is the 1-based index of the input image item whose sample is pushed to the stack. Shall be at most <code>[=reference_count=]</code>.
 
 <h5 id="sample-transform-constraints">Constraints</h5>
 
-The [=Sample Transform Derived Image Item=] uses the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
+[=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
 
-  - The tokens shall be evaluated in the order they are defined in the metadata of the Sample Transform Derived Image Item.
+  - The tokens shall be evaluated in the order they are defined in the metadata of the [=Sample Transform Derived Image Item=].
   - There shall be at least one token.
   - The stack is empty before evaluating the first token.
   - There shall be at least C elements in the stack before evaluating a <code>token</code>, C being that <code>token</code>'s Input count (defined by Table 2).
@@ -684,7 +646,7 @@ The [=Sample Transform Derived Image Item=] uses the postfix notation to evaluat
 
 Non-compliant expressions shall be rejected by parsers as invalid files.
 
-Note: Because each operator pops one or two elements then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least floor(<code>token_count</code>/2) operators and at most ceil(<code>token_count</code>/2) operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
+Note: Because each operator pops one or two elements then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operators and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
 
 <h2 id="groups">Entity groups</h2>
 
