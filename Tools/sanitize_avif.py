@@ -181,14 +181,24 @@ class FileReader:
 
         def get_byte(self) -> int:
             """Returns the next byte from the stream."""
-            assert self.bit_pos == 0
+            if self.bit_pos != 0:
+                raise ValueError("Bit position should be aligned to byte boundary")
+            if self.pos >= len(self.data):
+                raise EOFError("Attempted to read beyond the end of the data stream")
+
             byte = self.data[self.pos]
             self.pos += 1
             return byte
 
         def skip_bytes(self, num: int) -> None:
             """Skips forward 'num' bytes in the stream."""
-            assert self.bit_pos == 0
+            if self.bit_pos != 0:
+                raise ValueError("Bit position should be aligned to byte boundary")
+            if num < 0:
+                raise ValueError("Cannot skip a negative number of bytes")
+            if self.pos + num > len(self.data):
+                raise EOFError("Attempted to skip beyond the end of the data stream")
+
             self.pos += num
 
         def eof(self) -> bool:
@@ -197,14 +207,16 @@ class FileReader:
 
         def get_bytes(self, num_bytes: int = 0) -> bytes:
             """Returns the next num_bytes bytes, with 'num_bytes == 0' meaning until end."""
-            assert self.bit_pos == 0
-            pos = self.pos
+            if self.bit_pos != 0:
+                raise ValueError("Bit position should be aligned to byte boundary")
             if num_bytes == 0:
-                num_bytes = len(self.data) - pos
-            else:
-                assert self.pos + num_bytes <= len(self.data)
+                num_bytes = len(self.data) - self.pos
+            elif self.pos + num_bytes > len(self.data):
+                raise EOFError("Attempted to read beyond the end of the data stream")
+
+            start_pos = self.pos
             self.pos += num_bytes
-            return self.data[pos : pos + num_bytes]
+            return self.data[start_pos : start_pos + num_bytes]
 
         def bit_reader_for_bytes(self, num_bytes: int) -> "FileReader.BitReader":
             """Returns a new BitReader for the next 'num_bytes'."""
@@ -233,12 +245,23 @@ class FileReader:
         self.file.seek(0, os.SEEK_SET)
 
     def read_data(self, nbytes: int, end: Optional[int] = None) -> bytes:
-        """Reads nbytes of data from the file."""
+        """Reads nbytes of data from the file, ensuring the read operation stays within bounds."""
+        if nbytes < 0:
+            raise ValueError("Number of bytes to read cannot be negative")
+
+        current_pos = self.position()
         if end is None:
-            assert self.position() + nbytes <= self.size, "File ended prematurely"
+            if current_pos + nbytes > self.size:
+                raise IOError("Attempted to read beyond the end of the file")
         else:
-            assert self.position() + nbytes <= end, "Box/data ended prematurely"
-        return self.file.read(nbytes)
+            if current_pos + nbytes > end:
+                raise IOError("Attempted to read beyond the specified end position")
+
+        data = self.file.read(nbytes)
+        if len(data) != nbytes:
+            raise IOError("Failed to read the requested number of bytes")
+
+        return data
 
     def bit_reader_for_bytes(
         self, nbytes: int, end: Optional[int] = None
@@ -264,44 +287,63 @@ class FileReader:
         return [self.read_integer_of_size(end, nbytes, unsigned) for _ in range(count)]
 
     def read_string(self, end: int, size: int = 0) -> Optional[str]:
-        """Reads a NULL-terminated or fixed-length string from file."""
-        if size == 0:
-            max_length = end - self.file.tell()
-            buf = bytearray()
-            read = 0
-            while read < max_length:
-                byte = self.file.read(1)
-                read += 1
-                if byte is None or int(byte[0]) == 0:
-                    return decode_data_to_string(buf) if len(buf) > 0 else None
-                buf.append(byte[0])
-            if len(buf) > 0:
-                return decode_data_to_string(buf)
-            return None
-        return decode_data_to_string(self.read_data(size, end))
+        """Reads a NULL-terminated or fixed-length string from the file."""
+        try:
+            if size == 0:
+                max_length = end - self.file.tell()
+                buf = bytearray()
+                for _ in range(max_length):
+                    byte = self.file.read(1)
+                    if not byte or byte == b'\x00':
+                        return decode_data_to_string(buf) if buf else None
+                    buf.append(byte[0])
+                return decode_data_to_string(buf) if buf else None
+            else:
+                return decode_data_to_string(self.read_data(size, end))
+        except (OSError, ValueError) as e:
+            raise IOError(f"Failed to read string: {e}")
 
     # ---------------------------------------
     # Methods that maintain the file position
     # ---------------------------------------
 
     def read_data_from_offset(self, offset: int, nbytes: int) -> bytes:
-        """Read nbytes bytes from offset in file without moving position."""
-        pos = self.file.tell()
-        self.file.seek(offset, os.SEEK_SET)
-        data = self.file.read(nbytes)
-        assert len(data) == nbytes
-        self.file.seek(pos, os.SEEK_SET)
+        """Reads nbytes bytes from the specified offset in the file without moving the current position."""
+        if offset < 0:
+            raise ValueError("Offset cannot be negative")
+        if nbytes < 0:
+            raise ValueError("Number of bytes to read cannot be negative")
+
+        current_pos = self.file.tell()
+        try:
+            self.file.seek(offset, os.SEEK_SET)
+            data = self.file.read(nbytes)
+            if len(data) != nbytes:
+                raise IOError(f"Could only read {len(data)} bytes out of {nbytes} requested")
+        finally:
+            self.file.seek(current_pos, os.SEEK_SET)
+
         return data
 
     def copy_data_to_destination(self, output_file: BinaryIO, offset: int, count: int) -> None:
-        """Copy data from source file to destination file without holding all in memory."""
-        pos = self.file.tell()
-        self.file.seek(offset, os.SEEK_SET)
-        while count > 0:
-            data = self.file.read(min(32768, count))
-            output_file.write(data)
-            count -= len(data)
-        self.file.seek(pos, os.SEEK_SET)
+        """Copies data from source file to destination file without holding all in memory."""
+        if offset < 0:
+            raise ValueError("Offset cannot be negative")
+        if count < 0:
+            raise ValueError("Count of bytes to copy cannot be negative")
+
+        current_pos = self.file.tell()
+        try:
+            self.file.seek(offset, os.SEEK_SET)
+            while count > 0:
+                chunk_size = min(32768, count)
+                data = self.file.read(chunk_size)
+                if not data:
+                    raise IOError("Unexpected end of file during copy operation")
+                output_file.write(data)
+                count -= len(data)
+        finally:
+            self.file.seek(current_pos, os.SEEK_SET)
 
 
 # ===========================================
