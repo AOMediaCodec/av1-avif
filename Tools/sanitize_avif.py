@@ -87,58 +87,74 @@ NONVERBOSE_PRINT_LEVEL = -1000000
 def print_indent(lvl: int, string: str) -> None:
     """Print a message with the specified indentation level if lvl is positive."""
     if lvl >= 0:
-        print("  " * lvl + string)
+        indent = "  " * lvl
+        print(f"{indent}{string}")
 
 
 def decode_data_to_string(data: bytes) -> str:
-    """Handles potential unicode decoding errors (typically happens for corrupt files)."""
+    """Decodes bytes to a string, handling potential Unicode errors and stripping NULL characters."""
     try:
-        string = data.decode()
+        return data.decode().rstrip("\x00")
     except UnicodeDecodeError:
-        string = "CORRUPT"
-    # Strip out NULL terminated strings (typically only for corrupt files)
-    return string.rstrip("\x00")
+        return "CORRUPT"
 
 
 def bold(string: str) -> str:
-    """Returns the string with bold terminal color escape symbols"""
+    """Returns the string formatted in bold using terminal escape codes."""
     return f"\033[1m{string}\033[0m"
 
 
 def red(string: str) -> str:
-    """Returns the string with red terminal color escape symbols"""
+    """Returns the string formatted in red using terminal escape codes."""
     return f"\033[1;31m{string}\033[0m"
 
 
 def float_from_rational(arr: list[int]) -> float:
-    """Returns a float value given a rational."""
-    assert len(arr) == 2
-    if arr[1] == 0:
+    """Converts a list of two integers (numerator and denominator) to a float."""
+    if len(arr) != 2:
+        raise ValueError("Input must be a list of two integers representing a rational number.")
+    numerator, denominator = arr
+    if denominator == 0:
         return float("inf")
-    return arr[0] / arr[1]
+    return numerator / denominator
 
 
 # ===========================================
 # Reading utilities
 # ===========================================
 def get_struct_type(nbytes: int, unsigned: bool = True) -> str:
-    """Returns the appropriate struct type string for an element size."""
-    if unsigned:
-        nbytes_to_format_map = {1: "B", 2: "H", 4: "I", 8: "Q"}
-    else:
-        nbytes_to_format_map = {1: "b", 2: "h", 4: "i", 8: "q"}
-    assert nbytes in nbytes_to_format_map
-    return ">" + nbytes_to_format_map[nbytes]
+    """Returns the appropriate struct format string for an element size."""
+    nbytes_to_format_map = {
+        1: ("B", "b"),
+        2: ("H", "h"),
+        4: ("I", "i"),
+        8: ("Q", "q")
+    }
+
+    try:
+        fmt = nbytes_to_format_map[nbytes][0 if unsigned else 1]
+    except KeyError:
+        raise ValueError(f"Unsupported nbytes value: {nbytes}. Valid values are 1, 2, 4, 8.")
+
+    return f">{fmt}"
 
 
 def write_integer_of_size(value: int, nbytes: int, unsigned: bool = True) -> bytes:
-    """Writes a value as an integer of nbytes size."""
-    return struct.pack(get_struct_type(nbytes, unsigned=unsigned), value)
+    """Packs an integer into bytes of the specified size."""
+    try:
+        fmt = get_struct_type(nbytes, unsigned=unsigned)
+        return struct.pack(fmt, value)
+    except struct.error as e:
+        raise ValueError(f"Error packing integer {value} into {nbytes} bytes: {e}")
 
 
 def write_integer_array_of_size(values: list[int], nbytes: int, unsigned: bool = True) -> bytes:
-    """Writes a value as an integer of nbytes size."""
-    return struct.pack(">" + get_struct_type(nbytes, unsigned=unsigned)[1] * len(values), *values)
+    """Packs a list of integers into a byte sequence with each integer of nbytes size."""
+    try:
+        fmt = f">{get_struct_type(nbytes, unsigned=unsigned)[1] * len(values)}"
+        return struct.pack(fmt, *values)
+    except struct.error as e:
+        raise ValueError(f"Error packing integers {values} into {nbytes} bytes each: {e}")
 
 
 class FileReader:
