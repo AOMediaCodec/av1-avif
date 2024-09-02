@@ -379,7 +379,7 @@ In these sections, a "sample" refers to the value of a pixel for a given channel
 
 When a [=MIAF derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
 
-The input images are specified in, and in the same order as the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the field <code>[=from_item_ID=]</code> identifies the [=Sample Transform Derived Image Item=], and the values of the field <code>[=to_item_ID=]</code> identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
+The input images are specified in, and in the same order as the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each have a 'pixi' property with version 1, an 'ispe' property and at least one 'colr' property;
@@ -391,9 +391,9 @@ For each output sample of the [=Sample Transform Derived Image Item=], a series 
 
 No colour space conversion, matrix coefficients, or transfer function shall be applied to the input samples. They are already in the same colour model as the output samples.
 
-Input samples shall have their field <code>channel_format</code> set to 0 (unsigned integer) or 3 (signed integer) as defined by the 'pixi' property. This constraint does not apply to output samples.
+Input samples shall have their <code>channel_format</code> field set to 0 (unsigned integer) or 3 (signed integer) as defined by the 'pixi' property. This constraint does not apply to output samples.
 
-The output reconstructed image is made up of the output samples, whose values are each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The field <code>full_range_flag</code> of the 'colr' property of <code>colour_type</code> 'nclx' also defines a range of values to clamp to, as defined in [[!CICP]].
+The output reconstructed image is made up of the output samples, whose values are each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> 'nclx' also defines a range of values to clamp to, as defined in [[!CICP]].
 
 <div class="example">A primary [=MIAF image item=] can be completed with another hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same [=altr=] group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
 
