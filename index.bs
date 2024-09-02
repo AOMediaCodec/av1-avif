@@ -377,7 +377,7 @@ In these sections, a "sample" refers to the value of a pixel for a given channel
 
 <h5 id="sample-transform-definition">Definition</h5>
 
-When a [=MIAF derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
+When a [=MIAF derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
 
 The input images are specified in, and in the same order as the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
