@@ -417,7 +417,7 @@ aligned(8) class SampleTransform {
             // input image item to the stack. At most 'reference_count'.
             unsigned int(8) input_image_item_index; // 1-based
         } else {
-            if (token == 2 || token == 3 || token == 11 || token == 12) {
+            if ((token & 0x80) == 0) {
                 // Unary operator. Pop an operand from the stack.
             } else {
                 // Binary operator. Pop a right operand
@@ -459,7 +459,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
-<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values greater than 15 are reserved.
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Other values than the ones in the table below are reserved.
 
 <table class="data">
   <caption style="caption-side:bottom">
@@ -505,70 +505,13 @@ The result of any computation underflowing or overflowing the intermediate bit d
     </tr>
     <tr>
       <td>4</td>
-      <td>sum operator</td>
-      <td>2</td>
-      <td>Left operand added to the right operand.</td>
-      <td><math><mi>L</mi><mo>+</mo><mi>R</mi></math></td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>difference operator</td>
-      <td>2</td>
-      <td>Right operand subtracted from the left operand.</td>
-      <td><math><mi>L</mi><mo>-</mo><mi>R</mi></math></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>product operator</td>
-      <td>2</td>
-      <td>Left operand multiplied by the right operand.</td>
-      <td><math><mi>L</mi><mo>×</mo><mi>R</mi></math></td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>divide operator</td>
-      <td>2</td>
-      <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
-      <td>
-        <math>
-          <mo>{</mo>
-          <mtable>
-            <mtr><mtd><mi>L</mi></mtd><mtd><mo>if</mo><mi>R</mi><mo>=</mo><mn>0</mn></mtd></mtr>
-            <mtr><mtd>truncate<mo>(</mo><mfrac><mi>L</mi><mi>R</mi></mfrac><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
-          </mtable>
-        </math>
-      </td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>and operator</td>
-      <td>2</td>
-      <td>Bitwise conjunction of the operands.</td>
-      <td><math><mi>L</mi><mo>∧</mo><mi>R</mi></math></td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>or operator</td>
-      <td>2</td>
-      <td>Bitwise inclusive disjunction of the operands.</td>
-      <td><math><mi>L</mi><mo>∨</mo><mi>R</mi></math></td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>xor operator</td>
-      <td>2</td>
-      <td>Bitwise exclusive disjunction of the operands.</td>
-      <td><math><mi>L</mi><mo>⊻</mo><mi>R</mi></math></td>
-    </tr>
-    <tr>
-      <td>11</td>
       <td>not operator</td>
       <td>1</td>
       <td>Bitwise complement of the operand.</td>
       <td><math><mo>¬</mo><mi>L</mi></math></td>
     </tr>
     <tr>
-      <td>12</td>
+      <td>5</td>
       <td>bsr operator</td>
       <td>1</td>
       <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
@@ -583,7 +526,64 @@ The result of any computation underflowing or overflowing the intermediate bit d
       </td>
     </tr>
     <tr>
-      <td>13</td>
+      <td>128</td>
+      <td>sum operator</td>
+      <td>2</td>
+      <td>Left operand added to the right operand.</td>
+      <td><math><mi>L</mi><mo>+</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>129</td>
+      <td>difference operator</td>
+      <td>2</td>
+      <td>Right operand subtracted from the left operand.</td>
+      <td><math><mi>L</mi><mo>-</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>product operator</td>
+      <td>2</td>
+      <td>Left operand multiplied by the right operand.</td>
+      <td><math><mi>L</mi><mo>×</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>131</td>
+      <td>divide operator</td>
+      <td>2</td>
+      <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
+      <td>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>L</mi></mtd><mtd><mo>if</mo><mi>R</mi><mo>=</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><mfrac><mi>L</mi><mi>R</mi></mfrac><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
+      </td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>and operator</td>
+      <td>2</td>
+      <td>Bitwise conjunction of the operands.</td>
+      <td><math><mi>L</mi><mo>∧</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>133</td>
+      <td>or operator</td>
+      <td>2</td>
+      <td>Bitwise inclusive disjunction of the operands.</td>
+      <td><math><mi>L</mi><mo>∨</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>xor operator</td>
+      <td>2</td>
+      <td>Bitwise exclusive disjunction of the operands.</td>
+      <td><math><mi>L</mi><mo>⊻</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>135</td>
       <td>pow operator</td>
       <td>2</td>
       <td>Left operand raised to the exponent being the right operand if the left operand is not zero, zero otherwise.</td>
@@ -598,7 +598,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
       </td>
     </tr>
     <tr>
-      <td>14</td>
+      <td>136</td>
       <td>min operator</td>
       <td>2</td>
       <td>Minimum value among the operands.</td>
@@ -613,7 +613,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
       </td>
     </tr>
     <tr>
-      <td>15</td>
+      <td>137</td>
       <td>max operator</td>
       <td>2</td>
       <td>Maximum value among the operands.</td>
