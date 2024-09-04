@@ -66,12 +66,12 @@ Metadata Order: This version, !*, *
     },
 
     "CICP": {
-        "href": "https://www.iso.org/standard/85291.html",
+        "href": "https://www.itu.int/rec/T-REC-H.273",
         "id": "CICP",
-        "title": "Information technology — Coding-independent code points — Part 2: Video",
-        "status": "Draft International Standard",
-        "publisher": "ISO/IEC",
-        "isoNumber": "ISO/IEC 23091-2"
+        "title": "H.273 : Coding-independent code points for video signal type identification",
+        "status": "International Standard",
+        "publisher": "ITU-T",
+        "isoNumber": "ITU-T H.273"
     }
 }
 </pre>
