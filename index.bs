@@ -385,11 +385,11 @@ The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each have a 'pixi' property with version 1, an 'ispe' property and at least one 'colr' property;
   - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' property;
   - have the same dimensions as defined by the 'ispe' property;
-  - have the same colour type and space as defined by the 'colr' properties.
+  - have the same color type and space as defined by the 'colr' properties.
 
 For each output sample of the [=Sample Transform Derived Image Item=], a series of integer operations (an expression) is applied to operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
-No colour space conversion, matrix coefficients, or transfer function shall be applied to the input samples. They are already in the same colour model as the output samples.
+No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color model as the output samples.
 
 Input samples shall have their <code>channel_format</code> field set to 0 (unsigned integer) or 3 (signed integer) as defined by the 'pixi' property. This constraint does not apply to output samples.
 
@@ -455,7 +455,7 @@ aligned(8) class SampleTransform {
   </tbody>
 </table>
 
-The result of any computation under- or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and adapt the results accordingly. Computations with operands of negative value use the two’s-complement representation.
+The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and adapt the results accordingly. Computations with operands of negative values use the two’s-complement representation.
 
 <dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
