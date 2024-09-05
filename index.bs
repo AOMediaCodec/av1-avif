@@ -296,6 +296,7 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 <div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
+
 <p>An <dfn export>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
   - The track shall be a valid [=MIAF image sequence=].
@@ -305,7 +306,7 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 
 <h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
 
-<p>An <dfn export>AV1 Auxiliary Image Item</dfn> (respectively an <dfn export>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]</dfn>) with the following additional constraints:
+<p>An <dfn export>AV1 Auxiliary Image Item</dfn> (respectively an <dfn export>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]) with the following additional constraints:
   - It shall be a compliant [=MIAF Auxiliary Image Item=] (respectively [=MIAF Auxiliary Image Sequence=]).
   - The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.
   - The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</p>
@@ -391,15 +392,15 @@ NOTE:  AV1 tiers are not constrained because timing is optional in image sequenc
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the AVIF Baseline profile may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using grid derivation.
 
 <div class="example">
-  A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avif, mif1, miaf, MA1B</code>
 
-  A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, msf1, miaf, MA1B</code>
 
-  A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, avio, msf1, miaf, MA1B</code>
 </div>
@@ -421,11 +422,11 @@ The following additional constraints apply only to [=AV1 Image Sequences=]:
   - The AV1 level for High Profile shall be 5.1 or lower.
 
 <div class="example">
-  A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avif, mif1, miaf, MA1A</code>
 
-  A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
   <code>avis, msf1, miaf, MA1A</code>
 </div>
