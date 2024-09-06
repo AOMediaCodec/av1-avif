@@ -201,7 +201,7 @@ NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>
 <h4 id="av1-item-configuration-property">AV1 Item Configuration Property</h4>
 
 <pre class="def">
-    Box Type:                 <dfn export for="AV1ItemConfigurationProperty">av1C</dfn>
+    Box Type:                 <dfn export property>av1C</dfn>
     Property type:            Descriptive item property
     Container:                ItemPropertyContainerBox
     Mandatory (per  item):    Yes, for an image item of type 'av01', no otherwise
