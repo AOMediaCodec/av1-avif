@@ -387,7 +387,7 @@ The input image items and the [=Sample Transform Derived Image Item=] shall:
   - have the same dimensions as defined by the 'ispe' property;
   - have the same color type and space as defined by the 'colr' properties (or lack thereof).
 
-For each output sample of the [=Sample Transform Derived Image Item=], a series of integer operations (an expression) is applied to operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
+Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an expression consisting of a series of integer operators and operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
 No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
 
@@ -586,7 +586,7 @@ Note: <code>token</code> values greater than 1 and less than 128 are unary opera
       <td>135</td>
       <td>pow operator</td>
       <td>2</td>
-      <td>Left operand raised to the exponent being the right operand if the left operand is not zero, zero otherwise.</td>
+      <td>Left operand raised to the power of the right operand if the left operand is not zero, zero otherwise.</td>
       <td>
         <math>
           <mo>{</mo>
@@ -641,7 +641,7 @@ Note: <code>token</code> values greater than 1 and less than 128 are unary opera
   - The tokens shall be evaluated in the order they are defined in the metadata of the [=Sample Transform Derived Image Item=].
   - There shall be at least one token.
   - The stack is empty before evaluating the first token.
-  - There shall be at least C elements in the stack before evaluating a <code>token</code>, C being that <code>token</code>'s Input count (defined by Table 2).
+  - There shall be at least C elements in the stack before evaluating a <code>token</code>, where C is that <code>token</code>'s Input count (defined by Table 2).
   - There shall be exactly one remaining element in the stack after evaluating the last token. This element is the value of the reconstructed image item sample.
 
 Non-compliant expressions shall be rejected by parsers as invalid files.
