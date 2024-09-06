@@ -389,7 +389,7 @@ The input image items and the [=Sample Transform Derived Image Item=] shall:
 
 For each output sample of the [=Sample Transform Derived Image Item=], a series of integer operations (an expression) is applied to operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
-No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color model as the output samples.
+No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
 
 Input samples shall have their <code>channel_format</code> field set to 0 (unsigned integer) or 3 (signed integer) as defined by the 'pixi' property. This constraint does not apply to output samples.
 
@@ -417,7 +417,7 @@ aligned(8) class SampleTransform {
             // input image item to the stack. At most 'reference_count'.
             unsigned int(8) input_image_item_index; // 1-based
         } else {
-            if ((token & 0x80) == 0) {
+            if (token < 128) {
                 // Unary operator. Pop an operand from the stack.
             } else {
                 // Binary operator. Pop a right operand
@@ -461,6 +461,8 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Other values than the ones in the table below are reserved.
 
+Note: <code>token</code> values greater than 1 and less than 128 are unary operators, and <code>token</code> values greater than or equal to 128 are binary operators.
+
 <table class="data">
   <caption style="caption-side:bottom">
     Table 2 - Meaning of the value of <code>token</code>.
@@ -491,7 +493,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
     </tr>
     <tr>
       <td>2</td>
-      <td>negate operator</td>
+      <td>negation operator</td>
       <td>1</td>
       <td>Negation of the left operand.</td>
       <td><math><mo>-</mo><mi>L</mi></math></td>
@@ -548,7 +550,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
     </tr>
     <tr>
       <td>131</td>
-      <td>divide operator</td>
+      <td>quotient operator</td>
       <td>2</td>
       <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
       <td>
@@ -580,7 +582,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
       <td>xor operator</td>
       <td>2</td>
       <td>Bitwise exclusive disjunction of the operands.</td>
-      <td><math><mi>L</mi><mo>⊻</mo><mi>R</mi></math></td>
+      <td><math><mi>L</mi><mo>⊕</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>135</td>
