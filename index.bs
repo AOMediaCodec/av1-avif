@@ -42,9 +42,9 @@ Metadata Order: This version, !*, *
         "id": "HEIF",
         "href": "https://www.iso.org/standard/66067.html",
         "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
-        "status": "Committee Draft Amendment",
+        "status": "International Standard",
         "publisher": "ISO/IEC",
-        "isoNumber":"ISO/IEC 23008-12:2024 CDAM 2"
+        "isoNumber":"ISO/IEC 23008-12:2017"
     },
 
     "ISOBMFF": {
@@ -382,16 +382,14 @@ When a [=MIAF derived image item=] is of type <dfn value export for="Sample Tran
 The input images are specified in, and in the same order as the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
-  - each have a 'pixi' property with version 1, an 'ispe' property and at least one 'colr' property;
-  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' property;
+  - each have a 'pixi' property and an 'ispe' property;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' and 'av1C' properties;
   - have the same dimensions as defined by the 'ispe' property;
-  - have the same color type and space as defined by the 'colr' properties.
+  - have the same color type and space as defined by the 'colr' properties (or lack thereof).
 
 For each output sample of the [=Sample Transform Derived Image Item=], a series of integer operations (an expression) is applied to operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
 No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
-
-Input samples shall have their <code>channel_format</code> field set to 0 (unsigned integer) or 3 (signed integer) as defined by the 'pixi' property. This constraint does not apply to output samples.
 
 The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> 'nclx' also defines a range of values to clamp to, as defined in [[!CICP]].
 
