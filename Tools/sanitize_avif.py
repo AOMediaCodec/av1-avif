@@ -1258,6 +1258,7 @@ class AV1ElementaryStream:
         parsed["enable_restoration"] = reader.f(1)
 
         # color_config()
+        bitdepth = 8
         parsed["high_bitdepth"] = reader.f(1)
         if parsed["seq_profile"] == 2 and parsed["high_bitdepth"]:
             parsed["twelve_bit"] = reader.f(1)
@@ -1301,7 +1302,7 @@ class AV1ElementaryStream:
             elif parsed["seq_profile"] == 1:
                 parsed["subsampling_x"] = parsed["subsampling_y"] = 0
             else:
-                if parsed["twelve_bit"]:
+                if bitdepth == 12:
                     parsed["subsampling_x"] = reader.f(1)
                     if parsed["subsampling_x"]:
                         parsed["subsampling_y"] = reader.f(1)
