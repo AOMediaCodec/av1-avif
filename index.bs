@@ -360,9 +360,9 @@ NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still 
 The following constraints are common to files compliant with this specification:
     - <assert>The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].</assert>
     - <assert>The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].</assert>
-    - <assert>If transformative properties are used in derivation chains (as defined in [[MIAF]]), they shall only be associated with items that are not referenced by another derived item.</assert> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
+    - <assert>Transformative properties shall not be associated with items in a derivation chain (as defined in [[!MIAF]]) that serves as an input to a grid item.</assert> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
-NOTE: This constraint further restricts files compared to [[MIAF]].
+NOTE: This constraint further restricts files compared to [[!MIAF]].
 
 <h2 id="profiles">Profiles</h2>
 
@@ -799,3 +799,5 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/225">Add required list of boxes for AVIF files</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/230">Fix broken link for latest-draft.html</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/227">Relax constraint on transformative properties in derivation chains to only apply to grid items</a>
+
