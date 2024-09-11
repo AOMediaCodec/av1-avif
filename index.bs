@@ -176,8 +176,8 @@ When an item is of type <dfn export for="AV1 Image Item Type">av01</dfn>, it is 
     Box Type:                 <dfn export for="AV1ItemConfigurationProperty">av1C</dfn>
     Property type:            Descriptive item property
     Container:                ItemPropertyContainerBox
-    Mandatory (per  item):    Yes, for an image item of type 'av01'
-    Quantity:                 One for an image item of type 'av01'
+    Mandatory (per  item):    Yes, for an image item of type 'av01', no otherwise
+    Quantity (per item):      One for an image item of type 'av01', zero otherwise
 </pre>
 
 The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
@@ -234,11 +234,11 @@ NOTE: When such a progressive decoding of the layers within an [=Operating Point
 <h6 id="operating-point-selector-property-definition" class="no-toc">Definition</h6>
 
 <pre class="def">
-    Box Type:       <dfn export for="OperatingPointSelectorProperty">a1op</dfn>
-    Property type:  Descriptive item property
-    Container:      <code>ItemPropertyContainerBox</code>
-    Mandatory:      No
-    Quantity:       Zero or one
+    Box Type:              <dfn export for="OperatingPointSelectorProperty">a1op</dfn>
+    Property type:         Descriptive item property
+    Container:             <code>ItemPropertyContainerBox</code>
+    Mandatory (per item):  No
+    Quantity (per item):   Zero or one
 </pre>
 
 <h6 id="operating-point-selector-property-description" class="no-toc">Description</h6>
@@ -265,11 +265,11 @@ The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image I
 <h6 id="layered-image-indexing-property-definition" class="no-toc">Definition</h6>
 
 <pre class="def">
-    Box Type:       <dfn export for="AV1LayeredImageIndexingProperty">a1lx</dfn>
-    Property type:  Descriptive item property
-    Container:      <code>ItemPropertyContainerBox</code>
-    Mandatory:      No
-    Quantity:       Zero or one
+    Box Type:              <dfn export for="AV1LayeredImageIndexingProperty">a1lx</dfn>
+    Property type:         Descriptive item property
+    Container:             <code>ItemPropertyContainerBox</code>
+    Mandatory (per item):  No
+    Quantity (per item):   Zero or one
 </pre>
 
 <h6 id="layered-image-indexing-property-description" class="no-toc">Description</h6>
@@ -797,3 +797,5 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/223">Stop using `dfn value` for definitions.</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/222">Add assert-ids in the spec for conformance file testing and ComplianceWarden</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/225">Add required list of boxes for AVIF files</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a>
+
