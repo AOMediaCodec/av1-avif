@@ -14,9 +14,9 @@ Abstract: This document specifies syntax and semantics for the storage of [[!AV1
 Date: 2024-06-25
 Repository: AOMediaCodec/av1-avif
 Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
-!Previously approved version: <a href="v1.1.0.html">https://aomediacodec.github.io/av1-avif/v1.1.0.html</a>
 !Latest approved version: <a href="latest-approved.html">https://aomediacodec.github.io/av1-avif/latest-approved.html</a>
-!Latest draft version: <a href="latest-draft.html">https://aomediacodec.github.io/av1-avif/latest-draft.html</a>
+!Latest version (published or draft): <a href="index.html">https://aomediacodec.github.io/av1-avif/index.html</a>
+!Previously approved version: <a href="v1.1.0.html">https://aomediacodec.github.io/av1-avif/v1.1.0.html</a>
 Metadata Order: This version, !*, *
 </pre>
 
@@ -798,4 +798,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/222">Add assert-ids in the spec for conformance file testing and ComplianceWarden</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/225">Add required list of boxes for AVIF files</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a>
-
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/230">Fix broken link for latest-draft.html</a>
