@@ -132,7 +132,7 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: seq_level_idx
     text: render_width_minus1
     text: render_height_minus1
-    text: FrameWidth
+    text: UpscaledWidth
     text: FrameHeight
     text: max_frame_width_minus1
     text: max_frame_height_minus1
@@ -191,7 +191,7 @@ The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> a
 
 <h4 id="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
-The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of 'image_width' and 'image_height' shall respectively equal the values of [=FrameWidth=] and [=FrameHeight=]</assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
+The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of 'image_width' and 'image_height' shall respectively equal the values of [=UpscaledWidth=] and [=FrameHeight=]</assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
 
     - In the absence of a 'lsel' property associated with the item, or if it is present and its 'layer_id' value is set to 0xFFFF:
         - If no [=OperatingPointSelectorProperty=] is associated with the item, the <assert>'ispe' shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
@@ -800,4 +800,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/230">Fix broken link for latest-draft.html</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/227">Relax constraint on transformative properties in derivation chains to only apply to grid items</a>
-
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/238">Change ispe width to correspond to UpscaledWidth</a>
