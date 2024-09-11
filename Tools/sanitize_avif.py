@@ -2669,6 +2669,35 @@ def validate_track(parsed_file: ParsedFile, track: Box) -> list[BoxIssue]:
     return issues
 
 
+def validate_sequence_brands(parsed_file: ParsedFile) -> list[BoxIssue]:
+    """Validates that file containing an AVIF sequence has the required brands."""
+    issues = []
+
+    ftyp = parsed_file.get_box_from_hierarchy(["ftyp"])
+    assert ftyp
+    all_brands = [ftyp.body["major"]] + ftyp.body["compatible"]
+    required_brands = ["msf1", "iso8"]
+    missing_brands = [brand for brand in required_brands if brand not in all_brands]
+    if "avis" in all_brands and len(missing_brands) > 0:
+        issue = BoxIssue(-1, "ftyp")
+        for brand in missing_brands:
+            issue.add_issue("CRITICAL", f"Compatible brands is missing '{brand}' brand")
+        def _fix_ftyp() -> None:
+            assert ftyp
+            assert missing_brands
+            for brand in missing_brands:
+                if brand == "iso8":
+                    # Remove iso3 to iso7 brands since those are implied by iso8
+                    for sub_brand in ["iso3", "iso4", "iso5", "iso6", "iso7"]:
+                        if sub_brand in ftyp.body["compatible"]:
+                            ftyp.body["compatible"].remove(sub_brand)
+                ftyp.body["compatible"].append(brand)
+            ftyp.mark_for_rewrite()
+        issue.add_fix(_fix_ftyp, "Add missing brands to compatible brands")
+        issues.append(issue)
+    return issues
+
+
 def validate_file(parsed_file: ParsedFile, default_nclx: dict[str, list[int]]) -> list[BoxIssue]:
     """Validates that an AVIF file is correct."""
     items = parsed_file.get_items()
@@ -2688,6 +2717,8 @@ def validate_file(parsed_file: ParsedFile, default_nclx: dict[str, list[int]]) -
             if box.type != "trak":
                 continue
             issues += validate_track(parsed_file, box)
+        issues += validate_sequence_brands(parsed_file)
+
 
     issues += validate_profile_brands(parsed_file)
     return issues
