@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="cc68618af8f5020b92f79e97317200fb3a30b0aa" name="document-revision">
+  <meta content="bbeec5fdc1559baf724fc01ce0220e3e6318caa8" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2283,7 +2283,7 @@ Quantity (per item):   Zero or one
    <ul>
     <li data-md><span id="assert-cc4551b3">The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)">[MIAF]</a> specification and list <a class="property css" data-link-type="property" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⓪⑥">miaf</a> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⓪⑦">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⓪⑧">FileTypeBox</a>.</span> 
     <li data-md><span id="assert-c9940d26">The file shall list <code>'<a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif①">avif</a>'</code> or <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis①">avis</a>'</code> in the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⓪⑨">compatible_brands</a> field of the <a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①①⓪">FileTypeBox</a>.</span> 
-    <li data-md><span id="assert-0f52b6a6">If transformative properties are used in derivation chains (as defined in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)">[MIAF]</a>), they shall only be associated with items that are not referenced by another derived item.</span> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself. 
+    <li data-md><span id="assert-bae3ce0c">Transformative properties shall not be associated with items in a derivation chain (as defined in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)">[MIAF]</a>) that serves as an input to a grid item.</span> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself. 
    </ul>
    <p class="note" role="note"><span class="marker">NOTE:</span> This constraint further restricts files compared to <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)">[MIAF]</a>.</p>
    <h2 class="heading settled" data-level="7" id="profiles"><span class="secno">7. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
@@ -2650,6 +2650,8 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
      <p>EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a></p>
     <li data-md>
      <p>EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/230">Fix broken link for latest-draft.html</a></p>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/227">Relax constraint on transformative properties in derivation chains to only apply to grid items</a></p>
    </ul>
   </main>
   <div data-fill-with="conformance">
