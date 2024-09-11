@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="c1f956fd63dcb84aecdfe2aa8518fb91d2679777" name="document-revision">
+  <meta content="732e53d6d648bed7865055e42887b53494d44a9c" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2147,8 +2147,8 @@ New Image Formats and Brands" of <a data-link-type="biblio" href="#biblio-heif" 
 <pre class="def">Box Type:                 <dfn data-dfn-for="AV1ItemConfigurationProperty" data-dfn-type="dfn" data-export id="av1itemconfigurationproperty-av1c">av1C<a class="self-link" href="#av1itemconfigurationproperty-av1c"></a></dfn>
 Property type:            Descriptive item property
 Container:                ItemPropertyContainerBox
-Mandatory (per  item):    Yes, for an image item of type 'av01'
-Quantity:                 One for an image item of type 'av01'
+Mandatory (per  item):    Yes, for an image item of type 'av01', no otherwise
+Quantity (per item):      One for an image item of type 'av01', zero otherwise
 </pre>
    <p>The syntax and semantics of the <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1itemconfigurationproperty">AV1ItemConfigurationProperty</dfn> are identical to those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑨">AV1CodecConfigurationBox</a> defined in <a data-link-type="biblio" href="#biblio-av1-isobmff" title="AV1 Codec ISO Media File Format Binding">[AV1-ISOBMFF]</a>, with the following constraints:</p>
    <ul>
@@ -2189,11 +2189,11 @@ Quantity:                 One for an image item of type 'av01'
    <h4 class="heading settled" data-level="2.3.2" id="layered-properties"><span class="secno">2.3.2. </span><span class="content">Properties</span><a class="self-link" href="#layered-properties"></a></h4>
    <h5 class="heading settled" data-level="2.3.2.1" id="operating-point-selector-property"><span class="secno">2.3.2.1. </span><span class="content">Operating Point Selector Property</span><a class="self-link" href="#operating-point-selector-property"></a></h5>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.1" id="operating-point-selector-property-definition"><span class="secno">2.3.2.1.1. </span><span class="content">Definition</span><a class="self-link" href="#operating-point-selector-property-definition"></a></h6>
-<pre class="def">Box Type:       <dfn data-dfn-for="OperatingPointSelectorProperty" data-dfn-type="dfn" data-export id="operatingpointselectorproperty-a1op">a1op<a class="self-link" href="#operatingpointselectorproperty-a1op"></a></dfn>
-Property type:  Descriptive item property
-Container:      <code>ItemPropertyContainerBox</code>
-Mandatory:      No
-Quantity:       Zero or one
+<pre class="def">Box Type:              <dfn data-dfn-for="OperatingPointSelectorProperty" data-dfn-type="dfn" data-export id="operatingpointselectorproperty-a1op">a1op<a class="self-link" href="#operatingpointselectorproperty-a1op"></a></dfn>
+Property type:         Descriptive item property
+Container:             <code>ItemPropertyContainerBox</code>
+Mandatory (per item):  No
+Quantity (per item):   Zero or one
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.2" id="operating-point-selector-property-description"><span class="secno">2.3.2.1.2. </span><span class="content">Description</span><a class="self-link" href="#operating-point-selector-property-description"></a></h6>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="operatingpointselectorproperty">OperatingPointSelectorProperty</dfn> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①①">AV1 Image Item</a> to provide the index of the operating point to be processed for this item. <span id="assert-cec6554d">If associated, it shall be marked as essential.</span></p>
@@ -2208,11 +2208,11 @@ Quantity:       Zero or one
     The <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="ref-for-something⑥⑧">lsel</a> property defined in <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①②">AV1 Image Item</a>. The <a class="property css" data-link-type="property" href="https://www.iso.org/standard/66067.html" id="ref-for-something⑥⑨">layer_id</a> indicates the value of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦⓪">spatial_id</a> to render. <span id="assert-081f689f">The value shall be between 0 and 3, or the special value 0xFFFF.</span> When a value between 0 and 3 is used, <span id="assert-421bfe00">the corresponding spatial layer shall be present in the bitstream</span> and <span id="assert-d2e18a5d">shall produce an output frame</span>. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in <a href="#layered-items-overview">§ 2.3.1 Overview</a>. 
    <h5 class="heading settled" data-level="2.3.2.3" id="layered-image-indexing-property"><span class="secno">2.3.2.3. </span><span class="content">Layered Image Indexing Property</span><a class="self-link" href="#layered-image-indexing-property"></a></h5>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.1" id="layered-image-indexing-property-definition"><span class="secno">2.3.2.3.1. </span><span class="content">Definition</span><a class="self-link" href="#layered-image-indexing-property-definition"></a></h6>
-<pre class="def">Box Type:       <dfn data-dfn-for="AV1LayeredImageIndexingProperty" data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty-a1lx">a1lx<a class="self-link" href="#av1layeredimageindexingproperty-a1lx"></a></dfn>
-Property type:  Descriptive item property
-Container:      <code>ItemPropertyContainerBox</code>
-Mandatory:      No
-Quantity:       Zero or one
+<pre class="def">Box Type:              <dfn data-dfn-for="AV1LayeredImageIndexingProperty" data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty-a1lx">a1lx<a class="self-link" href="#av1layeredimageindexingproperty-a1lx"></a></dfn>
+Property type:         Descriptive item property
+Container:             <code>ItemPropertyContainerBox</code>
+Mandatory (per item):  No
+Quantity (per item):   Zero or one
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.2" id="layered-image-indexing-property-description"><span class="secno">2.3.2.3.2. </span><span class="content">Description</span><a class="self-link" href="#layered-image-indexing-property-description"></a></h6>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①③">AV1 Image Item</a>. <span id="assert-91b2f163">It should not be associated with <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Items</a> consisting of only one layer.</span></p>
@@ -2646,6 +2646,8 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
      <p>EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/222">Add assert-ids in the spec for conformance file testing and ComplianceWarden</a></p>
     <li data-md>
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/225">Add required list of boxes for AVIF files</a></p>
+    <li data-md>
+     <p>EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a></p>
    </ul>
   </main>
   <div data-fill-with="conformance">
