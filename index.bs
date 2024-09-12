@@ -240,7 +240,7 @@ NOTE: The values of [=render_width_minus1=] and [=render_height_minus1=] possibl
 
 The semantics of the clean aperture property ('clap') as defined in [[!HEIF]] apply. In addition to the restrictions on transformative item property ordering specified in [[!MIAF]], the following restriction also applies:
 
-<assert>The origin of the 'clap' item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary item in an image collection.</assert>
+<assert>The origin of the 'clap' item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary non-hidden image item in an image collection.</assert>
 
 <h4 id="other-item-property">Other Item Properties</h4>
 
