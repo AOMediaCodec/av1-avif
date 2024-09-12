@@ -136,6 +136,12 @@ url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
     text: MIAF image sequence
     text: MIAF auxiliary image item
     text: MIAF auxiliary image sequence
+    text: MIAF file
+    text: self-containment
+    text: grid-limit
+    text: single-track
+    text: edit-lists
+    text: matched-duration
 
 url: https://aomediacodec.github.io/av1-isobmff/; spec: AV1-ISOBMFF; type: dfn;
     text: AV1CodecConfigurationBox
@@ -742,6 +748,15 @@ This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically fo
 
 If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
+The following shared conditions and requirements from [[!MIAF]] shall apply:
+    - <assert>[=self-containment=] (subclause 8.2)</assert>
+
+The following shared conditions and requirements from [[!MIAF]] should apply:
+    - <assert>[=grid-limit=] (subclause 8.4)</assert>
+    - <assert>[=single-track=] (subclause 8.5)</assert>
+    - <assert>[=edit-lists=] (subclause 8.6)</assert>
+    - <assert>[=matched-duration=] (subclause 8.7)</assert>
+
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
     - <assert>The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</assert>
 
@@ -768,6 +783,15 @@ A file containing a 'pict' track compliant with this profile and made only of [=
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand <dfn export for="AVIF Advanced Profile">MA1A</dfn>.
 
 If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+
+The following shared conditions and requirements from [[!MIAF]] shall apply:
+    - <assert>[=self-containment=] (subclause 8.2)</assert>
+
+The following shared conditions and requirements from [[!MIAF]] should apply:
+    - <assert>[=grid-limit=] (subclause 8.4)</assert>
+    - <assert>[=single-track=] (subclause 8.5)</assert>
+    - <assert>[=edit-lists=] (subclause 8.6)</assert>
+    - <assert>[=matched-duration=] (subclause 8.7)</assert>
 
 The following additional constraints apply to all [=AV1 Image Items=]:
     - <assert>The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.</assert>
@@ -1172,3 +1196,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.2 "Sample Transform Derived Image Item"</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/232">Add restriction on usage of clap property</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/tbd">Adopt MIAF shared constraints</a>
