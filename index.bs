@@ -173,6 +173,8 @@ When an item is of type <dfn export for="AV1 Image Item Type">av01</dfn>, it is 
         - <assert>The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].</assert>
         - <assert>The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].</assert>
 
+NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>[=reduced_still_picture_header=]</code> flags to 1 when possible in the [=Sequence Header OBU=] part of the [=AV1 Image Item Data=] so that AV1 header overhead is minimized.
+
 <h3 id="image-item-properties">Image Item Properties</h3>
 
 <h4 id="av1-item-configuration-property">AV1 Item Configuration Property</h4>
@@ -852,4 +854,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/233">Update list of other item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Remove recommendations regarding still flags in image items.</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Remove recommendations regarding still picture flags in image items.</a>
