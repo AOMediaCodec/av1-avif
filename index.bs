@@ -355,7 +355,7 @@ A tonemap derived image item ('tmap') as defined in [[!HEIF]] may be used in an 
 
 <h2 id="groups">Entity groups</h2>
 
-The GroupsListBox ('<dfn for="AVIF">grpl</dfn>') defined in [[!ISOBMFF]] may be used to group multiple image items in a file together. The type of the group describes how the image items are related.
+The GroupsListBox ('<dfn for="AVIF">grpl</dfn>') defined in [[!ISOBMFF]] may be used to group multiple image items in a file together. The type of the group describes how the image items are related. <assert>Decoders should ignore groups of unknown type.</assert>
 
 <h3 id="altr-group">'altr' group</h3>
 
