@@ -386,7 +386,7 @@ The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each have a 'pixi' property and an 'ispe' property;
   - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' and 'av1C' properties;
   - have the same dimensions as defined by the 'ispe' property;
-  - have the same color type and space as defined by the 'colr' properties (or lack thereof).
+  - have the same color information as defined by the 'colr' properties (or lack thereof).
 
 Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an expression consisting of a series of integer operators and operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
@@ -394,11 +394,11 @@ No color space conversion, matrix coefficients, or transfer characteristics func
 
 The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> 'nclx' also defines a range of values to clamp to, as defined in [[!CICP]].
 
-<div class="example">A primary [=MIAF image item=] can be combined with another hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same [=altr=] group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
+<div class="example">An 8-bit primary [=MIAF image item=] can be combined with another 8-bit hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same [=altr=] group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
 
 <h5 id="sample-transform-syntax">Syntax</h5>
 
-An expression is a series of tokens. A token is an operand or an operator. An operand can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An operator takes either one or two input operands. Each unary operator pops one value from the stack. Each binary operator pops two values from the stack, being the right operand then the left operand. Each token results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
+An expression is a series of tokens. A token is an operand or an operator. An operand can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An operator takes either one or two input operands. Each unary operator pops one value from the stack. Each binary operator pops two values from the stack, the first being the right operand and the second being the left operand. Each token results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
 
 ```c
 aligned(8) class SampleTransform {
@@ -419,8 +419,8 @@ aligned(8) class SampleTransform {
             if (token < 128) {
                 // Unary operator. Pop an operand from the stack.
             } else {
-                // Binary operator. Pop a right operand
-                // then a left operand from the stack.
+                // Binary operator. Pop the right operand
+                // and then the left operand from the stack.
             }
             // Apply operator 'token' and push the result to the stack.
         }
@@ -430,9 +430,9 @@ aligned(8) class SampleTransform {
 
 <h5 id="sample-transform-semantics">Semantics</h5>
 
-<dfn noexport>version</dfn> shall be equal to 0.
+<dfn noexport>version</dfn> shall be equal to 0. Readers shall not process a <code>SampleTransform</code> with an unrecognized <code>version</code> number.
 
-<dfn noexport>reserved</dfn> for future use.
+<dfn noexport>reserved</dfn> shall be equal to 0 in files conforming to this version of this specification. The value of <code>reserved</code> shall be ignored by readers.
 
 <dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
 
@@ -454,11 +454,11 @@ aligned(8) class SampleTransform {
   </tbody>
 </table>
 
-The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and adapt the results accordingly. Computations with operands of negative values use the two’s-complement representation.
+The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and clamp the results accordingly. Computations with operands of negative values use the two’s-complement representation.
 
 <dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
-<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Other values than the ones in the table below are reserved.
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in the table below are reserved.
 
 Note: <code>token</code> values greater than 1 and less than 128 are unary operators, and <code>token</code> values greater than or equal to 128 are binary operators.
 
@@ -472,7 +472,7 @@ Note: <code>token</code> values greater than 1 and less than 128 are unary opera
       <th>Name</th>
       <th>Input count</th>
       <th>Meaning before pushing to the stack</th>
-      <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> being operands popped from the stack for operators)</th>
+      <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> refer to operands popped from the stack for operators)</th>
     </tr>
   </thead>
   <tbody>
@@ -639,15 +639,15 @@ Note: <code>token</code> values greater than 1 and less than 128 are unary opera
 
 [=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
 
-  - The tokens shall be evaluated in the order they are defined in the metadata of the [=Sample Transform Derived Image Item=].
+  - The tokens shall be evaluated in the order they are defined in the metadata (the <code>SampleTransform</code> structure) of the [=Sample Transform Derived Image Item=].
   - There shall be at least one token.
   - The stack is empty before evaluating the first token.
-  - There shall be at least C elements in the stack before evaluating a <code>token</code>, where C is that <code>token</code>'s Input count (defined by Table 2).
+  - There shall be at least C elements in the stack before evaluating a <code>token</code>, where C is that <code>token</code>'s input count (defined by Table 2).
   - There shall be exactly one remaining element in the stack after evaluating the last token. This element is the value of the reconstructed image item sample.
 
 Non-compliant expressions shall be rejected by parsers as invalid files.
 
-Note: Because each operator pops one or two elements then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operators and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
+Note: Because each operator pops one or two elements and then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operators and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
 
 <h2 id="groups">Entity groups</h2>
 
