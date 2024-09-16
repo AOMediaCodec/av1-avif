@@ -349,9 +349,9 @@ NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are 
 
 <h3 id="derived-images">Derived Image Items</h3>
 
-<h4 id="tonemap-derivation">Tonemap Derived Image Item</h4>
+<h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
 
-A tonemap derived image item ('tmap') as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the 'tmap' image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
+A tone map derived image item ('tmap') as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the 'tmap' image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
 
 <h2 id="groups">Entity groups</h2>
 
