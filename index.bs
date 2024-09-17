@@ -63,6 +63,15 @@ Metadata Order: This version, !*, *
         "status": "Enquiry",
         "publisher": "ISO/IEC",
         "isoNumber": "ISO/IEC DIS 23000-22"
+    },
+
+    "CICP": {
+        "href": "https://www.itu.int/rec/T-REC-H.273",
+        "id": "CICP",
+        "title": "H.273 : Coding-independent code points for video signal type identification",
+        "status": "International Standard",
+        "publisher": "ITU-T",
+        "isoNumber": "ITU-T H.273"
     }
 }
 </pre>
@@ -88,16 +97,27 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: ndwt
     text: cmin
     text: cmex
+    text: dimg
     text: layer_id
     text: image_width
     text: image_height
     text: ster
     text: tmap
 
+url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
+    text: derived image item
+
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
     text: FileTypeBox
     text: major_brand
+    text: SingleItemTypeReferenceBox
+    text: SingleItemTypeReferenceBoxLarge
+    text: ItemReferenceBox
+    text: reference_count
+    text: from_item_ID
+    text: to_item_ID
+    text: nclx
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: sync
@@ -115,7 +135,6 @@ url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
     text: MIAF image sequence
     text: MIAF auxiliary image item
     text: MIAF auxiliary image sequence
-    text: MIAF file
 
 url: https://aomediacodec.github.io/av1-isobmff/; spec: AV1-ISOBMFF; type: dfn;
     text: AV1CodecConfigurationBox
@@ -326,7 +345,7 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 
     - <assert>The track shall be a valid [=MIAF image sequence=].</assert>
     - <assert>The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.</assert>
-    - <assert>The track shall have only one sample description entry.</assert>
+    - <assert>The track shall have only one [=AV1 Sample=] description entry.</assert>
     - <assert>If multiple [=Sequence Header OBUs=] are present in the track payload, they shall be identical.</assert></p>
 
 <h2 id="other-images">Other Image Items and Sequences</h2>
@@ -351,6 +370,283 @@ NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are 
 <h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
 
 A tone map derived image item ('tmap') as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the 'tmap' image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
+
+<h4 id="sample-transform">Sample Transform Derived Image Item</h4>
+
+In these sections, a "sample" refers to the value of a pixel for a given channel.
+
+<h5 id="sample-transform-definition">Definition</h5>
+
+When a [=derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
+
+The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
+
+The input image items and the [=Sample Transform Derived Image Item=] shall:
+  - each have a 'pixi' property and an 'ispe' property;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' and '[=AV1ItemConfigurationProperty/av1C=]' properties;
+  - have the same dimensions as defined by the 'ispe' property;
+  - have the same color information as defined by the 'colr' properties (or lack thereof).
+
+Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an expression consisting of a series of integer operators and operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
+
+No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
+
+The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> <code>nclx</code> also defines a range of values to clamp to, as defined in [[!CICP]].
+
+<div class="example">An 8-bit primary [=MIAF image item=] can be combined with another 8-bit hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same <code>altr</code> group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
+
+<h5 id="sample-transform-syntax">Syntax</h5>
+
+An expression is a series of tokens. A token is an operand or an operator. An operand can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An operator takes either one or two input operands. Each unary operator pops one value from the stack. Each binary operator pops two values from the stack, the first being the right operand and the second being the left operand. Each token results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
+
+```c
+aligned(8) class SampleTransform {
+    unsigned int(2) version = 0;
+    unsigned int(4) reserved;
+    unsigned int(2) bit_depth; // Signed 8, 16, 32 or 64-bit.
+    unsigned int(8) token_count;
+    for (i=0; i<token_count; i++) {
+        unsigned int(8) token;
+        if (token == 0) {
+            // Push the 'constant' value to the stack.
+            signed int(1<<(bit_depth+3)) constant;
+        } else if (token == 1) {
+            // Push the sample value from the 'input_image_item_index'th
+            // input image item to the stack. At most 'reference_count'.
+            unsigned int(8) input_image_item_index; // 1-based
+        } else {
+            if (token < 128) {
+                // Unary operator. Pop an operand from the stack.
+            } else {
+                // Binary operator. Pop the right operand
+                // and then the left operand from the stack.
+            }
+            // Apply operator 'token' and push the result to the stack.
+        }
+    }
+}
+```
+
+<h5 id="sample-transform-semantics">Semantics</h5>
+
+<dfn noexport>version</dfn> shall be equal to 0. Readers shall not process a <code>SampleTransform</code> with an unrecognized <code>version</code> number.
+
+<dfn noexport>reserved</dfn> shall be equal to 0 in files conforming to this version of this specification. The value of <code>reserved</code> shall be ignored by readers.
+
+<dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
+
+<table class="data">
+  <caption style="caption-side:bottom">
+    Table 1 - Mapping from <code>bit_depth</code> to the intermediate bit depth.
+  </caption>
+  <thead>
+    <tr>
+      <th>Value of <code>bit_depth</code></th>
+      <th>Intermediate bit depth (sign bit inclusive) <code>num_bits</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>8</td></tr>
+    <tr><td>1</td><td>16</td></tr>
+    <tr><td>2</td><td>32</td></tr>
+    <tr><td>3</td><td>64</td></tr>
+  </tbody>
+</table>
+
+The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and clamp the results accordingly. Computations with operands of negative values use the two’s-complement representation.
+
+<dfn noexport>token_count</dfn> is the expected number of tokens to read.
+
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in the table below are reserved.
+
+Note: <code>token</code> values greater than 1 and less than 128 are unary operators, and <code>token</code> values greater than or equal to 128 are binary operators.
+
+<table class="data">
+  <caption style="caption-side:bottom">
+    Table 2 - Meaning of the value of <code>token</code>.
+  </caption>
+  <thead>
+    <tr>
+      <th>Value of <code>token</code></th>
+      <th>Name</th>
+      <th>Input count</th>
+      <th>Meaning before pushing to the stack</th>
+      <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> refer to operands popped from the stack for operators)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>constant operand</td>
+      <td>0</td>
+      <td><math><msup><mn>2</mn><mrow><mi>bit_depth</mi><mo>+</mo><mn>3</mn></mrow></math> bits from the stream read as a signed integer.</td>
+      <td>constant value</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>sample operand</td>
+      <td>0</td>
+      <td>Sample value from the <code>input_image_item_index</code><sup>th</sup> input image item.</td>
+      <td>input image item sample value</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>negation operator</td>
+      <td>1</td>
+      <td>Negation of the left operand.</td>
+      <td><math><mo>-</mo><mi>L</mi></math></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>absolute value operator</td>
+      <td>1</td>
+      <td>Absolute value of the left operand.</td>
+      <td><math><mo>|</mo><mi>L</mi><mo>|</mo></math></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>not operator</td>
+      <td>1</td>
+      <td>Bitwise complement of the operand.</td>
+      <td><math><mo>¬</mo><mi>L</mi></math></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>bsr operator</td>
+      <td>1</td>
+      <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
+      <td>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mo>if</mo><mi>L</mi><mo>≤</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><msub><mo>log</mo><mn>2</mn></msub><mi>L</mi><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
+      </td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>sum operator</td>
+      <td>2</td>
+      <td>Left operand added to the right operand.</td>
+      <td><math><mi>L</mi><mo>+</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>129</td>
+      <td>difference operator</td>
+      <td>2</td>
+      <td>Right operand subtracted from the left operand.</td>
+      <td><math><mi>L</mi><mo>-</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>130</td>
+      <td>product operator</td>
+      <td>2</td>
+      <td>Left operand multiplied by the right operand.</td>
+      <td><math><mi>L</mi><mo>×</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>131</td>
+      <td>quotient operator</td>
+      <td>2</td>
+      <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
+      <td>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>L</mi></mtd><mtd><mo>if</mo><mi>R</mi><mo>=</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><mfrac><mi>L</mi><mi>R</mi></mfrac><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
+      </td>
+    </tr>
+    <tr>
+      <td>132</td>
+      <td>and operator</td>
+      <td>2</td>
+      <td>Bitwise conjunction of the operands.</td>
+      <td><math><mi>L</mi><mo>∧</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>133</td>
+      <td>or operator</td>
+      <td>2</td>
+      <td>Bitwise inclusive disjunction of the operands.</td>
+      <td><math><mi>L</mi><mo>∨</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>134</td>
+      <td>xor operator</td>
+      <td>2</td>
+      <td>Bitwise exclusive disjunction of the operands.</td>
+      <td><math><mi>L</mi><mo>⊕</mo><mi>R</mi></math></td>
+    </tr>
+    <tr>
+      <td>135</td>
+      <td>pow operator</td>
+      <td>2</td>
+      <td>Left operand raised to the power of the right operand if the left operand is not zero, zero otherwise.</td>
+      <td>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mo>if</mo><mi>L</mi><mo>=</mo><mn>0</mn></mtd></mtr>
+            <mtr><mtd>truncate<mo>(</mo><msup><mi>L</mi><mi>R</mi></msup><mo>)</mo></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
+      </td>
+    </tr>
+    <tr>
+      <td>136</td>
+      <td>min operator</td>
+      <td>2</td>
+      <td>Minimum value among the operands.</td>
+      <td>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>L</mi></mtd><mtd><mo>if</mo><mi>L</mi><mo>≤</mo><mn>R</mn></mtd></mtr>
+            <mtr><mtd><mi>R</mi></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
+      </td>
+    </tr>
+    <tr>
+      <td>137</td>
+      <td>max operator</td>
+      <td>2</td>
+      <td>Maximum value among the operands.</td>
+      <td>
+        <math>
+          <mo>{</mo>
+          <mtable>
+            <mtr><mtd><mi>R</mi></mtd><mtd><mo>if</mo><mi>L</mi><mo>≤</mo><mn>R</mn></mtd></mtr>
+            <mtr><mtd><mi>L</mi></mtd><mtd>otherwise</mtd></mtr>
+          </mtable>
+        </math>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<dfn noexport>constant</dfn> is a literal signed value extracted from the stream with a precision of intermediate bit depth, pushed to the stack.
+
+<dfn noexport>input_image_item_index</dfn> is the 1-based index of the input image item whose sample is pushed to the stack. Shall be at least 1 and at most <code>[=reference_count=]</code>.
+
+<h5 id="sample-transform-constraints">Constraints</h5>
+
+[=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
+
+  - The tokens shall be evaluated in the order they are defined in the metadata (the <code>SampleTransform</code> structure) of the [=Sample Transform Derived Image Item=].
+  - There shall be at least one token.
+  - The stack is empty before evaluating the first token.
+  - There shall be at least C elements in the stack before evaluating a <code>token</code>, where C is that <code>token</code>'s input count (defined by Table 2).
+  - There shall be exactly one remaining element in the stack after evaluating the last token. This element is the value of the reconstructed image item sample.
+
+Non-compliant expressions shall be rejected by parsers as invalid files.
+
+Note: Because each operator pops one or two elements and then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operators and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
 
 <h2 id="groups">Entity groups</h2>
 
@@ -445,7 +741,7 @@ A file containing a 'pict' track compliant with this profile is expected to list
 
     <code>avis, msf1, miaf, MA1B</code>
 
-A file containing a 'pict' track compliant with this profile and made only of samples marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a 'pict' track compliant with this profile and made only of [=AV1 Samples=] marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
 
     <code>avis, avio, msf1, miaf, MA1B</code>
 </div>
@@ -857,3 +1153,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.2 "Sample Transform Derived Image Item"</a>
