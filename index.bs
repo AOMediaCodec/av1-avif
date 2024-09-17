@@ -98,13 +98,13 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: cmin
     text: cmex
     text: dimg
-
-url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: layer_id
     text: image_width
     text: image_height
     text: ster
     text: tmap
+
+url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: derived image item
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
@@ -117,7 +117,7 @@ url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: reference_count
     text: from_item_ID
     text: to_item_ID
-    text: altr
+    text: nclx
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: sync
@@ -125,7 +125,6 @@ url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: mdat
     text: idat
     text: altr
-    text: nclx
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: property;
     text: miaf
@@ -202,7 +201,7 @@ NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>
 <h4 id="av1-item-configuration-property">AV1 Item Configuration Property</h4>
 
 <pre class="def">
-    Box Type:                 <dfn export property>av1C</dfn>
+    Box Type:                 <dfn export for="AV1ItemConfigurationProperty">av1C</dfn>
     Property type:            Descriptive item property
     Container:                ItemPropertyContainerBox
     Mandatory (per  item):    Yes, for an image item of type 'av01', no otherwise
@@ -221,16 +220,16 @@ The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> a
 
 <h4 id="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
-The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of <code>image_width</code> and <code>image_height</code> shall respectively equal the values of [=UpscaledWidth=] and [=FrameHeight=]</assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
+The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of 'image_width' and 'image_height' shall respectively equal the values of [=UpscaledWidth=] and [=FrameHeight=]</assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
 
-    - In the absence of a 'lsel' property associated with the item, or if it is present and its <code>layer_id</code> value is set to 0xFFFF:
+    - In the absence of a 'lsel' property associated with the item, or if it is present and its 'layer_id' value is set to 0xFFFF:
         - If no [=OperatingPointSelectorProperty=] is associated with the item, the <assert>'ispe' shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
 
         - If an [=OperatingPointSelectorProperty=] is associated with the item, the <assert>'ispe' property shall document the dimensions of the last frame decoded when processing the corresponding operating point</assert>.
 
         NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. If they display these intermediate images, renderers are expected to scale the output image to match the 'ispe' property.
 
-    - If a 'lsel' property is associated with an item and its <code>layer_id</code> is different from 0xFFFF, the 'ispe' property documents the dimensions of the output frame produced by decoding the corresponding layer.
+    - If a 'lsel' property is associated with an item and its 'layer_id' is different from 0xFFFF, the 'ispe' property documents the dimensions of the output frame produced by decoding the corresponding layer.
 
 NOTE: The dimensions indicated in the 'ispe' property might not match the values [=max_frame_width_minus1=]+1 and [=max_frame_height_minus1=]+1 indicated in the AV1 bitstream.
 
@@ -267,9 +266,9 @@ NOTE: Although the clean aperture property ('clap') defined in [[!HEIF]] is appl
 
 NOTE: When an author wants to offer the ability to render multiple [=Operating Points=] from the same AV1 image (e.g. in the case of multi-view images), multiple [=AV1 Image Items=] can be created that share the same [=AV1 Image Item Data=] but have different [=OperatingPointSelectorProperty=]s.
 
-[[!AV1]] expects the renderer to display only one frame within the selected [=Operating Point=], which should be the highest spatial layer that is both within the [=Operating Point=] and present within the temporal unit, but [[!AV1]] leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the 'lsel' property (mandated by [[!HEIF]] for layered images) is used to control which layer is rendered. According to [[!HEIF]], the interpretation of the <code>layer_id</code> field in the 'lsel' property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a 'lsel' property is associated with an [=AV1 Image Item=] but its <code>layer_id</code> value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a 'lsel' property is associated with an [=AV1 Image Item=] and the value of <code>layer_id</code> is not 0xFFFF, the renderer is expected to render only the output image for that layer.
+[[!AV1]] expects the renderer to display only one frame within the selected [=Operating Point=], which should be the highest spatial layer that is both within the [=Operating Point=] and present within the temporal unit, but [[!AV1]] leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the 'lsel' property (mandated by [[!HEIF]] for layered images) is used to control which layer is rendered. According to [[!HEIF]], the interpretation of the 'layer_id' field in the 'lsel' property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a 'lsel' property is associated with an [=AV1 Image Item=] but its 'layer_id' value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a 'lsel' property is associated with an [=AV1 Image Item=] and the value of 'layer_id' is not 0xFFFF, the renderer is expected to render only the output image for that layer.
 
-NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when an author wants to expose each layer as a specific item, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different 'lsel' properties, each with a different value of <code>layer_id</code>.
+NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when an author wants to expose each layer as a specific item, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different 'lsel' properties, each with a different value of 'layer_id'.
 
 <h4 id="layered-properties">Properties</h4>
 <h5 id="operating-point-selector-property">Operating Point Selector Property</h5>
@@ -301,7 +300,7 @@ class OperatingPointSelectorProperty extends ItemProperty('a1op') {
 <dfn noexport>op_index</dfn> indicates the index of the operating point to be processed for this item. <assert>Its value shall be between 0 and [=operating_points_cnt_minus_1=].</assert>
 
 <h5 id="layer-selector-property">Layer Selector Property</h5>
-The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The <code>layer_id</code> indicates the value of the [=spatial_id=] to render. <assert>The value shall be between 0 and 3, or the special value 0xFFFF.</assert> When a value between 0 and 3 is used, <assert>the corresponding spatial layer shall be present in the bitstream</assert> and <assert>shall produce an output frame</assert>. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in [[#layered-items-overview]].
+The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The 'layer_id' indicates the value of the [=spatial_id=] to render. <assert>The value shall be between 0 and 3, or the special value 0xFFFF.</assert> When a value between 0 and 3 is used, <assert>the corresponding spatial layer shall be present in the bitstream</assert> and <assert>shall produce an output frame</assert>. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in [[#layered-items-overview]].
 
 <h5 id="layered-image-indexing-property">Layered Image Indexing Property</h5>
 
@@ -384,7 +383,7 @@ The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each have a 'pixi' property and an 'ispe' property;
-  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' and 'av1C' properties;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' and '[=AV1ItemConfigurationProperty/av1C=]' properties;
   - have the same dimensions as defined by the 'ispe' property;
   - have the same color information as defined by the 'colr' properties (or lack thereof).
 
@@ -392,9 +391,9 @@ Each output sample of the [=Sample Transform Derived Image Item=] is obtained by
 
 No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
 
-The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> 'nclx' also defines a range of values to clamp to, as defined in [[!CICP]].
+The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> <code>nclx</code> also defines a range of values to clamp to, as defined in [[!CICP]].
 
-<div class="example">An 8-bit primary [=MIAF image item=] can be combined with another 8-bit hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same [=altr=] group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
+<div class="example">An 8-bit primary [=MIAF image item=] can be combined with another 8-bit hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same <code>altr</code> group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
 
 <h5 id="sample-transform-syntax">Syntax</h5>
 
@@ -661,8 +660,6 @@ The '<dfn for="AVIF">altr</dfn>' entity group as defined in [[!ISOBMFF]] may be 
 
 The '<dfn for="AVIF">ster</dfn>' entity group as defined in [[!HEIF]] may be used to indicate that two image items form a stereo pair suitable for stereoscopic viewing.
 
-<h3 id="derived-images">Derived Image Items and Sequences</h3>
-
 <h2 id="brands">Brands, Internet media types and file extensions</h2>
 
 <h3 id="brands-overview">Brands overview</h3>
@@ -724,7 +721,7 @@ NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensi
 
 <h3 id="baseline-profile">AVIF Baseline Profile</h3>
 
-This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
+This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
 
 If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
@@ -1153,7 +1150,6 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/238">Change ispe width to correspond to UpscaledWidth</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/234">Clarify relationship between av1C, metadata OBUs and item properties</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/233">Update list of other item properties</a>
-
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
