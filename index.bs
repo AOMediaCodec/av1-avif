@@ -130,8 +130,6 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: Temporal Unit
     text: Operating Point
     text: Intra Frame
-
-url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: mono_chrome
     text: color_range
     text: operating_points_cnt_minus_1
@@ -144,6 +142,8 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: FrameHeight
     text: max_frame_width_minus1
     text: max_frame_height_minus1
+    text: still_picture
+    text: reduced_still_picture_header
 </pre>
 
 <h2 id="general">Scope</h2>
