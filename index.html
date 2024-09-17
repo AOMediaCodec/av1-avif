@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="01e3ea344a5492ded76ec4557364f4b0b25c8c0d" name="document-revision">
+  <meta content="24508d699f55e6feba816f627dba68f75ba7355e" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2155,7 +2155,7 @@ Quantity (per item):      One for an image item of type 'av01', zero otherwise
     <li data-md><span id="assert-30afd5ee"><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⓪">Sequence Header OBUs</a> should not be present in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①①">AV1CodecConfigurationBox</a>.</span> 
     <li data-md><span id="assert-255dc0e5">If a <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①②">Sequence Header OBU</a> is present in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①③">AV1CodecConfigurationBox</a>, it shall match the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①④">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data③">AV1 Image Item Data</a>.</span> 
     <li data-md><span id="assert-8f13136d">The values of the fields in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①⑤">AV1CodecConfigurationBox</a> shall match those of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑥">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data④">AV1 Image Item Data</a>.</span> 
-    <li data-md><span id="assert-210ea861">The bit depth and number of channels in the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①⑦">AV1CodecConfigurationBox</a> shall match the PixelInformationProperty if present.</span> 
+    <li data-md><span id="assert-f8d91d0c">The values of the bit depth and the number of channels derived from the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①⑦">AV1CodecConfigurationBox</a> shall match the PixelInformationProperty if present.</span> 
     <li data-md><span id="assert-071d427d"><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑧">Metadata OBUs</a>, if present, shall match the values given in other item properties</span>, such as the MasteringDisplayColourVolumeBox or ContentLightLevelBox. 
    </ul>
     <span id="assert-ebb95262">This property should be marked as essential.</span> 
@@ -2687,6 +2687,8 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/234">Clarify relationship between av1C, metadata OBUs and item properties</a></p>
     <li data-md>
      <p>EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/233">Update list of other item properties</a></p>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a></p>
    </ul>
   </main>
   <div data-fill-with="conformance">
