@@ -91,6 +91,8 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: layer_id
     text: image_width
     text: image_height
+    text: ster
+    text: tmap
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
@@ -102,6 +104,7 @@ url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: iloc
     text: mdat
     text: idat
+    text: altr
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: property;
     text: miaf
@@ -327,7 +330,9 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
     - <assert>The track shall have only one sample description entry.</assert>
     - <assert>If multiple [=Sequence Header OBUs=] are present in the track payload, they shall be identical.</assert></p>
 
-<h2 id="auxiliary-images">Auxiliary Image Items and Sequences</h2>
+<h2 id="other-images">Other Image Items and Sequences</h2>
+
+<h3 id="auxiliary-images">Auxiliary Image Items and Sequences</h3>
 
 <p>An <dfn export>AV1 Auxiliary Image Item</dfn> (respectively an <dfn export>AV1 Auxiliary Image Sequence</dfn>) is an [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]) with the following additional constraints:
     - <assert>It shall be a compliant [=MIAF Auxiliary Image Item=] (respectively [=MIAF Auxiliary Image Sequence=]).</assert>
@@ -341,6 +346,24 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
 <p>An <dfn export>AV1 Depth Image Item</dfn> (respectively an <dfn export>AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
 NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>matrix_coefficients</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>aux_type</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.
+
+<h3 id="derived-images">Derived Image Items</h3>
+
+<h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
+
+A tone map derived image item ('tmap') as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the 'tmap' image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
+
+<h2 id="groups">Entity groups</h2>
+
+The GroupsListBox ('<dfn for="AVIF">grpl</dfn>') defined in [[!ISOBMFF]] may be used to group multiple image items in a file together. The type of the group describes how the image items are related. <assert>Decoders should ignore groups of unknown type.</assert>
+
+<h3 id="altr-group">'altr' group</h3>
+
+The '<dfn for="AVIF">altr</dfn>' entity group as defined in [[!ISOBMFF]] may be used to mark multiple items as alternatives to each other. Only one item in the 'altr' group should be played or processed. This grouping is useful for defining a fallback for parsers when new types of items or essential item properties are introduced.
+
+<h3 id="ster-group">'ster' group</h3>
+
+The '<dfn for="AVIF">ster</dfn>' entity group as defined in [[!HEIF]] may be used to indicate that two image items form a stereo pair suitable for stereoscopic viewing.
 
 <h2 id="brands">Brands, Internet media types and file extensions</h2>
 
@@ -696,7 +719,7 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
             <td>Used to store derived image definitions</td>
         </tr>
         <tr>
-            <td>grpl</td>
+            <td>[=AVIF/grpl=]</td>
             <td>&nbsp;</td>
             <td>-</td>
             <td>ISOBMFF</td>
@@ -705,12 +728,20 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td>altr</td>
+            <td>[=AVIF/altr=]</td>
             <td>0</td>
             <td>ISOBMFF</td>
             <td>&nbsp;</td>
             <td>Used when images in a group are alternative to each other</td>
-        </tr>        
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>[=AVIF/ster=]</td>
+            <td>0</td>
+            <td>HEIF</td>
+            <td>&nbsp;</td>
+            <td>Used when images in a group form a stereo pair</td>
+        </tr>
         <tr>
             <td>pasp</td>
             <td>&nbsp;</td>
@@ -825,3 +856,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/234">Clarify relationship between av1C, metadata OBUs and item properties</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/233">Update list of other item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
