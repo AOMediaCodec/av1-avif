@@ -1153,4 +1153,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.1 "Sample Transform Derived Image Item"</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.2 "Sample Transform Derived Image Item"</a>
