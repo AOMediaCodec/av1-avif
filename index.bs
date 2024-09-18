@@ -375,6 +375,8 @@ A tone map derived image item ('tmap') as defined in [[!HEIF]] may be used in an
 
 In these sections, a "sample" refers to the value of a pixel for a given channel.
 
+With a Sample Transform Derived Image Item, pixels at the same position in multiple input image items can be combined into a single output pixel using basic mathematical operations. This makes it possible for [=AVIF=] to support 16 or more bits of precision per sample, while still offering backward compatibility through a regular 8 to 12-bit [=AV1 Image Item=] containing the most significant bits of each sample.
+
 <h5 id="sample-transform-definition">Definition</h5>
 
 When a [=derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
