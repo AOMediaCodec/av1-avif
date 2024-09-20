@@ -412,13 +412,12 @@ aligned(8) class SampleTransform {
         if (token == 0) {
             // Push the 'constant' value to the stack.
             signed int(1<<(bit_depth+3)) constant;
-        } else if (token == 1) {
-            // Push the sample value from the 'input_image_item_index'th
-            // input image item to the stack. At most 'reference_count'.
-            unsigned int(8) input_image_item_index; // 1-based
+        } else if (token <= 32) {
+            // Push the sample value from the 'token'th input image item
+            // to the stack.
         } else {
             if (token >= 64 && token <= 67) {
-                // Unary operator. Pop an operand from the stack.
+                // Unary operator. Pop the operand from the stack.
             } else if (token >= 128 && token <= 137) {
                 // Binary operator. Pop the right operand
                 // and then the left operand from the stack.
@@ -426,6 +425,7 @@ aligned(8) class SampleTransform {
             // Apply operator 'token' and push the result to the stack.
         }
     }
+    // Output the single remaining stack element.
 }
 ```
 
@@ -459,9 +459,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
-<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in Table 2 below are reserved. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.
-
-Note: <code>token</code> values greater than or equal to 64 and less than or equal to 67 are unary operators, and <code>token</code> values greater than or equal to 128 and less than or equal to 137 are binary operators.
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.
 
 <table class="data">
   <caption style="caption-side:bottom">
@@ -470,8 +468,8 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
   <thead>
     <tr>
       <th>Value of <code>token</code></th>
-      <th>Name</th>
-      <th>Input count</th>
+      <th>Token name</th>
+      <th>Token type</th>
       <th>Meaning before pushing to the stack</th>
       <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> refer to operands popped from the stack for operators)</th>
     </tr>
@@ -479,43 +477,47 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
   <tbody>
     <tr>
       <td>0</td>
-      <td>constant operand</td>
-      <td>0</td>
+      <td>constant</td>
+      <td>operand</td>
       <td><math><msup><mn>2</mn><mrow><mi>bit_depth</mi><mo>+</mo><mn>3</mn></mrow></math> bits from the stream read as a signed integer.</td>
       <td>constant value</td>
     </tr>
     <tr>
-      <td>1</td>
-      <td>sample operand</td>
-      <td>0</td>
-      <td>Sample value from the <code>input_image_item_index</code><sup>th</sup> input image item.</td>
+      <td>1..32</td>
+      <td>sample</td>
+      <td>operand</td>
+      <td>Sample value from the <code>token</code><sup>th</sup> input image item (<code>token</code> is the 1-based index of the input image item whose sample is pushed to the stack).</td>
       <td>input image item sample value</td>
     </tr>
     <tr>
+      <td>33..63</td>
+      <td colspan=4><i>Reserved</i></td>
+    </tr>
+    <tr>
       <td>64</td>
-      <td>negation operator</td>
-      <td>1</td>
+      <td>negation</td>
+      <td>unary operator</td>
       <td>Negation of the left operand.</td>
       <td><math><mo>-</mo><mi>L</mi></math></td>
     </tr>
     <tr>
       <td>65</td>
-      <td>absolute value operator</td>
-      <td>1</td>
+      <td>absolute value</td>
+      <td>unary operator</td>
       <td>Absolute value of the left operand.</td>
       <td><math><mo>|</mo><mi>L</mi><mo>|</mo></math></td>
     </tr>
     <tr>
       <td>66</td>
-      <td>not operator</td>
-      <td>1</td>
+      <td>not</td>
+      <td>unary operator</td>
       <td>Bitwise complement of the operand.</td>
       <td><math><mo>¬</mo><mi>L</mi></math></td>
     </tr>
     <tr>
       <td>67</td>
-      <td>bsr operator</td>
-      <td>1</td>
+      <td>bsr</td>
+      <td>unary operator</td>
       <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
       <td>
         <math>
@@ -528,30 +530,34 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
       </td>
     </tr>
     <tr>
+      <td>68..127</td>
+      <td colspan=4><i>Reserved</i></td>
+    </tr>
+    <tr>
       <td>128</td>
-      <td>sum operator</td>
-      <td>2</td>
+      <td>sum</td>
+      <td>binary operator</td>
       <td>Left operand added to the right operand.</td>
       <td><math><mi>L</mi><mo>+</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>129</td>
-      <td>difference operator</td>
-      <td>2</td>
+      <td>difference</td>
+      <td>binary operator</td>
       <td>Right operand subtracted from the left operand.</td>
       <td><math><mi>L</mi><mo>-</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>130</td>
-      <td>product operator</td>
-      <td>2</td>
+      <td>product</td>
+      <td>binary operator</td>
       <td>Left operand multiplied by the right operand.</td>
       <td><math><mi>L</mi><mo>×</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>131</td>
-      <td>quotient operator</td>
-      <td>2</td>
+      <td>quotient</td>
+      <td>binary operator</td>
       <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
       <td>
         <math>
@@ -565,29 +571,29 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
     </tr>
     <tr>
       <td>132</td>
-      <td>and operator</td>
-      <td>2</td>
+      <td>and</td>
+      <td>binary operator</td>
       <td>Bitwise conjunction of the operands.</td>
       <td><math><mi>L</mi><mo>∧</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>133</td>
-      <td>or operator</td>
-      <td>2</td>
+      <td>or</td>
+      <td>binary operator</td>
       <td>Bitwise inclusive disjunction of the operands.</td>
       <td><math><mi>L</mi><mo>∨</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>134</td>
-      <td>xor operator</td>
-      <td>2</td>
+      <td>xor</td>
+      <td>binary operator</td>
       <td>Bitwise exclusive disjunction of the operands.</td>
       <td><math><mi>L</mi><mo>⊕</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>135</td>
-      <td>pow operator</td>
-      <td>2</td>
+      <td>pow</td>
+      <td>binary operator</td>
       <td>Left operand raised to the power of the right operand if the left operand is not zero, zero otherwise.</td>
       <td>
         <math>
@@ -601,8 +607,8 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
     </tr>
     <tr>
       <td>136</td>
-      <td>min operator</td>
-      <td>2</td>
+      <td>min</td>
+      <td>binary operator</td>
       <td>Minimum value among the operands.</td>
       <td>
         <math>
@@ -616,8 +622,8 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
     </tr>
     <tr>
       <td>137</td>
-      <td>max operator</td>
-      <td>2</td>
+      <td>max</td>
+      <td>binary operator</td>
       <td>Maximum value among the operands.</td>
       <td>
         <math>
@@ -629,21 +635,25 @@ Note: <code>token</code> values greater than or equal to 64 and less than or equ
         </math>
       </td>
     </tr>
+    <tr>
+      <td>138..255</td>
+      <td colspan=4><i>Reserved</i></td>
+    </tr>
   </tbody>
 </table>
 
 <dfn noexport>constant</dfn> is a literal signed value extracted from the stream with a precision of intermediate bit depth, pushed to the stack.
-
-<dfn noexport>input_image_item_index</dfn> is the 1-based index of the input image item whose sample is pushed to the stack. Shall be at least 1 and at most <code>[=reference_count=]</code>.
 
 <h5 id="sample-transform-constraints">Constraints</h5>
 
 [=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
 
   - The tokens shall be evaluated in the order they are defined in the metadata (the <code>SampleTransform</code> structure) of the [=Sample Transform Derived Image Item=].
+  - <code>token</code> shall be at most <code>[=reference_count=]</code> when evaluating a sample operand (when <math><mn>1</mn><mo>≤</mo><mi>token</mi><mo>≤</mo><mn>32</mn></math>).
   - There shall be at least one token.
   - The stack is empty before evaluating the first token.
-  - There shall be at least C elements in the stack before evaluating a <code>token</code>, where C is that <code>token</code>'s input count (defined by Table 2).
+  - There shall be at least 1 element in the stack before evaluating a unary operator.
+  - There shall be at least 2 elements in the stack before evaluating a binary operator.
   - There shall be exactly one remaining element in the stack after evaluating the last token. This element is the value of the reconstructed image item sample.
 
 Non-compliant expressions shall be rejected by parsers as invalid files.
