@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="b21779dd2a50721f055c1ec4245b6f378cc1499a" name="document-revision">
+  <meta content="b6758cadb9be71ed6680a520a629d5180858de2e" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2464,9 +2464,9 @@ Quantity (per item):   Zero or one
             <c- c1>// input image item to the stack. At most 'reference_count'.</c->
             <c- b>unsigned</c-> <c- nf>int</c-><c- p>(</c-><c- mi>8</c-><c- p>)</c-> <c- n>input_image_item_index</c-><c- p>;</c-> <c- c1>// 1-based</c->
         <c- p>}</c-> <c- k>else</c-> <c- p>{</c->
-            <c- k>if</c-> <c- p>(</c-><c- n>token</c-> <c- o>&lt;</c-> <c- mi>128</c-><c- p>)</c-> <c- p>{</c->
+            <c- k>if</c-> <c- p>(</c-><c- n>token</c-> <c- o>>=</c-> <c- mi>64</c-> <c- o>&amp;&amp;</c-> <c- n>token</c-> <c- o>&lt;=</c-> <c- mi>67</c-><c- p>)</c-> <c- p>{</c->
                 <c- c1>// Unary operator. Pop an operand from the stack.</c->
-            <c- p>}</c-> <c- k>else</c-> <c- p>{</c->
+            <c- p>}</c-> <c- k>else</c-> <c- k>if</c-> <c- p>(</c-><c- n>token</c-> <c- o>>=</c-> <c- mi>128</c-> <c- o>&amp;&amp;</c-> <c- n>token</c-> <c- o>&lt;=</c-> <c- mi>137</c-><c- p>)</c-> <c- p>{</c->
                 <c- c1>// Binary operator. Pop the right operand</c->
                 <c- c1>// and then the left operand from the stack.</c->
             <c- p>}</c->
@@ -2476,8 +2476,8 @@ Quantity (per item):   Zero or one
 <c- p>}</c->
 </pre>
    <h5 class="heading settled" data-level="4.2.2.3" id="sample-transform-semantics"><span class="secno">4.2.2.3. </span><span class="content">Semantics</span><a class="self-link" href="#sample-transform-semantics"></a></h5>
-   <p><dfn data-dfn-type="dfn" data-noexport id="version">version<a class="self-link" href="#version"></a></dfn> shall be equal to 0. Readers shall not process a <code>SampleTransform</code> with an unrecognized <code>version</code> number.</p>
-   <p><dfn data-dfn-type="dfn" data-noexport id="reserved">reserved<a class="self-link" href="#reserved"></a></dfn> shall be equal to 0 in files conforming to this version of this specification. The value of <code>reserved</code> shall be ignored by readers.</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="version">version<a class="self-link" href="#version"></a></dfn> shall be equal to 0. Readers shall ignore a <code>SampleTransform</code> with an unrecognized <code>version</code> number.</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="reserved">reserved<a class="self-link" href="#reserved"></a></dfn> shall be equal to 0. The value of <code>reserved</code> shall be ignored by readers.</p>
    <p><dfn data-dfn-type="dfn" data-noexport id="bit_depth">bit_depth<a class="self-link" href="#bit_depth"></a></dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.</p>
    <table class="data">
     <caption style="caption-side:bottom"> Table 1 - Mapping from <code>bit_depth</code> to the intermediate bit depth. </caption>
@@ -2501,8 +2501,8 @@ Quantity (per item):   Zero or one
    </table>
    <p>The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and clamp the results accordingly. Computations with operands of negative values use the two’s-complement representation.</p>
    <p><dfn data-dfn-type="dfn" data-noexport id="token_count">token_count<a class="self-link" href="#token_count"></a></dfn> is the expected number of tokens to read.</p>
-   <p><dfn data-dfn-type="dfn" data-noexport id="token">token<a class="self-link" href="#token"></a></dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in the table below are reserved.</p>
-   <p class="note" role="note"><span class="marker">Note:</span> <code>token</code> values greater than 1 and less than 128 are unary operators, and <code>token</code> values greater than or equal to 128 are binary operators.</p>
+   <p><dfn data-dfn-type="dfn" data-noexport id="token">token<a class="self-link" href="#token"></a></dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in Table 2 below are reserved. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.</p>
+   <p class="note" role="note"><span class="marker">Note:</span> <code>token</code> values greater than or equal to 64 and less than or equal to 67 are unary operators, and <code>token</code> values greater than or equal to 128 and less than or equal to 137 are binary operators.</p>
    <table class="data">
     <caption style="caption-side:bottom"> Table 2 - Meaning of the value of <code>token</code>. </caption>
     <thead>
@@ -2546,7 +2546,7 @@ Quantity (per item):   Zero or one
       <td>Sample value from the <code>input_image_item_index</code><sup>th</sup> input image item.
       <td>input image item sample value
      <tr>
-      <td>2
+      <td>64
       <td>negation operator
       <td>1
       <td>Negation of the left operand.
@@ -2556,7 +2556,7 @@ Quantity (per item):   Zero or one
         <mi>L</mi>
        </math>
      <tr>
-      <td>3
+      <td>65
       <td>absolute value operator
       <td>1
       <td>Absolute value of the left operand.
@@ -2567,7 +2567,7 @@ Quantity (per item):   Zero or one
         <mo>|</mo>
        </math>
      <tr>
-      <td>4
+      <td>66
       <td>not operator
       <td>1
       <td>Bitwise complement of the operand.
@@ -2577,7 +2577,7 @@ Quantity (per item):   Zero or one
         <mi>L</mi>
        </math>
      <tr>
-      <td>5
+      <td>67
       <td>bsr operator
       <td>1
       <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.
