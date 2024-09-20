@@ -417,9 +417,9 @@ aligned(8) class SampleTransform {
             // input image item to the stack. At most 'reference_count'.
             unsigned int(8) input_image_item_index; // 1-based
         } else {
-            if (token < 128) {
+            if (token >= 64 && token <= 67) {
                 // Unary operator. Pop an operand from the stack.
-            } else {
+            } else if (token >= 128 && token <= 137) {
                 // Binary operator. Pop the right operand
                 // and then the left operand from the stack.
             }
@@ -431,9 +431,9 @@ aligned(8) class SampleTransform {
 
 <h5 id="sample-transform-semantics">Semantics</h5>
 
-<dfn noexport>version</dfn> shall be equal to 0. Readers shall not process a <code>SampleTransform</code> with an unrecognized <code>version</code> number.
+<dfn noexport>version</dfn> shall be equal to 0. Readers shall ignore a <code>SampleTransform</code> with an unrecognized <code>version</code> number.
 
-<dfn noexport>reserved</dfn> shall be equal to 0 in files conforming to this version of this specification. The value of <code>reserved</code> shall be ignored by readers.
+<dfn noexport>reserved</dfn> shall be equal to 0. The value of <code>reserved</code> shall be ignored by readers.
 
 <dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
 
@@ -459,9 +459,9 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
-<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in the table below are reserved.
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in Table 2 below are reserved. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.
 
-Note: <code>token</code> values greater than 1 and less than 128 are unary operators, and <code>token</code> values greater than or equal to 128 are binary operators.
+Note: <code>token</code> values greater than or equal to 64 and less than or equal to 67 are unary operators, and <code>token</code> values greater than or equal to 128 and less than or equal to 137 are binary operators.
 
 <table class="data">
   <caption style="caption-side:bottom">
@@ -492,28 +492,28 @@ Note: <code>token</code> values greater than 1 and less than 128 are unary opera
       <td>input image item sample value</td>
     </tr>
     <tr>
-      <td>2</td>
+      <td>64</td>
       <td>negation operator</td>
       <td>1</td>
       <td>Negation of the left operand.</td>
       <td><math><mo>-</mo><mi>L</mi></math></td>
     </tr>
     <tr>
-      <td>3</td>
+      <td>65</td>
       <td>absolute value operator</td>
       <td>1</td>
       <td>Absolute value of the left operand.</td>
       <td><math><mo>|</mo><mi>L</mi><mo>|</mo></math></td>
     </tr>
     <tr>
-      <td>4</td>
+      <td>66</td>
       <td>not operator</td>
       <td>1</td>
       <td>Bitwise complement of the operand.</td>
       <td><math><mo>¬</mo><mi>L</mi></math></td>
     </tr>
     <tr>
-      <td>5</td>
+      <td>67</td>
       <td>bsr operator</td>
       <td>1</td>
       <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
