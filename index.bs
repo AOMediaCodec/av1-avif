@@ -459,7 +459,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <dfn noexport>token_count</dfn> is the expected number of tokens to read.
 
-<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in the Table 2 below are reserved. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.
+<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Values other than the ones in Table 2 below are reserved. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.
 
 Note: <code>token</code> values greater than or equal to 64 and less than or equal to 67 are unary operators, and <code>token</code> values greater than or equal to 128 and less than or equal to 137 are binary operators.
 
