@@ -7,6 +7,7 @@ URL: https://AOMediaCodec.github.io/av1-avif
 Shortname: av1-avif
 Editor: Yannis Guyon, Google, yguyon@google.com
 Editor: Leo Barnes, Apple, lbarnes@apple.com
+Editor: Wan-Teh Chang, Google, wtc@google.com
 Former Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Former Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
