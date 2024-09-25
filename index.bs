@@ -136,7 +136,6 @@ url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
     text: MIAF image sequence
     text: MIAF auxiliary image item
     text: MIAF auxiliary image sequence
-    text: MIAF file
     text: self-containment
     text: grid-limit
     text: single-track
