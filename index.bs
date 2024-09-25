@@ -106,8 +106,8 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: tmap
     text: derived image item
     text: aux_type
-    text: AuxiliaryTypeProperty
     text: AuxiliaryTypeInfoBox
+    text: AuxiliaryTypeProperty
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
