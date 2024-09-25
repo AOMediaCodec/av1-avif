@@ -78,7 +78,7 @@ Metadata Order: This version, !*, *
 </pre>
 
 <pre class="anchors">
-url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
+url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: colr
     text: mif1
     text: msf1
@@ -104,9 +104,10 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: property;
     text: image_height
     text: ster
     text: tmap
-
-url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: derived image item
+    text: aux_type
+    text: AuxiliaryTypeProperty
+    text: AuxiliaryTypeInfoBox
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
@@ -119,18 +120,20 @@ url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: from_item_ID
     text: to_item_ID
     text: nclx
-
-url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: property;
     text: sync
     text: iloc
     text: mdat
     text: idat
     text: altr
-
-url: https://www.iso.org/standard/74417.html; spec: MIAF; type: property;
-    text: miaf
+    text: matrix_coefficients
+    text: full_range_flag
+    text: colour_type
+    text: meta
+    text: free
+    text: skip
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
+    text: miaf
     text: primary image
     text: MIAF image item
     text: MIAF image sequence
@@ -155,8 +158,6 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: Temporal Unit
     text: Operating Point
     text: Intra Frame
-
-url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
     text: mono_chrome
     text: color_range
     text: still_picture
@@ -197,7 +198,7 @@ When an item is of type <dfn export for="AV1 Image Item Type">av01</dfn>, it is 
     - <assert>The [=AV1 Image Item=] shall be a conformant [=MIAF image item=].</assert>
     - <assert>The [=AV1 Image Item=] shall be associated with an [=AV1ItemConfigurationProperty=].</assert>
     - The content of an [=AV1 Image Item=] is called the <dfn export>AV1 Image Item Data</dfn> and shall obey the following constraints:
-        - <assert>The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as 'sync', as defined in [[!AV1-ISOBMFF]].</assert>
+        - <assert>The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as <code>'[=sync=]'</code>, as defined in [[!AV1-ISOBMFF]].</assert>
         - <assert>The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].</assert>
 
 NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>[=reduced_still_picture_header=]</code> flags to 1 when possible in the [=Sequence Header OBU=] part of the [=AV1 Image Item Data=] so that AV1 header overhead is minimized.
@@ -210,8 +211,8 @@ NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>
     Box Type:                 <dfn export for="AV1ItemConfigurationProperty">av1C</dfn>
     Property type:            Descriptive item property
     Container:                ItemPropertyContainerBox
-    Mandatory (per  item):    Yes, for an image item of type 'av01', no otherwise
-    Quantity (per item):      One for an image item of type 'av01', zero otherwise
+    Mandatory (per  item):    Yes, for an image item of type <code>'av01'</code>, no otherwise
+    Quantity (per item):      One for an image item of type <code>'av01'</code>, zero otherwise
 </pre>
 
 The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
@@ -226,43 +227,43 @@ The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> a
 
 <h4 id="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
-The semantics of the 'ispe' property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of 'image_width' and 'image_height' shall respectively equal the values of [=UpscaledWidth=] and [=FrameHeight=]</assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the 'lsel' and [=OperatingPointSelectorProperty=] properties as follows:
+The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of <code>[=image_width=]</code> and <code>[=image_height=]</code> shall respectively equal the values of <code>[=UpscaledWidth=]</code> and <code>[=FrameHeight=]</code></assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the <code>'[=lsel=]'</code> and [=OperatingPointSelectorProperty=] properties as follows:
 
-    - In the absence of a 'lsel' property associated with the item, or if it is present and its 'layer_id' value is set to 0xFFFF:
-        - If no [=OperatingPointSelectorProperty=] is associated with the item, the <assert>'ispe' shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
+    - In the absence of a <code>'[=lsel=]'</code> property associated with the item, or if it is present and its <code>[=layer_id=]</code> value is set to 0xFFFF:
+        - If no [=OperatingPointSelectorProperty=] is associated with the item, the <assert><code>'[=ispe=]'</code> shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
 
-        - If an [=OperatingPointSelectorProperty=] is associated with the item, the <assert>'ispe' property shall document the dimensions of the last frame decoded when processing the corresponding operating point</assert>.
+        - If an [=OperatingPointSelectorProperty=] is associated with the item, the <assert><code>'[=ispe=]'</code> property shall document the dimensions of the last frame decoded when processing the corresponding operating point</assert>.
 
-        NOTE: The dimensions of possible intermediate output images might not match the ones given in the 'ispe' property. If they display these intermediate images, renderers are expected to scale the output image to match the 'ispe' property.
+        NOTE: The dimensions of possible intermediate output images might not match the ones given in the <code>'[=ispe=]'</code> property. If they display these intermediate images, renderers are expected to scale the output image to match the <code>'[=ispe=]'</code> property.
 
-    - If a 'lsel' property is associated with an item and its 'layer_id' is different from 0xFFFF, the 'ispe' property documents the dimensions of the output frame produced by decoding the corresponding layer.
+    - If a <code>'[=lsel=]'</code> property is associated with an item and its <code>[=layer_id=]</code> is different from 0xFFFF, the <code>'[=ispe=]'</code> property documents the dimensions of the output frame produced by decoding the corresponding layer.
 
-NOTE: The dimensions indicated in the 'ispe' property might not match the values [=max_frame_width_minus1=]+1 and [=max_frame_height_minus1=]+1 indicated in the AV1 bitstream.
+NOTE: The dimensions indicated in the <code>'[=ispe=]'</code> property might not match the values <code>[=max_frame_width_minus1=]+1</code> and <code>[=max_frame_height_minus1=]+1</code> indicated in the AV1 bitstream.
 
-NOTE: The values of [=render_width_minus1=] and [=render_height_minus1=] possibly present in the AV1 bistream are not exposed in the AVIF container level.
+NOTE: The values of <code>[=render_width_minus1=]</code> and <code>[=render_height_minus1=]</code> possibly present in the AV1 bistream are not exposed in the AVIF container level.
 
 <h4 id="clean-aperture-property">Clean Aperture Property</h4>
 
-The semantics of the clean aperture property ('clap') as defined in [[!HEIF]] apply. In addition to the restrictions on transformative item property ordering specified in [[!MIAF]], the following restriction also applies:
+The semantics of the clean aperture property (<code>'[=clap=]'</code>) as defined in [[!HEIF]] apply. In addition to the restrictions on transformative item property ordering specified in [[!MIAF]], the following restriction also applies:
 
-<assert>The origin of the 'clap' item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary non-hidden image item.</assert>
+<assert>The origin of the <code>'[=clap=]'</code> item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary non-hidden image item.</assert>
 
 <h4 id="other-item-property">Other Item Properties</h4>
 
 In addition to the Image Properties defined in this document, [=AV1 image items=] MAY also be associated with item properties defined in other specifications such as [[!HEIF]] and [[!MIAF]]. Examples of commonly used item properties are:
-    - 'colr'
-    - 'pixi'
-    - 'pasp'
-    - 'irot'
-    - 'imir'
-    - 'clli'
-    - 'cclv'
-    - 'mdcv'
-    - 'amve'
-    - 'reve'
-    - 'ndwt'
-    - 'cmin'
-    - 'cmex'
+    - <code>'[=colr=]'</code>
+    - <code>'[=pixi=]'</code>
+    - <code>'[=pasp=]'</code>
+    - <code>'[=irot=]'</code>
+    - <code>'[=imir=]'</code>
+    - <code>'[=clli=]'</code>
+    - <code>'[=cclv=]'</code>
+    - <code>'[=mdcv=]'</code>
+    - <code>'[=amve=]'</code>
+    - <code>'[=reve=]'</code>
+    - <code>'[=ndwt=]'</code>
+    - <code>'[=cmin=]'</code>
+    - <code>'[=cmex=]'</code>
 
 In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1ItemConfigurationProperty=].
 
@@ -272,13 +273,13 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
 [[!AV1]] supports encoding a frame using multiple spatial layers. A spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Additionally, not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate decodes. Finally, layers are grouped into one or more [=Operating Points=]. The [=Sequence Header OBU=] defines the list of [=Operating Points=], provides required decoding capabilities, and indicates which layers form each [=Operating Point=].
 
-[[!AV1]] delegates the selection of which [=Operating Point=] to process to the application, by means of a function called <code>choose_operating_point()</code>. AVIF defines the [=OperatingPointSelectorProperty=] to control this selection. In the absence of an [=OperatingPointSelectorProperty=] associated with an [=AV1 Image Item=], the AVIF renderer is free to process any [=Operating Point=] present in the [=AV1 Image Item Data=]. In particular, <assert>when the [=AV1 Image Item=] is composed of a unique [=Operating Point=], the [=OperatingPointSelectorProperty=] should not be present</assert>. If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the <code>op_index</code> field indicates which [=Operating Point=] is expected to be processed for this item.
+[[!AV1]] delegates the selection of which [=Operating Point=] to process to the application, by means of a function called <code>choose_operating_point()</code>. AVIF defines the [=OperatingPointSelectorProperty=] to control this selection. In the absence of an [=OperatingPointSelectorProperty=] associated with an [=AV1 Image Item=], the AVIF renderer is free to process any [=Operating Point=] present in the [=AV1 Image Item Data=]. In particular, <assert>when the [=AV1 Image Item=] is composed of a unique [=Operating Point=], the [=OperatingPointSelectorProperty=] should not be present</assert>. If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the <code>[=op_index=]</code> field indicates which [=Operating Point=] is expected to be processed for this item.
 
 NOTE: When an author wants to offer the ability to render multiple [=Operating Points=] from the same AV1 image (e.g. in the case of multi-view images), multiple [=AV1 Image Items=] can be created that share the same [=AV1 Image Item Data=] but have different [=OperatingPointSelectorProperty=]s.
 
-[[!AV1]] expects the renderer to display only one frame within the selected [=Operating Point=], which should be the highest spatial layer that is both within the [=Operating Point=] and present within the temporal unit, but [[!AV1]] leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the 'lsel' property (mandated by [[!HEIF]] for layered images) is used to control which layer is rendered. According to [[!HEIF]], the interpretation of the 'layer_id' field in the 'lsel' property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a 'lsel' property is associated with an [=AV1 Image Item=] but its 'layer_id' value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a 'lsel' property is associated with an [=AV1 Image Item=] and the value of 'layer_id' is not 0xFFFF, the renderer is expected to render only the output image for that layer.
+[[!AV1]] expects the renderer to display only one frame within the selected [=Operating Point=], which should be the highest spatial layer that is both within the [=Operating Point=] and present within the temporal unit, but [[!AV1]] leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the <code>'[=lsel=]'</code> property (mandated by [[!HEIF]] for layered images) is used to control which layer is rendered. According to [[!HEIF]], the interpretation of the <code>[=layer_id=]</code> field in the <code>'[=lsel=]'</code> property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a <code>'[=lsel=]'</code> property is associated with an [=AV1 Image Item=] but its <code>[=layer_id=]</code> value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a <code>'[=lsel=]'</code> property is associated with an [=AV1 Image Item=] and the value of <code>[=layer_id=]</code> is not 0xFFFF, the renderer is expected to render only the output image for that layer.
 
-NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when an author wants to expose each layer as a specific item, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different 'lsel' properties, each with a different value of 'layer_id'.
+NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when an author wants to expose each layer as a specific item, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different <code>'[=lsel=]'</code> properties, each with a different value of <code>[=layer_id=]</code>.
 
 <h4 id="layered-properties">Properties</h4>
 <h5 id="operating-point-selector-property">Operating Point Selector Property</h5>
@@ -310,7 +311,7 @@ class OperatingPointSelectorProperty extends ItemProperty('a1op') {
 <dfn noexport>op_index</dfn> indicates the index of the operating point to be processed for this item. <assert>Its value shall be between 0 and [=operating_points_cnt_minus_1=].</assert>
 
 <h5 id="layer-selector-property">Layer Selector Property</h5>
-The 'lsel' property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The 'layer_id' indicates the value of the [=spatial_id=] to render. <assert>The value shall be between 0 and 3, or the special value 0xFFFF.</assert> When a value between 0 and 3 is used, <assert>the corresponding spatial layer shall be present in the bitstream</assert> and <assert>shall produce an output frame</assert>. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in [[#layered-items-overview]].
+The <code>'[=lsel=]'</code> property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The <code>[=layer_id=]</code> indicates the value of the <code>[=spatial_id=]</code> to render. <assert>The value shall be between 0 and 3, or the special value 0xFFFF.</assert> When a value between 0 and 3 is used, <assert>the corresponding spatial layer shall be present in the bitstream</assert> and <assert>shall produce an output frame</assert>. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in [[#layered-items-overview]].
 
 <h5 id="layered-image-indexing-property">Layered Image Indexing Property</h5>
 
@@ -343,18 +344,18 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
 
 <h6 id="layered-image-indexing-property-semantics" class="no-toc">Semantics</h6>
 
-<dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of [=spatial_id=]. A value of zero means that all the layers except the last one have been documented and <assert>following values shall be 0</assert>. <assert>The number of non-zero values shall match the number of layers in the image minus one.</assert>.
+<dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <code>[=spatial_id=]</code>. A value of zero means that all the layers except the last one have been documented and <assert>following values shall be 0</assert>. <assert>The number of non-zero values shall match the number of layers in the image minus one.</assert>.
 
 NOTE: The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.
 
-<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the [=spatial_id=] for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding [=spatial_id=] could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
+<div class="example">A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <code>[=spatial_id=]</code> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <code>[=spatial_id=]</code> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
 
 <h2 id="image-sequences">Image Sequences</h2>
 
 <p>An <dfn export>AV1 Image Sequence</dfn> is defined as a set of AV1 [=Temporal Units=] stored in an [=AV1 track=] as defined in [[!AV1-ISOBMFF]] with the following constraints:
 
     - <assert>The track shall be a valid [=MIAF image sequence=].</assert>
-    - <assert>The track handler for an [=AV1 Image Sequence=] shall be <code>pict</code>.</assert>
+    - <assert>The track handler for an [=AV1 Image Sequence=] shall be <code>'[=pict=]'</code>.</assert>
     - <assert>The track shall have only one [=AV1 Sample=] description entry.</assert>
     - <assert>If multiple [=Sequence Header OBUs=] are present in the track payload, they shall be identical.</assert></p>
 
@@ -367,19 +368,19 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
     - <assert>The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</assert>
     - <assert>The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</assert></p>
 
-<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. <assert>An [=AV1 Alpha Image Item=] (respectively an [=AV1 Alpha Image Sequence=]) shall be encoded with the same bit depth as the associated master [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]).</assert></p>
+<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the [=AuxiliaryTypeProperty=] (respectively [=AuxiliaryTypeInfoBox=]) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. <assert>An [=AV1 Alpha Image Item=] (respectively an [=AV1 Alpha Image Sequence=]) shall be encoded with the same bit depth as the associated master [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]).</assert></p>
 
 <p><assert>For [=AV1 Alpha Image Item=] and [=AV1 Alpha Image Sequence=], the ColourInformationBox should be omitted.</assert> <assert>If present, readers shall ignore it.</assert></p>
 
-<p>An <dfn export>AV1 Depth Image Item</dfn> (respectively an <dfn export>AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>aux_type</code> field of the <code>AuxiliaryTypeProperty</code> (respectively <code>AuxiliaryTypeInfoBox</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
+<p>An <dfn export>AV1 Depth Image Item</dfn> (respectively an <dfn export>AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the [=AuxiliaryTypeProperty=] (respectively [=AuxiliaryTypeInfoBox=]) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
-NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>matrix_coefficients</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>aux_type</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.
+NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>[=matrix_coefficients=]</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>[=aux_type=]</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.
 
 <h3 id="derived-images">Derived Image Items</h3>
 
 <h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
 
-A tone map derived image item ('tmap') as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the 'tmap' image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
+A tone map derived image item (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF=] file. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an '[=AVIF/altr=]' entity group as recommended in [[!HEIF]].</assert>
 
 <h4 id="sample-transform">Sample Transform Derived Image Item</h4>
 
@@ -389,27 +390,27 @@ With a Sample Transform Derived Image Item, pixels at the same position in multi
 
 <h5 id="sample-transform-definition">Definition</h5>
 
-When a [=derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, constants and operators.
+When a [=derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
 
-The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type 'dimg' for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type 'dimg', the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
+The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type <code>'[=dimg=]'</code> for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type <code>'[=dimg=]'</code>, the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
-  - each have a 'pixi' property and an 'ispe' property;
-  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the 'pixi' and '[=AV1ItemConfigurationProperty/av1C=]' properties;
-  - have the same dimensions as defined by the 'ispe' property;
-  - have the same color information as defined by the 'colr' properties (or lack thereof).
+  - each have a <code>'[=pixi=]'</code> property and an <code>'[=ispe=]'</code> property;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the <code>'[=pixi=]'</code> and '[=AV1ItemConfigurationProperty/av1C=]' properties;
+  - have the same dimensions as defined by the <code>'[=ispe=]'</code> property;
+  - have the same color information as defined by the <code>'[=colr=]'</code> properties (or lack thereof).
 
-Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an expression consisting of a series of integer operators and operands. An operand is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
+Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an expression consisting of a series of integer [=sato/operators=] and [=sato/operands=]. An [=sato/operand=] is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
 No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
 
-The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the 'pixi' property of the reconstructed image item. The <code>full_range_flag</code> field of the 'colr' property of <code>colour_type</code> <code>nclx</code> also defines a range of values to clamp to, as defined in [[!CICP]].
+The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the <code>'[=pixi=]'</code> property of the reconstructed image item. The <code>[=full_range_flag=]</code> field of the <code>'[=colr=]'</code> property of <code>[=colour_type=]</code> <code>'[=nclx=]'</code> also defines a range of values to clamp to, as defined in [[!CICP]].
 
-<div class="example">An 8-bit primary [=MIAF image item=] can be combined with another 8-bit hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same <code>altr</code> group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
+<div class="example">An 8-bit primary [=MIAF image item=] can be combined with another 8-bit hidden [=MIAF image item=], both used as input image items to a [=Sample Transform Derived Image Item=], with an expression corresponding to ReconstructedSample = 256 × PrimarySample + HiddenSample. The primary [=MIAF image item=] and the [=Sample Transform Derived Image Item=] are both part of the same <code>'[=AVIF/altr=]'</code> group. This will be perceived as a backward-compatible regular 8-bit image to readers not supporting [=Sample Transform Derived Image Items=], and can be decoded as a 16-bit image otherwise, making that pattern a bit-depth extension mechanism.</div>
 
 <h5 id="sample-transform-syntax">Syntax</h5>
 
-An expression is a series of tokens. A token is an operand or an operator. An operand can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An operator takes either one or two input operands. Each unary operator pops one value from the stack. Each binary operator pops two values from the stack, the first being the right operand and the second being the left operand. Each token results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
+An expression is a series of [=sato/tokens=]. A [=sato/token=] is an [=sato/operand=] or an [=sato/operator=]. An [=sato/operand=] can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An [=sato/operator=] takes either one or two input [=sato/operands=]. Each unary [=sato/operator=] pops one value from the stack. Each binary [=sato/operator=] pops two values from the stack, the first being the right [=sato/operand=] and the second being the left [=sato/operand=]. Each [=sato/token=] results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
 
 ```c
 aligned(8) class SampleTransform {
@@ -441,20 +442,20 @@ aligned(8) class SampleTransform {
 
 <h5 id="sample-transform-semantics">Semantics</h5>
 
-<dfn noexport>version</dfn> shall be equal to 0. Readers shall ignore a <code>SampleTransform</code> with an unrecognized <code>version</code> number.
+<dfn noexport for="sato">version</dfn> shall be equal to 0. Readers shall ignore a [=Sample Transform Derived Image Item=] with an unrecognized <code>[=sato/version=]</code> number.
 
-<dfn noexport>reserved</dfn> shall be equal to 0. The value of <code>reserved</code> shall be ignored by readers.
+<dfn noexport for="sato">reserved</dfn> shall be equal to 0. The value of <code>[=sato/reserved=]</code> shall be ignored by readers.
 
-<dfn noexport>bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
+<dfn noexport for="sato">bit_depth</dfn> determines the precision (from 8 to 64 bits, see Table 1) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code>constant</code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.
 
 <table class="data">
   <caption style="caption-side:bottom">
-    Table 1 - Mapping from <code>bit_depth</code> to the intermediate bit depth.
+    Table 1 - Mapping from <code>[=sato/bit_depth=]</code> to the <dfn noexport for="sato">intermediate bit depth</dfn>.
   </caption>
   <thead>
     <tr>
-      <th>Value of <code>bit_depth</code></th>
-      <th>Intermediate bit depth (sign bit inclusive) <code>num_bits</code></th>
+      <th>Value of <code>[=sato/bit_depth=]</code></th>
+      <th>Intermediate bit depth (sign bit inclusive) <dfn noexport for="sato">num_bits</dfn></th>
     </tr>
   </thead>
   <tbody>
@@ -465,38 +466,38 @@ aligned(8) class SampleTransform {
   </tbody>
 </table>
 
-The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>num_bits</code>-1</sup> and 2<sup><code>num_bits</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and clamp the results accordingly. Computations with operands of negative values use the two’s-complement representation.
+The result of any computation underflowing or overflowing the intermediate bit depth is replaced by -2<sup><code>[=sato/num_bits=]</code>-1</sup> and 2<sup><code>[=sato/num_bits=]</code>-1</sup>-1, respectively. Encoder implementations should not create files leading to potential computation underflow or overflow. Decoder implementations shall check for computation underflow or overflow and clamp the results accordingly. Computations with [=sato/operands=] of negative values use the two’s-complement representation.
 
-<dfn noexport>token_count</dfn> is the expected number of tokens to read.
+<dfn noexport for="sato">token_count</dfn> is the expected number of [=sato/tokens=] to read.
 
-<dfn noexport>token</dfn> determines the type of the operand (constant or input image item sample) or the operator (how to transform one or two operands into the result). See Table 2. Readers shall ignore a <code>SampleTransform</code> with a reserved <code>token</code> value.
+<dfn noexport for="sato">token</dfn> determines the type of the <dfn noexport for="sato">operand</dfn> (<code>[=sato/constant=]</code> or input image item sample) or the <dfn noexport for="sato">operator</dfn> (how to transform one or two [=sato/operands=] into the result). See Table 2. Readers shall ignore a [=Sample Transform Derived Image Item=] with a reserved <code>[=sato/token=]</code> value.
 
 <table class="data">
   <caption style="caption-side:bottom">
-    Table 2 - Meaning of the value of <code>token</code>.
+    Table 2 - Meaning of the value of <code>[=sato/token=]</code>.
   </caption>
   <thead>
     <tr>
-      <th>Value of <code>token</code></th>
+      <th>Value of <code>[=sato/token=]</code></th>
       <th>Token name</th>
       <th>Token type</th>
       <th>Meaning before pushing to the stack</th>
-      <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> refer to operands popped from the stack for operators)</th>
+      <th>Value pushed to the stack<br>(<math><mi>L</mi></math> and <math><mi>R</mi></math> refer to [=sato/operands=] popped from the stack for [=sato/operators=])</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>0</td>
       <td>constant</td>
-      <td>operand</td>
-      <td><math><msup><mn>2</mn><mrow><mi>bit_depth</mi><mo>+</mo><mn>3</mn></mrow></math> bits from the stream read as a signed integer.</td>
+      <td>[=sato/operand=]</td>
+      <td><math><msup><mn>2</mn><mrow><mi>[=sato/bit_depth=]</mi><mo>+</mo><mn>3</mn></mrow></math> bits from the stream read as a signed integer.</td>
       <td>constant value</td>
     </tr>
     <tr>
       <td>1..32</td>
       <td>sample</td>
-      <td>operand</td>
-      <td>Sample value from the <code>token</code><sup>th</sup> input image item (<code>token</code> is the 1-based index of the input image item whose sample is pushed to the stack).</td>
+      <td>[=sato/operand=]</td>
+      <td>Sample value from the <code>[=sato/token=]</code><sup>th</sup> input image item (<code>[=sato/token=]</code> is the 1-based index of the input image item whose sample is pushed to the stack).</td>
       <td>input image item sample value</td>
     </tr>
     <tr>
@@ -506,29 +507,29 @@ The result of any computation underflowing or overflowing the intermediate bit d
     <tr>
       <td>64</td>
       <td>negation</td>
-      <td>unary operator</td>
-      <td>Negation of the left operand.</td>
+      <td>unary [=sato/operator=]</td>
+      <td>Negation of the left [=sato/operand=].</td>
       <td><math><mo>-</mo><mi>L</mi></math></td>
     </tr>
     <tr>
       <td>65</td>
       <td>absolute value</td>
-      <td>unary operator</td>
-      <td>Absolute value of the left operand.</td>
+      <td>unary [=sato/operator=]</td>
+      <td>Absolute value of the left [=sato/operand=].</td>
       <td><math><mo>|</mo><mi>L</mi><mo>|</mo></math></td>
     </tr>
     <tr>
       <td>66</td>
       <td>not</td>
-      <td>unary operator</td>
-      <td>Bitwise complement of the operand.</td>
+      <td>unary [=sato/operator=]</td>
+      <td>Bitwise complement of the [=sato/operand=].</td>
       <td><math><mo>¬</mo><mi>L</mi></math></td>
     </tr>
     <tr>
       <td>67</td>
       <td>bsr</td>
-      <td>unary operator</td>
-      <td>0-based index of the most significant set bit of the left operand if the left operand is strictly positive, zero otherwise.</td>
+      <td>unary [=sato/operator=]</td>
+      <td>0-based index of the most significant set bit of the left [=sato/operand=] if the left [=sato/operand=] is strictly positive, zero otherwise.</td>
       <td>
         <math>
           <mo>{</mo>
@@ -546,29 +547,29 @@ The result of any computation underflowing or overflowing the intermediate bit d
     <tr>
       <td>128</td>
       <td>sum</td>
-      <td>binary operator</td>
-      <td>Left operand added to the right operand.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Left [=sato/operand=] added to the right [=sato/operand=].</td>
       <td><math><mi>L</mi><mo>+</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>129</td>
       <td>difference</td>
-      <td>binary operator</td>
-      <td>Right operand subtracted from the left operand.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Right [=sato/operand=] subtracted from the left [=sato/operand=].</td>
       <td><math><mi>L</mi><mo>-</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>130</td>
       <td>product</td>
-      <td>binary operator</td>
-      <td>Left operand multiplied by the right operand.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Left [=sato/operand=] multiplied by the right [=sato/operand=].</td>
       <td><math><mi>L</mi><mo>×</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>131</td>
       <td>quotient</td>
-      <td>binary operator</td>
-      <td>Left operand divided by the right operand if the right operand is not zero, left operand otherwise. The result is truncated toward zero (integer division).</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Left [=sato/operand=] divided by the right [=sato/operand=] if the right [=sato/operand=] is not zero, left [=sato/operand=] otherwise. The result is truncated toward zero (integer division).</td>
       <td>
         <math>
           <mo>{</mo>
@@ -582,29 +583,29 @@ The result of any computation underflowing or overflowing the intermediate bit d
     <tr>
       <td>132</td>
       <td>and</td>
-      <td>binary operator</td>
-      <td>Bitwise conjunction of the operands.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Bitwise conjunction of the [=sato/operands=].</td>
       <td><math><mi>L</mi><mo>∧</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>133</td>
       <td>or</td>
-      <td>binary operator</td>
-      <td>Bitwise inclusive disjunction of the operands.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Bitwise inclusive disjunction of the [=sato/operands=].</td>
       <td><math><mi>L</mi><mo>∨</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>134</td>
       <td>xor</td>
-      <td>binary operator</td>
-      <td>Bitwise exclusive disjunction of the operands.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Bitwise exclusive disjunction of the [=sato/operands=].</td>
       <td><math><mi>L</mi><mo>⊕</mo><mi>R</mi></math></td>
     </tr>
     <tr>
       <td>135</td>
       <td>pow</td>
-      <td>binary operator</td>
-      <td>Left operand raised to the power of the right operand if the left operand is not zero, zero otherwise.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Left [=sato/operand=] raised to the power of the right [=sato/operand=] if the left [=sato/operand=] is not zero, zero otherwise.</td>
       <td>
         <math>
           <mo>{</mo>
@@ -618,8 +619,8 @@ The result of any computation underflowing or overflowing the intermediate bit d
     <tr>
       <td>136</td>
       <td>min</td>
-      <td>binary operator</td>
-      <td>Minimum value among the operands.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Minimum value among the [=sato/operands=].</td>
       <td>
         <math>
           <mo>{</mo>
@@ -633,8 +634,8 @@ The result of any computation underflowing or overflowing the intermediate bit d
     <tr>
       <td>137</td>
       <td>max</td>
-      <td>binary operator</td>
-      <td>Maximum value among the operands.</td>
+      <td>binary [=sato/operator=]</td>
+      <td>Maximum value among the [=sato/operands=].</td>
       <td>
         <math>
           <mo>{</mo>
@@ -652,33 +653,33 @@ The result of any computation underflowing or overflowing the intermediate bit d
   </tbody>
 </table>
 
-<dfn noexport>constant</dfn> is a literal signed value extracted from the stream with a precision of intermediate bit depth, pushed to the stack.
+<dfn noexport for="sato">constant</dfn> is a literal signed value extracted from the stream with a precision of [=sato/intermediate bit depth=], pushed to the stack.
 
 <h5 id="sample-transform-constraints">Constraints</h5>
 
 [=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
 
-  - The tokens shall be evaluated in the order they are defined in the metadata (the <code>SampleTransform</code> structure) of the [=Sample Transform Derived Image Item=].
-  - <code>token</code> shall be at most <code>[=reference_count=]</code> when evaluating a sample operand (when <math><mn>1</mn><mo>≤</mo><mi>token</mi><mo>≤</mo><mn>32</mn></math>).
-  - There shall be at least one token.
-  - The stack is empty before evaluating the first token.
-  - There shall be at least 1 element in the stack before evaluating a unary operator.
-  - There shall be at least 2 elements in the stack before evaluating a binary operator.
-  - There shall be exactly one remaining element in the stack after evaluating the last token. This element is the value of the reconstructed image item sample.
+  - <assert>The [=sato/tokens=] shall be evaluated in the order they are defined in the metadata (the <code>SampleTransform</code> structure) of the [=Sample Transform Derived Image Item=].</assert>
+  - <assert><code>[=sato/token=]</code> shall be at most <code>[=reference_count=]</code> when evaluating a sample [=sato/operand=] (when <math><mn>1</mn><mo>≤</mo><mi>token</mi><mo>≤</mo><mn>32</mn></math>).</assert>
+  - <assert>There shall be at least one <code>[=sato/token=]</code>.</assert>
+  - The stack is empty before evaluating the first <code>[=sato/token=]</code>.
+  - <assert>There shall be at least 1 element in the stack before evaluating a unary [=sato/operator=].</assert>
+  - <assert>There shall be at least 2 elements in the stack before evaluating a binary [=sato/operator=].</assert>
+  - <assert>There shall be exactly one remaining element in the stack after evaluating the last <code>[=sato/token=]</code>.</assert> This element is the value of the reconstructed image item sample.
 
 Non-compliant expressions shall be rejected by parsers as invalid files.
 
-Note: Because each operator pops one or two elements and then pushes one element to the stack, there is at most one more operand than operators in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operators and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> operands. <code>token_count</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
+Note: Because each [=sato/operator=] pops one or two elements and then pushes one element to the stack, there is at most one more [=sato/operand=] than [=sato/operators=] in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>[=sato/token_count=]</mi><mn>2</mn></mfrac><mo>)</mo></math> [=sato/operators=] and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> [=sato/operands=]. <code>[=sato/token_count=]</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
 
 <h2 id="groups">Entity groups</h2>
 
 The GroupsListBox ('<dfn for="AVIF">grpl</dfn>') defined in [[!ISOBMFF]] may be used to group multiple image items in a file together. The type of the group describes how the image items are related. <assert>Decoders should ignore groups of unknown type.</assert>
 
-<h3 id="altr-group">'altr' group</h3>
+<h3 id="altr-group"><code>'[=/altr=]'</code> group</h3>
 
-The '<dfn for="AVIF">altr</dfn>' entity group as defined in [[!ISOBMFF]] may be used to mark multiple items as alternatives to each other. Only one item in the 'altr' group should be played or processed. This grouping is useful for defining a fallback for parsers when new types of items or essential item properties are introduced.
+The '<dfn for="AVIF">altr</dfn>' entity group as defined in [[!ISOBMFF]] may be used to mark multiple items as alternatives to each other. Only one item in the <code>'[=AVIF/altr=]'</code> group should be played or processed. This grouping is useful for defining a fallback for parsers when new types of items or essential item properties are introduced.
 
-<h3 id="ster-group">'ster' group</h3>
+<h3 id="ster-group"><code>'[=/ster=]'</code> group</h3>
 
 The '<dfn for="AVIF">ster</dfn>' entity group as defined in [[!HEIF]] may be used to indicate that two image items form a stereo pair suitable for stereoscopic viewing.
 
@@ -695,32 +696,32 @@ The '<dfn for="AVIF">ster</dfn>' entity group as defined in [[!HEIF]] may be use
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
 The brand to identify [=AV1 image items=] is <dfn export for="AVIF Image brand">avif</dfn>.
 
-Files that indicate this brand in the [=compatible_brands=] field of the [=FileTypeBox=] shall comply with the following:
+Files that indicate this brand in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=] shall comply with the following:
     - <assert>The primary item shall be an [=AV1 Image Item=] or be a derived image that references directly or indirectly one or more items that all are [=AV1 Image Items=].</assert>
     - [=AV1 auxiliary image items=] may be present in the file.
 
-<assert>Files that conform with these constraints should include the brand <code>[=avif=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=].</assert>
+<assert>Files that conform with these constraints should include the brand <code>[=avif=]</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
 
-Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=], then <assert>the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]</assert>. Conversely, <assert>if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the [=compatible_brands=] field of the [=FileTypeBox=]</assert>.
+Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=], then <assert>the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]</assert>. Conversely, <assert>if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=]</assert>.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify AVIF image sequences is <dfn export for="AVIF Image Sequence brand">avis</dfn>.
 
-Files that indicate this brand in the [=compatible_brands=] field of the [=FileTypeBox=] shall comply with the following:
+Files that indicate this brand in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=] shall comply with the following:
     - <assert>they shall contain one or more [=AV1 image sequences=].</assert>
     - they may contain [=AV1 auxiliary image sequences=].
 
-<assert>Files that conform with these constraints should include the brand <code>[=avis=]</code> in the [=compatible_brands=] field of the [=FileTypeBox=].</assert>
+<assert>Files that conform with these constraints should include the brand <code>[=avis=]</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
 
-Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the [=compatible_brands=] field of the [=FileTypeBox=], <assert>the item constraints for this brand shall be met</assert> and <assert>at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as 'sync'</assert>. Conversely, <assert>if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used</assert>.
+Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=], <assert>the item constraints for this brand shall be met</assert> and <assert>at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as <code>'[=sync=]'</code></assert>. Conversely, <assert>if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used</assert>.
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.
 
 <h2 id="file-constraints">General constraints</h2>
 
 The following constraints are common to files compliant with this specification:
-    - <assert>The file shall be compliant with the [[!MIAF]] specification and list 'miaf' in the [=compatible_brands=] field of the [=FileTypeBox=].</assert>
-    - <assert>The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the [=compatible_brands=] field of the [=FileTypeBox=].</assert>
+    - <assert>The file shall be compliant with the [[!MIAF]] specification and list <code>'[=miaf=]'</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
+    - <assert>The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
     - <assert>Transformative properties shall not be associated with items in a derivation chain (as defined in [[!MIAF]]) that serves as an input to a grid item.</assert> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
 NOTE: This constraint further restricts files compared to [[!MIAF]].
@@ -737,7 +738,7 @@ The profiles defined in this section are for enabling interoperability between [
 
 It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
 
-NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when [=seq_level_idx=] is set to 31 (maximum parameters level).
+NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <code>[=seq_level_idx=]</code> is set to 31 (maximum parameters level).
 
 <div class="example">If an image is encoded with dimensions (respectively a bit depth) that exceed the maximum dimensions (respectively bit depth) required by the AV1 profile and level of the AVIF profiles defined in this specification, the file will only signal general AVIF brands.</div>
 
@@ -745,7 +746,7 @@ NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensi
 
 This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
 
-If the brand <code>MA1B</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>'[=MA1B=]'</code> is in the list of <code>[=compatible_brands=]</code> of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
 The following shared conditions and requirements from [[!MIAF]] shall apply:
     - <assert>[=self-containment=] (subclause 8.2)</assert>
@@ -764,15 +765,15 @@ NOTE:  AV1 tiers are not constrained because timing is optional in image sequenc
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the AVIF Baseline profile may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using grid derivation.
 
 <div class="example">
-A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
 
     <code>avif, mif1, miaf, MA1B</code>
 
-A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a <code>'[=pict=]'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
 
     <code>avis, msf1, miaf, MA1B</code>
 
-A file containing a 'pict' track compliant with this profile and made only of [=AV1 Samples=] marked 'sync' is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a <code>'[=pict=]'</code> track compliant with this profile and made only of [=AV1 Samples=] marked <code>'[=sync=]'</code> is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
 
     <code>avis, avio, msf1, miaf, MA1B</code>
 </div>
@@ -781,7 +782,7 @@ A file containing a 'pict' track compliant with this profile and made only of [=
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand <dfn export for="AVIF Advanced Profile">MA1A</dfn>.
 
-If the brand <code>MA1A</code> is in the list of [=compatible_brands=] of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>'[=MA1A=]'</code> is in the list of <code>[=compatible_brands=]</code> of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
 
 The following shared conditions and requirements from [[!MIAF]] shall apply:
     - <assert>[=self-containment=] (subclause 8.2)</assert>
@@ -803,11 +804,11 @@ The following additional constraints apply only to [=AV1 Image Sequences=]:
     - <assert>The AV1 level for High Profile shall be 5.1 or lower.</assert>
 
 <div class="example">
-A file containing items compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
 
     <code>avif, mif1, miaf, MA1A</code>
 
-A file containing a 'pict' track compliant with this profile is expected to list the following brands, in any order, in the [=compatible_brands=] of the [=FileTypeBox=]:
+A file containing a <code>'[=pict=]'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
 
     <code>avis, msf1, miaf, MA1A</code>
 </div>
@@ -820,7 +821,7 @@ This section discusses the box requirements for an AVIF file containing only ima
 <h4 id="avif-required-boxes">Minimum set of boxes</h4>
 
 <p>As indicated in [[#file-constraints]], an AVIF file is a compliant [[!MIAF]] file. As a consequence, some [[!ISOBMFF]] or [[!HEIF]] boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification" 
-column may require a specific order for the box or for its children and shall be respected. For example, per [[!ISOBMFF]], the <code>FileTypeBox</code> is required to appear first in an AVIF file.
+column may require a specific order for the box or for its children and shall be respected. For example, per [[!ISOBMFF]], the <code>[=FileTypeBox=]</code> is required to appear first in an AVIF file.
 The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. 
 Other versions of the boxes shall not be used. "-" means that the box does not have a version.</p>
 
@@ -961,14 +962,14 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
             <td>&nbsp;</td>
             <td>-</td>
             <td>ISOBMFF</td>
-            <td>The coded payload may be placed in 'idat' rather than 'mdat', in which case 'mdat' is not required.</td>
+            <td>The coded payload may be placed in <code>'[=idat=]'</code> rather than <code>'[=mdat=]'</code>, in which case <code>'[=mdat=]'</code> is not required.</td>
         </tr>
     </tbody>
 </table>
 
 <h4 id="avif-required-boxes-additional">Requirements on additional image item related boxes</h4>
 
-<p>The boxes indicated in the following table may be present in an AVIF file to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing box" column. If present, they shall use the version indicated in the table and AVIF readers are expected to understand them. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>free</code> and <code>skip</code> boxes may be present at any level in the hierarchy. AVIF readers are expected to ignore them. Additional boxes in the <code>meta</code> hierarchy not listed in the following table may also be present and may be ignored by AVIF readers.</p>
+<p>The boxes indicated in the following table may be present in an AVIF file to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing box" column. If present, they shall use the version indicated in the table and AVIF readers are expected to understand them. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>'[=free=]'</code> and <code>'[=skip=]'</code> boxes may be present at any level in the hierarchy. AVIF readers are expected to ignore them. Additional boxes in the <code>'[=meta=]'</code> hierarchy not listed in the following table may also be present and may be ignored by AVIF readers.</p>
 <table class="data">
     <thead>
         <tr>
@@ -1196,3 +1197,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.2 "Sample Transform Derived Image Item"</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/232">Add restriction on usage of clap property</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/tbd">Adopt MIAF shared constraints</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/tbd">Clean up usage of dfn and linking</a>
