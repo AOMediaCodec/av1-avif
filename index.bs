@@ -196,7 +196,7 @@ This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
 When an item is of type <dfn export for="AV1 Image Item Type">av01</dfn>, it is called an <dfn export>AV1 Image Item</dfn>, and shall obey the following constraints:
     - <assert>The [=AV1 Image Item=] shall be a conformant [=MIAF image item=].</assert>
-    - <assert>The [=AV1 Image Item=] shall be associated with an [=AV1ItemConfigurationProperty=].</assert>
+    - <assert>The [=AV1 Image Item=] shall be associated with an <code>[=AV1ItemConfigurationProperty=]</code>.</assert>
     - The content of an [=AV1 Image Item=] is called the <dfn export>AV1 Image Item Data</dfn> and shall obey the following constraints:
         - <assert>The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as <code>'[=sync=]'</code>, as defined in [[!AV1-ISOBMFF]].</assert>
         - <assert>The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].</assert>
@@ -215,24 +215,24 @@ NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>
     Quantity (per item):      One for an image item of type <code>'av01'</code>, zero otherwise
 </pre>
 
-The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> are identical to those of the [=AV1CodecConfigurationBox=] defined in [[!AV1-ISOBMFF]], with the following constraints:
+The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> are identical to those of the <code>[=AV1CodecConfigurationBox=]</code> defined in [[!AV1-ISOBMFF]], with the following constraints:
 
-    - <assert>[=Sequence Header OBUs=] should not be present in the [=AV1CodecConfigurationBox=].</assert>
-    - <assert>If a [=Sequence Header OBU=] is present in the [=AV1CodecConfigurationBox=], it shall match the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
-    - <assert>The values of the fields in the [=AV1CodecConfigurationBox=] shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
-    - <assert>The values of the bit depth and the number of channels derived from the [=AV1CodecConfigurationBox=] shall match the PixelInformationProperty if present.</assert>
+    - <assert>[=Sequence Header OBUs=] should not be present in the <code>[=AV1CodecConfigurationBox=]</code>.</assert>
+    - <assert>If a [=Sequence Header OBU=] is present in the <code>[=AV1CodecConfigurationBox=]</code>, it shall match the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
+    - <assert>The values of the fields in the <code>[=AV1CodecConfigurationBox=]</code> shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
+    - <assert>The values of the bit depth and the number of channels derived from the <code>[=AV1CodecConfigurationBox=]</code> shall match the PixelInformationProperty if present.</assert>
     - <assert>[=Metadata OBUs=], if present, shall match the values given in other item properties</assert>, such as the MasteringDisplayColourVolumeBox or ContentLightLevelBox.
 
 <assert>This property should be marked as essential.</assert>
 
 <h4 id="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
-The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of <code>[=image_width=]</code> and <code>[=image_height=]</code> shall respectively equal the values of <code>[=UpscaledWidth=]</code> and <code>[=FrameHeight=]</code></assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the <code>'[=lsel=]'</code> and [=OperatingPointSelectorProperty=] properties as follows:
+The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of <code>[=image_width=]</code> and <code>[=image_height=]</code> shall respectively equal the values of <code>[=UpscaledWidth=]</code> and <code>[=FrameHeight=]</code></assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the <code>'[=lsel=]'</code> and <code>[=OperatingPointSelectorProperty=]</code> properties as follows:
 
     - In the absence of a <code>'[=lsel=]'</code> property associated with the item, or if it is present and its <code>[=layer_id=]</code> value is set to 0xFFFF:
-        - If no [=OperatingPointSelectorProperty=] is associated with the item, the <assert><code>'[=ispe=]'</code> shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
+        - If no <code>[=OperatingPointSelectorProperty=]</code> is associated with the item, the <assert><code>'[=ispe=]'</code> shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
 
-        - If an [=OperatingPointSelectorProperty=] is associated with the item, the <assert><code>'[=ispe=]'</code> property shall document the dimensions of the last frame decoded when processing the corresponding operating point</assert>.
+        - If an <code>[=OperatingPointSelectorProperty=]</code> is associated with the item, the <assert><code>'[=ispe=]'</code> property shall document the dimensions of the last frame decoded when processing the corresponding operating point</assert>.
 
         NOTE: The dimensions of possible intermediate output images might not match the ones given in the <code>'[=ispe=]'</code> property. If they display these intermediate images, renderers are expected to scale the output image to match the <code>'[=ispe=]'</code> property.
 
@@ -265,7 +265,7 @@ In addition to the Image Properties defined in this document, [=AV1 image items=
     - <code>'[=cmin=]'</code>
     - <code>'[=cmex=]'</code>
 
-In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1ItemConfigurationProperty=].
+In general, it is recommended to use properties instead of [=Metadata OBUs=] in the <code>[=AV1ItemConfigurationProperty=]</code>.
 
 <h3 id="layered-items">AV1 Layered Image Items</h3>
 
@@ -273,9 +273,9 @@ In general, it is recommended to use properties instead of [=Metadata OBUs=] in 
 
 [[!AV1]] supports encoding a frame using multiple spatial layers. A spatial layer may improve the resolution or quality of the image decoded based on one or more of the previous layers. A layer may also provide an image that does not depend on the previous layers. Additionally, not all layers are expected to produce an image meant to be rendered. Some decoded images may be used only as intermediate decodes. Finally, layers are grouped into one or more [=Operating Points=]. The [=Sequence Header OBU=] defines the list of [=Operating Points=], provides required decoding capabilities, and indicates which layers form each [=Operating Point=].
 
-[[!AV1]] delegates the selection of which [=Operating Point=] to process to the application, by means of a function called <code>choose_operating_point()</code>. AVIF defines the [=OperatingPointSelectorProperty=] to control this selection. In the absence of an [=OperatingPointSelectorProperty=] associated with an [=AV1 Image Item=], the AVIF renderer is free to process any [=Operating Point=] present in the [=AV1 Image Item Data=]. In particular, <assert>when the [=AV1 Image Item=] is composed of a unique [=Operating Point=], the [=OperatingPointSelectorProperty=] should not be present</assert>. If an [=OperatingPointSelectorProperty=] is associated with an [=AV1 Image Item=], the <code>[=op_index=]</code> field indicates which [=Operating Point=] is expected to be processed for this item.
+[[!AV1]] delegates the selection of which [=Operating Point=] to process to the application, by means of a function called <code>choose_operating_point()</code>. AVIF defines the <code>[=OperatingPointSelectorProperty=]</code> to control this selection. In the absence of an <code>[=OperatingPointSelectorProperty=]</code> associated with an [=AV1 Image Item=], the AVIF renderer is free to process any [=Operating Point=] present in the [=AV1 Image Item Data=]. In particular, <assert>when the [=AV1 Image Item=] is composed of a unique [=Operating Point=], the <code>[=OperatingPointSelectorProperty=]</code> should not be present</assert>. If an <code>[=OperatingPointSelectorProperty=]</code> is associated with an [=AV1 Image Item=], the <code>[=op_index=]</code> field indicates which [=Operating Point=] is expected to be processed for this item.
 
-NOTE: When an author wants to offer the ability to render multiple [=Operating Points=] from the same AV1 image (e.g. in the case of multi-view images), multiple [=AV1 Image Items=] can be created that share the same [=AV1 Image Item Data=] but have different [=OperatingPointSelectorProperty=]s.
+NOTE: When an author wants to offer the ability to render multiple [=Operating Points=] from the same AV1 image (e.g. in the case of multi-view images), multiple [=AV1 Image Items=] can be created that share the same [=AV1 Image Item Data=] but have different <code>[=OperatingPointSelectorProperty=]</code>s.
 
 [[!AV1]] expects the renderer to display only one frame within the selected [=Operating Point=], which should be the highest spatial layer that is both within the [=Operating Point=] and present within the temporal unit, but [[!AV1]] leaves the option for other applications to set their own policy about which frames are output, as defined in the general output process. AVIF sets a different policy, and defines how the <code>'[=lsel=]'</code> property (mandated by [[!HEIF]] for layered images) is used to control which layer is rendered. According to [[!HEIF]], the interpretation of the <code>[=layer_id=]</code> field in the <code>'[=lsel=]'</code> property is codec specific. In this specification, the value 0xFFFF is reserved for a special meaning. If a <code>'[=lsel=]'</code> property is associated with an [=AV1 Image Item=] but its <code>[=layer_id=]</code> value is set to 0xFFFF, the renderer is free to render either only the output image of the highest spatial layer, or to render all output images of all the intermediate layers and the highest spatial layer, resulting in a form of progressive decoding. If a <code>'[=lsel=]'</code> property is associated with an [=AV1 Image Item=] and the value of <code>[=layer_id=]</code> is not 0xFFFF, the renderer is expected to render only the output image for that layer.
 
@@ -329,7 +329,7 @@ The <code>'[=lsel=]'</code> property defined in [[!HEIF]] may be associated with
 
 The <dfn export>AV1LayeredImageIndexingProperty</dfn> property may be associated with an [=AV1 Image Item=]. <assert>It should not be associated with [=AV1 Image Items=] consisting of only one layer.</assert>
 
-The [=AV1LayeredImageIndexingProperty=] documents the size in bytes of each layer (except the last one) in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process one or more layers of an [=Operating Point=]. <assert>If associated, it shall not be marked as essential.</assert>
+The <code>[=AV1LayeredImageIndexingProperty=]</code> documents the size in bytes of each layer (except the last one) in the [=AV1 Image Item Data=], and enables determining the byte ranges required to process one or more layers of an [=Operating Point=]. <assert>If associated, it shall not be marked as essential.</assert>
 
 <h6 id="layered-image-indexing-property-syntax" class="no-toc">Syntax</h6>
 
@@ -368,11 +368,11 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
     - <assert>The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</assert>
     - <assert>The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</assert></p>
 
-<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the [=AuxiliaryTypeProperty=] (respectively [=AuxiliaryTypeInfoBox=]) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. <assert>An [=AV1 Alpha Image Item=] (respectively an [=AV1 Alpha Image Sequence=]) shall be encoded with the same bit depth as the associated master [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]).</assert></p>
+<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the <code>[=AuxiliaryTypeProperty=]</code> (respectively <code>[=AuxiliaryTypeInfoBox=]</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. <assert>An [=AV1 Alpha Image Item=] (respectively an [=AV1 Alpha Image Sequence=]) shall be encoded with the same bit depth as the associated master [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]).</assert></p>
 
 <p><assert>For [=AV1 Alpha Image Item=] and [=AV1 Alpha Image Sequence=], the ColourInformationBox should be omitted.</assert> <assert>If present, readers shall ignore it.</assert></p>
 
-<p>An <dfn export>AV1 Depth Image Item</dfn> (respectively an <dfn export>AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the [=AuxiliaryTypeProperty=] (respectively [=AuxiliaryTypeInfoBox=]) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
+<p>An <dfn export>AV1 Depth Image Item</dfn> (respectively an <dfn export>AV1 Depth Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the <code>[=AuxiliaryTypeProperty=]</code> (respectively <code>[=AuxiliaryTypeInfoBox=]</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:depth</code>.</p>
 
 NOTE: [[!AV1]] supports encoding either 3-component images (whose semantics are given by the <code>[=matrix_coefficients=]</code> element), or 1-component images (monochrome). When an image requires a different number of components, multiple auxiliary images may be used, each providing additional component(s), according to the semantics of their <code>[=aux_type=]</code> field. In such case, the maximum number of components is restricted by number of possible items in a file, coded on 16 or 32 bits.
 
@@ -392,11 +392,11 @@ With a Sample Transform Derived Image Item, pixels at the same position in multi
 
 When a [=derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
 
-The input images are specified in the [=SingleItemTypeReferenceBox=] or [=SingleItemTypeReferenceBoxLarge=] entries of type <code>'[=dimg=]'</code> for this [=Sample Transform Derived Image Item=] within the [=ItemReferenceBox=]. The input images are in the same order as specified in these entries. In the [=SingleItemTypeReferenceBox=] or [=SingleItemTypeReferenceBoxLarge=] of type <code>'[=dimg=]'</code>, the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the [=ItemReferenceBox=].
+The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type <code>'[=dimg=]'</code> for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type <code>'[=dimg=]'</code>, the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each have a <code>'[=pixi=]'</code> property and an <code>'[=ispe=]'</code> property;
-  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the <code>'[=pixi=]'</code> and '[=AV1ItemConfigurationProperty/av1C=]' properties;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the <code>'[=pixi=]'</code> and <code>'[=AV1ItemConfigurationProperty/av1C=]'</code> properties;
   - have the same dimensions as defined by the <code>'[=ispe=]'</code> property;
   - have the same color information as defined by the <code>'[=colr=]'</code> properties (or lack thereof).
 
@@ -687,41 +687,41 @@ The '<dfn for="AVIF">ster</dfn>' entity group as defined in [[!HEIF]] may be use
 
 <h3 id="brands-overview">Brands overview</h3>
 
-<p>As defined by [[!ISOBMFF]], the presence of a brand in the <code>[=compatible_brands=]</code> list in the [=FileTypeBox=] can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the brand, to process the corresponding file and only the parts (e.g. items or sequences) that comply with the brand.</p>
+<p>As defined by [[!ISOBMFF]], the presence of a brand in the <code>[=compatible_brands=]</code> list in the <code>[=FileTypeBox=]</code> can be interpreted as the permission for those [=AV1 Image File Format=] readers/parsers and [=AV1 Image File Format=] renderers that only implement the features required by the brand, to process the corresponding file and only the parts (e.g. items or sequences) that comply with the brand.</p>
 
 <p>An [=AV1 Image File Format=] file may conform to multiple brands. Similarly, an [=AV1 Image File Format=] reader/parser or [=AV1 Image File Format=] renderer may be capable of processing the features associated with one or more brands.</p>
 
-<p><assert>If any of the brands defined in this document is specified in the <code>[=major_brand=]</code> field of the [=FileTypeBox=], the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in [[#mime-registration]].</assert></p>
+<p><assert>If any of the brands defined in this document is specified in the <code>[=major_brand=]</code> field of the <code>[=FileTypeBox=]</code>, the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in [[#mime-registration]].</assert></p>
 
 <h3 id="image-and-image-collection-brand">AVIF image and image collection brand</h3>
 The brand to identify [=AV1 image items=] is <dfn export for="AVIF Image brand">avif</dfn>.
 
-Files that indicate this brand in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=] shall comply with the following:
+Files that indicate this brand in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code> shall comply with the following:
     - <assert>The primary item shall be an [=AV1 Image Item=] or be a derived image that references directly or indirectly one or more items that all are [=AV1 Image Items=].</assert>
     - [=AV1 auxiliary image items=] may be present in the file.
 
-<assert>Files that conform with these constraints should include the brand <code>[=avif=]</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
+<assert>Files that conform with these constraints should include the brand <code>[=avif=]</code> in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>.</assert>
 
-Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=], then <assert>the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]</assert>. Conversely, <assert>if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=]</assert>.
+Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>, then <assert>the primary item or all the items referenced by the primary item shall be [=AV1 image items=] made only of [=Intra Frames=]</assert>. Conversely, <assert>if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code></assert>.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify AVIF image sequences is <dfn export for="AVIF Image Sequence brand">avis</dfn>.
 
-Files that indicate this brand in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=] shall comply with the following:
+Files that indicate this brand in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code> shall comply with the following:
     - <assert>they shall contain one or more [=AV1 image sequences=].</assert>
     - they may contain [=AV1 auxiliary image sequences=].
 
-<assert>Files that conform with these constraints should include the brand <code>[=avis=]</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
+<assert>Files that conform with these constraints should include the brand <code>[=avis=]</code> in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>.</assert>
 
-Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=], <assert>the item constraints for this brand shall be met</assert> and <assert>at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as <code>'[=sync=]'</code></assert>. Conversely, <assert>if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used</assert>.
+Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>, <assert>the item constraints for this brand shall be met</assert> and <assert>at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as <code>'[=sync=]'</code></assert>. Conversely, <assert>if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used</assert>.
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.
 
 <h2 id="file-constraints">General constraints</h2>
 
 The following constraints are common to files compliant with this specification:
-    - <assert>The file shall be compliant with the [[!MIAF]] specification and list <code>'[=miaf=]'</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
-    - <assert>The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the <code>[=compatible_brands=]</code> field of the [=FileTypeBox=].</assert>
+    - <assert>The file shall be compliant with the [[!MIAF]] specification and list <code>'[=miaf=]'</code> in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>.</assert>
+    - <assert>The file shall list <code>'[=avif=]'</code> or <code>'[=avis=]'</code> in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>.</assert>
     - <assert>Transformative properties shall not be associated with items in a derivation chain (as defined in [[!MIAF]]) that serves as an input to a grid item.</assert> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
 NOTE: This constraint further restricts files compared to [[!MIAF]].
@@ -732,9 +732,9 @@ NOTE: This constraint further restricts files compared to [[!MIAF]].
 
 The profiles defined in this section are for enabling interoperability between [=AV1 Image File Format=] files and [=AV1 Image File Format=] readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.
 
-<assert>The [=FileTypeBox=] should declare at least one profile that enables decoding of the primary image item.</assert> It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
+<assert>The <code>[=FileTypeBox=]</code> should declare at least one profile that enables decoding of the primary image item.</assert> It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
-<assert>If <code>'[=avis=]'</code> is declared in the [=FileTypeBox=] and a profile is declared in the [=FileTypeBox=], the profile shall also enable decoding of at least one image sequence track.</assert> <assert>The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</assert>
+<assert>If <code>'[=avis=]'</code> is declared in the <code>[=FileTypeBox=]</code> and a profile is declared in the <code>[=FileTypeBox=]</code>, the profile shall also enable decoding of at least one image sequence track.</assert> <assert>The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</assert>
 
 It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare an AVIF profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
 
@@ -746,7 +746,7 @@ NOTE: [[!AV1]] supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensi
 
 This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand  <dfn export for="AVIF Baseline Profile">MA1B</dfn>.
 
-If the brand <code>'[=MA1B=]'</code> is in the list of <code>[=compatible_brands=]</code> of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>'[=MA1B=]'</code> is in the list of <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>, the common constraints in the section [[#brands]] shall apply.
 
 The following shared conditions and requirements from [[!MIAF]] shall apply:
     - <assert>[=self-containment=] (subclause 8.2)</assert>
@@ -765,15 +765,15 @@ NOTE:  AV1 tiers are not constrained because timing is optional in image sequenc
 NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the AVIF Baseline profile may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using grid derivation.
 
 <div class="example">
-A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
 
     <code>avif, mif1, miaf, MA1B</code>
 
-A file containing a <code>'[=pict=]'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
+A file containing a <code>'[=pict=]'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
 
     <code>avis, msf1, miaf, MA1B</code>
 
-A file containing a <code>'[=pict=]'</code> track compliant with this profile and made only of [=AV1 Samples=] marked <code>'[=sync=]'</code> is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
+A file containing a <code>'[=pict=]'</code> track compliant with this profile and made only of [=AV1 Samples=] marked <code>'[=sync=]'</code> is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
 
     <code>avis, avio, msf1, miaf, MA1B</code>
 </div>
@@ -782,7 +782,7 @@ A file containing a <code>'[=pict=]'</code> track compliant with this profile an
 
 This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically for [[!AV1]] bitstreams, based on the constraints specified in [[!MIAF]] and identified by the brand <dfn export for="AVIF Advanced Profile">MA1A</dfn>.
 
-If the brand <code>'[=MA1A=]'</code> is in the list of <code>[=compatible_brands=]</code> of the [=FileTypeBox=], the common constraints in the section [[#brands]] shall apply.
+If the brand <code>'[=MA1A=]'</code> is in the list of <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>, the common constraints in the section [[#brands]] shall apply.
 
 The following shared conditions and requirements from [[!MIAF]] shall apply:
     - <assert>[=self-containment=] (subclause 8.2)</assert>
@@ -804,11 +804,11 @@ The following additional constraints apply only to [=AV1 Image Sequences=]:
     - <assert>The AV1 level for High Profile shall be 5.1 or lower.</assert>
 
 <div class="example">
-A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
 
     <code>avif, mif1, miaf, MA1A</code>
 
-A file containing a <code>'[=pict=]'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the [=FileTypeBox=]:
+A file containing a <code>'[=pict=]'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
 
     <code>avis, msf1, miaf, MA1A</code>
 </div>
@@ -821,7 +821,7 @@ This section discusses the box requirements for an AVIF file containing only ima
 <h4 id="avif-required-boxes">Minimum set of boxes</h4>
 
 <p>As indicated in [[#file-constraints]], an AVIF file is a compliant [[!MIAF]] file. As a consequence, some [[!ISOBMFF]] or [[!HEIF]] boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification" 
-column may require a specific order for the box or for its children and shall be respected. For example, per [[!ISOBMFF]], the [=FileTypeBox=] is required to appear first in an AVIF file.
+column may require a specific order for the box or for its children and shall be respected. For example, per [[!ISOBMFF]], the <code>[=FileTypeBox=]</code> is required to appear first in an AVIF file.
 The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. 
 Other versions of the boxes shall not be used. "-" means that the box does not have a version.</p>
 
