@@ -822,8 +822,7 @@ This section discusses the box requirements for an AVIF file containing only ima
 
 <p>As indicated in [[#file-constraints]], an AVIF file is a compliant [[!MIAF]] file. As a consequence, some [[!ISOBMFF]] or [[!HEIF]] boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification" 
 column may require a specific order for the box or for its children and shall be respected. For example, per [[!ISOBMFF]], the <code>[=FileTypeBox=]</code> is required to appear first in an AVIF file.
-The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. 
-Other versions of the boxes shall not be used. "-" means that the box does not have a version.</p>
+The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. <assert>With the exception of item properties marked as non-essential, other versions of the boxes shall not be used.</assert> "-" means that the box does not have a version.</p>
 
 <table class="data">
     <thead>
@@ -969,7 +968,7 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
 
 <h4 id="avif-required-boxes-additional">Requirements on additional image item related boxes</h4>
 
-<p>The boxes indicated in the following table may be present in an AVIF file to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing box" column. If present, they shall use the version indicated in the table and AVIF readers are expected to understand them. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>'[=free=]'</code> and <code>'[=skip=]'</code> boxes may be present at any level in the hierarchy. AVIF readers are expected to ignore them. Additional boxes in the <code>'[=meta=]'</code> hierarchy not listed in the following table may also be present and may be ignored by AVIF readers.</p>
+<p>The boxes indicated in the following table may be present in an AVIF file to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing box" column. <assert>If present, they shall use the version indicated in the table unless the box is an item property marked as non-essential.</assert> AVIF readers are expected to understand the boxes and versions listed in this table. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>'[=free=]'</code> and <code>'[=skip=]'</code> boxes may be present at any level in the hierarchy. AVIF readers are expected to ignore them. Additional boxes in the <code>'[=meta=]'</code> hierarchy not listed in the following table may also be present and may be ignored by AVIF readers.</p>
 <table class="data">
     <thead>
         <tr>
