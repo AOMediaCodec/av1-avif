@@ -236,6 +236,12 @@ NOTE: The dimensions indicated in the 'ispe' property might not match the values
 
 NOTE: The values of [=render_width_minus1=] and [=render_height_minus1=] possibly present in the AV1 bistream are not exposed in the AVIF container level.
 
+<h4 id="clean-aperture-property">Clean Aperture Property</h4>
+
+The semantics of the clean aperture property ('clap') as defined in [[!HEIF]] apply. In addition to the restrictions on transformative item property ordering specified in [[!MIAF]], the following restriction also applies:
+
+<assert>The origin of the 'clap' item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary non-hidden image item.</assert>
+
 <h4 id="other-item-property">Other Item Properties</h4>
 
 In addition to the Image Properties defined in this document, [=AV1 image items=] MAY also be associated with item properties defined in other specifications such as [[!HEIF]] and [[!MIAF]]. Examples of commonly used item properties are:
@@ -254,8 +260,6 @@ In addition to the Image Properties defined in this document, [=AV1 image items=
     - 'cmex'
 
 In general, it is recommended to use properties instead of [=Metadata OBUs=] in the [=AV1ItemConfigurationProperty=].
-
-NOTE: Although the clean aperture property ('clap') defined in [[!HEIF]] is applicable to AVIF, implementers of authoring tools should be aware of the possibility of unintended consequences since users may not realize image data outside the clap region is still in the file. A future revision of this specification may place normative restrictions on how clap can be used.
 
 <h3 id="layered-items">AV1 Layered Image Items</h3>
 
@@ -1167,3 +1171,4 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.2 "Sample Transform Derived Image Item"</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/232">Add restriction on usage of clap property</a>
