@@ -390,7 +390,7 @@ With a Sample Transform Derived Image Item, pixels at the same position in multi
 
 <h5 id="sample-transform-definition">Definition</h5>
 
-When a [=derived image item=] is of type <dfn value export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
+When a [=derived image item=] is of type <dfn export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
 
 The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type <code>'[=dimg=]'</code> for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type <code>'[=dimg=]'</code>, the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
