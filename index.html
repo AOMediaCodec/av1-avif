@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="7f87801c978721f83d8a9980b84dcc07283ae9c8" name="document-revision">
+  <meta content="434dbe121f81b9d191ccd26d4ff948ebb4f931ef" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2963,8 +2963,7 @@ Quantity (per item):   Zero or one
    <h4 class="heading settled" data-level="9.1.1" id="avif-required-boxes"><span class="secno">9.1.1. </span><span class="content">Minimum set of boxes</span><a class="self-link" href="#avif-required-boxes"></a></h4>
    <p>As indicated in <a href="#file-constraints">§ 7 General constraints</a>, an AVIF file is a compliant <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)">[MIAF]</a> file. As a consequence, some <a data-link-type="biblio" href="#biblio-isobmff" title="Information technology — Coding of audio-visual objects — Part 12: ISO base media file format">[ISOBMFF]</a> or <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a> boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification" 
 column may require a specific order for the box or for its children and shall be respected. For example, per <a data-link-type="biblio" href="#biblio-isobmff" title="Information technology — Coding of audio-visual objects — Part 12: ISO base media file format">[ISOBMFF]</a>, the <code><a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨④">FileTypeBox</a></code> is required to appear first in an AVIF file.
-The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. 
-Other versions of the boxes shall not be used. "-" means that the box does not have a version.</p>
+The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. <span id="assert-e613e861">With the exception of item properties marked as non-essential, other versions of the boxes shall not be used.</span> "-" means that the box does not have a version.</p>
    <table class="data">
     <thead>
      <tr>
@@ -3090,7 +3089,7 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
       <td>The coded payload may be placed in <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑤">idat</a>'</code> rather than <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑥">mdat</a>'</code>, in which case <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑦">mdat</a>'</code> is not required.
    </table>
    <h4 class="heading settled" data-level="9.1.2" id="avif-required-boxes-additional"><span class="secno">9.1.2. </span><span class="content">Requirements on additional image item related boxes</span><a class="self-link" href="#avif-required-boxes-additional"></a></h4>
-   <p>The boxes indicated in the following table may be present in an AVIF file to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing box" column. If present, they shall use the version indicated in the table and AVIF readers are expected to understand them. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑧">free</a>'</code> and <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑨">skip</a>'</code> boxes may be present at any level in the hierarchy. AVIF readers are expected to ignore them. Additional boxes in the <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something②⓪⓪">meta</a>'</code> hierarchy not listed in the following table may also be present and may be ignored by AVIF readers.</p>
+   <p>The boxes indicated in the following table may be present in an AVIF file to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing box" column. <span id="assert-0fd6a4a0">If present, they shall use the version indicated in the table unless the box is an item property marked as non-essential.</span> AVIF readers are expected to understand the boxes and versions listed in this table. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑧">free</a>'</code> and <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something①⑨⑨">skip</a>'</code> boxes may be present at any level in the hierarchy. AVIF readers are expected to ignore them. Additional boxes in the <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/68960.html" id="ref-for-something②⓪⓪">meta</a>'</code> hierarchy not listed in the following table may also be present and may be ignored by AVIF readers.</p>
    <table class="data">
     <thead>
      <tr>
@@ -3306,6 +3305,8 @@ Other versions of the boxes shall not be used. "-" means that the box does not h
      <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/240">Adopt MIAF shared constraints</a></p>
     <li data-md>
      <p>EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/251">Clean up usage of dfn and linking</a></p>
+    <li data-md>
+     <p><a href="https://github.com/AOMediaCodec/av1-avif/pull/250">Clarify required versions of non-essential item properties</a></p>
    </ul>
   </main>
   <div data-fill-with="conformance">
