@@ -1203,7 +1203,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
 
 <h2 id="sato-examples">Appendix A: Sample Transform Derived Image Item Examples</h2>
 
-This section contains demonstration recipes for extending base AVIF features with [=Sample Transform Derived Image Items=].
+This informative appendix contains demonstration recipes for extending base AVIF features with [=Sample Transform Derived Image Items=].
 
 <h3 id="sato-example-bit-depth-extension">Bit depth extension</h3>
 
