@@ -407,7 +407,7 @@ No color space conversion, matrix coefficients, or transfer characteristics func
 
 The output reconstructed image is made up of the output samples, whose values shall be each clamped to fit in the number of bits per sample as defined by the <code>'[=pixi=]'</code> property of the reconstructed image item. The <code>[=full_range_flag=]</code> field of the <code>'[=colr=]'</code> property of <code>[=colour_type=]</code> <code>'[=nclx=]'</code> also defines a range of values to clamp to, as defined in [[!CICP]].
 
-NOTE: <a href="#sato-examples">Appendix A</a> contains examples of Sample Transform Derived Image Item usage.
+NOTE: [[#sato-examples]] contains examples of Sample Transform Derived Image Item usage.
 
 <h5 id="sample-transform-syntax">Syntax</h5>
 
@@ -1245,7 +1245,7 @@ NOTE: This pattern can be used for reconstructed bit depths beyond 16 by combini
 <h4 id="sato-example-residual-bit-depth-extension">Residual bit depth extension</h4>
 
 The following example describes how to leverage a [=Sample Transform Derived Image Item=] on top of a regular 12-bit [=MIAF image item=] to extend the decoded bit depth to 16 bits.<br>
-It differs from the <a href="sato-example-suffix-bit-depth-extension">suffix bit depth extension example</a> by its slightly longer series of operations allowing its first input image item to be lossily encoded.
+It differs from the [[#sato-example-suffix-bit-depth-extension]] by its slightly longer series of operations allowing its first input image item to be lossily encoded.
 
 Consider the following:
     - A [=MIAF image item=] being a lossily coded image item,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=12,
