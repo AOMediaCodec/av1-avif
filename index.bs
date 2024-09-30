@@ -1203,7 +1203,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
 
 <h2 id="sato-examples">Appendix A: Sample Transform Derived Image Item Examples</h2>
 
-This informative appendix contains demonstration recipes for extending base AVIF features with [=Sample Transform Derived Image Items=].
+This informative appendix contains example recipes for extending base AVIF features with [=Sample Transform Derived Image Items=].
 
 <h3 id="sato-example-bit-depth-extension">Bit depth extension</h3>
 
@@ -1245,7 +1245,7 @@ NOTE: This pattern can be used for reconstructed bit depths beyond 16 by combini
 <h4 id="sato-example-residual-bit-depth-extension">Residual bit depth extension</h4>
 
 The following example describes how to leverage a [=Sample Transform Derived Image Item=] on top of a regular 12-bit [=MIAF image item=] to extend the decoded bit depth to 16 bits.<br>
-It differs from the <a href="sato-example-suffix-bit-depth-extension">Suffix bit depth extension example</a> by its slightly longer series of operations allowing its first input image item to be lossily encoded.
+It differs from the <a href="sato-example-suffix-bit-depth-extension">suffix bit depth extension example</a> by its slightly longer series of operations allowing its first input image item to be lossily encoded.
 
 Consider the following:
     - A [=MIAF image item=] being a lossily coded image item,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=12,
@@ -1280,6 +1280,6 @@ Each output sample is equal to the sum of a sample of the first input image item
 
 NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=AVIF/altr=]'</code> group with the derived image item, the first input image item is also a backward-compatible 12-bit regular coded image item that can be used by decoding contexts that do not support [=Sample Transform Derived Image Items=] or do not need extra precision.
 
-NOTE: The first input image item supports reasonable loss during encoding because the second input image item "overlaps" by 4 bits to correct it. The second input image item supports reasonable loss during encoding.
+NOTE: The first input image item supports reasonable loss during encoding because the second input image item "overlaps" by 4 bits to correct the loss. The second input image item supports reasonable loss during encoding.
 
 NOTE: This pattern can be used for reconstructed bit depths beyond 16 by combining more than two input image items or with various input bit depth configurations and operations.
