@@ -186,7 +186,7 @@ The [=AV1 Image File Format=] defines multiple profiles, which restrict the allo
 The profiles defined in this specification follow the conventions of the [[!MIAF]] specification.
 Images encoded with [[!AV1]] and not meeting the restrictions of the defined profiles may still be compliant to this [=AV1 Image File Format=] if they adhere to the general AVIF requirements.
 
-The [=AV1 Image File Format=] supports High Dynamic Range (HDR) and Wide Color Gamut (WCG) images as well as Standard Dynamic Range (SDR). It supports monochrome images as well as multi-channel images with all the bit depths and color spaces specified in [[!AV1]], and beyond with [=Sample Transform Derived Image Items=]. The [=AV1 Image File Format=] also supports transparency/translucency through an auxiliary [=AV1 bitstream=].
+The [=AV1 Image File Format=] supports High Dynamic Range (HDR) and Wide Color Gamut (WCG) images as well as Standard Dynamic Range (SDR). It supports monochrome images as well as multi-channel images with all the bit depths and color spaces specified in [[!AV1]], and and other bit depths with [=Sample Transform Derived Image Items=]. The [=AV1 Image File Format=] also supports transparency (alpha) and other types of data such as depth maps through auxiliary [=AV1 bitstreams=].
 
 The [=AV1 Image File Format=] also supports multi-layer images as specified in [[!AV1]] to be stored both in image items and image sequences. The [=AV1 Image File Format=] supports progressive image decoding through layered images.
 
@@ -1206,7 +1206,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/251">Clean up usage of dfn and linking</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/250">Clarify required versions of non-essential item properties</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/257">Add refs, fix wording and format in clauses 1,2</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/258">Add sato, alpha and progressive in Scope</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/258">Add sato, alpha, depth, progressive in Scope</a>
 
 <h2 id="sato-examples">Appendix A: Sample Transform Derived Image Item Examples</h2>
 
