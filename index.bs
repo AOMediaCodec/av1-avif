@@ -1205,7 +1205,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/240">Adopt MIAF shared constraints</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/251">Clean up usage of dfn and linking</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/250">Clarify required versions of non-essential item properties</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/257">Formatting changes in clause 1 and 2</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/257">Add refs, fix wording and format in clauses 1,2</a>
 
 <h2 id="sato-examples">Appendix A: Sample Transform Derived Image Item Examples</h2>
 
