@@ -109,6 +109,7 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: AuxiliaryTypeInfoBox
     text: AuxiliaryTypeProperty
     text: bits_per_channel
+    text: PixelInformationProperty
 
 url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: compatible_brands
@@ -132,6 +133,9 @@ url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
     text: meta
     text: free
     text: skip
+    text: ItemPropertyContainerBox
+    text: MasteringDisplayColourVolumeBox
+    text: ContentLightLevelBox
 
 url: https://www.iso.org/standard/74417.html; spec: MIAF; type: dfn;
     text: miaf
@@ -180,14 +184,13 @@ url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf; spec: AV1; type: dfn;
 [[!AV1]] defines the syntax and semantics of an [=AV1 bitstream=]. The <dfn export>AV1 Image File Format</dfn> (AVIF) defined in this document supports the storage of a subset of the syntax and semantics of an [=AV1 bitstream=] in a [[!HEIF]] file.
 The [=AV1 Image File Format=] defines multiple profiles, which restrict the allowed syntax and semantics of the [=AV1 bitstream=] with the goal to improve interoperability, especially for hardware implementations.
 The profiles defined in this specification follow the conventions of the [[!MIAF]] specification.
-Images encoded with AV1 and not meeting the restrictions of the defined profiles may still be compliant to this [=AV1 Image File Format=] if they adhere to the general AVIF requirements.
+Images encoded with [[!AV1]] and not meeting the restrictions of the defined profiles may still be compliant to this [=AV1 Image File Format=] if they adhere to the general AVIF requirements.
 
 [=AV1 Image File Format=] supports High Dynamic Range (HDR) and Wide Color Gamut (WCG) images as well as Standard Dynamic Range (SDR). It supports monochrome images as well as multi-channel images with all the bit depths and color spaces specified in [[!AV1]].
 
 [=AV1 Image File Format=] also supports multi-layer images as specified in [[!AV1]] to be stored both in image items and image sequences.
 
-An AVIF file is designed to be a conformant [[!HEIF]] file for both image items and image sequences. Specifically, this specification follows the recommendations given in "Annex I: Guidelines On Defining
-New Image Formats and Brands" of [[!HEIF]].
+An AVIF file is designed to be a conformant [[!HEIF]] file for both image items and image sequences. Specifically, this specification follows the recommendations given in "Annex I: Guidelines On Defining New Image Formats and Brands" of [[!HEIF]].
 
 This specification reuses syntax and semantics used in [[!AV1-ISOBMFF]].
 
@@ -212,26 +215,26 @@ NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>
     Box Type:                 <dfn export for="AV1ItemConfigurationProperty">av1C</dfn>
     Property type:            Descriptive item property
     Container:                ItemPropertyContainerBox
-    Mandatory (per  item):    Yes, for an image item of type <code>'av01'</code>, no otherwise
+    Mandatory (per item):     Yes, for an image item of type <code>'av01'</code>, no otherwise
     Quantity (per item):      One for an image item of type <code>'av01'</code>, zero otherwise
 </pre>
 
 The syntax and semantics of the <dfn export>AV1ItemConfigurationProperty</dfn> are identical to those of the <code>[=AV1CodecConfigurationBox=]</code> defined in [[!AV1-ISOBMFF]], with the following constraints:
 
-    - <assert>[=Sequence Header OBUs=] should not be present in the <code>[=AV1CodecConfigurationBox=]</code>.</assert>
-    - <assert>If a [=Sequence Header OBU=] is present in the <code>[=AV1CodecConfigurationBox=]</code>, it shall match the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
-    - <assert>The values of the fields in the <code>[=AV1CodecConfigurationBox=]</code> shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
-    - <assert>The values of the bit depth and the number of channels derived from the <code>[=AV1CodecConfigurationBox=]</code> shall match the PixelInformationProperty if present.</assert>
-    - <assert>[=Metadata OBUs=], if present, shall match the values given in other item properties</assert>, such as the MasteringDisplayColourVolumeBox or ContentLightLevelBox.
+    - <assert>[=Sequence Header OBUs=] should not be present in the <code>[=AV1ItemConfigurationProperty=]</code>.</assert>
+    - <assert>If a [=Sequence Header OBU=] is present in the <code>[=AV1ItemConfigurationProperty=]</code>, it shall match the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
+    - <assert>The values of the fields in the <code>[=AV1ItemConfigurationProperty=]</code> shall match those of the [=Sequence Header OBU=] in the [=AV1 Image Item Data=].</assert>
+    - <assert>The values of the bit depth and the number of channels derived from the <code>[=AV1ItemConfigurationProperty=]</code> shall match the <code>[=PixelInformationProperty=]</code> if present.</assert>
+    - <assert>[=Metadata OBUs=], if present, shall match the values given in other item properties</assert>, such as the <code>[=MasteringDisplayColourVolumeBox=]</code> or <code>[=ContentLightLevelBox=]</code>.
 
 <assert>This property should be marked as essential.</assert>
 
 <h4 id="image-spatial-extents-property">Image Spatial Extents Property</h4>
 
-The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] apply. More specifically, for AV1 images, <assert>the values of <code>[=image_width=]</code> and <code>[=image_height=]</code> shall respectively equal the values of <code>[=UpscaledWidth=]</code> and <code>[=FrameHeight=]</code></assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the <code>'[=lsel=]'</code> and <code>[=OperatingPointSelectorProperty=]</code> properties as follows:
+The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] apply. More specifically, for [[!AV1]] images, <assert>the values of <code>[=image_width=]</code> and <code>[=image_height=]</code> shall respectively equal the values of <code>[=UpscaledWidth=]</code> and <code>[=FrameHeight=]</code></assert> as defined in [[!AV1]] but for a specific frame in the item payload. The exact frame depends on the presence and content of the <code>'[=lsel=]'</code> and <code>[=OperatingPointSelectorProperty=]</code> properties as follows:
 
     - In the absence of a <code>'[=lsel=]'</code> property associated with the item, or if it is present and its <code>[=layer_id=]</code> value is set to 0xFFFF:
-        - If no <code>[=OperatingPointSelectorProperty=]</code> is associated with the item, the <assert><code>'[=ispe=]'</code> shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
+        - If no <code>[=OperatingPointSelectorProperty=]</code> is associated with the item, the <assert><code>'[=ispe=]'</code> property shall document the dimensions of the last frame decoded when processing the operating point whose index is 0</assert>.
 
         - If an <code>[=OperatingPointSelectorProperty=]</code> is associated with the item, the <assert><code>'[=ispe=]'</code> property shall document the dimensions of the last frame decoded when processing the corresponding operating point</assert>.
 
@@ -241,7 +244,7 @@ The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] ap
 
 NOTE: The dimensions indicated in the <code>'[=ispe=]'</code> property might not match the values <code>[=max_frame_width_minus1=]+1</code> and <code>[=max_frame_height_minus1=]+1</code> indicated in the AV1 bitstream.
 
-NOTE: The values of <code>[=render_width_minus1=]</code> and <code>[=render_height_minus1=]</code> possibly present in the AV1 bistream are not exposed in the AVIF container level.
+NOTE: The values of <code>[=render_width_minus1=]</code> and <code>[=render_height_minus1=]</code> possibly present in the AV1 bistream are not exposed at the AVIF container level.
 
 <h4 id="clean-aperture-property">Clean Aperture Property</h4>
 
@@ -283,6 +286,7 @@ NOTE: When an author wants to offer the ability to render multiple [=Operating P
 NOTE: When such a progressive decoding of the layers within an [=Operating Point=] is not desired or when an author wants to expose each layer as a specific item, multiple [=AV1 Image Items=] sharing the same [=AV1 Image Item Data=] can be created and associated with different <code>'[=lsel=]'</code> properties, each with a different value of <code>[=layer_id=]</code>.
 
 <h4 id="layered-properties">Properties</h4>
+
 <h5 id="operating-point-selector-property">Operating Point Selector Property</h5>
 
 <h6 id="operating-point-selector-property-definition" class="no-toc">Definition</h6>
@@ -290,7 +294,7 @@ NOTE: When such a progressive decoding of the layers within an [=Operating Point
 <pre class="def">
     Box Type:              <dfn export for="OperatingPointSelectorProperty">a1op</dfn>
     Property type:         Descriptive item property
-    Container:             <code>ItemPropertyContainerBox</code>
+    Container:             ItemPropertyContainerBox
     Mandatory (per item):  No
     Quantity (per item):   Zero or one
 </pre>
@@ -309,9 +313,10 @@ class OperatingPointSelectorProperty extends ItemProperty('a1op') {
 
 <h6 id="operating-point-selector-property-semantics" class="no-toc">Semantics</h6>
 
-<dfn noexport>op_index</dfn> indicates the index of the operating point to be processed for this item. <assert>Its value shall be between 0 and [=operating_points_cnt_minus_1=].</assert>
+<dfn noexport>op_index</dfn> indicates the index of the operating point to be processed for this item. <assert>Its value shall be between 0 and <code>[=operating_points_cnt_minus_1=]</code> inclusive.</assert>
 
 <h5 id="layer-selector-property">Layer Selector Property</h5>
+
 The <code>'[=lsel=]'</code> property defined in [[!HEIF]] may be associated with an [=AV1 Image Item=]. The <code>[=layer_id=]</code> indicates the value of the <code>[=spatial_id=]</code> to render. <assert>The value shall be between 0 and 3, or the special value 0xFFFF.</assert> When a value between 0 and 3 is used, <assert>the corresponding spatial layer shall be present in the bitstream</assert> and <assert>shall produce an output frame</assert>. Other layers may be needed to decode the indicated layer. When the special value 0xFFFF is used, progressive decoding is allowed as described in [[#layered-items-overview]].
 
 <h5 id="layered-image-indexing-property">Layered Image Indexing Property</h5>
@@ -321,7 +326,7 @@ The <code>'[=lsel=]'</code> property defined in [[!HEIF]] may be associated with
 <pre class="def">
     Box Type:              <dfn export for="AV1LayeredImageIndexingProperty">a1lx</dfn>
     Property type:         Descriptive item property
-    Container:             <code>ItemPropertyContainerBox</code>
+    Container:             ItemPropertyContainerBox
     Mandatory (per item):  No
     Quantity (per item):   Zero or one
 </pre>
@@ -345,7 +350,7 @@ class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
 
 <h6 id="layered-image-indexing-property-semantics" class="no-toc">Semantics</h6>
 
-<dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <code>[=spatial_id=]</code>. A value of zero means that all the layers except the last one have been documented and <assert>following values shall be 0</assert>. <assert>The number of non-zero values shall match the number of layers in the image minus one.</assert>.
+<dfn noexport>layer_size</dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <code>[=spatial_id=]</code>. A value of zero means that all the layers except the last one have been documented and <assert>following values shall be 0</assert>. <assert>The number of non-zero values shall match the number of layers in the image minus one.</assert>
 
 NOTE: The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.
 
@@ -1200,6 +1205,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/240">Adopt MIAF shared constraints</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/251">Clean up usage of dfn and linking</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/250">Clarify required versions of non-essential item properties</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/257">Add refs, fix wording and format in clauses 1,2</a>
 
 <h2 id="sato-examples">Appendix A: Sample Transform Derived Image Item Examples</h2>
 
