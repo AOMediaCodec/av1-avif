@@ -719,7 +719,7 @@ Files that indicate this brand in the <code>[=FileTypeBox=]</code> shall comply 
 
 <assert>Files that conform with these constraints should include the brand <code>[=AVIF Image brand/avif=]</code> in the <code>[=FileTypeBox=]</code>.</assert>
 
-Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the <code>[=FileTypeBox=]</code>, then <assert>the [=primary image item=] or all the items referenced by the [=primary image item=] shall be [=AV1 image items=] made only of [=Intra Frames=]</assert>. Conversely, <assert>if the previous constraint applies, the brand <code>[=avio=]</code> should be used in the <code>[=FileTypeBox=]</code></assert>.
+Additionally, the brand <dfn export for="AVIF Intra-only brand">avio</dfn> is defined. If the file indicates the brand <code>[=avio=]</code> in the <code>[=FileTypeBox=]</code>, then <assert>the [=primary image item=] or all the items referenced by the [=primary image item=] shall be [=AV1 image items=] made only of [=Intra Frames=]</assert>.
 
 <h3 id="image-sequence-brand">AVIF image sequence brands</h3>
 The brand to identify [=AV1 image sequences=] is <dfn export for="AVIF Image Sequence brand">avis</dfn>.
@@ -1325,6 +1325,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/273">Change structure of optional table of boxes</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/288">Add hidden image item recommendation</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/289">Remove mentions of ftyp compatible_brands</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/265">Remove avio brand recommendation</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
