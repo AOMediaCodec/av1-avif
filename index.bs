@@ -396,17 +396,17 @@ A <dfn noexport>grid derived image item</dfn> (<code>'[=grid=]'</code>) as defin
 
 <h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
 
-A tone map derived image item (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF file=]. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an <code>'[=altr=]'</code> (see [[#altr-group]]) entity group as recommended in [[!HEIF]].</assert>
+A <dfn noexport>tone map derived image item</dfn> (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF file=]. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an <code>'[=altr=]'</code> (see [[#altr-group]]) entity group as recommended in [[!HEIF]].</assert>
 
 <h4 id="sample-transform">Sample Transform Derived Image Item</h4>
 
-With a [=Sample Transform Derived Image Item=], pixels at the same position in multiple input image items can be combined into a single output pixel using basic mathematical operations. This can for example be used to work around codec limitations or for storing alterations to an image as non-destructive residuals. With a [=Sample Transform Derived Image Item=] it is possible for [=/AVIF=] to support 16 or more bits of precision per sample, while still offering backward compatibility through a regular 8 to 12-bit [=AV1 Image Item=] containing the most significant bits of each sample.
+With a <dfn export>Sample Transform Derived Image Item</dfn>, pixels at the same position in multiple input image items can be combined into a single output pixel using basic mathematical operations. This can for example be used to work around codec limitations or for storing alterations to an image as non-destructive residuals. With a [=Sample Transform Derived Image Item=] it is possible for [=/AVIF=] to support 16 or more bits of precision per sample, while still offering backward compatibility through a regular 8 to 12-bit [=AV1 Image Item=] containing the most significant bits of each sample.
 
 In these sections, a "sample" refers to the value of a pixel for a given channel.
 
 <h5 id="sample-transform-definition">Definition</h5>
 
-When a [=derived image item=] is of type <dfn export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
+When a [=derived image item=] is of type <dfn export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a [=Sample Transform Derived Image Item=], and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
 
 The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type <code>'[=dimg=]'</code> for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type <code>'[=dimg=]'</code>, the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
