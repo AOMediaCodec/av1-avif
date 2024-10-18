@@ -1107,7 +1107,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
             <td>[=ipco=]</td>
-            <td>Used to signal information such as color primaries.</td>
+            <td>Used to signal information such as color primaries</td>
         </tr>
         <tr>
             <td>[=auxC=]</td>
@@ -1115,7 +1115,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>0</td>
             <td>[[!HEIF]]</td>
             <td>[=ipco=]</td>
-            <td>Used to signal the type of an auxiliary image (e.g. alpha, depth).</td>
+            <td>Used to signal the type of an auxiliary image (e.g. alpha, depth)</td>
         </tr>
         <tr>
             <td>[[#clean-aperture-property|clap]]</td>
