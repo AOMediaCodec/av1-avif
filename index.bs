@@ -406,33 +406,34 @@ In these sections, a "sample" refers to the value of a pixel for a given channel
 
 <h5 id="sample-transform-definition" class="no-toc">Definition</h5>
 
-When a [=derived image item=] is of type <dfn export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a [=Sample Transform Derived Image Item=], and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
+When a [=derived image item=] is of type <code>'<dfn export for="Sample Transform Derived Image Item Type">sato</dfn>'</code>, it is called a [=Sample Transform Derived Image Item=], and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
 
 The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> entries of type <code>'[=dimg=]'</code> for this [=Sample Transform Derived Image Item=] within the <code>[=ItemReferenceBox=]</code>. The input images are in the same order as specified in these entries. In the <code>[=SingleItemTypeReferenceBox=]</code> or <code>[=SingleItemTypeReferenceBoxLarge=]</code> of type <code>'[=dimg=]'</code>, the value of the <code>[=from_item_ID=]</code> field identifies the [=Sample Transform Derived Image Item=], and the values of the <code>[=to_item_ID=]</code> field identify the input images. There are <code>[=reference_count=]</code> input image items as specified by the <code>[=ItemReferenceBox=]</code>.
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
-  - each be associated with a <code>'[=pixi=]'</code> property and an <code>'[=ispe=]'</code> property;
-  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the <code>'[=pixi=]'</code> and <code>'[=AV1ItemConfigurationProperty/av1C=]'</code> properties;
+  - each be associated with a <code>[=PixelInformationProperty=]</code> and an <code>'[=ispe=]'</code> property;
+  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the <code>[=PixelInformationProperty=]</code> and <code>[=AV1ItemConfigurationProperty=]</code>;
   - have the same dimensions as defined by the <code>'[=ispe=]'</code> property;
-  - have the same color information as defined by the <code>'[=colr=]'</code> properties (or lack thereof).
+  - have the same color information as defined by the <code>[=ColourInformationBox=]</code> properties (or lack thereof).
 
-Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an expression consisting of a series of integer [=sato/operators=] and [=sato/operands=]. An [=sato/operand=] is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
+Each output sample of the [=Sample Transform Derived Image Item=] is obtained by evaluating an [=sato/expression=] consisting of a series of integer [=sato/operators=] and [=sato/operands=]. An [=sato/operand=] is a constant or a sample from an input image item located at the same channel index and at the same spatial coordinates as the output sample.
 
 No color space conversion, matrix coefficients, or transfer characteristics function shall be applied to the input samples. They are already in the same color space as the output samples.
 
-The output reconstructed image is made up of the output samples, whose values shall each be clamped to fit in the number of bits per sample as defined by the <code>'[=pixi=]'</code> property of the reconstructed image item. The <code>[=full_range_flag=]</code> field of the <code>'[=colr=]'</code> property of <code>[=colour_type=]</code> <code>'[=nclx=]'</code> also defines a range of values to clamp to, as defined in [[!CICP]].
+The output reconstructed image is made up of the output samples, whose values shall each be clamped to fit in the number of bits per sample as defined by the <code>[=PixelInformationProperty=]</code> of the reconstructed image item. The <code>[=full_range_flag=]</code> field of the <code>[=ColourInformationBox=]</code> property of <code>[=colour_type=]</code> <code>'[=nclx=]'</code> also defines a range of values to clamp to, as defined in [[!CICP]].
 
-NOTE: [[#sato-examples]] contains examples of Sample Transform Derived Image Item usage.
+NOTE: [[#sato-examples]] contains examples of [=Sample Transform Derived Image Item=] usage.
 
 <h5 id="sample-transform-syntax" class="no-toc">Syntax</h5>
 
-An expression is a series of [=sato/tokens=]. A [=sato/token=] is an [=sato/operand=] or an [=sato/operator=]. An [=sato/operand=] can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An [=sato/operator=] takes either one or two input [=sato/operands=]. Each unary [=sato/operator=] pops one value from the stack. Each binary [=sato/operator=] pops two values from the stack, the first being the right [=sato/operand=] and the second being the left [=sato/operand=]. Each [=sato/token=] results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
+An <dfn noexport for="sato">expression</dfn> is a series of [=sato/tokens=]. A [=sato/token=] is an [=sato/operand=] or an [=sato/operator=]. An [=sato/operand=] can be a literal constant value or a sample value. A stack is used to keep track of the results of the [=sato/expression|subexpressions=]. An [=sato/operator=] takes either one or two input [=sato/operands=]. Each unary [=sato/operator=] pops one value from the stack. Each binary [=sato/operator=] pops two values from the stack, the first being the right [=sato/operand=] and the second being the left [=sato/operand=]. Each [=sato/token=] results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole [=sato/expression=] is the resulting output sample.
 
 ```c
 aligned(8) class SampleTransform {
     unsigned int(2) version = 0;
     unsigned int(4) reserved;
     unsigned int(2) bit_depth; // Enum signaling signed 8, 16, 32 or 64-bit.
+    // Create an empty stack of signed integer elements of that depth.
     unsigned int(8) token_count;
     for (i=0; i<token_count; i++) {
         unsigned int(8) token;
@@ -471,7 +472,7 @@ aligned(8) class SampleTransform {
   <thead>
     <tr>
       <th>Value of <code>[=sato/bit_depth=]</code></th>
-      <th>Intermediate bit depth (sign bit inclusive) <dfn noexport for="sato">num_bits</dfn></th>
+      <th>Intermediate bit depth (sign bit inclusive) <code><dfn noexport for="sato">num_bits</dfn></code></th>
     </tr>
   </thead>
   <tbody>
@@ -673,9 +674,9 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <h5 id="sample-transform-constraints" class="no-toc">Constraints</h5>
 
-[=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
+[=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole [=sato/expression=] for each reconstructed image item sample.
 
-  - <assert>The [=sato/tokens=] shall be evaluated in the order they are defined in the metadata (the <code><dfn export>SampleTransform</dfn></code> structure) of the [=Sample Transform Derived Image Item=].</assert>
+  - <assert>The [=sato/tokens=] shall be evaluated in the order they are defined in the metadata (the <code><dfn export>SampleTransform</dfn></code> structure defined in [[#sample-transform-syntax]]) of the [=Sample Transform Derived Image Item=].</assert>
   - <assert><code>[=sato/token=]</code> shall be at most <code>[=reference_count=]</code> when evaluating a sample [=sato/operand=] (when <math><mn>1</mn><mo>≤</mo><mi>token</mi><mo>≤</mo><mn>32</mn></math>).</assert>
   - <assert>There shall be at least one <code>[=sato/token=]</code>.</assert>
   - The stack is empty before evaluating the first <code>[=sato/token=]</code>.
@@ -683,9 +684,9 @@ The result of any computation underflowing or overflowing the intermediate bit d
   - <assert>There shall be at least 2 elements in the stack before evaluating a binary [=sato/operator=].</assert>
   - <assert>There shall be exactly one remaining element in the stack after evaluating the last <code>[=sato/token=]</code>.</assert> This element is the value of the reconstructed image item sample.
 
-Non-compliant expressions shall be rejected by parsers as invalid files.
+Non-compliant [=sato/expressions=] shall be rejected by parsers as invalid files.
 
-Note: Because each [=sato/operator=] pops one or two elements and then pushes one element to the stack, there is at most one more [=sato/operand=] than [=sato/operators=] in the expression. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>[=sato/token_count=]</mi><mn>2</mn></mfrac><mo>)</mo></math> [=sato/operators=] and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> [=sato/operands=]. <code>[=sato/token_count=]</code> is at most 255, meaning the maximum stack size for a valid expression is 128.
+Note: Because each [=sato/operator=] pops one or two elements and then pushes one element to the stack, there is at most one more [=sato/operand=] than [=sato/operators=] in the [=sato/expression=]. There are at least <math><mo>floor</mo><mo>(</mo><mfrac><mi>[=sato/token_count=]</mi><mn>2</mn></mfrac><mo>)</mo></math> [=sato/operators=] and at most <math><mo>ceil</mo><mo>(</mo><mfrac><mi>token_count</mi><mn>2</mn></mfrac><mo>)</mo></math> [=sato/operands=]. <code>[=sato/token_count=]</code> is at most 255, meaning the maximum stack size for a valid [=sato/expression=] is 128.
 
 <h2 id="groups">Entity groups</h2>
 
@@ -1272,9 +1273,9 @@ This informative appendix contains example recipes for extending base [=/AVIF=] 
 The following example describes how to leverage a [=Sample Transform Derived Image Item=] on top of a regular 8-bit [=MIAF image item=] to extend the decoded bit depth to 16 bits.
 
 Consider the following:
-    - A [=MIAF image item=] being a losslessly coded image item,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=8,
-    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the same dimensions and number of samples as the first input image item,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=8,
-    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=16,<br>and the following <code>[=SampleTransform=]</code> fields:
+    - A [=MIAF image item=] being a losslessly coded image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,
+    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the same dimensions and number of samples as the first input image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,
+    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>and the following <code>[=SampleTransform=]</code> fields:
         - <code>[=sato/version=]</code>=0
         - <code>[=sato/bit_depth=]</code>=2 (signed 32-bit <code>[=sato/constant=]</code>s, stack values and intermediate results)
         - <code>[=sato/token_count=]</code>=5
@@ -1306,15 +1307,15 @@ The following example describes how to leverage a [=Sample Transform Derived Ima
 It differs from the [[#sato-example-suffix-bit-depth-extension]] by its slightly longer series of operations allowing its first input image item to be lossily encoded.
 
 Consider the following:
-    - A [=MIAF image item=] being a lossily coded image item,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=12,
-    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the same dimensions and number of samples as the first input image item,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=8,<br>with the following contraints:
+    - A [=MIAF image item=] being a lossily coded image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=12,
+    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the same dimensions and number of samples as the first input image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,<br>with the following contraints:
         <li style="list-style: none"><ul><li style="list-style: none">For each sample position in each plane,<br><math><msub><mi>sample</mi><mi>original</mi></msub></math> being the value of the 16-bit original sample at that position in that plane,<br><math><msub><mi>sample</mi><mi>1</mi></msub></math> being the value of the 12-bit sample of the first input image at that position in that plane,<br><math><msub><mi>sample</mi><mi>2</mi></msub></math> being the value of the sample of the second input image at that position in that plane,<br><math><mo>≈</mo></math> representing similarity within compression loss range,</li></ul></li>
         - <math><msub><mi>sample</mi><mi>1</mi></msub><mo>≈</mo><mfrac><msub><mi>sample</mi><mi>original</mi></msub><msup><mn>2</mn><mn>4</mn></msup></mfrac></math>
         - <math><msub><mi>sample</mi><mi>2</mi></msub><mo>≈</mo><msub><mi>sample</mi><mi>original</mi></msub><mo>-</mo><msup><mn>2</mn><mn>4</mn></msup><mo>×</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>+</mo><msup><mn>2</mn><mn>7</mn></msup></math>
         - <math><mn>0</mn><mo>≤</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>&lt;</mo><msup><mn>2</mn><mn>12</mn></msup></math>
         - <math><mn>0</mn><mo>≤</mo><msub><mi>sample</mi><mi>2</mi></msub><mo>&lt;</mo><msup><mn>2</mn><mn>8</mn></msup></math>
-        - <math><mn>0</mn><mo>≤</mo><msup><mn>2</mn><mn>4</mn></msup><mo>×</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>+</mo><msub><mi>sample</mi><mi>2</mi></msub><mo>-</mo><msup><mn>2</mn><mn>7</mn></msup><mo>&lt;</mo><msup><mn>2</mn><mn>16</mn></msup></math><br><p class="note" role="note"><span class="marker">NOTE:</span> Files that do not respect this constraint will still decode successfully because Clause [[#sample-transform-definition]] mandates the resulting values to be each clamped to fit in the number of bits per sample as defined by the <code>'[=pixi=]'</code> property of the reconstructed image item.</p>
-    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>and its <code>'[=pixi=]'</code> property with <code>[=bits_per_channel=]</code>=16,<br>and the following <code>[=SampleTransform=]</code> fields:
+        - <math><mn>0</mn><mo>≤</mo><msup><mn>2</mn><mn>4</mn></msup><mo>×</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>+</mo><msub><mi>sample</mi><mi>2</mi></msub><mo>-</mo><msup><mn>2</mn><mn>7</mn></msup><mo>&lt;</mo><msup><mn>2</mn><mn>16</mn></msup></math><br><p class="note" role="note"><span class="marker">NOTE:</span> Files that do not respect this constraint will still decode successfully because Clause [[#sample-transform-definition]] mandates the resulting values to be each clamped to fit in the number of bits per sample as defined by the <code>[=PixelInformationProperty=]</code> of the reconstructed image item.</p>
+    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>and the following <code>[=SampleTransform=]</code> fields:
         - <code>[=sato/version=]</code>=0
         - <code>[=sato/bit_depth=]</code>=2 (signed 32-bit <code>[=sato/constant=]</code>s, stack values and intermediate results)
         - <code>[=sato/token_count=]</code>=7
