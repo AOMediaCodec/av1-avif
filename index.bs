@@ -404,7 +404,7 @@ With a [=Sample Transform Derived Image Item=], pixels at the same position in m
 
 In these sections, a "sample" refers to the value of a pixel for a given channel.
 
-<h5 id="sample-transform-definition">Definition</h5>
+<h5 id="sample-transform-definition" class="no-toc">Definition</h5>
 
 When a [=derived image item=] is of type <dfn export for="Sample Transform Derived Image Item Type">sato</dfn>, it is called a <dfn export>Sample Transform Derived Image Item</dfn>, and its reconstructed image is formed from a set of input image items, [=sato/constants=] and [=sato/operators=].
 
@@ -424,7 +424,7 @@ The output reconstructed image is made up of the output samples, whose values sh
 
 NOTE: [[#sato-examples]] contains examples of Sample Transform Derived Image Item usage.
 
-<h5 id="sample-transform-syntax">Syntax</h5>
+<h5 id="sample-transform-syntax" class="no-toc">Syntax</h5>
 
 An expression is a series of [=sato/tokens=]. A [=sato/token=] is an [=sato/operand=] or an [=sato/operator=]. An [=sato/operand=] can be a literal constant value or a sample value. A stack is used to keep track of the results of the subexpressions. An [=sato/operator=] takes either one or two input [=sato/operands=]. Each unary [=sato/operator=] pops one value from the stack. Each binary [=sato/operator=] pops two values from the stack, the first being the right [=sato/operand=] and the second being the left [=sato/operand=]. Each [=sato/token=] results in a value pushed to the stack. The single remaining value in the stack after evaluating the whole expression is the resulting output sample.
 
@@ -456,7 +456,7 @@ aligned(8) class SampleTransform {
 }
 ```
 
-<h5 id="sample-transform-semantics">Semantics</h5>
+<h5 id="sample-transform-semantics" class="no-toc">Semantics</h5>
 
 <dfn noexport for="sato">version</dfn> shall be equal to 0. Readers shall ignore a [=Sample Transform Derived Image Item=] with an unrecognized <code>[=sato/version=]</code> number.
 
@@ -671,7 +671,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
 
 <dfn noexport for="sato">constant</dfn> is a literal signed value extracted from the stream with a precision of [=sato/intermediate bit depth=], pushed to the stack.
 
-<h5 id="sample-transform-constraints">Constraints</h5>
+<h5 id="sample-transform-constraints" class="no-toc">Constraints</h5>
 
 [=Sample Transform Derived Image Items=] use the postfix notation to evaluate the result of the whole expression for each reconstructed image item sample.
 
