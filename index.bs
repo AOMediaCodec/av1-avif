@@ -224,7 +224,7 @@ When an item is of type <dfn export for="AV1 Image Item Type">av01</dfn>, it is 
         - <assert>The [=AV1 Image Item Data=] shall be identical to the content of an [=AV1 Sample=] marked as <code>'[=sync=]'</code>, as defined in [[!AV1-ISOBMFF]].</assert>
         - <assert>The [=AV1 Image Item Data=] shall have exactly one [=Sequence Header OBU=].</assert>
 
-NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>[=reduced_still_picture_header=]</code> flags to 1 when possible in the [=Sequence Header OBU=] part of the [=AV1 Image Item Data=] so that AV1 header overhead is minimized.
+            NOTE: File writers may want to set the <code>[=still_picture=]</code> and <code>[=reduced_still_picture_header=]</code> flags to 1 when possible in the [=Sequence Header OBU=] part of the [=AV1 Image Item Data=] so that AV1 header overhead is minimized.
 
 <h3 id="image-item-properties">Image Item Properties</h3>
 
@@ -741,7 +741,7 @@ The following constraints are common to files compliant with this specification:
     - <assert>The file shall list <code>'[=AVIF Image brand/avif=]'</code> or <code>'[=avis=]'</code> in the <code>[=compatible_brands=]</code> field of the <code>[=FileTypeBox=]</code>.</assert>
     - <assert>Transformative properties shall not be associated with items in a derivation chain (as defined in [[!MIAF]]) that serves as an input to a [=grid derived image item=].</assert> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
 
-NOTE: This constraint further restricts files compared to [[!MIAF]].
+        NOTE: This constraint further restricts files compared to [[!MIAF]].
 
 <h2 id="profiles">Profiles</h2>
 
@@ -777,9 +777,9 @@ The following shared conditions and requirements from [[!MIAF]] should apply:
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
     - <assert>The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</assert>
 
-NOTE:  AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.
+        NOTE:  AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.
 
-NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the [=AVIF Baseline profile=] may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using a [=grid derived image item=].
+        NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the [=AVIF Baseline profile=] may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using a [=grid derived image item=].
 
 <div class="example">
 A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
@@ -813,7 +813,7 @@ The following shared conditions and requirements from [[!MIAF]] should apply:
 The following additional constraints apply to all [=AV1 Image Items=]:
     - <assert>The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.</assert>
 
-NOTE: Following [[!AV1]] level definitions, coded image items compliant to the [=AVIF Advanced profile=] may not have a number of pixels greater than 35651584, a width greater than 16384 or a height greater than 8704. It is still possible to use the Advanced profile to create larger images using a [=grid derived image item=].
+        NOTE: Following [[!AV1]] level definitions, coded image items compliant to the [=AVIF Advanced profile=] may not have a number of pixels greater than 35651584, a width greater than 16384 or a height greater than 8704. It is still possible to use the Advanced profile to create larger images using a [=grid derived image item=].
 
 The following additional constraints apply only to [=AV1 Image Sequences=]:
     - <assert>The AV1 profile shall be either Main Profile or High Profile.</assert>
