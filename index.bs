@@ -1259,6 +1259,12 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/257">Add refs, fix wording and format in clauses 1,2</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/258">Add sato, alpha, depth, progressive in Scope</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/256">Clean up linking to base specs and duplicated information</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/259">Use Markdown syntax coloring for code snippets</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/261">Consistently use dfn noexport for derived items</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/262">Remove Sample Transform sections from TOC</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/263">Add references in the Sample Transform sections</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/266">Indent notes as the list items they refer to</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/267">Remove inconsistent dots in 9.1.2</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
