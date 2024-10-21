@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="727501ad5122db883ca546d8ae683076ea660ee4" name="document-revision">
+  <meta content="94c679e37c9ceb6a81ae0684b0b776824e98e50d" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -2354,9 +2354,9 @@ Quantity (per item):   Zero or one
    <h6 class="no-toc heading settled" data-level="2.3.2.1.2" id="operating-point-selector-property-description"><span class="secno">2.3.2.1.2. </span><span class="content">Description</span><a class="self-link" href="#operating-point-selector-property-description"></a></h6>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="operatingpointselectorproperty">OperatingPointSelectorProperty</dfn> may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①①">AV1 Image Item</a> to provide the index of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑥⑨">operating point</a> to be processed for this item. <span id="assert-cec6554d">If associated, it shall be marked as essential.</span></p>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.3" id="operating-point-selector-property-syntax"><span class="secno">2.3.2.1.3. </span><span class="content">Syntax</span><a class="self-link" href="#operating-point-selector-property-syntax"></a></h6>
-<pre>class OperatingPointSelectorProperty extends ItemProperty('a1op') {
-    unsigned int(8) op_index;
-}
+<pre class="language-c highlight"><c- n>class</c-> <c- n>OperatingPointSelectorProperty</c-> <c- n>extends</c-> <c- n>ItemProperty</c-><c- p>(</c->'<c- n>a1op</c->'<c- p>)</c-> <c- p>{</c->
+    <c- b>unsigned</c-> <c- nf>int</c-><c- p>(</c-><c- mi>8</c-><c- p>)</c-> <c- n>op_index</c-><c- p>;</c->
+<c- p>}</c->
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.1.4" id="operating-point-selector-property-semantics"><span class="secno">2.3.2.1.4. </span><span class="content">Semantics</span><a class="self-link" href="#operating-point-selector-property-semantics"></a></h6>
    <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="op_index">op_index</dfn> indicates the index of the <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦⓪">operating point</a> to be processed for this item. <span id="assert-a878ecf3">Its value shall be between 0 and <code><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦①">operating_points_cnt_minus_1</a></code> inclusive.</span></p>
@@ -2374,12 +2374,12 @@ Quantity (per item):   Zero or one
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</dfn> property may be associated with an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①③">AV1 Image Item</a>. <span id="assert-91b2f163">It should not be associated with <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①④">AV1 Image Items</a> consisting of only one layer.</span></p>
    <p>The <code><a data-link-type="dfn" href="#av1layeredimageindexingproperty" id="ref-for-av1layeredimageindexingproperty">AV1LayeredImageIndexingProperty</a></code> documents the size in bytes of each layer (except the last one) in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data⑧">AV1 Image Item Data</a>, and enables determining the byte ranges required to process one or more layers of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦⑤">Operating Point</a>. <span id="assert-08b24f89">If associated, it shall not be marked as essential.</span></p>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.3" id="layered-image-indexing-property-syntax"><span class="secno">2.3.2.3.3. </span><span class="content">Syntax</span><a class="self-link" href="#layered-image-indexing-property-syntax"></a></h6>
-<pre>class AV1LayeredImageIndexingProperty extends ItemProperty('a1lx') {
-    unsigned int(7) reserved = 0;
-    unsigned int(1) large_size;
-    FieldLength = (large_size + 1) * 16;
-    unsigned int(FieldLength) layer_size[3];
-}
+<pre class="language-c highlight"><c- n>class</c-> <c- n>AV1LayeredImageIndexingProperty</c-> <c- n>extends</c-> <c- n>ItemProperty</c-><c- p>(</c->'<c- n>a1lx</c->'<c- p>)</c-> <c- p>{</c->
+    <c- b>unsigned</c-> <c- nf>int</c-><c- p>(</c-><c- mi>7</c-><c- p>)</c-> <c- n>reserved</c-> <c- o>=</c-> <c- mi>0</c-><c- p>;</c->
+    <c- b>unsigned</c-> <c- nf>int</c-><c- p>(</c-><c- mi>1</c-><c- p>)</c-> <c- n>large_size</c-><c- p>;</c->
+    <c- n>FieldLength</c-> <c- o>=</c-> <c- p>(</c-><c- n>large_size</c-> <c- o>+</c-> <c- mi>1</c-><c- p>)</c-> <c- o>*</c-> <c- mi>16</c-><c- p>;</c->
+    <c- b>unsigned</c-> <c- nf>int</c-><c- p>(</c-><c- n>FieldLength</c-><c- p>)</c-> <c- n>layer_size</c-><c- p>[</c-><c- mi>3</c-><c- p>];</c->
+<c- p>}</c->
 </pre>
    <h6 class="no-toc heading settled" data-level="2.3.2.3.4" id="layered-image-indexing-property-semantics"><span class="secno">2.3.2.3.4. </span><span class="content">Semantics</span><a class="self-link" href="#layered-image-indexing-property-semantics"></a></h6>
    <p><dfn data-dfn-type="dfn" data-noexport id="layer_size">layer_size<a class="self-link" href="#layer_size"></a></dfn> indicates the number of bytes corresponding to each layer in the item payload, except for the last layer. Values are provided in increasing order of <code><a data-link-type="dfn" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦⑥">spatial_id</a></code>. A value of zero means that all the layers except the last one have been documented and <span id="assert-1f4a7944">following values shall be 0</span>. <span id="assert-31ec505f">The number of non-zero values shall match the number of layers in the image minus one.</span></p>
