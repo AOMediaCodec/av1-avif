@@ -1291,7 +1291,7 @@ Consider the following:
             - <code>[=sato/token=]</code>=2 (sample from 2<sup>nd</sup> input image item)
             - <code>[=sato/token=]</code>=128 (sum)
 
-This is equivalent to the following postfix notation (parentheses for clarity):
+This is equivalent to the following postfix notation (parentheses added for clarity):
 
 <math><msub><mi>sample</mi><mi>output</mi></msub><mo>=</mo><mo>(</mo><mn>256</mn><mspace width="0.5em"/><msub><mi>sample</mi><mn>1</mn></msub><mo>×</mo><mo>)</mo><mspace width="0.5em"/><msub><mi>sample</mi><mn>2</mn></msub><mo>+</mo></math>
 
@@ -1333,7 +1333,7 @@ Consider the following:
             - <code>[=sato/token=]</code>=0, <code>[=sato/constant=]</code>=128
             - <code>[=sato/token=]</code>=129 (difference)
 
-This is equivalent to the following postfix notation (parentheses for clarity):
+This is equivalent to the following postfix notation (parentheses added for clarity):
 
 <math><msub><mi>sample</mi><mi>output</mi></msub><mo>=</mo><mo>(</mo><mo>(</mo><mn>16</mn><mspace width="0.5em"/><msub><mi>sample</mi><mn>1</mn></msub><mo>×</mo><mo>)</mo><mspace width="0.5em"/><msub><mi>sample</mi><mn>2</mn></msub><mo>+</mo><mo>)</mo><mspace width="0.5em"/><mn>128</mn><mo>-</mo></math>
 
