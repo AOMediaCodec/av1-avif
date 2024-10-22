@@ -1108,7 +1108,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
             <td>[=ipco=]</td>
-            <td>Used to signal information such as color primaries</td>
+            <td>Used to signal color information such as color primaries</td>
         </tr>
         <tr>
             <td>[=auxC=]</td>
