@@ -834,7 +834,7 @@ A file containing a <code>'[=pict=]'</code> track compliant with this profile is
 <h2 id="box-lists">Box requirements</h2>
 
 <h3 id="avif-boxes">Image item boxes</h3>
-This section discusses the box requirements for an [=AVIF file=] containing only image items.
+This section discusses the box requirements for an [=AVIF file=] containing image items.
 
 <h4 id="avif-required-boxes">Minimum set of boxes</h4>
 
