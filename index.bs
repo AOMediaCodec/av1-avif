@@ -752,7 +752,7 @@ The profiles defined in this section are for enabling interoperability between [
 
 <assert>The <code>[=FileTypeBox=]</code> should declare at least one profile that enables decoding of the [=primary image item=].</assert> It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
 
-<assert>If <code>'[=avis=]'</code> is declared in the <code>[=FileTypeBox=]</code> and a profile is declared in the <code>[=FileTypeBox=]</code>, the profile shall also enable decoding of at least one image sequence track.</assert> <assert>The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence without its auxiliary image sequence tracks.</assert>
+<assert>If <code>'[=avis=]'</code> is declared in the <code>[=FileTypeBox=]</code> and a profile is declared in the <code>[=FileTypeBox=]</code>, the profile shall also enable decoding of at least one image sequence track.</assert> <assert>The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence track without its auxiliary image sequence tracks.</assert>
 
 It is possible for a file compliant to this [=AV1 Image File Format=] to not be able to declare an [=/AVIF=] profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.
 
@@ -778,9 +778,9 @@ The following shared conditions and requirements from [[!MIAF]] should apply:
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
     - <assert>The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</assert>
 
-        NOTE:  AV1 tiers are not constrained because timing is optional in image sequences and are not relevant in image items or collections.
+        NOTE:  AV1 tiers are not constrained because timing is optional in image sequences and is not relevant in image items or collections.
 
-        NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoder may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the [=AVIF Baseline profile=] may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using a [=grid derived image item=].
+        NOTE:  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoders may not be able to handle larger images. More precisely, following [[!AV1]] level definitions, coded image items compliant to the [=AVIF Baseline profile=] may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using a [=grid derived image item=].
 
 <div class="example">
 A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code>[=compatible_brands=]</code> of the <code>[=FileTypeBox=]</code>:
