@@ -1281,6 +1281,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/263">Add references in the Sample Transform sections</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/266">Indent notes as the list items they refer to</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/267">Remove inconsistent dots in 9.1.2</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/273">Change structure of optional table of boxes</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
