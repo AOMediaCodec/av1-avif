@@ -1359,7 +1359,7 @@ This is equivalent to the following infix notation:
 
 <math><msub><mi>sample</mi><mi>output</mi></msub><mo>=</mo><mn>256</mn><mo>×</mo><msub><mi>sample</mi><mn>1</mn></msub><mo>+</mo><msub><mi>sample</mi><mn>2</mn></msub></math>
 
-Each output sample is equal to the sum of a sample of the first input image item shifted to the left by 8 and of a sample of the second input image item. This can be viewed as a bit depth extension of the first input image item by the second input image item. The first input image item contains the 8 most significant bits and the second input image item contains the 8 least significant bits of the output reconstructed image item which has a bit depth of 16, something that is impossible to achieve with a single [=AV1 image item=].
+Each output sample is equal to the sum of a sample of the first input image item shifted to the left by 8 bits and of a sample of the second input image item. This can be viewed as a bit depth extension of the first input image item by the second input image item. The first input image item contains the 8 most significant bits and the second input image item contains the 8 least significant bits of the output reconstructed image item which has a bit depth of 16, something that is impossible to achieve with a single [=AV1 image item=].
 
 NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=altr=]'</code> group (see [[#altr-group]]) with the [=Sample Transform Derived Image Item=], the first input image item is also a backward-compatible 8-bit regular coded image item that can be used by readers that do not support [=Sample Transform Derived Image Items=] or do not need extra precision.
 
@@ -1403,7 +1403,7 @@ This is equivalent to the following infix notation:
 
 <math><msub><mi>sample</mi><mi>output</mi></msub><mo>=</mo><mn>16</mn><mo>×</mo><msub><mi>sample</mi><mn>1</mn></msub><mo>+</mo><msub><mi>sample</mi><mn>2</mn></msub><mo>-</mo><mn>128</mn></math>
 
-Each output sample is equal to the sum of a sample of the first input image item shifted to the left by 4 and of a sample of the second input image item offset by -128. This can be viewed as a bit depth extension of the first input image item by the second input image item which contains the residuals to correct the precision loss of the first input image item.
+Each output sample is equal to the sum of a sample of the first input image item shifted to the left by 4 bits and of a sample of the second input image item offset by -128. This can be viewed as a bit depth extension of the first input image item by the second input image item which contains the residuals to correct the precision loss of the first input image item.
 
 NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=altr=]'</code> group (see [[#altr-group]]) with the derived image item, the first input image item is also a backward-compatible 12-bit regular coded image item that can be used by decoding contexts that do not support [=Sample Transform Derived Image Items=] or do not need extra precision.
 
