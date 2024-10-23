@@ -396,7 +396,7 @@ A <dfn noexport>grid derived image item</dfn> (<code>'[=grid=]'</code>) as defin
 
 <h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
 
-A <dfn noexport>tone map derived image item</dfn> (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF file=]. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an <code>'[=altr=]'</code> (see [[#altr-group]]) entity group as recommended in [[!HEIF]].</assert>
+A <dfn noexport>tone map derived image item</dfn> (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF file=]. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an <code>'[=altr=]'</code> (see [[#altr-group]]) entity group as recommended in [[!HEIF]].</assert> <assert>When present, the gainmap image item should be a hidden image item as recommended in [[!HEIF]].</assert>
 
 <h4 id="sample-transform">Sample Transform Derived Image Item</h4>
 
@@ -1359,7 +1359,7 @@ This is equivalent to the following infix notation:
 
 Each output sample is equal to the sum of a sample of the first input image item shifted to the left by 8 and of a sample of the second input image item. This can be viewed as a bit depth extension of the first input image item by the second input image item. The first input image item contains the 8 most significant bits and the second input image item contains the 8 least significant bits of the output reconstructed image item which has a bit depth of 16, something that is impossible to achieve with a single [=AV1 image item=].
 
-NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=altr=]'</code> group (see [[#altr-group]]) with the [=Sample Transform Derived Image Item=], the first input image item is also a backward-compatible 8-bit regular coded image item that can be used by readers that do not support [=Sample Transform Derived Image Items=] or do not need extra precision.
+NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=altr=]'</code> group (see [[#altr-group]]) with the [=Sample Transform Derived Image Item=], the first input image item is also a backward-compatible 8-bit regular coded image item that can be used by readers that do not support [=Sample Transform Derived Image Items=] or do not need extra precision. The second input image item should be a hidden image item as recommended in [[!HEIF]].
 
 NOTE: The second input image item loses its meaning of least significant part if any of the most significant bits changes, so the first input image item has to be losslessly encoded. The second input image item supports reasonable loss during encoding.
 
@@ -1401,7 +1401,7 @@ This is equivalent to the following infix notation:
 
 Each output sample is equal to the sum of a sample of the first input image item shifted to the left by 4 and of a sample of the second input image item offset by -128. This can be viewed as a bit depth extension of the first input image item by the second input image item which contains the residuals to correct the precision loss of the first input image item.
 
-NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=altr=]'</code> group (see [[#altr-group]]) with the derived image item, the first input image item is also a backward-compatible 12-bit regular coded image item that can be used by decoding contexts that do not support [=Sample Transform Derived Image Items=] or do not need extra precision.
+NOTE: If the first input image item is the [=primary image item=] and is enclosed in an <code>'[=altr=]'</code> group (see [[#altr-group]]) with the derived image item, the first input image item is also a backward-compatible 12-bit regular coded image item that can be used by decoding contexts that do not support [=Sample Transform Derived Image Items=] or do not need extra precision. The second input image item should be a hidden image item as recommended in [[!HEIF]].
 
 NOTE: The first input image item supports reasonable loss during encoding because the second input image item "overlaps" by 4 bits to correct the loss. The second input image item supports reasonable loss during encoding.
 
