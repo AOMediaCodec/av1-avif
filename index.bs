@@ -1196,7 +1196,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>[=clli=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>Used to signal HDR light level information for an image</td>
+            <td>Used to signal HDR content light level information for an image</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -1205,7 +1205,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>[=cclv=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>Used to signal HDR color volume for an image</td>
+            <td>Used to signal HDR content color volume for an image</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -1214,7 +1214,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>[=mdcv=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>Used to signal HDR mastering information for an image</td>
+            <td>Used to signal HDR mastering display color volume for an image</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
