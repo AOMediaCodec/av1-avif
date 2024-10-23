@@ -985,249 +985,306 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
 
 <h4 id="avif-required-boxes-additional">Requirements on additional image item related boxes</h4>
 
-<p>The boxes indicated in the following table may be present in an [=AVIF file=] to provide additional signaling for image items. The boxes may be present inside the box indicated in the "Containing Box" column. <assert>If present, they shall use the version indicated in the table unless the box is an item property marked as non-essential.</assert> [=/AVIF=] readers are expected to understand the boxes and versions listed in this table. The order of the boxes is indicative in the table. Specifications may require specific order and shall be respected. Additionally, the <code>'[=free=]'</code> and <code>'[=skip=]'</code> boxes may be present at any level in the hierarchy and [=/AVIF=] readers are expected to ignore them. Additional boxes in the <code>'[=meta=]'</code> hierarchy not listed in the following table may also be present and may be ignored by [=/AVIF=] readers.</p>
+<p>The boxes indicated in the following table may be present in an [=AVIF file=] to provide additional signaling for image items. <assert>If present, the boxes shall use the version indicated in the table unless the box is an item property marked as non-essential.</assert> [=/AVIF=] readers are expected to understand the boxes and versions listed in this table. The order of the boxes in the table may not be the order of the boxes in the file. Specifications may require specific order and shall be respected. Additionally, the <code>'[=free=]'</code> and <code>'[=skip=]'</code> boxes may be present at any level in the hierarchy and [=/AVIF=] readers are expected to ignore them. Additional boxes in the <code>'[=meta=]'</code> hierarchy not listed in the following table may also be present and may be ignored by [=/AVIF=] readers.</p>
 <table class="data">
     <thead>
         <tr>
+            <th>Top-Level</th>
             <th>Level 1</th>
             <th>Level 2</th>
+            <th>Level 3</th>
             <th>Version(s)</th>
             <th>Specification</th>
-            <th>Containing Box</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
+            <td>[=meta=]</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>See [[#avif-required-boxes]]</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
             <td>[=dinf=]</td>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=meta=]</td>
-            <td>Used to indicate the location of the media information in a track</td>
+            <td>Used to indicate the location of the media information</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[=dref=]</td>
+            <td>&nbsp;</td>
             <td>0</td>
             <td>[[!ISOBMFF]]</td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
             <td>[=iref=]</td>
+            <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>0, 1</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=meta=]</td>
             <td>Used to indicate directional relationships between images or metadata</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[=auxl=]</td>
+            <td>&nbsp;</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>&nbsp;</td>
             <td>Used when an image is auxiliary to another image</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[=thmb=]</td>
+            <td>&nbsp;</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>&nbsp;</td>
             <td>Used when an image is a thumbnail of another image</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[=dimg=]</td>
+            <td>&nbsp;</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>&nbsp;</td>
             <td>Used when an image is [[#derived-images|derived from another image]]</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[=prem=]</td>
+            <td>&nbsp;</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>&nbsp;</td>
             <td>Used when the color values in an image have been premultiplied with alpha values</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[=cdsc=]</td>
+            <td>&nbsp;</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>&nbsp;</td>
             <td>Used to link metadata with an image</td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
             <td>[=idat=]</td>
             <td>&nbsp;</td>
-            <td>-</td>
-            <td>[[!ISOBMFF]]</td>
-            <td>[=meta=]</td>
-            <td>Used to store derived image definitions</td>
-        </tr>
-        <tr>
-            <td>[[#groups|grpl]]</td>
             <td>&nbsp;</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=meta=]</td>
+            <td>Typically used to store derived image definitions or small pieces of metadata</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>[[#groups|grpl]]</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>-</td>
+            <td>[[!ISOBMFF]]</td>
             <td>Used to indicate that multiple images are semantically grouped</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[[#altr-group|altr]]</td>
+            <td>&nbsp;</td>
             <td>0</td>
             <td>[[!ISOBMFF]]</td>
-            <td>&nbsp;</td>
             <td>Used when images in a group are alternatives to each other</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td>[[#ster-group|ster]]</td>
+            <td>&nbsp;</td>
             <td>0</td>
             <td>[[!HEIF]]</td>
-            <td>&nbsp;</td>
             <td>Used when images in a group form a stereo pair</td>
         </tr>
         <tr>
-            <td>[=pasp=]</td>
             <td>&nbsp;</td>
+            <td>[=iprp=]</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>See [[#avif-required-boxes]]</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=ipco=]</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>See [[#avif-required-boxes]]</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=pasp=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal pixel aspect ratio. If present, shall indicate a pixel aspect ratio of 1:1</td>
         </tr>
         <tr>
-            <td>[=colr=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=colr=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal information such as color primaries</td>
         </tr>
         <tr>
-            <td>[=auxC=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=auxC=]</td>
             <td>0</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal the type of an auxiliary image (e.g. alpha, depth)</td>
         </tr>
         <tr>
-            <td>[[#clean-aperture-property|clap]]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[[#clean-aperture-property|clap]]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal cropping applied to an image</td>
         </tr>
         <tr>
-            <td>[=irot=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=irot=]</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal a rotation applied to an image</td>
         </tr>
         <tr>
-            <td>[=imir=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=imir=]</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal a mirroring applied to an image</td>
         </tr>
         <tr>
-            <td>[=clli=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=clli=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal HDR light level information for an image</td>
         </tr>
         <tr>
-            <td>[=cclv=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=cclv=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal HDR color volume for an image</td>
         </tr>
         <tr>
-            <td>[=mdcv=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=mdcv=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal HDR mastering information for an image</td>
         </tr>
         <tr>
-            <td>[=amve=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=amve=]</td>
             <td>-</td>
             <td>[[!ISOBMFF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal the nominal ambient viewing environment for the display of the content</td>
         </tr>
         <tr>
-            <td>[=reve=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=reve=]</td>
             <td>0</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal the viewing environment in which the image was mastered</td>
         </tr>
         <tr>
-            <td>[=ndwt=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=ndwt=]</td>
             <td>0</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal the nominal diffuse white luminance of the content</td>
         </tr>
         <tr>
-            <td>[=a1op=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=a1op=]</td>
             <td>-</td>
             <td>[=/AVIF=]</td>
-            <td>[=ipco=]</td>
             <td>Used to configure which operating point to select when there are multiple choices</td>
         </tr>
         <tr>
-            <td>[=lsel=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=lsel=]</td>
             <td>-</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to configure rendering of a multilayered image</td>
         </tr>
         <tr>
-            <td>[=a1lx=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=a1lx=]</td>
             <td>-</td>
             <td>[=/AVIF=]</td>
-            <td>[=ipco=]</td>
             <td>Used to assist reader in parsing a multilayered image</td>
         </tr>
         <tr>
-            <td>[=cmin=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=cmin=]</td>
             <td>0</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal the camera intrinsic matrix</td>
         </tr>
         <tr>
-            <td>[=cmex=]</td>
             <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>[=cmex=]</td>
             <td>0</td>
             <td>[[!HEIF]]</td>
-            <td>[=ipco=]</td>
             <td>Used to signal the camera extrinsic matrix</td>
         </tr>
     </tbody>
@@ -1265,6 +1322,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/263">Add references in the Sample Transform sections</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/266">Indent notes as the list items they refer to</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/267">Remove inconsistent dots in 9.1.2</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/273">Change structure of optional table of boxes</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
