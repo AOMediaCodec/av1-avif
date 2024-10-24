@@ -1340,9 +1340,15 @@ This informative appendix contains example recipes for extending base [=/AVIF=] 
 The following example describes how to leverage a [=Sample Transform Derived Image Item=] on top of a regular 8-bit [=MIAF image item=] to extend the decoded bit depth to 16 bits.
 
 Consider the following:
-    - A [=MIAF image item=] being a losslessly coded image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,
-    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,
-    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>and the following <code>[=SampleTransform=]</code> fields:
+    - A [=MIAF image item=] being a losslessly coded image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8.
+    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the<br>
+        same spatial dimensions,<br>
+        same number of channels,<br>
+        same chroma subsampling (or lack thereof)<br>
+        as the first input image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8.
+    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>
+        and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>
+        and the following <code>[=SampleTransform=]</code> fields:
         - <code>[=sato/version=]</code>=0
         - <code>[=sato/bit_depth=]</code>=2 (signed 32-bit <code>[=sato/constant=]</code>s, stack values and intermediate results)
         - <code>[=sato/token_count=]</code>=5
@@ -1376,15 +1382,30 @@ The following example describes how to leverage a [=Sample Transform Derived Ima
 It differs from the [[#sato-example-suffix-bit-depth-extension]] by its slightly longer series of operations allowing its first input image item to be lossily encoded.
 
 Consider the following:
-    - A [=MIAF image item=] being a lossily coded image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=12,
-    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,<br>with the following contraints:
-        <li style="list-style: none"><ul><li style="list-style: none">For each sample position in each plane,<br><math><msub><mi>sample</mi><mi>original</mi></msub></math> being the value of the 16-bit original sample at that position in that plane,<br><math><msub><mi>sample</mi><mi>1</mi></msub></math> being the value of the 12-bit sample of the first input image at that position in that plane,<br><math><msub><mi>sample</mi><mi>2</mi></msub></math> being the value of the sample of the second input image at that position in that plane,<br><math><mo>≈</mo></math> representing similarity within compression loss range,</li></ul></li>
+    - A [=MIAF image item=] being a lossily coded image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=12.
+    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the<br>
+        same spatial dimensions,<br>
+        same number of channels,<br>
+        same chroma subsampling (or lack thereof)<br>
+        as the first input image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,<br>with the following contraints:
+        <li style="list-style: none">
+            <ul>For each sample position in each plane,</ul>
+            <ul><math><msub><mi>sample</mi><mi>original</mi></msub></math> being the value of the 16-bit original sample at that position in that plane,</ul>
+            <ul><math><msub><mi>sample</mi><mi>1</mi></msub></math> being the value of the 12-bit sample of the first input image at that position in that plane,</ul>
+            <ul><math><msub><mi>sample</mi><mi>2</mi></msub></math> being the value of the sample of the second input image at that position in that plane,</ul>
+            <ul><math><mo>≈</mo></math> representing similarity within compression loss range,</ul>
+        </li>
         - <math><msub><mi>sample</mi><mi>1</mi></msub><mo>≈</mo><mfrac><msub><mi>sample</mi><mi>original</mi></msub><msup><mn>2</mn><mn>4</mn></msup></mfrac></math>
         - <math><msub><mi>sample</mi><mi>2</mi></msub><mo>≈</mo><msub><mi>sample</mi><mi>original</mi></msub><mo>-</mo><msup><mn>2</mn><mn>4</mn></msup><mo>×</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>+</mo><msup><mn>2</mn><mn>7</mn></msup></math>
         - <math><mn>0</mn><mo>≤</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>&lt;</mo><msup><mn>2</mn><mn>12</mn></msup></math>
         - <math><mn>0</mn><mo>≤</mo><msub><mi>sample</mi><mi>2</mi></msub><mo>&lt;</mo><msup><mn>2</mn><mn>8</mn></msup></math>
-        - <math><mn>0</mn><mo>≤</mo><msup><mn>2</mn><mn>4</mn></msup><mo>×</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>+</mo><msub><mi>sample</mi><mi>2</mi></msub><mo>-</mo><msup><mn>2</mn><mn>7</mn></msup><mo>&lt;</mo><msup><mn>2</mn><mn>16</mn></msup></math><br><p class="note" role="note"><span class="marker">NOTE:</span> Files that do not respect this constraint will still decode successfully because Clause [[#sample-transform-definition]] mandates the resulting values to be each clamped to fit in the number of bits per sample as defined by the <code>[=PixelInformationProperty=]</code> of the reconstructed image item.</p>
-    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>and the following <code>[=SampleTransform=]</code> fields:
+        - <math><mn>0</mn><mo>≤</mo><msup><mn>2</mn><mn>4</mn></msup><mo>×</mo><msub><mi>sample</mi><mi>1</mi></msub><mo>+</mo><msub><mi>sample</mi><mi>2</mi></msub><mo>-</mo><msup><mn>2</mn><mn>7</mn></msup><mo>&lt;</mo><msup><mn>2</mn><mn>16</mn></msup></math>
+
+            NOTE: Files that do not respect this constraint will still decode successfully because Clause [[#sample-transform-definition]] mandates the resulting values to be each clamped to fit in the number of bits per sample as defined by the <code>[=PixelInformationProperty=]</code> of the reconstructed image item.
+
+    - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>
+        and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>
+        and the following <code>[=SampleTransform=]</code> fields:
         - <code>[=sato/version=]</code>=0
         - <code>[=sato/bit_depth=]</code>=2 (signed 32-bit <code>[=sato/constant=]</code>s, stack values and intermediate results)
         - <code>[=sato/token_count=]</code>=7
