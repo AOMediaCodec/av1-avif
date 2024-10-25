@@ -1326,6 +1326,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/288">Add hidden image item recommendation</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/289">Remove mentions of ftyp compatible_brands</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/265">Remove avio brand recommendation</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/292">Fix broken lines in Sample Transform examples</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
