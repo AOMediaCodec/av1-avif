@@ -21,6 +21,7 @@ Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
 Metadata Order: This version, !*, *
 </pre>
 
+
 <pre class='biblio'>
 {
     "AV1": {
