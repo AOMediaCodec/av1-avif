@@ -1340,12 +1340,10 @@ This informative appendix contains example recipes for extending base [=/AVIF=] 
 The following example describes how to leverage a [=Sample Transform Derived Image Item=] on top of a regular 8-bit [=MIAF image item=] to extend the decoded bit depth to 16 bits.
 
 Consider the following:
-    - A [=MIAF image item=] being a losslessly coded image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8.
-    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the<br>
-        same spatial dimensions,<br>
-        same number of channels,<br>
-        same chroma subsampling (or lack thereof)<br>
-        as the first input image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8.
+    - A [=MIAF image item=] being a losslessly coded image item,<br>
+        and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,
+    - Another image item being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br>
+        and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,
     - A [=Sample Transform Derived Image Item=] with the two items above as input in this order,<br>
         and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=16,<br>
         and the following <code>[=SampleTransform=]</code> fields:
@@ -1382,12 +1380,11 @@ The following example describes how to leverage a [=Sample Transform Derived Ima
 It differs from the [[#sato-example-suffix-bit-depth-extension]] by its slightly longer series of operations allowing its first input image item to be lossily encoded.
 
 Consider the following:
-    - A [=MIAF image item=] being a lossily coded image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=12.
-    - Another [=MIAF image item=] being a lossily or losslessly coded image item with the<br>
-        same spatial dimensions,<br>
-        same number of channels,<br>
-        same chroma subsampling (or lack thereof)<br>
-        as the first input image item, and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,<br>with the following contraints:
+    - A [=MIAF image item=] being a lossily coded image item,<br>
+        and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=12,
+    - Another image item being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br>
+        and its <code>[=PixelInformationProperty=]</code> with <code>[=bits_per_channel=]</code>=8,<br>
+        with the following contraints:
         <li style="list-style: none">
             <ul>For each sample position in each plane,</ul>
             <ul><math><msub><mi>sample</mi><mi>original</mi></msub></math> being the value of the 16-bit original sample at that position in that plane,</ul>
