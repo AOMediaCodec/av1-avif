@@ -1,6 +1,6 @@
 <pre class='metadata'>
 Group: AOM
-Status: WGD
+Status: WGA
 Text Macro: SPECVERSION v1.2.0
 Title: AV1 Image File Format (AVIF)
 URL: https://AOMediaCodec.github.io/av1-avif
@@ -12,7 +12,7 @@ Former Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Former Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2024-10-25
+Date: 2025-01-08
 Repository: AOMediaCodec/av1-avif
 Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
 !Latest approved version: <a href="latest-approved.html">https://aomediacodec.github.io/av1-avif/latest-approved.html</a>
@@ -837,7 +837,7 @@ This section discusses the box requirements for an [=AVIF file=] containing imag
 
 <h4 id="avif-required-boxes">Minimum set of boxes</h4>
 
-<p>As indicated in [[#file-constraints]], an [=AVIF file=] is a compliant [[!MIAF]] file. As a consequence, some [[!ISOBMFF]] or [[!HEIF]] boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification" 
+<p>As indicated in [[#file-constraints]], an [=AVIF file=] is a compliant [[!MIAF]] file. As a consequence, some [[!ISOBMFF]] or [[!HEIF]] boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification"
 column may require a specific order for a box or for its children and the order shall be respected. For example, per [[!ISOBMFF]], the <code>[=FileTypeBox=]</code> is required to appear first in an [=AVIF file=].
 The "Version(s)" column in the following table lists the version(s) of the boxes allowed by this brand. <assert>With the exception of item properties marked as non-essential, other versions of the boxes shall not be used.</assert> "-" means that the box does not have a version.</p>
 
@@ -939,7 +939,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>[=/av1C=]</td>
+            <td>[=AV1ItemConfigurationProperty/av1C=]</td>
             <td>-</td>
             <td>[=/AVIF=]</td>
             <td>&nbsp;</td>
