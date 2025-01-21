@@ -766,13 +766,13 @@ This section defines the MIAF AV1 Baseline profile of [[!HEIF]], specifically fo
 If the brand <code>'[=MA1B=]'</code> is in the <code>[=FileTypeBox=]</code>, the common constraints in the section [[#brands]] shall apply.
 
 The following shared conditions and requirements from [[!MIAF]] shall apply:
-    - <assert>[=self-containment=] (subclause 8.2)</assert>
+    - <assert><span hidden>baseline-profile</span>[=self-containment=] (subclause 8.2)</assert>
 
 The following shared conditions and requirements from [[!MIAF]] should apply:
-    - <assert>[=grid-limit=] (subclause 8.4)</assert>
-    - <assert>[=single-track=] (subclause 8.5)</assert>
-    - <assert>[=edit-lists=] (subclause 8.6)</assert>
-    - <assert>[=matched-duration=] (subclause 8.7)</assert>
+    - <assert><span hidden>baseline-profile</span>[=grid-limit=] (subclause 8.4)</assert>
+    - <assert><span hidden>baseline-profile</span>[=single-track=] (subclause 8.5)</assert>
+    - <assert><span hidden>baseline-profile</span>[=edit-lists=] (subclause 8.6)</assert>
+    - <assert><span hidden>baseline-profile</span>[=matched-duration=] (subclause 8.7)</assert>
 
 The following additional constraints apply to all [=AV1 Image Items=] and all [=AV1 Image Sequences=]:
     - <assert>The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</assert>
@@ -802,13 +802,13 @@ This section defines the MIAF AV1 Advanced profile of [[!HEIF]], specifically fo
 If the brand <code>'[=MA1A=]'</code> is in the <code>[=FileTypeBox=]</code>, the common constraints in the section [[#brands]] shall apply.
 
 The following shared conditions and requirements from [[!MIAF]] shall apply:
-    - <assert>[=self-containment=] (subclause 8.2)</assert>
+    - <assert><span hidden>advanced-profile</span>[=self-containment=] (subclause 8.2)</assert>
 
 The following shared conditions and requirements from [[!MIAF]] should apply:
-    - <assert>[=grid-limit=] (subclause 8.4)</assert>
-    - <assert>[=single-track=] (subclause 8.5)</assert>
-    - <assert>[=edit-lists=] (subclause 8.6)</assert>
-    - <assert>[=matched-duration=] (subclause 8.7)</assert>
+    - <assert><span hidden>advanced-profile</span>[=grid-limit=] (subclause 8.4)</assert>
+    - <assert><span hidden>advanced-profile</span>[=single-track=] (subclause 8.5)</assert>
+    - <assert><span hidden>advanced-profile</span>[=edit-lists=] (subclause 8.6)</assert>
+    - <assert><span hidden>advanced-profile</span>[=matched-duration=] (subclause 8.7)</assert>
 
 The following additional constraints apply to all [=AV1 Image Items=]:
     - <assert>The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.</assert>
@@ -1327,6 +1327,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/289">Remove mentions of ftyp compatible_brands</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/265">Remove avio brand recommendation</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/292">Fix broken lines in Sample Transform examples</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/300">Make assert IDs between profiles unique</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
