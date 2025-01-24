@@ -396,7 +396,7 @@ A <dfn noexport>grid derived image item</dfn> (<code>'[=grid=]'</code>) as defin
 
 <h4 id="tone-map-derivation">Tone Map Derived Image Item</h4>
 
-A <dfn noexport>tone map derived image item</dfn> (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF file=]. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an <code>'[=altr=]'</code> (see [[#altr-group]]) entity group as recommended in [[!HEIF]].</assert> <assert>When present, the gainmap image item should be a [=hidden image item=].</assert>
+A <dfn noexport>tone map derived image item</dfn> (<code>'[=tmap=]'</code>) as defined in [[!HEIF]] may be used in an [=AVIF file=]. <assert>When present, the base image item and the <code>'[=tmap=]'</code> image item should be grouped together by an <code>'[=altr=]'</code> (see [[#altr-group]]) entity group as recommended in [[!HEIF]].</assert> <assert>When present, the gain map image item should be a [=hidden image item=].</assert>
 
 <h4 id="sample-transform">Sample Transform Derived Image Item</h4>
 
