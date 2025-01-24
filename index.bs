@@ -41,29 +41,29 @@ Metadata Order: This version, !*, *
 
     "HEIF": {
         "id": "HEIF",
-        "href": "https://www.iso.org/standard/66067.html",
+        "href": "https://www.iso.org/standard/83650.html",
         "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
         "status": "International Standard",
         "publisher": "ISO/IEC",
-        "isoNumber":"ISO/IEC 23008-12:2017"
+        "isoNumber":"ISO/IEC 23008-12:2022"
     },
 
     "ISOBMFF": {
         "id": "ISOBMFF",
-        "href": "https://www.iso.org/standard/68960.html",
+        "href": "https://www.iso.org/standard/83102.html",
         "title": "Information technology — Coding of audio-visual objects — Part 12: ISO base media file format",
         "status": "International Standard",
         "publisher": "ISO/IEC",
-        "isoNumber":"ISO/IEC 14496-12:2015"
+        "isoNumber":"ISO/IEC 14496-12:2022"
     },
 
     "MIAF": {
         "href": "https://www.iso.org/standard/74417.html",
         "id": "MIAF",
-        "title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-Image Application Format (MiAF)",
+        "title": "Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)",
         "status": "Enquiry",
         "publisher": "ISO/IEC",
-        "isoNumber": "ISO/IEC DIS 23000-22"
+        "isoNumber": "ISO/IEC 23000-22:2019"
     },
 
     "CICP": {
@@ -78,7 +78,7 @@ Metadata Order: This version, !*, *
 </pre>
 
 <pre class="anchors">
-url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
+url: https://www.iso.org/standard/83650.html; spec: HEIF; type: dfn;
     text: aux_type
     text: auxC
     text: AuxiliaryTypeInfoBox
@@ -111,7 +111,7 @@ url: https://www.iso.org/standard/66067.html; spec: HEIF; type: dfn;
     text: thmb
     text: tmap
 
-url: https://www.iso.org/standard/68960.html; spec: ISOBMFF; type: dfn;
+url: https://www.iso.org/standard/83102.html; spec: ISOBMFF; type: dfn;
     text: altr
     text: amve
     text: cclv
@@ -1328,6 +1328,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/265">Remove avio brand recommendation</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/292">Fix broken lines in Sample Transform examples</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/300">Make assert IDs between profiles unique</a>
+    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/304">Update the HEIF, ISOBMFF, and MIAF references to the latest versions</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
