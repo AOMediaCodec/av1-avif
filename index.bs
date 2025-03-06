@@ -507,7 +507,7 @@ The result of any computation underflowing or overflowing the intermediate bit d
       <td>0</td>
       <td>constant</td>
       <td>[=sato/operand=]</td>
-      <td><math><msup><mn>2</mn><mrow><mi>[=sato/bit_depth=]</mi><mo>+</mo><mn>3</mn></mrow></math> bits from the stream read as a signed integer.</td>
+      <td><math><msup><mn>2</mn><mrow><mi>[=sato/bit_depth=]</mi><mo>+</mo><mn>3</mn></mrow></msup></math> bits from the stream read as a signed integer.</td>
       <td>constant value</td>
     </tr>
     <tr>
