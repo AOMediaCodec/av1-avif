@@ -263,7 +263,7 @@ The semantics of the <code>'[=ispe=]'</code> property as defined in [[!HEIF]] ap
 
 NOTE: The dimensions indicated in the <code>'[=ispe=]'</code> property might not match the values <code>[=max_frame_width_minus1=]+1</code> and <code>[=max_frame_height_minus1=]+1</code> indicated in the AV1 bitstream.
 
-NOTE: The values of <code>[=render_width_minus1=]</code> and <code>[=render_height_minus1=]</code> possibly present in the AV1 bistream are not exposed at the [=/AVIF=] container level.
+NOTE: The values of <code>[=render_width_minus1=]</code> and <code>[=render_height_minus1=]</code> possibly present in the AV1 bitstream are not exposed at the [=/AVIF=] container level.
 
 <h4 id="clean-aperture-property">Clean Aperture Property</h4>
 
