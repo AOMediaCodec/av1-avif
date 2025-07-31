@@ -1329,6 +1329,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/292">Fix broken lines in Sample Transform examples</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/300">Make assert IDs between profiles unique</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/304">Update the HEIF, ISOBMFF, and MIAF references to the latest versions</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/313">Merge asserts for avio brand</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
