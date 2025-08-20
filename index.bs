@@ -730,7 +730,7 @@ Files that indicate this brand in the <code>[=FileTypeBox=]</code> shall comply 
 
 <assert>Files that conform with these constraints should include the brand <code>[=avis=]</code> in the <code>[=FileTypeBox=]</code>.</assert>
 
-Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the <code>[=FileTypeBox=]</code>, <assert>the item constraints for this brand shall be met</assert> and <assert>at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as <code>'[=sync=]'</code></assert>. Conversely, <assert>if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used</assert>.
+Additionally, if a file contains [=AV1 image sequences=] and the brand <code>[=avio=]</code> is used in the <code>[=FileTypeBox=]</code>, <assert>the item constraints for this brand shall be met and at least one of the [=AV1 image sequences=] shall be made only of [=AV1 Samples=] marked as <code>'[=sync=]'</code></assert>. Conversely, <assert>if such a track exists and the constraints of the brand <code>[=avio=]</code> on [=AV1 image items=] are met, the brand should be used</assert>.
 
 NOTE: As defined in [[!MIAF]], a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.
 
@@ -1329,6 +1329,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/292">Fix broken lines in Sample Transform examples</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/300">Make assert IDs between profiles unique</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/304">Update the HEIF, ISOBMFF, and MIAF references to the latest versions</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/313">Merge asserts for avio brand</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
