@@ -41,11 +41,11 @@ Metadata Order: This version, !*, *
 
     "HEIF": {
         "id": "HEIF",
-        "href": "https://www.iso.org/standard/83650.html",
+        "href": "https://www.iso.org/standard/89044.html",
         "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
         "status": "International Standard",
         "publisher": "ISO/IEC",
-        "isoNumber":"ISO/IEC 23008-12:2022"
+        "isoNumber":"ISO/IEC 23008-12:2025/FDAmd 1"
     },
 
     "ISOBMFF": {
