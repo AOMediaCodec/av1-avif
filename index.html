@@ -1488,9 +1488,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 60c422380, updated Thu Feb 20 19:11:22 2025 -0800" name="generator">
+  <meta content="Bikeshed version 3f621ba99, updated Mon Jul 28 15:38:36 2025 -0700" name="generator">
   <link href="https://AOMediaCodec.github.io/av1-avif" rel="canonical">
-  <meta content="aaea3c9bb04d8d0c3812f61ab8f88eb527952249" name="revision">
+  <meta content="8acef893bcaa565f0c1e11b73a4e6d0823cdaa8f" name="revision">
   <meta content="dark light" name="color-scheme">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
@@ -2170,9 +2170,14 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </style>
  <body class="h-entry">
   <div class="head">
-   <p data-fill-with="logo"><a class="logo" href="https://www.aomedia.org/" style="width: 200px"> <img alt="AOM" height="60" src="https://aomedia.org/assets/images/aomedia-logo-rgb.svg" width="200"> <img src="https://aomedia.org/assets/images/avif-logo-rgb.svg" width="200"> </a> </p>
+   <p data-fill-with="logo"><a class="logo" href="https://www.aomedia.org/" style="width: 200px">
+    <img alt="AOM" height="60" src="https://aomedia.org/assets/images/aomedia-logo-rgb.svg" width="200">
+    <img src="https://aomedia.org/assets/images/avif-logo-rgb.svg" width="200">
+</a>
+</p>
    <h1 class="p-name no-ref" id="title">AV1 Image File Format (AVIF)</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">AOM Working Group Approved Draft, <time class="dt-updated" datetime="2025-01-08">8 January 2025</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">AOM Working Group Approved Draft,
+    <time class="dt-updated" datetime="2025-01-08">8 January 2025</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2298,7 +2303,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         <li><a href="#sato-example-residual-bit-depth-extension"><span class="secno"></span> <span class="content">Residual bit depth extension</span></a>
        </ol>
      </ol>
-    <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
+    <li><a href="#conformance"><span class="secno"></span> <span class="content">
+    Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -2326,14 +2332,19 @@ Images encoded with <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bit
    <h3 class="heading settled" data-level="2.1" id="image-item"><span class="secno">2.1. </span><span class="content">AV1 Image Item</span><a class="self-link" href="#image-item"></a></h3>
    <p>When an item is of type <dfn class="dfn-paneled" data-dfn-for="AV1 Image Item Type" data-dfn-type="dfn" data-export id="av1-image-item-type-av01">av01</dfn>, it is called an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-image-item">AV1 Image Item</dfn>, and shall obey the following constraints:</p>
    <ul>
-    <li data-md><span id="assert-cadb7e29">The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item">AV1 Image Item</a> shall be a conformant <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something④">MIAF image item</a>.</span> 
-    <li data-md><span id="assert-dd521ae6">The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①">AV1 Image Item</a> shall be associated with an <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty">AV1ItemConfigurationProperty</a></code>.</span> 
+    <li data-md><span id="assert-cadb7e29">The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item">AV1 Image Item</a> shall be a conformant <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something④">MIAF image item</a>.</span>
+
+    <li data-md><span id="assert-dd521ae6">The <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①">AV1 Image Item</a> shall be associated with an <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty">AV1ItemConfigurationProperty</a></code>.</span>
+
     <li data-md>
      <p>The content of an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②">AV1 Image Item</a> is called the <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-image-item-data">AV1 Image Item Data</dfn> and shall obey the following constraints:</p>
      <ul>
-      <li data-md><span id="assert-8ef3bad2">The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data">AV1 Image Item Data</a> shall be identical to the content of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑤">AV1 Sample</a> marked as <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/83102.html" id="ref-for-something⑥">sync</a>'</code>, as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff" title="AV1 Codec ISO Media File Format Binding">[AV1-ISOBMFF]</a>.</span> 
+      <li data-md><span id="assert-8ef3bad2">The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data">AV1 Image Item Data</a> shall be identical to the content of an <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑤">AV1 Sample</a> marked as <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/83102.html" id="ref-for-something⑥">sync</a>'</code>, as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff" title="AV1 Codec ISO Media File Format Binding">[AV1-ISOBMFF]</a>.</span>
+
       <li data-md>
-       <span id="assert-809b9acc">The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall have exactly one <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦">Sequence Header OBU</a>.</span> 
+       <span id="assert-809b9acc">The <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data①">AV1 Image Item Data</a> shall have exactly one <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦">Sequence Header OBU</a>.</span>
+
+
        <p class="note" role="note"><span class="marker">NOTE:</span> File writers may want to set the <code><a data-link-type="dfn" data-refhint-key="cac3ab9a" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧">still_picture</a></code> and <code><a data-link-type="dfn" data-refhint-key="b7a83fe5" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑨">reduced_still_picture_header</a></code> flags to 1 when possible in the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⓪">Sequence Header OBU</a> part of the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data②">AV1 Image Item Data</a> so that AV1 header overhead is minimized.</p>
      </ul>
    </ul>
@@ -2347,13 +2358,21 @@ Quantity (per item):      One for an image item of type <code>'av01'</code>, zer
 </pre>
    <p>The syntax and semantics of the <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1itemconfigurationproperty">AV1ItemConfigurationProperty</dfn> are identical to those of the <code><a data-link-type="dfn" data-refhint-key="0b35ca40" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①①">AV1CodecConfigurationBox</a></code> defined in <a data-link-type="biblio" href="#biblio-av1-isobmff" title="AV1 Codec ISO Media File Format Binding">[AV1-ISOBMFF]</a>, with the following constraints:</p>
    <ul>
-    <li data-md><span id="assert-9c37f45a"><a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①②">Sequence Header OBUs</a> should not be present in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty①">AV1ItemConfigurationProperty</a></code>.</span> 
-    <li data-md><span id="assert-a0fd4b2f">If a <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①③">Sequence Header OBU</a> is present in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty②">AV1ItemConfigurationProperty</a></code>, it shall match the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①④">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data③">AV1 Image Item Data</a>.</span> 
-    <li data-md><span id="assert-4f2a2770">The values of the fields in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty③">AV1ItemConfigurationProperty</a></code> shall match those of the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑤">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data④">AV1 Image Item Data</a>.</span> 
-    <li data-md><span id="assert-a631d62f">The values of the bit depth and the number of channels derived from the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty④">AV1ItemConfigurationProperty</a></code> shall match the <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something①⑥">PixelInformationProperty</a></code> (<code>'<a data-link-type="dfn" data-refhint-key="75eb2e09" href="https://www.iso.org/standard/83650.html" id="ref-for-something①⑦">pixi</a>'</code>) if present.</span> 
-    <li data-md><span id="assert-071d427d"><a data-link-type="dfn" data-refhint-key="2eee8bad" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑧">Metadata OBUs</a>, if present, shall match the values given in other item properties</span>, such as the <code><a data-link-type="dfn" data-refhint-key="a0af581e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑨">MasteringDisplayColourVolumeBox</a></code> (<code>'<a data-link-type="dfn" data-refhint-key="636c951e" href="https://www.iso.org/standard/83102.html" id="ref-for-something②⓪">mdcv</a>'</code>) or <code><a data-link-type="dfn" data-refhint-key="c32cd26b" href="https://www.iso.org/standard/83102.html" id="ref-for-something②①">ContentLightLevelBox</a></code> (<code>'<a data-link-type="dfn" data-refhint-key="5e0ecddc" href="https://www.iso.org/standard/83102.html" id="ref-for-something②②">clli</a>'</code>). 
+    <li data-md><span id="assert-9c37f45a"><a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①②">Sequence Header OBUs</a> should not be present in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty①">AV1ItemConfigurationProperty</a></code>.</span>
+
+    <li data-md><span id="assert-a0fd4b2f">If a <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①③">Sequence Header OBU</a> is present in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty②">AV1ItemConfigurationProperty</a></code>, it shall match the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①④">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data③">AV1 Image Item Data</a>.</span>
+
+    <li data-md><span id="assert-4f2a2770">The values of the fields in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty③">AV1ItemConfigurationProperty</a></code> shall match those of the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑤">Sequence Header OBU</a> in the <a data-link-type="dfn" href="#av1-image-item-data" id="ref-for-av1-image-item-data④">AV1 Image Item Data</a>.</span>
+
+    <li data-md><span id="assert-a631d62f">The values of the bit depth and the number of channels derived from the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty④">AV1ItemConfigurationProperty</a></code> shall match the <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something①⑥">PixelInformationProperty</a></code> (<code>'<a data-link-type="dfn" data-refhint-key="75eb2e09" href="https://www.iso.org/standard/83650.html" id="ref-for-something①⑦">pixi</a>'</code>) if present.</span>
+
+    <li data-md><span id="assert-071d427d"><a data-link-type="dfn" data-refhint-key="2eee8bad" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑧">Metadata OBUs</a>, if present, shall match the values given in other item properties</span>, such as the <code><a data-link-type="dfn" data-refhint-key="a0af581e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑨">MasteringDisplayColourVolumeBox</a></code> (<code>'<a data-link-type="dfn" data-refhint-key="636c951e" href="https://www.iso.org/standard/83102.html" id="ref-for-something②⓪">mdcv</a>'</code>) or <code><a data-link-type="dfn" data-refhint-key="c32cd26b" href="https://www.iso.org/standard/83102.html" id="ref-for-something②①">ContentLightLevelBox</a></code> (<code>'<a data-link-type="dfn" data-refhint-key="5e0ecddc" href="https://www.iso.org/standard/83102.html" id="ref-for-something②②">clli</a>'</code>).
+
    </ul>
-    <span id="assert-ebb95262">This property should be marked as essential.</span> 
+   
+<span id="assert-ebb95262">This property should be marked as essential.</span>
+
+
    <h4 class="heading settled" data-level="2.2.2" id="image-spatial-extents-property"><span class="secno">2.2.2. </span><span class="content">Image Spatial Extents Property</span><a class="self-link" href="#image-spatial-extents-property"></a></h4>
    <p>The semantics of the <code>'<a data-link-type="dfn" data-refhint-key="4baefa0a" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③">ispe</a>'</code> property as defined in <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a> apply. More specifically, for <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> images, <span id="assert-62e7d10a">the values of <code><a data-link-type="dfn" data-refhint-key="35bf2217" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④">image_width</a></code> and <code><a data-link-type="dfn" data-refhint-key="1f80d67a" href="https://www.iso.org/standard/83650.html" id="ref-for-something②⑤">image_height</a></code> shall respectively equal the values of <code><a data-link-type="dfn" data-refhint-key="8c2ad851" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something②⑥">UpscaledWidth</a></code> and <code><a data-link-type="dfn" data-refhint-key="e8f34553" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something②⑦">FrameHeight</a></code></span> as defined in <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> but for a specific frame in the item payload. The exact frame depends on the presence and content of the <code>'<a data-link-type="dfn" data-refhint-key="07f6aa01" href="https://www.iso.org/standard/83650.html" id="ref-for-something②⑧">lsel</a>'</code> and <code><a data-link-type="dfn" href="#operatingpointselectorproperty" id="ref-for-operatingpointselectorproperty">OperatingPointSelectorProperty</a></code> properties as follows:</p>
    <ul>
@@ -2370,10 +2389,14 @@ Quantity (per item):      One for an image item of type <code>'av01'</code>, zer
      <p>If a <code>'<a data-link-type="dfn" data-refhint-key="07f6aa01" href="https://www.iso.org/standard/83650.html" id="ref-for-something③⑦">lsel</a>'</code> property is associated with an item and its <code><a data-link-type="dfn" data-refhint-key="043b05f1" href="https://www.iso.org/standard/83650.html" id="ref-for-something③⑧">layer_id</a></code> is different from 0xFFFF, the <code>'<a data-link-type="dfn" data-refhint-key="4baefa0a" href="https://www.iso.org/standard/83650.html" id="ref-for-something③⑨">ispe</a>'</code> property documents the dimensions of the output frame produced by decoding the corresponding layer.</p>
    </ul>
    <p class="note" role="note"><span class="marker">NOTE:</span> The dimensions indicated in the <code>'<a data-link-type="dfn" data-refhint-key="4baefa0a" href="https://www.iso.org/standard/83650.html" id="ref-for-something④⓪">ispe</a>'</code> property might not match the values <code><a data-link-type="dfn" data-refhint-key="1acfb1b7" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④①">max_frame_width_minus1</a>+1</code> and <code><a data-link-type="dfn" data-refhint-key="17ba9ff4" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④②">max_frame_height_minus1</a>+1</code> indicated in the AV1 bitstream.</p>
-   <p class="note" role="note"><span class="marker">NOTE:</span> The values of <code><a data-link-type="dfn" data-refhint-key="673167c4" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④③">render_width_minus1</a></code> and <code><a data-link-type="dfn" data-refhint-key="f0e4fd5f" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④④">render_height_minus1</a></code> possibly present in the AV1 bistream are not exposed at the <a data-link-type="dfn" href="#avif" id="ref-for-avif①">AVIF</a> container level.</p>
+   <p class="note" role="note"><span class="marker">NOTE:</span> The values of <code><a data-link-type="dfn" data-refhint-key="673167c4" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④③">render_width_minus1</a></code> and <code><a data-link-type="dfn" data-refhint-key="f0e4fd5f" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④④">render_height_minus1</a></code> possibly present in the AV1 bitstream are not exposed at the <a data-link-type="dfn" href="#avif" id="ref-for-avif①">AVIF</a> container level.</p>
    <h4 class="heading settled" data-level="2.2.3" id="clean-aperture-property"><span class="secno">2.2.3. </span><span class="content">Clean Aperture Property</span><a class="self-link" href="#clean-aperture-property"></a></h4>
    <p>The semantics of the clean aperture property (<code>'<a data-link-type="dfn" data-refhint-key="c5aab698" href="https://www.iso.org/standard/83102.html" id="ref-for-something④⑤">clap</a>'</code>) as defined in <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a> apply. In addition to the restrictions on transformative item property ordering specified in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a>, the following restriction also applies:</p>
-    <span id="assert-ecdb0910">The origin of the <code>'<a data-link-type="dfn" data-refhint-key="c5aab698" href="https://www.iso.org/standard/83102.html" id="ref-for-something④⑥">clap</a>'</code> item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary <a data-link-type="dfn" data-refhint-key="be54c0aa" href="https://www.iso.org/standard/83650.html" id="ref-for-something④⑦">non-hidden image item</a>.</span> 
+   
+
+<span id="assert-ecdb0910">The origin of the <code>'<a data-link-type="dfn" data-refhint-key="c5aab698" href="https://www.iso.org/standard/83102.html" id="ref-for-something④⑥">clap</a>'</code> item property shall be anchored to 0,0 (top-left) of the input image unless the full, un-cropped image item is included as a secondary <a data-link-type="dfn" data-refhint-key="be54c0aa" href="https://www.iso.org/standard/83650.html" id="ref-for-something④⑦">non-hidden image item</a>.</span>
+
+
    <h4 class="heading settled" data-level="2.2.4" id="other-item-property"><span class="secno">2.2.4. </span><span class="content">Other Item Properties</span><a class="self-link" href="#other-item-property"></a></h4>
    <p>In addition to the Image Properties defined in this document, <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item③">AV1 image items</a> may also be associated with item properties defined in other specifications such as <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a> and <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a>. Commonly used item properties can be found in <a href="#avif-required-boxes">§ 9.1.1 Minimum set of boxes</a> and <a href="#avif-required-boxes-additional">§ 9.1.2 Requirements on additional image item related boxes</a>.</p>
    <p>In general, it is recommended to use item properties instead of <a data-link-type="dfn" data-refhint-key="2eee8bad" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something④⑧">Metadata OBUs</a> in the <code><a data-link-type="dfn" href="#av1itemconfigurationproperty" id="ref-for-av1itemconfigurationproperty⑤">AV1ItemConfigurationProperty</a></code>.</p>
@@ -2428,21 +2451,29 @@ Quantity (per item):   Zero or one
    <p class="note" role="note"><span class="marker">NOTE:</span> The size of the last layer can be determined by subtracting the sum of the sizes of all layers indicated in this property from the entire item size.</p>
    <div class="example" id="example-4f7751ed"><a class="self-link" href="#example-4f7751ed"></a>A property indicating [X,0,0] is used for an image item composed of 2 layers. The size of the first layer is X and the size of the second layer is ItemSize - X. Note that the <code><a data-link-type="dfn" data-refhint-key="b44bf56b" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦⑧">spatial_id</a></code> for the first layer does not necessarily match the index in the array that provides the size. In other words, in this case the index giving value X is 0, but the corresponding <code><a data-link-type="dfn" data-refhint-key="b44bf56b" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑦⑨">spatial_id</a></code> could be 0, 1 or 2. Similarly, a property indicating [X,Y,0] is used for an image made of 3 layers.</div>
    <h2 class="heading settled" data-level="3" id="image-sequences"><span class="secno">3. </span><span class="content">Image Sequences</span><a class="self-link" href="#image-sequences"></a></h2>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" data-refhint-key="60dc4d02" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⓪">Temporal Units</a> stored in an <a data-link-type="dfn" data-refhint-key="632f8566" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑧①">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff" title="AV1 Codec ISO Media File Format Binding">[AV1-ISOBMFF]</a> with the following constraints: </p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-image-sequence">AV1 Image Sequence</dfn> is defined as a set of AV1 <a data-link-type="dfn" data-refhint-key="60dc4d02" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⓪">Temporal Units</a> stored in an <a data-link-type="dfn" data-refhint-key="632f8566" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑧①">AV1 track</a> as defined in <a data-link-type="biblio" href="#biblio-av1-isobmff" title="AV1 Codec ISO Media File Format Binding">[AV1-ISOBMFF]</a> with the following constraints:
+
+</p>
    <ul>
-    <li data-md><span id="assert-773464dd">The track shall be a valid <a data-link-type="dfn" data-refhint-key="7d32177e" href="https://www.iso.org/standard/74417.html" id="ref-for-something⑧②">MIAF image sequence</a>.</span> 
-    <li data-md><span id="assert-f42bd67a">The track handler for an <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence">AV1 Image Sequence</a> shall be <code>'<a data-link-type="dfn" data-refhint-key="aab5dfbd" href="https://www.iso.org/standard/83650.html" id="ref-for-something⑧③">pict</a>'</code>.</span> 
-    <li data-md><span id="assert-457192a4">The track shall have only one <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑧④">AV1 Sample</a> description entry.</span> 
+    <li data-md><span id="assert-773464dd">The track shall be a valid <a data-link-type="dfn" data-refhint-key="7d32177e" href="https://www.iso.org/standard/74417.html" id="ref-for-something⑧②">MIAF image sequence</a>.</span>
+
+    <li data-md><span id="assert-f42bd67a">The track handler for an <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence">AV1 Image Sequence</a> shall be <code>'<a data-link-type="dfn" data-refhint-key="aab5dfbd" href="https://www.iso.org/standard/83650.html" id="ref-for-something⑧③">pict</a>'</code>.</span>
+
+    <li data-md><span id="assert-457192a4">The track shall have only one <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something⑧④">AV1 Sample</a> description entry.</span>
+
     <li data-md>
      <span id="assert-bfc4d5c2">If multiple <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⑤">Sequence Header OBUs</a> are present in the track payload, they shall be identical.</span>
      <p></p>
    </ul>
    <h2 class="heading settled" data-level="4" id="other-images"><span class="secno">4. </span><span class="content">Other Image Items and Sequences</span><a class="self-link" href="#other-images"></a></h2>
    <h3 class="heading settled" data-level="4.1" id="auxiliary-images"><span class="secno">4.1. </span><span class="content">Auxiliary Image Items and Sequences</span><a class="self-link" href="#auxiliary-images"></a></h3>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-auxiliary-image-item">AV1 Auxiliary Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑤">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints: </p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-auxiliary-image-item">AV1 Auxiliary Image Item</dfn> (respectively an <dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="av1-auxiliary-image-sequence">AV1 Auxiliary Image Sequence</dfn>) is an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑤">AV1 Image Item</a> (respectively <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence①">AV1 Image Sequence</a>) with the following additional constraints:
+</p>
    <ul>
-    <li data-md><span id="assert-1047902f">It shall be a compliant <a data-link-type="dfn" data-refhint-key="104e0ad8" href="https://www.iso.org/standard/74417.html" id="ref-for-something⑧⑥">MIAF Auxiliary Image Item</a> (respectively <a data-link-type="dfn" data-refhint-key="89045c4e" href="https://www.iso.org/standard/74417.html" id="ref-for-something⑧⑦">MIAF Auxiliary Image Sequence</a>).</span> 
-    <li data-md><span id="assert-1243aeeb">The <code><a data-link-type="dfn" data-refhint-key="fba95d43" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⑧">mono_chrome</a></code> field in the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⑨">Sequence Header OBU</a> shall be set to 1.</span> 
+    <li data-md><span id="assert-1047902f">It shall be a compliant <a data-link-type="dfn" data-refhint-key="104e0ad8" href="https://www.iso.org/standard/74417.html" id="ref-for-something⑧⑥">MIAF Auxiliary Image Item</a> (respectively <a data-link-type="dfn" data-refhint-key="89045c4e" href="https://www.iso.org/standard/74417.html" id="ref-for-something⑧⑦">MIAF Auxiliary Image Sequence</a>).</span>
+
+    <li data-md><span id="assert-1243aeeb">The <code><a data-link-type="dfn" data-refhint-key="fba95d43" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⑧">mono_chrome</a></code> field in the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑧⑨">Sequence Header OBU</a> shall be set to 1.</span>
+
     <li data-md>
      <span id="assert-12507edd">The <code><a data-link-type="dfn" data-refhint-key="33ee9ea3" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑨⓪">color_range</a></code> field in the <a data-link-type="dfn" data-refhint-key="30a8ed33" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something⑨①">Sequence Header OBU</a> shall be set to 1.</span>
      <p></p>
@@ -2511,7 +2542,9 @@ Quantity (per item):   Zero or one
    <p><dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-reserved">reserved</dfn> shall be equal to 0. The value of <code><a data-link-type="dfn" href="#sato-reserved" id="ref-for-sato-reserved">reserved</a></code> shall be ignored by readers.</p>
    <p><dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-bit_depth">bit_depth</dfn> determines the precision (from 8 to 64 bits, see <a href="#sato-num-bits-table">Table 1</a>) of the signed integer temporary variable supporting the intermediate results of the operations. It also determines the precision of the stack elements and the field size of the <code><a data-link-type="dfn" href="#sato-constant" id="ref-for-sato-constant①">constant</a></code> fields. This intermediate precision shall be high enough so that all input sample values fit into that signed bit depth.</p>
    <table class="data" id="sato-num-bits-table">
-    <caption style="caption-side:bottom"> Table 1 - Mapping from <code><a data-link-type="dfn" href="#sato-bit_depth" id="ref-for-sato-bit_depth">bit_depth</a></code> to the <dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-intermediate-bit-depth">intermediate bit depth</dfn> (<code><a data-link-type="dfn" href="#sato-num_bits" id="ref-for-sato-num_bits">num_bits</a></code>). </caption>
+    <caption style="caption-side:bottom">
+    Table 1 - Mapping from <code><a data-link-type="dfn" href="#sato-bit_depth" id="ref-for-sato-bit_depth">bit_depth</a></code> to the <dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-intermediate-bit-depth">intermediate bit depth</dfn> (<code><a data-link-type="dfn" href="#sato-num_bits" id="ref-for-sato-num_bits">num_bits</a></code>).
+  </caption>
     <thead>
      <tr>
       <th>Value of <code><a data-link-type="dfn" href="#sato-bit_depth" id="ref-for-sato-bit_depth①">bit_depth</a></code>
@@ -2534,7 +2567,9 @@ Quantity (per item):   Zero or one
    <p><dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-token_count">token_count</dfn> is the expected number of <a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token③">tokens</a> to read. <span id="assert-66976029">The value of <code><a data-link-type="dfn" href="#sato-token_count" id="ref-for-sato-token_count">token_count</a></code> shall be greater than 0.</span></p>
    <p><dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-token">token</dfn> determines the type of the <dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-operand">operand</dfn> (<code><a data-link-type="dfn" href="#sato-constant" id="ref-for-sato-constant②">constant</a></code> or input image item sample) or the <dfn class="dfn-paneled" data-dfn-for="sato" data-dfn-type="dfn" data-noexport id="sato-operator">operator</dfn> (how to transform one or two <a data-link-type="dfn" href="#sato-operand" id="ref-for-sato-operand⑧">operands</a> into the result). See <a href="#sato-token-table">Table 2</a>. Readers shall ignore a <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item⑨">Sample Transform Derived Image Item</a> with a reserved <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token④">token</a></code> value.</p>
    <table class="data" id="sato-token-table">
-    <caption style="caption-side:bottom"> Table 2 - Meaning of the value of <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token⑤">token</a></code>. </caption>
+    <caption style="caption-side:bottom">
+    Table 2 - Meaning of the value of <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token⑤">token</a></code>.
+  </caption>
     <thead>
      <tr>
       <th>Value of <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token⑥">token</a></code>
@@ -2845,14 +2880,20 @@ Quantity (per item):   Zero or one
    <h5 class="no-toc heading settled" data-level="4.2.3.4" id="sample-transform-constraints"><span class="secno">4.2.3.4. </span><span class="content">Constraints</span><a class="self-link" href="#sample-transform-constraints"></a></h5>
    <p><a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⓪">Sample Transform Derived Image Items</a> use the postfix notation to evaluate the result of the whole <a data-link-type="dfn" href="#sato-expression" id="ref-for-sato-expression③">expression</a> for each reconstructed image item sample.</p>
    <ul>
-    <li data-md><span id="assert-989adc85">The <a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token⑨">tokens</a> shall be evaluated in the order they are defined in the metadata (the <code><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="sampletransform">SampleTransform</dfn></code> structure defined in <a href="#sample-transform-syntax">§ 4.2.3.2 Syntax</a>) of the <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①①">Sample Transform Derived Image Item</a>.</span> 
-    <li data-md><span id="assert-1f569fa5"><code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①⓪">token</a></code> shall be at most <code><a data-link-type="dfn" data-refhint-key="a5ec90ef" href="https://www.iso.org/standard/83102.html" id="ref-for-something①②⑨">reference_count</a></code> when evaluating a sample <a data-link-type="dfn" href="#sato-operand" id="ref-for-sato-operand③⑤">operand</a> (when <math><mn>1</mn><mo>≤</mo><mi>token</mi><mo>≤</mo><mn>32</mn></math>).</span> 
-    <li data-md><span id="assert-6c16d91f">There shall be at least one <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①①">token</a></code>.</span> 
+    <li data-md><span id="assert-989adc85">The <a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token⑨">tokens</a> shall be evaluated in the order they are defined in the metadata (the <code><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="sampletransform">SampleTransform</dfn></code> structure defined in <a href="#sample-transform-syntax">§ 4.2.3.2 Syntax</a>) of the <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①①">Sample Transform Derived Image Item</a>.</span>
+
+    <li data-md><span id="assert-1f569fa5"><code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①⓪">token</a></code> shall be at most <code><a data-link-type="dfn" data-refhint-key="a5ec90ef" href="https://www.iso.org/standard/83102.html" id="ref-for-something①②⑨">reference_count</a></code> when evaluating a sample <a data-link-type="dfn" href="#sato-operand" id="ref-for-sato-operand③⑤">operand</a> (when <math><mn>1</mn><mo>≤</mo><mi>token</mi><mo>≤</mo><mn>32</mn></math>).</span>
+
+    <li data-md><span id="assert-6c16d91f">There shall be at least one <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①①">token</a></code>.</span>
+
     <li data-md>
      <p>The stack is empty before evaluating the first <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①②">token</a></code>.</p>
-    <li data-md><span id="assert-98b07e13">There shall be at least 1 element in the stack before evaluating a unary <a data-link-type="dfn" href="#sato-operator" id="ref-for-sato-operator②①">operator</a>.</span> 
-    <li data-md><span id="assert-75c5cbbc">There shall be at least 2 elements in the stack before evaluating a binary <a data-link-type="dfn" href="#sato-operator" id="ref-for-sato-operator②②">operator</a>.</span> 
-    <li data-md><span id="assert-bac41e3a">There shall be exactly one remaining element in the stack after evaluating the last <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①③">token</a></code>.</span> This element is the value of the reconstructed image item sample. 
+    <li data-md><span id="assert-98b07e13">There shall be at least 1 element in the stack before evaluating a unary <a data-link-type="dfn" href="#sato-operator" id="ref-for-sato-operator②①">operator</a>.</span>
+
+    <li data-md><span id="assert-75c5cbbc">There shall be at least 2 elements in the stack before evaluating a binary <a data-link-type="dfn" href="#sato-operator" id="ref-for-sato-operator②②">operator</a>.</span>
+
+    <li data-md><span id="assert-bac41e3a">There shall be exactly one remaining element in the stack after evaluating the last <code><a data-link-type="dfn" href="#sato-token" id="ref-for-sato-token①③">token</a></code>.</span> This element is the value of the reconstructed image item sample.
+
    </ul>
    <p>Non-compliant <a data-link-type="dfn" href="#sato-expression" id="ref-for-sato-expression④">expressions</a> shall be rejected by parsers as invalid files.</p>
    <p class="note" role="note">
@@ -2890,65 +2931,99 @@ Quantity (per item):   Zero or one
    <p>An <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑧">AV1 Image File Format</a> file may conform to multiple brands. Similarly, an <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format⑨">AV1 Image File Format</a> reader/parser or <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①⓪">AV1 Image File Format</a> renderer may be capable of processing the features associated with one or more brands.</p>
    <p><span id="assert-bd18acea">If any of the brands defined in this document is specified in the <code><a data-link-type="dfn" data-refhint-key="c9bbeee3" href="https://www.iso.org/standard/83102.html" id="ref-for-something①③⑧">major_brand</a></code> field of the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①③⑨">FileTypeBox</a></code>, the file extension and Internet Media Type should respectively be "<code>.avif</code>" and "<code>image/avif</code>" as defined in <a href="#mime-registration">§ 10 AVIF Media Type Registration</a>.</span></p>
    <h3 class="heading settled" data-level="6.2" id="image-and-image-collection-brand"><span class="secno">6.2. </span><span class="content">AVIF image and image collection brand</span><a class="self-link" href="#image-and-image-collection-brand"></a></h3>
-    The brand to identify <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑧">AV1 image items</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image brand" data-dfn-type="dfn" data-export id="avif-image-brand-avif">avif</dfn>. 
+   
+The brand to identify <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑧">AV1 image items</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image brand" data-dfn-type="dfn" data-export id="avif-image-brand-avif">avif</dfn>.
+
+
    <p>Files that indicate this brand in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④⓪">FileTypeBox</a></code> shall comply with the following:</p>
    <ul>
-    <li data-md><span id="assert-cb307e76">The <a data-link-type="dfn" data-refhint-key="81157bdc" href="https://www.iso.org/standard/74417.html" id="ref-for-something①④①">primary image item</a> shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑨">AV1 Image Item</a> or be a derived image that references directly or indirectly one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②⓪">AV1 Image Items</a>.</span> 
+    <li data-md><span id="assert-cb307e76">The <a data-link-type="dfn" data-refhint-key="81157bdc" href="https://www.iso.org/standard/74417.html" id="ref-for-something①④①">primary image item</a> shall be an <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item①⑨">AV1 Image Item</a> or be a derived image that references directly or indirectly one or more items that all are <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②⓪">AV1 Image Items</a>.</span>
+
     <li data-md>
      <p><a data-link-type="dfn" href="#av1-auxiliary-image-item" id="ref-for-av1-auxiliary-image-item②">AV1 auxiliary image items</a> may be present in the file.</p>
    </ul>
-    <span id="assert-d15b2e01">Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif">avif</a></code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④②">FileTypeBox</a></code>.</span> 
+   
+<span id="assert-d15b2e01">Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif">avif</a></code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④②">FileTypeBox</a></code>.</span>
+
+
    <p>Additionally, the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Intra-only brand" data-dfn-type="dfn" data-export id="avif-intra-only-brand-avio">avio</dfn> is defined. If the file indicates the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio">avio</a></code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④③">FileTypeBox</a></code>, then <span id="assert-05eb121f">the <a data-link-type="dfn" data-refhint-key="81157bdc" href="https://www.iso.org/standard/74417.html" id="ref-for-something①④④">primary image item</a> or all the items referenced by the <a data-link-type="dfn" data-refhint-key="81157bdc" href="https://www.iso.org/standard/74417.html" id="ref-for-something①④⑤">primary image item</a> shall be <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②①">AV1 image items</a> made only of <a data-link-type="dfn" data-refhint-key="65cfd086" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①④⑥">Intra Frames</a></span>.</p>
    <h3 class="heading settled" data-level="6.3" id="image-sequence-brand"><span class="secno">6.3. </span><span class="content">AVIF image sequence brands</span><a class="self-link" href="#image-sequence-brand"></a></h3>
-    The brand to identify <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="dfn" data-export id="avif-image-sequence-brand-avis">avis</dfn>. 
+   
+The brand to identify <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence③">AV1 image sequences</a> is <dfn class="dfn-paneled" data-dfn-for="AVIF Image Sequence brand" data-dfn-type="dfn" data-export id="avif-image-sequence-brand-avis">avis</dfn>.
+
+
    <p>Files that indicate this brand in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④⑦">FileTypeBox</a></code> shall comply with the following:</p>
    <ul>
-    <li data-md><span id="assert-efe9c102">they shall contain one or more <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a>.</span> 
+    <li data-md><span id="assert-efe9c102">they shall contain one or more <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence④">AV1 image sequences</a>.</span>
+
     <li data-md>
      <p>they may contain <a data-link-type="dfn" href="#av1-auxiliary-image-sequence" id="ref-for-av1-auxiliary-image-sequence②">AV1 auxiliary image sequences</a>.</p>
    </ul>
-    <span id="assert-f531b09d">Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis">avis</a></code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④⑧">FileTypeBox</a></code>.</span> 
+   
+<span id="assert-f531b09d">Files that conform with these constraints should include the brand <code><a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis">avis</a></code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④⑧">FileTypeBox</a></code>.</span>
+
+
    <p>Additionally, if a file contains <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑤">AV1 image sequences</a> and the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio①">avio</a></code> is used in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①④⑨">FileTypeBox</a></code>, <span id="assert-254a98fe">the item constraints for this brand shall be met</span> and <span id="assert-bc61e83a">at least one of the <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑥">AV1 image sequences</a> shall be made only of <a data-link-type="dfn" href="https://aomediacodec.github.io/av1-isobmff/" id="ref-for-something①⑤⓪">AV1 Samples</a> marked as <code>'<a data-link-type="dfn" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤①">sync</a>'</code></span>. Conversely, <span id="assert-7d2f92b6">if such a track exists and the constraints of the brand <code><a data-link-type="dfn" href="#avif-intra-only-brand-avio" id="ref-for-avif-intra-only-brand-avio②">avio</a></code> on <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②②">AV1 image items</a> are met, the brand should be used</span>.</p>
    <p class="note" role="note"><span class="marker">NOTE:</span> As defined in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a>, a file that is primarily an image sequence still has at least an image item. Hence, it can also declare brands for signaling the image item.</p>
    <h2 class="heading settled" data-level="7" id="file-constraints"><span class="secno">7. </span><span class="content">General constraints</span><a class="self-link" href="#file-constraints"></a></h2>
    <p>The following constraints are common to files compliant with this specification:</p>
    <ul>
-    <li data-md><span id="assert-8fc3f160">The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> specification and list <code>'<a data-link-type="dfn" data-refhint-key="a6f606aa" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑤②">miaf</a>'</code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤③">FileTypeBox</a></code>.</span> 
-    <li data-md><span id="assert-dff472eb">The file shall list <code>'<a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif①">avif</a>'</code> or <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis①">avis</a>'</code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤④">FileTypeBox</a></code>.</span> 
+    <li data-md><span id="assert-8fc3f160">The file shall be compliant with the <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> specification and list <code>'<a data-link-type="dfn" data-refhint-key="a6f606aa" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑤②">miaf</a>'</code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤③">FileTypeBox</a></code>.</span>
+
+    <li data-md><span id="assert-dff472eb">The file shall list <code>'<a data-link-type="dfn" href="#avif-image-brand-avif" id="ref-for-avif-image-brand-avif①">avif</a>'</code> or <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis①">avis</a>'</code> in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤④">FileTypeBox</a></code>.</span>
+
     <li data-md>
-     <span id="assert-c4bb0e7d">Transformative properties shall not be associated with items in a derivation chain (as defined in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a>) that serves as an input to a <a data-link-type="dfn" href="#grid-derived-image-item" id="ref-for-grid-derived-image-item">grid derived image item</a>.</span> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself. 
+     <span id="assert-c4bb0e7d">Transformative properties shall not be associated with items in a derivation chain (as defined in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a>) that serves as an input to a <a data-link-type="dfn" href="#grid-derived-image-item" id="ref-for-grid-derived-image-item">grid derived image item</a>.</span> For example, if a file contains a grid item and its referenced coded image items, cropping, mirroring or rotation transformations are only permitted on the grid item itself.
+
+
      <p class="note" role="note"><span class="marker">NOTE:</span> This constraint further restricts files compared to <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a>.</p>
    </ul>
    <h2 class="heading settled" data-level="8" id="profiles"><span class="secno">8. </span><span class="content">Profiles</span><a class="self-link" href="#profiles"></a></h2>
    <h3 class="heading settled" data-level="8.1" id="profiles-overview"><span class="secno">8.1. </span><span class="content">Overview</span><a class="self-link" href="#profiles-overview"></a></h3>
    <p>The profiles defined in this section are for enabling interoperability between <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①①">AV1 Image File Format</a> files and <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①②">AV1 Image File Format</a> readers/parsers. A profile imposes a set of specific restrictions and is signaled by brands defined in this specification.</p>
-    <span id="assert-90b9bfa3">The <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤⑤">FileTypeBox</a></code> should declare at least one profile that enables decoding of the <a data-link-type="dfn" data-refhint-key="81157bdc" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑤⑥">primary image item</a>.</span> It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s). <span id="assert-951c6d0d">If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤⑦">FileTypeBox</a></code> and a profile is declared in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤⑧">FileTypeBox</a></code>, the profile shall also enable decoding of at least one image sequence track.</span> <span id="assert-564c67c4">The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence track without its auxiliary image sequence tracks.</span> 
+   
+
+<span id="assert-90b9bfa3">The <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤⑤">FileTypeBox</a></code> should declare at least one profile that enables decoding of the <a data-link-type="dfn" data-refhint-key="81157bdc" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑤⑥">primary image item</a>.</span> It is not an error for the encoder to include an auxiliary image that is not allowed by the specified profile(s).
+
+<span id="assert-951c6d0d">If <code>'<a data-link-type="dfn" href="#avif-image-sequence-brand-avis" id="ref-for-avif-image-sequence-brand-avis②">avis</a>'</code> is declared in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤⑦">FileTypeBox</a></code> and a profile is declared in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑤⑧">FileTypeBox</a></code>, the profile shall also enable decoding of at least one image sequence track.</span> <span id="assert-564c67c4">The profile should allow decoding of any associated auxiliary image sequence tracks, unless it is acceptable to decode the image sequence track without its auxiliary image sequence tracks.</span>
+
+
    <p>It is possible for a file compliant to this <a data-link-type="dfn" href="#av1-image-file-format" id="ref-for-av1-image-file-format①③">AV1 Image File Format</a> to not be able to declare an <a data-link-type="dfn" href="#avif" id="ref-for-avif⑥">AVIF</a> profile, if the corresponding AV1 encoding characteristics do not match any of the defined profiles.</p>
    <p class="note" role="note"><span class="marker">NOTE:</span> <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> supports 3 bit depths: 8, 10 and 12 bits, and the maximum dimensions of a coded image is 65536x65536, when <code><a data-link-type="dfn" data-refhint-key="09d2cd57" href="https://aomediacodec.github.io/av1-spec/av1-spec.pdf" id="ref-for-something①⑤⑨">seq_level_idx</a></code> is set to 31 (maximum parameters level).</p>
    <div class="example" id="example-ee584b29"><a class="self-link" href="#example-ee584b29"></a>If an image is encoded with dimensions (respectively a bit depth) that exceed the maximum dimensions (respectively bit depth) required by the AV1 profile and level of the <a data-link-type="dfn" href="#avif" id="ref-for-avif⑦">AVIF</a> profiles defined in this specification, the file will only signal general <a data-link-type="dfn" href="#avif" id="ref-for-avif⑧">AVIF</a> brands.</div>
    <h3 class="heading settled" data-level="8.2" id="baseline-profile"><span class="secno">8.2. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="avif-baseline-profile">AVIF Baseline Profile</dfn></span><a class="self-link" href="#baseline-profile"></a></h3>
-   <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> and identified by the brand <dfn class="dfn-paneled" data-dfn-for="AVIF Baseline Profile" data-dfn-type="dfn" data-export id="avif-baseline-profile-ma1b">MA1B</dfn>.</p>
+   <p>This section defines the MIAF AV1 Baseline profile of <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a>, specifically for <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> bitstreams, based on the constraints specified in <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> and identified by the brand  <dfn class="dfn-paneled" data-dfn-for="AVIF Baseline Profile" data-dfn-type="dfn" data-export id="avif-baseline-profile-ma1b">MA1B</dfn>.</p>
    <p>If the brand <code>'<a data-link-type="dfn" href="#avif-baseline-profile-ma1b" id="ref-for-avif-baseline-profile-ma1b">MA1B</a>'</code> is in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑥⓪">FileTypeBox</a></code>, the common constraints in the section <a href="#brands">§ 6 Brands, Internet media types and file extensions</a> shall apply.</p>
    <p>The following shared conditions and requirements from <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> shall apply:</p>
    <ul>
-    <li data-md><span id="assert-84233327"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="8a73930b" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥①">self-containment</a> (subclause 8.2)</span> 
+    <li data-md><span id="assert-84233327"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="8a73930b" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥①">self-containment</a> (subclause 8.2)</span>
+
    </ul>
    <p>The following shared conditions and requirements from <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> should apply:</p>
    <ul>
-    <li data-md><span id="assert-cf4ea772"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="684d0a6c" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥②">grid-limit</a> (subclause 8.4)</span> 
-    <li data-md><span id="assert-2b177d00"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="bd0f5fa2" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥③">single-track</a> (subclause 8.5)</span> 
-    <li data-md><span id="assert-7bef4687"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="1c7d45d3" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥④">edit-lists</a> (subclause 8.6)</span> 
-    <li data-md><span id="assert-ff5867a4"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="1616f062" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥⑤">matched-duration</a> (subclause 8.7)</span> 
+    <li data-md><span id="assert-cf4ea772"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="684d0a6c" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥②">grid-limit</a> (subclause 8.4)</span>
+
+    <li data-md><span id="assert-2b177d00"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="bd0f5fa2" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥③">single-track</a> (subclause 8.5)</span>
+
+    <li data-md><span id="assert-7bef4687"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="1c7d45d3" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥④">edit-lists</a> (subclause 8.6)</span>
+
+    <li data-md><span id="assert-ff5867a4"><span hidden>baseline-profile</span><a data-link-type="dfn" data-refhint-key="1616f062" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑥⑤">matched-duration</a> (subclause 8.7)</span>
+
    </ul>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②③">AV1 Image Items</a> and all <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑦">AV1 Image Sequences</a>:</p>
    <ul>
     <li data-md>
-     <span id="assert-76bdbeb4">The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</span> 
-     <p class="note" role="note"><span class="marker">NOTE:</span> AV1 tiers are not constrained because timing is optional in image sequences and is not relevant in image items or collections.</p>
-     <p class="note" role="note"><span class="marker">NOTE:</span> Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoders may not be able to handle larger images. More precisely, following <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> level definitions, coded image items compliant to the <a data-link-type="dfn" href="#avif-baseline-profile" id="ref-for-avif-baseline-profile">AVIF Baseline profile</a> may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using a <a data-link-type="dfn" href="#grid-derived-image-item" id="ref-for-grid-derived-image-item①">grid derived image item</a>.</p>
+     <span id="assert-76bdbeb4">The AV1 profile shall be the Main Profile and the level shall be 5.1 or lower.</span>
+
+
+     <p class="note" role="note"><span class="marker">NOTE:</span>  AV1 tiers are not constrained because timing is optional in image sequences and is not relevant in image items or collections.</p>
+     <p class="note" role="note"><span class="marker">NOTE:</span>  Level 5.1 is chosen for the Baseline profile to ensure that no single coded image exceeds 4k resolution, as some decoders may not be able to handle larger images. More precisely, following <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> level definitions, coded image items compliant to the <a data-link-type="dfn" href="#avif-baseline-profile" id="ref-for-avif-baseline-profile">AVIF Baseline profile</a> may not have a number of pixels greater than 8912896, a width greater than 8192 or a height greater than 4352. It is still possible to use the Baseline profile to create larger images using a <a data-link-type="dfn" href="#grid-derived-image-item" id="ref-for-grid-derived-image-item①">grid derived image item</a>.</p>
    </ul>
    <div class="example" id="example-691e5fe6">
-    <a class="self-link" href="#example-691e5fe6"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑥⑥">FileTypeBox</a></code>: 
+    <a class="self-link" href="#example-691e5fe6"></a>
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑥⑥">FileTypeBox</a></code>:
+
+
     <p><code>avif, mif1, miaf, MA1B</code></p>
     <p>A file containing a <code>'<a data-link-type="dfn" data-refhint-key="aab5dfbd" href="https://www.iso.org/standard/83650.html" id="ref-for-something①⑥⑦">pict</a>'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑥⑧">FileTypeBox</a></code>:</p>
     <p><code>avis, msf1, miaf, MA1B</code></p>
@@ -2960,36 +3035,52 @@ Quantity (per item):   Zero or one
    <p>If the brand <code>'<a data-link-type="dfn" href="#avif-advanced-profile-ma1a" id="ref-for-avif-advanced-profile-ma1a">MA1A</a>'</code> is in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑦③">FileTypeBox</a></code>, the common constraints in the section <a href="#brands">§ 6 Brands, Internet media types and file extensions</a> shall apply.</p>
    <p>The following shared conditions and requirements from <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> shall apply:</p>
    <ul>
-    <li data-md><span id="assert-c2e4549c"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="8a73930b" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦④">self-containment</a> (subclause 8.2)</span> 
+    <li data-md><span id="assert-c2e4549c"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="8a73930b" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦④">self-containment</a> (subclause 8.2)</span>
+
    </ul>
    <p>The following shared conditions and requirements from <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> should apply:</p>
    <ul>
-    <li data-md><span id="assert-3d9cf5a6"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="684d0a6c" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑤">grid-limit</a> (subclause 8.4)</span> 
-    <li data-md><span id="assert-309f6423"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="bd0f5fa2" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑥">single-track</a> (subclause 8.5)</span> 
-    <li data-md><span id="assert-fd768c18"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="1c7d45d3" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑦">edit-lists</a> (subclause 8.6)</span> 
-    <li data-md><span id="assert-53ffd4a0"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="1616f062" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑧">matched-duration</a> (subclause 8.7)</span> 
+    <li data-md><span id="assert-3d9cf5a6"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="684d0a6c" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑤">grid-limit</a> (subclause 8.4)</span>
+
+    <li data-md><span id="assert-309f6423"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="bd0f5fa2" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑥">single-track</a> (subclause 8.5)</span>
+
+    <li data-md><span id="assert-fd768c18"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="1c7d45d3" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑦">edit-lists</a> (subclause 8.6)</span>
+
+    <li data-md><span id="assert-53ffd4a0"><span hidden>advanced-profile</span><a data-link-type="dfn" data-refhint-key="1616f062" href="https://www.iso.org/standard/74417.html" id="ref-for-something①⑦⑧">matched-duration</a> (subclause 8.7)</span>
+
    </ul>
    <p>The following additional constraints apply to all <a data-link-type="dfn" href="#av1-image-item" id="ref-for-av1-image-item②④">AV1 Image Items</a>:</p>
    <ul>
     <li data-md>
-     <span id="assert-994c71bb">The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.</span> 
+     <span id="assert-994c71bb">The AV1 profile shall be the High Profile and the level shall be 6.0 or lower.</span>
+
+
      <p class="note" role="note"><span class="marker">NOTE:</span> Following <a data-link-type="biblio" href="#biblio-av1" title="AV1 Bitstream &amp; Decoding Process Specification">[AV1]</a> level definitions, coded image items compliant to the <a data-link-type="dfn" href="#avif-advanced-profile" id="ref-for-avif-advanced-profile">AVIF Advanced profile</a> may not have a number of pixels greater than 35651584, a width greater than 16384 or a height greater than 8704. It is still possible to use the Advanced profile to create larger images using a <a data-link-type="dfn" href="#grid-derived-image-item" id="ref-for-grid-derived-image-item②">grid derived image item</a>.</p>
    </ul>
    <p>The following additional constraints apply only to <a data-link-type="dfn" href="#av1-image-sequence" id="ref-for-av1-image-sequence⑧">AV1 Image Sequences</a>:</p>
    <ul>
-    <li data-md><span id="assert-7f965b8f">The AV1 profile shall be either Main Profile or High Profile.</span> 
-    <li data-md><span id="assert-d00bacd1">The AV1 level for Main Profile shall be 5.1 or lower.</span> 
-    <li data-md><span id="assert-d0390d60">The AV1 level for High Profile shall be 5.1 or lower.</span> 
+    <li data-md><span id="assert-7f965b8f">The AV1 profile shall be either Main Profile or High Profile.</span>
+
+    <li data-md><span id="assert-d00bacd1">The AV1 level for Main Profile shall be 5.1 or lower.</span>
+
+    <li data-md><span id="assert-d0390d60">The AV1 level for High Profile shall be 5.1 or lower.</span>
+
    </ul>
    <div class="example" id="example-df3267d9">
-    <a class="self-link" href="#example-df3267d9"></a> A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑦⑨">FileTypeBox</a></code>: 
+    <a class="self-link" href="#example-df3267d9"></a>
+A file containing items compliant with this profile is expected to list the following brands, in any order, in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑦⑨">FileTypeBox</a></code>:
+
+
     <p><code>avif, mif1, miaf, MA1A</code></p>
     <p>A file containing a <code>'<a data-link-type="dfn" data-refhint-key="aab5dfbd" href="https://www.iso.org/standard/83650.html" id="ref-for-something①⑧⓪">pict</a>'</code> track compliant with this profile is expected to list the following brands, in any order, in the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑧①">FileTypeBox</a></code>:</p>
     <p><code>avis, msf1, miaf, MA1A</code></p>
    </div>
    <h2 class="heading settled" data-level="9" id="box-lists"><span class="secno">9. </span><span class="content">Box requirements</span><a class="self-link" href="#box-lists"></a></h2>
    <h3 class="heading settled" data-level="9.1" id="avif-boxes"><span class="secno">9.1. </span><span class="content">Image item boxes</span><a class="self-link" href="#avif-boxes"></a></h3>
-    This section discusses the box requirements for an <a data-link-type="dfn" href="#avif-file" id="ref-for-avif-file②">AVIF file</a> containing image items. 
+   
+This section discusses the box requirements for an <a data-link-type="dfn" href="#avif-file" id="ref-for-avif-file②">AVIF file</a> containing image items.
+
+
    <h4 class="heading settled" data-level="9.1.1" id="avif-required-boxes"><span class="secno">9.1.1. </span><span class="content">Minimum set of boxes</span><a class="self-link" href="#avif-required-boxes"></a></h4>
    <p>As indicated in <a href="#file-constraints">§ 7 General constraints</a>, an <a data-link-type="dfn" href="#avif-file" id="ref-for-avif-file③">AVIF file</a> is a compliant <a data-link-type="biblio" href="#biblio-miaf" title="Information technology -- Multimedia application format (MPEG-A) -- Part 22: Multi-image application format (MIAF)">[MIAF]</a> file. As a consequence, some <a data-link-type="biblio" href="#biblio-isobmff" title="Information technology — Coding of audio-visual objects — Part 12: ISO base media file format">[ISOBMFF]</a> or <a data-link-type="biblio" href="#biblio-heif" title="Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format">[HEIF]</a> boxes are required, as indicated in the following table. The order of the boxes is indicative in the table. The specifications listed in the "Specification"
 column may require a specific order for a box or for its children and the order shall be respected. For example, per <a data-link-type="biblio" href="#biblio-isobmff" title="Information technology — Coding of audio-visual objects — Part 12: ISO base media file format">[ISOBMFF]</a>, the <code><a data-link-type="dfn" data-refhint-key="8df44d9e" href="https://www.iso.org/standard/83102.html" id="ref-for-something①⑧②">FileTypeBox</a></code> is required to appear first in an <a data-link-type="dfn" href="#avif-file" id="ref-for-avif-file④">AVIF file</a>.
@@ -3470,11 +3561,15 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
    <p>Consider the following:</p>
    <ul>
     <li data-md>
-     <p>A <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something②②⑨">MIAF image item</a> being a losslessly coded image item,<br> and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③⓪">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③①">bits_per_channel</a></code>=8,</p>
+     <p>A <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something②②⑨">MIAF image item</a> being a losslessly coded image item,<br>
+and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③⓪">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③①">bits_per_channel</a></code>=8,</p>
     <li data-md>
-     <p>Another image item being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br> and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③②">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③③">bits_per_channel</a></code>=8,</p>
+     <p>Another image item being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br>
+and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③②">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③③">bits_per_channel</a></code>=8,</p>
     <li data-md>
-     <p>A <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⑤">Sample Transform Derived Image Item</a> with the two items above as input in this order,<br> and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③④">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③⑤">bits_per_channel</a></code>=16,<br> and the following <code><a data-link-type="dfn" href="#sampletransform" id="ref-for-sampletransform">SampleTransform</a></code> fields:</p>
+     <p>A <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⑤">Sample Transform Derived Image Item</a> with the two items above as input in this order,<br>
+and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③④">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②③⑤">bits_per_channel</a></code>=16,<br>
+and the following <code><a data-link-type="dfn" href="#sampletransform" id="ref-for-sampletransform">SampleTransform</a></code> fields:</p>
      <ul>
       <li data-md>
        <p><code><a data-link-type="dfn" href="#sato-version" id="ref-for-sato-version①">version</a></code>=0</p>
@@ -3544,13 +3639,17 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
    <p class="note" role="note"><span class="marker">NOTE:</span> The second input image item loses its meaning of the least significant part if any of the most significant bits changes, so the first input image item has to be losslessly encoded. The second input image item supports reasonable loss during encoding.</p>
    <p class="note" role="note"><span class="marker">NOTE:</span> This pattern can be used for reconstructed bit depths beyond 16 by combining more than two input image items or with various input bit depth configurations and operations.</p>
    <h4 class="heading settled" id="sato-example-residual-bit-depth-extension"><span class="content">Residual bit depth extension</span><a class="self-link" href="#sato-example-residual-bit-depth-extension"></a></h4>
-   <p>The following example describes how to leverage a <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⑧">Sample Transform Derived Image Item</a> on top of a regular 12-bit <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something②③⑨">MIAF image item</a> to extend the decoded bit depth to 16 bits.<br> It differs from the <a href="#sato-example-suffix-bit-depth-extension">Suffix bit depth extension</a> by its slightly longer series of operations allowing its first input image item to be lossily encoded.</p>
+   <p>The following example describes how to leverage a <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⑧">Sample Transform Derived Image Item</a> on top of a regular 12-bit <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something②③⑨">MIAF image item</a> to extend the decoded bit depth to 16 bits.<br>
+It differs from the <a href="#sato-example-suffix-bit-depth-extension">Suffix bit depth extension</a> by its slightly longer series of operations allowing its first input image item to be lossily encoded.</p>
    <p>Consider the following:</p>
    <ul>
     <li data-md>
-     <p>A <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something②④⓪">MIAF image item</a> being a lossily coded image item,<br> and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④①">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④②">bits_per_channel</a></code>=12,</p>
+     <p>A <a data-link-type="dfn" href="https://www.iso.org/standard/74417.html" id="ref-for-something②④⓪">MIAF image item</a> being a lossily coded image item,<br>
+and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④①">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④②">bits_per_channel</a></code>=12,</p>
     <li data-md>
-     <p>Another image item being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br> and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④③">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④④">bits_per_channel</a></code>=8,<br> with the following contraints:</p>
+     <p>Another image item being a lossily or losslessly coded image item with the same spatial dimensions, the same number of channels, and the same chroma subsampling (or lack thereof) as the first input image item,<br>
+and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④③">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④④">bits_per_channel</a></code>=8,<br>
+with the following contraints:</p>
     <li style="list-style: none">
      <ul>For each sample position in each plane,</ul>
      <ul>
@@ -3692,7 +3791,9 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
       <p class="note" role="note"><span class="marker">NOTE:</span> Files that do not respect this constraint will still decode successfully because Clause <a href="#sample-transform-definition">§ 4.2.3.1 Definition</a> mandates the resulting values to be each clamped to fit in the number of bits per sample as defined by the <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④⑤">PixelInformationProperty</a></code> of the reconstructed image item.</p>
     </ul>
     <li data-md>
-     <p>A <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⑨">Sample Transform Derived Image Item</a> with the two items above as input in this order,<br> and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④⑥">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④⑦">bits_per_channel</a></code>=16,<br> and the following <code><a data-link-type="dfn" href="#sampletransform" id="ref-for-sampletransform①">SampleTransform</a></code> fields:</p>
+     <p>A <a data-link-type="dfn" href="#sample-transform-derived-image-item" id="ref-for-sample-transform-derived-image-item①⑨">Sample Transform Derived Image Item</a> with the two items above as input in this order,<br>
+and its <code><a data-link-type="dfn" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④⑥">PixelInformationProperty</a></code> with <code><a data-link-type="dfn" data-refhint-key="93bef998" href="https://www.iso.org/standard/83650.html" id="ref-for-something②④⑦">bits_per_channel</a></code>=16,<br>
+and the following <code><a data-link-type="dfn" href="#sampletransform" id="ref-for-sampletransform①">SampleTransform</a></code> fields:</p>
      <ul>
       <li data-md>
        <p><code><a data-link-type="dfn" href="#sato-version" id="ref-for-sato-version②">version</a></code>=0</p>
@@ -3774,21 +3875,37 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
    <p class="note" role="note"><span class="marker">NOTE:</span> This pattern can be used for reconstructed bit depths beyond 16 by combining more than two input image items or with various input bit depth configurations and operations.</p>
   </main>
   <div data-fill-with="conformance">
-   <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
-   <p> Conformance requirements are expressed with a combination of descriptive assertions and RFC 2119 terminology.
+   <h2 class="no-ref no-num heading settled" id="conformance"><span class="content">
+    Conformance</span><a class="self-link" href="#conformance"></a></h2>
+   <p>
+            Conformance requirements are expressed with a combination of descriptive assertions and RFC 2119 terminology.
             The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL”
             in the normative parts of this document
             are to be interpreted as described in RFC 2119.
             However, for readability,
-            these words do not appear in all uppercase letters in this specification. </p>
-   <p> All of the text of this specification is normative
-            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a> </p>
-   <p> Examples in this specification are introduced with the words “for example”
-            or are set apart from the normative text with <code>class="example"</code>, like this: </p>
-   <div class="example" id="example-example"><a class="self-link" href="#example-example"></a> This is an example of an informative example. </div>
-   <p> Informative notes begin with the word “Note”
-            and are set apart from the normative text with <code>class="note"</code>, like this: </p>
-   <p class="note" role="note"> Note, this is an informative note.</p>
+            these words do not appear in all uppercase letters in this specification.
+
+        </p>
+   <p>
+            All of the text of this specification is normative
+            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a>
+
+        </p>
+   <p>
+            Examples in this specification are introduced with the words “for example”
+            or are set apart from the normative text with <code>class="example"</code>, like this:
+
+        </p>
+   <div class="example" id="example-example"><a class="self-link" href="#example-example"></a>
+            This is an example of an informative example.
+        </div>
+   <p>
+            Informative notes begin with the word “Note”
+            and are set apart from the normative text with <code>class="note"</code>, like this:
+
+        </p>
+   <p class="note" role="note">
+            Note, this is an informative note.</p>
   </div>
 <script>
 (function() {
