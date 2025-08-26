@@ -412,7 +412,8 @@ The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each be associated with a <code>[=PixelInformationProperty=]</code> and an <code>'[=ispe=]'</code> property;
-  - have the same number of channels and the same chroma subsampling (or lack thereof) as defined by the <code>[=PixelInformationProperty=]</code> and <code>[=AV1ItemConfigurationProperty=]</code>;
+  - have the same number of channels as defined by the<code>[=PixelInformationProperty=]</code> or <code>[=AV1ItemConfigurationProperty=]</code>;
+  - have the same chroma subsampling; this may be explicitly defined by one of the above properties for some input image items and/or the [=Sample Transform Derived Image Item=], and may be implicit for the other items (meaning no property defines chroma subsampling for these items);
   - have the same dimensions as defined by the <code>'[=ispe=]'</code> property;
   - have the same color information as defined by the <code>[=ColourInformationBox=]</code> properties (or lack thereof).
 
@@ -1330,6 +1331,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/300">Make assert IDs between profiles unique</a>
     - <a href="https://github.com/AOMediaCodec/av1-avif/pull/304">Update the HEIF, ISOBMFF, and MIAF references to the latest versions</a>
     - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/313">Merge asserts for avio brand</a>
+    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/tbd">Clarify 'sato' item requirements</a>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
