@@ -412,8 +412,8 @@ The input images are specified in the <code>[=SingleItemTypeReferenceBox=]</code
 
 The input image items and the [=Sample Transform Derived Image Item=] shall:
   - each be associated with a <code>[=PixelInformationProperty=]</code> and an <code>'[=ispe=]'</code> property;
-  - have the same number of channels as defined by the<code>[=PixelInformationProperty=]</code> or <code>[=AV1ItemConfigurationProperty=]</code>;
-  - have the same chroma subsampling; this may be explicitly defined by one of the above properties for some input image items and/or the [=Sample Transform Derived Image Item=], and may be implicit for the other items (meaning no property defines chroma subsampling for these items);
+  - have the same number of channels as defined by the <code>[=PixelInformationProperty=]</code> or <code>[=AV1ItemConfigurationProperty=]</code>;
+  - have the same chroma subsampling; this may be explicitly defined by one of the above properties for some input image items or the [=Sample Transform Derived Image Item=], and may be implicit for the other items (meaning no property defines chroma subsampling for these items);
   - have the same dimensions as defined by the <code>'[=ispe=]'</code> property;
   - have the same color information as defined by the <code>[=ColourInformationBox=]</code> properties (or lack thereof).
 
