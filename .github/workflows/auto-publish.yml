@@ -1,7 +1,7 @@
 name: Auto-Publish
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 permissions:
   contents: read
@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  master:
+  main:
     name: Compile and deploy
     runs-on: ubuntu-24.04
 

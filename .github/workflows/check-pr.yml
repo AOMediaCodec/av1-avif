@@ -3,7 +3,7 @@ on:
     pull_request:
 
 jobs:
-  master:
+  main:
     name: Run checks for specification
     runs-on: ubuntu-24.04
 
