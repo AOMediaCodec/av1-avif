@@ -45,7 +45,7 @@ Metadata Order: This version, !*, *
         "title": "Information technology — High efficiency coding and media delivery in heterogeneous environments — Part 12: Image File Format",
         "status": "International Standard",
         "publisher": "ISO/IEC",
-        "isoNumber":"ISO/IEC 23008-12:2025/FDAmd 1"
+        "isoNumber":"ISO/IEC 23008-12:2025/Amd 1"
     },
 
     "ISOBMFF": {
