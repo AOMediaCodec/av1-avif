@@ -3,7 +3,7 @@ Group: AOM
 Status: FD
 Text Macro: SPECVERSION v1.2.0
 Title: AV1 Image File Format (AVIF)
-URL: https://AOMediaCodec.github.io/av1-avif
+URL: https://aomediacodec.github.io/av1-avif/v1.2.0.html
 Shortname: av1-avif
 Editor: Yannis Guyon, Google, yguyon@google.com
 Editor: Leo Barnes, Apple, lbarnes@apple.com
