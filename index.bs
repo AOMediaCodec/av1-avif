@@ -1,9 +1,9 @@
 <pre class='metadata'>
 Group: AOM
-Status: FD
-Text Macro: SPECVERSION v1.2.0
+Status: WGD
+Text Macro: SPECVERSION v1.2.1
 Title: AV1 Image File Format (AVIF)
-URL: https://aomediacodec.github.io/av1-avif/v1.2.0.html
+URL: https://aomediacodec.github.io/av1-avif
 Shortname: av1-avif
 Editor: Yannis Guyon, Google, yguyon@google.com
 Editor: Leo Barnes, Apple, lbarnes@apple.com
@@ -12,12 +12,12 @@ Former Editor: Cyril Concolato, Netflix, cconcolato@netflix.com
 Former Editor: Paul Kerr, Netflix, pkerr@netflix.com
 Former Editor: Anders Klemets, Microsoft, Anders.Klemets@microsoft.com
 Abstract: This document specifies syntax and semantics for the storage of [[!AV1]] images in the generic image file format [[!HEIF]], which is based on [[!ISOBMFF]]. While [[!HEIF]] defines general requirements, this document also specifies additional constraints to ensure higher interoperability between writers and readers when [[!HEIF]] is used with [[!AV1]] images. These constraints are based on constraints defined in the Multi-Image Application Format [[!MIAF]] and are grouped into profiles inspired by the profiles defined in [[!MIAF]].
-Date: 2025-10-16
+Date: 2026-01-05
 Repository: AOMediaCodec/av1-avif
 Text Macro: ADDITIONALLOGO https://aomedia.org/assets/images/avif-logo-rgb.svg
 !Latest approved version: <a href="latest-approved.html">https://aomediacodec.github.io/av1-avif/latest-approved.html</a>
 !Latest version (published or draft): <a href="index.html">https://aomediacodec.github.io/av1-avif/index.html</a>
-!Previously approved version: <a href="v1.1.0.html">https://aomediacodec.github.io/av1-avif/v1.1.0.html</a>
+!Previously approved version: <a href="v1.2.0.html">https://aomediacodec.github.io/av1-avif/v1.2.0.html</a>
 Metadata Order: This version, !*, *
 </pre>
 
@@ -1295,43 +1295,7 @@ The "Version(s)" column in the following table lists the version(s) of the boxes
 
 <p>The media type <code>"image/avif"</code> is officially registered with IANA and available at: <a href="https://www.iana.org/assignments/media-types/image/avif">https://www.iana.org/assignments/media-types/image/avif</a>.</p>
 
-<h2 id="change-list">Changes since v1.1.0 release</h2>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/223">Stop using `dfn value` for definitions.</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/222">Add assert-ids in the spec for conformance file testing and ComplianceWarden</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/225">Add required list of boxes for AVIF files</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/229">Add "per item" to item property definitions</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/230">Fix broken link for latest-draft.html</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/227">Relax constraint on transformative properties in derivation chains to only apply to grid items</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/238">Change ispe width to correspond to UpscaledWidth</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/234">Clarify relationship between av1C, metadata OBUs and item properties</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/233">Update list of other item properties</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/243">Further clarify relationship between av1C, metadata OBUs and item properties</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/239">Add information on tmap, grpl and altr</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/228">Replace recommendations regarding still picture flags in image items by a note</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/224">Add section 4.2.2 "Sample Transform Derived Image Item"</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/253">Add Appendix A "Sample Transform Derived Image Item Examples"</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/232">Add restriction on usage of clap property</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/240">Adopt MIAF shared constraints</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/251">Clean up usage of dfn and linking</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/250">Clarify required versions of non-essential item properties</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/257">Add refs, fix wording and format in clauses 1,2</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/258">Add sato, alpha, depth, progressive in Scope</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/256">Clean up linking to base specs and duplicated information</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/259">Use Markdown syntax coloring for code snippets</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/261">Consistently use dfn noexport for derived items</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/262">Remove Sample Transform sections from TOC</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/263">Add references in the Sample Transform sections</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/266">Indent notes as the list items they refer to</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/267">Remove inconsistent dots in 9.1.2</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/273">Change structure of optional table of boxes</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/288">Add hidden image item recommendation</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/289">Remove mentions of ftyp compatible_brands</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/265">Remove avio brand recommendation</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/292">Fix broken lines in Sample Transform examples</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/300">Make assert IDs between profiles unique</a>
-    - <a href="https://github.com/AOMediaCodec/av1-avif/pull/304">Update the HEIF, ISOBMFF, and MIAF references to the latest versions</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/313">Merge asserts for avio brand</a>
-    - EDITORIAL: <a href="https://github.com/AOMediaCodec/av1-avif/pull/315">Clarify <code>sato</code> item requirements</a>
+<h2 id="change-list">Changes since v1.2.0 release</h2>
 
 <h2 id="sato-examples">Appendix A: (informative) Sample Transform Derived Image Item Examples</h2>
 
