@@ -380,7 +380,7 @@ NOTE: The size of the last layer can be determined by subtracting the sum of the
     - <assert>The <code>[=mono_chrome=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</assert>
     - <assert>The <code>[=color_range=]</code> field in the [=Sequence Header OBU=] shall be set to 1.</assert></p>
 
-<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the <code>[=AuxiliaryTypeProperty=]</code> (respectively <code>[=AuxiliaryTypeInfoBox=]</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>. <assert>An [=AV1 Alpha Image Item=] (respectively an [=AV1 Alpha Image Sequence=]) shall be encoded with the same bit depth as the associated master [=AV1 Image Item=] (respectively [=AV1 Image Sequence=]).</assert></p>
+<p>An <dfn export>AV1 Alpha Image Item</dfn> (respectively an <dfn export>AV1 Alpha Image Sequence</dfn>) is an [=AV1 Auxiliary Image Item=] (respectively an [=AV1 Auxiliary Image Sequence=]), and as defined in [[!MIAF]], with the <code>[=aux_type=]</code> field of the <code>[=AuxiliaryTypeProperty=]</code> (respectively <code>[=AuxiliaryTypeInfoBox=]</code>) set to <code>urn:mpeg:mpegB:cicp:systems:auxiliary:alpha</code>.</p>
 
 <p><assert>For [=AV1 Alpha Image Items=] and [=AV1 Alpha Image Sequences=], the <code>[=ColourInformationBox=]</code> (<code>'[=colr=]'</code>) should be omitted.</assert> <assert>If present, readers shall ignore it.</assert></p>
 
