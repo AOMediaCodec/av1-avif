@@ -22,7 +22,7 @@ multidict==6.6.4
 pillow==11.3.0
 propcache==0.3.2
 Pygments==2.19.2
-requests==2.32.4
+requests==2.33.0
 result==0.17.0
 setuptools==80.9.0
 six==1.17.0
