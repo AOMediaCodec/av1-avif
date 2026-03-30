@@ -21,7 +21,7 @@ lxml==6.0.0
 multidict==6.6.4
 pillow==11.3.0
 propcache==0.3.2
-Pygments==2.19.2
+Pygments==2.20.0
 requests==2.32.4
 result==0.17.0
 setuptools==80.9.0
